@@ -1,8 +1,7 @@
 import { Box, makeStyles } from '@material-ui/core';
 import React from 'react';
 import spa1 from 'assets/med.jpg';
-import useStyles from 'styles/commonStyles';
-import spa2 from 'assets/spa2.jpg';
+
 const styles = makeStyles((theme) => ({
   root: {
     height: 500,
@@ -21,7 +20,6 @@ const styles = makeStyles((theme) => ({
 
 const Banner = () => {
   const classes = styles();
-  const classes_g = useStyles();
 
   return (
     <section className={classes.root}>
