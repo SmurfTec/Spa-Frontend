@@ -12,9 +12,19 @@ import SendIcon from '@material-ui/icons/Send';
 const styles = makeStyles((theme) => ({
   root: {
     background: theme.custom.white,
-    paddingInline: '7em',
     paddingBlock: 10,
     borderRadius: 10,
+    margin: '0 auto',
+
+    [theme.breakpoints.up('sm')]: {
+      paddingInline: '7em',
+      width: '80%',
+      maxWidth: 700,
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      paddingInline: '1em',
+    },
   },
   subs: {
     '& span': {

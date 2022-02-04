@@ -52,6 +52,8 @@ const Navbar = (props) => {
           // className={`${classes_g.flexAlignDisp} ${classes.navSearch}`}
           >
             <Box
+              display='flex'
+              alignItems='center'
               // className={classes_g.flexAlignDisp}
               sx={{ columnGap: 5 }}
             >
@@ -76,73 +78,59 @@ const Navbar = (props) => {
           <div className={classes.sectionDesktop}>
             {/* <Box
               display='flex'
-              justifyContent='space-around'
-              sx={{
-                columnGap: '2.5em',
-                marginLeft: 'auto',
-                textAlign: 'center',
-                alignItems: 'center',
-              }}
-            > */}
-            <Box
-              display='flex'
               minWidth='200px'
               sx={{ alignItems: 'center', columnGap: '2.5em' }}
               className={classes_g.linkHover}
+            > */}
+            <Box display='flex' alignItems='center' sx={{ columnGap: 25 }}>
+              <Typography variant='subtitle2' noWrap>
+                <NavLink to='/contact-us'>Home </NavLink>
+              </Typography>
+              <Typography variant='subtitle2' noWrap>
+                <NavLink to='/faq'>Our Partners</NavLink>
+              </Typography>
+              <Typography variant='subtitle2' noWrap>
+                <NavLink to='/leaderboard'>Promotions</NavLink>
+              </Typography>
+              <Typography variant='subtitle2' noWrap>
+                <NavLink to='/contact-us'>Products</NavLink>
+              </Typography>
+              <Typography variant='subtitle2' noWrap>
+                <NavLink to='/leaderboard'>Contact Us</NavLink>
+              </Typography>
+            </Box>
+            <Box
+              display='flex'
+              alignItems='center'
+              justifyContent='center'
+              // gridColumnGap='20px'
+              sx={{ columnGap: 10 }}
             >
-              <Box display='flex' alignItems='center' sx={{ columnGap: 25 }}>
-                <Typography variant='subtitle2' noWrap>
-                  <NavLink to='/contact-us'>Home </NavLink>
-                </Typography>
-                <Typography variant='subtitle2' noWrap>
-                  <NavLink to='/faq'>Our Partners</NavLink>
-                </Typography>
-                <Typography variant='subtitle2' noWrap>
-                  <NavLink to='/leaderboard'>Promotions</NavLink>
-                </Typography>
-                <Typography variant='subtitle2' noWrap>
-                  <NavLink to='/contact-us'>Products</NavLink>
-                </Typography>
-                <Typography variant='subtitle2' noWrap>
-                  <NavLink to='/leaderboard'>Contact Us</NavLink>
-                </Typography>
-              </Box>
-              <Box
-                display='flex'
-                alignItems='center'
-                justifyContent='center'
-                // gridColumnGap='20px'
-                sx={{ columnGap: 10 }}
+              <Button
+                variant='contained'
+                color='secondary'
+                size='small'
+                style={{
+                  minWidth: 80,
+                  height: 'fit-content',
+                }}
+                onClick={() => navigate('/login')}
               >
-                <Button
-                  variant='contained'
-                  color='secondary'
-                  size='small'
-                  style={{
-                    minWidth: 80,
-                    height: 'fit-content',
-                  }}
-                  onClick={() => navigate('/login')}
-                >
-                  BOOK NOW
-                </Button>
-                <Button
-                  variant='contained'
-                  color='default'
-                  className={`${classes.customNavBtn} ${classes.navBtn}`}
-                  size='small'
-                  endIcon={<FaceIcon />}
-                  onClick={() => navigate('/register')}
-                >
-                  SIGN IN
-                </Button>
-                <IconButton aria-label='delete'>
-                  <ShoppingCartIcon
-                    style={{ color: '#fff' }}
-                    fontSize='small'
-                  />
-                </IconButton>
-              </Box>
+                BOOK NOW
+              </Button>
+              <Button
+                variant='contained'
+                color='default'
+                className={`${classes.customNavBtn} ${classes.navBtn}`}
+                size='small'
+                endIcon={<FaceIcon />}
+                onClick={() => navigate('/register')}
+              >
+                SIGN IN
+              </Button>
+              <IconButton aria-label='delete'>
+                <ShoppingCartIcon style={{ color: '#fff' }} fontSize='small' />
+              </IconButton>
             </Box>
             {/* </Box> */}
           </div>

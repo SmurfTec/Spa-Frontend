@@ -30,3 +30,12 @@ export const products = [...Array(8)].map((_, index) => ({
 }));
 
 export const decreaseBy = [1, 5, 4, 3, 1, 5, 4, 3, 1, 5, 4, 3, 1, 5, 4, 3];
+
+export const bannerContent = [...Array(4)].map((_, index) => ({
+  _id: faker.datatype.uuid(),
+  title:
+    index === 1 || index === 3
+      ? 'Welcome To the Royal Thai Spa'
+      : 'Welcome to Land of Smiles',
+  description: faker.lorem.lines(3),
+}));

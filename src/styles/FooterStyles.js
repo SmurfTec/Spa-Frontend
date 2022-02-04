@@ -42,6 +42,14 @@ const styles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     columnGap: 15,
     paddingTop: '0.5em',
+    '& .MuiAvatar-colorDefault': {
+      backgroundColor: 'transparent',
+
+      '& svg': {
+        width: theme.spacing(7),
+        height: theme.spacing(7),
+      },
+    },
   },
   menuDiv: {
     top: '50%',

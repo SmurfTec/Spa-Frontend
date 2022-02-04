@@ -3,24 +3,20 @@ import {
   Card,
   CardContent,
   Typography,
-  CardActions,
-  CardMedia,
-  Button,
   CardActionArea,
   Box,
-  Avatar,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import spa1 from 'assets/spa1.svg';
 import StarIcon from '@material-ui/icons/Star';
-// import styles from 'styles/commonStyles';
+
 const styles = makeStyles((theme) => ({
   vendorCard: {
     borderRadius: 8,
     '& .MuiCardContent-root': {
       display: 'flex',
       flexDirection: 'column',
-      rowGap: 10,
+      rowGap: 15,
       '& svg': {
         color: theme.palette.warning.main,
       },
@@ -29,7 +25,11 @@ const styles = makeStyles((theme) => ({
       },
       '& .MuiTypography-subtitle2': {
         fontWeight: 600,
+        // height: 44,
       },
+      // '& .title': {
+      //   height: 60,
+      // },
     },
   },
 }));
@@ -46,8 +46,7 @@ const VendorCard = ({ title, description, image, rating, _id, history }) => {
             justifyContent='space-between'
             sx={{ columnGap: 15 }}
           >
-            <img src={spa1} width='30px' height='30px' alt='' />
-            {/* <Avatar /> */}
+            <img src={spa1} width='40px' height='40px' alt='' />
             <Box display='flex' alignItems='center' sx={{ columnGap: 5 }}>
               <StarIcon fontSize='small' />
               <Typography variant='subtitle1' component='span'>
@@ -56,10 +55,7 @@ const VendorCard = ({ title, description, image, rating, _id, history }) => {
             </Box>
           </Box>
           <Box>
-            <Typography
-              // className={classes.title}
-              variant='h5'
-            >
+            <Typography variant='h5' className='title'>
               {title}
             </Typography>
             <Typography variant='subtitle2' color='textSecondary'>

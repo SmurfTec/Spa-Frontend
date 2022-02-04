@@ -1,10 +1,13 @@
-import { Box, Typography } from '@material-ui/core';
+import { Avatar, Box, Typography } from '@material-ui/core';
 import React from 'react';
 import styles from 'styles/FooterStyles';
 import Logo from './Logo';
 import faker from 'faker';
 import brand1 from 'assets/brand3.png';
 import brand2 from 'assets/brand2.png';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import YouTubeIcon from '@material-ui/icons/YouTube';
 
 const menu = [
   {
@@ -94,8 +97,8 @@ const Footer = () => {
                 OUR AWARDS
               </Typography>
               <div className={classes.brandsImg}>
-                <img src={brand1} alt='brand1' height='60px' width='100px' />
-                <img src={brand2} alt='brand2' height='60px' width='100px' />
+                <img src={brand1} alt='brand1' height='60px' width='90px' />
+                <img src={brand2} alt='brand2' height='60px' width='90px' />
               </div>
             </Box>
             <Box>
@@ -103,8 +106,8 @@ const Footer = () => {
                 OUR PARTNERS
               </Typography>
               <div className={classes.brandsImg}>
-                <img src={brand1} alt='brand1' height='60px' width='100px' />
-                <img src={brand2} alt='brand2' height='60px' width='100px' />
+                <img src={brand1} alt='brand1' height='60px' width='90px' />
+                <img src={brand2} alt='brand2' height='60px' width='90px' />
               </div>
             </Box>
             <Box>
@@ -112,8 +115,15 @@ const Footer = () => {
                 FIND US ON
               </Typography>
               <div className={classes.brandsImg}>
-                <img src={brand1} alt='brand1' height='60px' width='100px' />
-                <img src={brand2} alt='brand2' height='60px' width='100px' />
+                <Avatar variant='rounded'>
+                  <FacebookIcon />
+                </Avatar>
+                <Avatar variant='rounded'>
+                  <InstagramIcon />
+                </Avatar>
+                <Avatar variant='rounded'>
+                  <YouTubeIcon />
+                </Avatar>
               </div>
             </Box>
           </div>

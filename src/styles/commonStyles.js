@@ -27,6 +27,7 @@ const styles = makeStyles((theme) => ({
 
   sectionGap: {
     marginBottom: '2em',
+    paddingInline: '1em',
   },
   subHeading: {
     maxWidth: 500,
@@ -122,8 +123,13 @@ const styles = makeStyles((theme) => ({
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    height: 520,
     width: '100%',
+
+    [theme.breakpoints.up('sm')]: {
+      height: 520,
+    },
+
+    // [theme.breakpoints.down('sm')]: {},
   },
 
   // ^ Offers section

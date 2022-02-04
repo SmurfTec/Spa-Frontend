@@ -13,7 +13,7 @@ import Subscription from 'components/Subscription';
 import ProductCarousel from 'components/Carousels/ProductCarousel';
 import Footer from 'components/common/Footer';
 import Banner from './Banner';
-
+import Offers from './Offers';
 const Home = () => {
   const classes = styles();
   const classes_g = globalStyles();
@@ -22,9 +22,9 @@ const Home = () => {
   return (
     <>
       {/* // ^ Banner */}
-      <section className={classes_g.sectionGap}>
-        <Banner />
-      </section>
+      {/* <section className={classes_g.sectionGap}> */}
+      <Banner />
+      {/* </section> */}
       {/* // ^ Partners*/}
       <section className={`${classes_g.sectionGap} ${classes_g.sectionFlex}`}>
         <Search placeholder='Where to ?' submitForm={patnerSearch} />
@@ -81,121 +81,7 @@ const Home = () => {
       </section>
       {/* // ^ Offers Section */}
       <section className={classes_g.sectionGap}>
-        <div className={`${classes_g.secBackImage} ${classes.homePromoBg}`}>
-          <Grid container className={classes.offerCard}>
-            <Grid item xs={12} sm={6}>
-              <Box
-                className={classes.divbackImg}
-                sx={{
-                  backgroundImage: `url(https://images.unsplash.com/photo-1453834190665-46ff0a1fbd5a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80)`,
-                }}
-              >
-                <Box
-                  display='flex'
-                  flexDirection='column'
-                  justifyContent='center'
-                  sx={{ height: '100%' }}
-                >
-                  <Box sx={{ width: '50%', flex: 1 }}>
-                    {/* <Box
-                      display='flex'
-                      flexDirection='column'
-                      justifyContent='center'
-                      sx={{ height: '100%' }}
-                    > */}
-                    <Typography variant='h4'>
-                      Free Gift. Energise 9 Piece Set
-                    </Typography>
-                    <Typography variant='subtitle1'>
-                      Weekly upto Rs 4000
-                    </Typography>
-                    <Typography variant='subtitle1'>Use Coupon</Typography>
-                    <Typography variant='subtitle1' component='span'>
-                      ENERGISE
-                    </Typography>
-                  </Box>
-                  {/* </Box> */}
-
-                  <Box>
-                    <Button color='secondary' variant='contained'>
-                      Explore
-                    </Button>
-                  </Box>
-                </Box>
-              </Box>
-            </Grid>
-            <Grid item xs={12} sm={3}>
-              <Box
-                className={classes.divbackImg}
-                sx={{
-                  backgroundImage: `url(https://images.unsplash.com/photo-1631730486572-226d1f595b68?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=475&q=80)`,
-                }}
-              >
-                <Box
-                  display='flex'
-                  flexDirection='column'
-                  justifyContent='center'
-                  sx={{ height: '100%' }}
-                >
-                  <Box sx={{ flex: 1 }}>
-                    <div className={classes.offerProduct}>
-                      <Typography variant='h4' align='center'>
-                        BEAUTY PACK
-                      </Typography>
-                    </div>
-                  </Box>
-                  {/* </Box> */}
-
-                  <Box>
-                    <Button color='secondary' variant='contained'>
-                      Explore
-                    </Button>
-                  </Box>
-                </Box>
-              </Box>
-            </Grid>
-            <Grid item xs={12} sm={3}>
-              <Box
-                className={classes.divbackImg}
-                sx={{
-                  backgroundImage: `url(${spa2})`,
-                }}
-              >
-                <Box
-                  display='flex'
-                  flexDirection='column'
-                  justifyContent='center'
-                  sx={{ height: '100%' }}
-                >
-                  <Box sx={{ flex: 1 }}>
-                    <div className={classes.offerProduct}>
-                      <Typography variant='h4' align='center'>
-                        BEAUTY PACK
-                      </Typography>
-                      <Typography variant='subtitle1'>Body & Hair</Typography>
-                    </div>
-                  </Box>
-                  {/* </Box> */}
-
-                  <Box>
-                    <Button color='secondary' variant='contained'>
-                      Explore
-                    </Button>
-                  </Box>
-                </Box>
-              </Box>
-            </Grid>
-            {/* <Grid xs={12} sm={12}></Grid> */}
-          </Grid>
-          <Box
-            sx={{
-              margin: '0 auto',
-              width: '75%',
-            }}
-          >
-            <Subscription />
-          </Box>
-        </div>
+        <Offers />
       </section>
       {/* // ^ Promotions Section */}
       <section className={`${classes_g.sectionGap} ${classes_g.sectionFlex}`}>
@@ -262,7 +148,7 @@ const Home = () => {
       {/* // ^ Promotions Banner Section */}
       <section className={classes_g.sectionGap}>
         <div className={`${classes_g.secBackImage} ${classes.homePromoBg}`}>
-          <Grid container className={classes.offerCard}>
+          <Grid container className={classes.offerWrapper}>
             <Grid item xs={12} sm={3}>
               <Box
                 className={classes.divbackImg}

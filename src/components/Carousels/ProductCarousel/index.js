@@ -16,7 +16,7 @@ const ProductCarousel = (props) => {
           <div key={el._id} className={classes.carouselItem}>
             <ProductCard
               {...el}
-              isPromo={props.pricePromo ? true : false}
+              isPromo={props.isPromo}
               promoPrice={el.price.split('$')[1] - decreaseBy[index]}
             />
           </div>

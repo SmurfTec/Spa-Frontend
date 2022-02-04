@@ -19,7 +19,9 @@
     "react-responsive-carousel": "^3.2.22",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "react-swipe": "^6.0.4",
     "react-toastify": "^8.1.1",
+    "swipe-js-iso": "^2.1.5",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },

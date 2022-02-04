@@ -15,11 +15,10 @@ const styles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
-      //   height: '60%',
       rowGap: 10,
-
       '& .MuiTypography-subtitle2': {
         fontWeight: 600,
+        height: 44,
       },
     },
   },

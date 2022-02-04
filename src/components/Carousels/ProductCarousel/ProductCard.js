@@ -31,7 +31,7 @@ const ProductCard = ({
   isPromo,
 }) => {
   const classes = styles();
-  console.log('promoPrice', promoPrice);
+  // console.log('promoPrice', promoPrice);
   return (
     <Card className={classes.productCard}>
       <CardMedia className={classes.cardMedia} image={prod1} />

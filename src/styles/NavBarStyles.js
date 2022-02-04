@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.custom.darkFore,
     '& .MuiToolbar-regular': {
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'space-between',
       columnGap: '2.5em',
     },
     '& a': {
@@ -65,9 +65,10 @@ const useStyles = makeStyles((theme) => ({
 
   sectionDesktop: {
     display: 'none',
-    alignItems: 'center',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: 'flex',
+      alignItems: 'center',
+      columnGap: '2.5em',
     },
   },
 
@@ -75,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     marginLeft: 'auto',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: 'none',
     },
   },
