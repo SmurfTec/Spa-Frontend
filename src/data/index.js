@@ -6,6 +6,7 @@ export const LoremIpsum =
 export const shortVersion = 'Contrary to popular belief';
 
 export const loremShort = faker.lorem.lines(1);
+export const loremlong = faker.lorem.paragraph(5);
 // export const vendors = [
 //   {
 //     title,

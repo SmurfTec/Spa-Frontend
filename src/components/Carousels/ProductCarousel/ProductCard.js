@@ -57,7 +57,7 @@ const ProductCard = ({
             ) : (
               <>
                 <Typography variant='h5'>{price}</Typography>
-                {/* <Typography variant='h5'>- ${promoPrice}</Typography> */}
+                <Typography variant='body2'>{'  '} (100ml)</Typography>
               </>
             )}
           </div>

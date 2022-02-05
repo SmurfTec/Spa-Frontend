@@ -9,6 +9,7 @@ import {
   ListItem,
   ListItemIcon,
   Icon,
+  Badge,
 } from '@material-ui/core';
 import { Box, Button, Typography } from '@material-ui/core';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -26,6 +27,7 @@ import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import HomeIcon from '@material-ui/icons/Home';
 import globalStyles from 'styles/commonStyles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import clsx from 'clsx';
 
 const Navbar = (props) => {
   const classes = useStyles();
@@ -45,7 +47,7 @@ const Navbar = (props) => {
   };
 
   return (
-    <div className={`${classes.root}`}>
+    <div className={classes.root}>
       <AppBar position='fixed' className={classes.Appbar}>
         <Toolbar>
           <div
@@ -82,21 +84,26 @@ const Navbar = (props) => {
               sx={{ alignItems: 'center', columnGap: '2.5em' }}
               className={classes_g.linkHover}
             > */}
-            <Box display='flex' alignItems='center' sx={{ columnGap: 25 }}>
+            <Box
+              display='flex'
+              alignItems='center'
+              sx={{ columnGap: 25 }}
+              className={classes_g.linkHover}
+            >
               <Typography variant='subtitle2' noWrap>
-                <NavLink to='/contact-us'>Home </NavLink>
+                <NavLink to='/'>Home </NavLink>
               </Typography>
               <Typography variant='subtitle2' noWrap>
-                <NavLink to='/faq'>Our Partners</NavLink>
+                <NavLink to='/ourpartners'>Our Partners</NavLink>
               </Typography>
               <Typography variant='subtitle2' noWrap>
-                <NavLink to='/leaderboard'>Promotions</NavLink>
+                <NavLink to='/flashsales'>Flash Sales</NavLink>
               </Typography>
               <Typography variant='subtitle2' noWrap>
-                <NavLink to='/contact-us'>Products</NavLink>
+                <NavLink to='/products&services'>Products</NavLink>
               </Typography>
               <Typography variant='subtitle2' noWrap>
-                <NavLink to='/leaderboard'>Contact Us</NavLink>
+                <NavLink to='/contact-us'>Contact Us</NavLink>
               </Typography>
             </Box>
             <Box
@@ -121,7 +128,7 @@ const Navbar = (props) => {
               <Button
                 variant='contained'
                 color='default'
-                className={`${classes.customNavBtn} ${classes.navBtn}`}
+                className={clsx(classes.customNavBtn, classes.navBtn)}
                 size='small'
                 endIcon={<FaceIcon />}
                 onClick={() => navigate('/register')}
@@ -129,7 +136,12 @@ const Navbar = (props) => {
                 SIGN IN
               </Button>
               <IconButton aria-label='delete'>
-                <ShoppingCartIcon style={{ color: '#fff' }} fontSize='small' />
+                <Badge badgeContent='0'>
+                  <ShoppingCartIcon
+                    style={{ color: '#fff' }}
+                    fontSize='small'
+                  />
+                </Badge>
               </IconButton>
             </Box>
             {/* </Box> */}
@@ -137,7 +149,7 @@ const Navbar = (props) => {
         </Toolbar>
       </AppBar>
 
-      <Box paddingTop={'64px'} />
+      <div className={classes.navFixed} />
 
       <Drawer
         anchor='left'

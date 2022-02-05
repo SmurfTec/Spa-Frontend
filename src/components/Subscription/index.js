@@ -19,17 +19,30 @@ const styles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingInline: '7em',
       width: '80%',
-      maxWidth: 700,
+      // maxWidth: 700,
     },
     [theme.breakpoints.down('sm')]: {
-      width: '100%',
+      // width: '100%',
       paddingInline: '1em',
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
     },
   },
   subs: {
     '& span': {
       color: theme.palette.secondary.main,
       fontWeight: 700,
+    },
+  },
+  subscribeForm: {
+    display: 'flex',
+    columnGap: 15,
+    marginTop: '1em',
+
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column',
+      rowGap: 15,
     },
   },
 }));
@@ -54,7 +67,7 @@ const Subscription = () => {
         {` `} to all our newsletter subscribers
       </Typography>
       <form onSubmit={handleSubmit}>
-        <Box display='flex' mt={2} sx={{ columnGap: 15 }}>
+        <div className={classes.subscribeForm}>
           <TextField
             name='subscriberEmail'
             value={state}
@@ -69,7 +82,7 @@ const Subscription = () => {
           <Button color='secondary' endIcon={<SendIcon />}>
             Subscribe
           </Button>
-        </Box>
+        </div>
       </form>
     </div>
   );

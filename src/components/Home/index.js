@@ -3,10 +3,11 @@ import React from 'react';
 import styles from 'styles/HomeStyles';
 import globalStyles from 'styles/commonStyles';
 import { Carousel } from 'react-responsive-carousel';
+import clsx from 'clsx';
 import spa1 from 'assets/med.jpg';
 import spa2 from 'assets/spa2.jpg';
 import Search from 'components/common/Search/Search';
-import { LoremIpsum, shortVersion, vendors, loremShort } from 'data';
+import { LoremIpsum, shortVersion, vendors, loremShort, loremlong } from 'data';
 import { NavLink } from 'react-router-dom';
 import VendorCarousel from 'components/Carousels/VendorCarousel';
 import Subscription from 'components/Subscription';
@@ -22,13 +23,14 @@ const Home = () => {
   return (
     <>
       {/* // ^ Banner */}
-      {/* <section className={classes_g.sectionGap}> */}
       <Banner />
-      {/* </section> */}
       {/* // ^ Partners*/}
-      <section className={`${classes_g.sectionGap} ${classes_g.sectionFlex}`}>
-        <Search placeholder='Where to ?' submitForm={patnerSearch} />
-        <Box>
+      <section className={clsx(classes_g.sectionGap, classes_g.sectionFlex)}>
+        <div className={classes_g.sectHorAlignment}>
+          <Search placeholder='Where to ?' submitForm={patnerSearch} />
+        </div>
+
+        <div className={classes_g.sectHorAlignment}>
           <Typography variant='h2' align='center'>
             Our Partners
           </Typography>
@@ -39,7 +41,7 @@ const Home = () => {
           >
             {loremShort}
           </Typography>
-        </Box>
+        </div>
         <Carousel
           showArrows={false}
           showThumbs={false}
@@ -55,17 +57,13 @@ const Home = () => {
             <div className={classes_g.overlay} />
             <Box className='legend'>
               <div className={classes_g.contentContainer}>
-                <Box sx={{ flexBasis: '45%' }}>
+                <div>
                   <Typography variant='h5'>ABOUT</Typography>
-                  <Typography variant='body2'>{LoremIpsum}</Typography>
+                  <Typography variant='body2'>{loremlong}</Typography>
+                </div>
 
-                  <Box mt={2}>
-                    <NavLink to='/'>See More</NavLink>
-                  </Box>
-                </Box>
-                <Box sx={{ flexBasis: '25%' }}>
-                  <Typography variant='h3'>Bamboo Sea</Typography>
-                  <Typography variant='body2'>{shortVersion}</Typography>
+                <Box mt={2}>
+                  <NavLink to='/'>See More</NavLink>
                 </Box>
               </div>
             </Box>
@@ -84,8 +82,8 @@ const Home = () => {
         <Offers />
       </section>
       {/* // ^ Promotions Section */}
-      <section className={`${classes_g.sectionGap} ${classes_g.sectionFlex}`}>
-        <Box>
+      <section className={clsx(classes_g.sectionGap, classes_g.sectionFlex)}>
+        <div className={classes_g.sectHorAlignment}>
           <Typography variant='h2' align='center'>
             Flash Sales
           </Typography>
@@ -96,7 +94,7 @@ const Home = () => {
           >
             {loremShort}
           </Typography>
-        </Box>
+        </div>
         <Carousel
           showArrows={true}
           showThumbs={false}
@@ -107,29 +105,19 @@ const Home = () => {
           infiniteLoop={true}
           className={classes_g.Carousel}
         >
-          <div>
+          <div className='rndCornCarsl'>
             <img src={spa2} alt='' />
             <div className={classes_g.overlay} />
             <Box className='legend'>
               <div className={classes_g.contentContainer}>
-                <Box
-                  sx={{ flexBasis: '45%', height: '100%' }}
-                  display='flex'
-                  flexDirection='column'
-                  justifyContent='space-between'
-                >
-                  <div>
-                    <Typography variant='h5'>ABOUT</Typography>
-                    <Typography variant='body2'>{LoremIpsum}</Typography>
-                  </div>
+                <div>
+                  <Typography variant='h5'>ABOUT</Typography>
+                  <Typography variant='body2'>{loremlong}</Typography>
+                </div>
 
-                  <div>
-                    <Button color='secondary' variant='contained'>
-                      Explore
-                    </Button>
-                  </div>
+                <Box mt={2}>
+                  <NavLink to='/'>See More</NavLink>
                 </Box>
-                <Box sx={{ flexBasis: '25%' }} />
               </div>
             </Box>
           </div>
@@ -140,14 +128,14 @@ const Home = () => {
         </Box>
         <Box
           mt={2}
-          className={`${classes_g.sectionLink} ${classes.linkUnderline}`}
+          className={clsx(classes_g.sectionLink, classes_g.linkUnderline)}
         >
           <NavLink to='/'>See More</NavLink>
         </Box>
       </section>
       {/* // ^ Promotions Banner Section */}
       <section className={classes_g.sectionGap}>
-        <div className={`${classes_g.secBackImage} ${classes.homePromoBg}`}>
+        <div className={clsx(classes_g.secBackImage, classes.homePromoBg)}>
           <Grid container className={classes.offerWrapper}>
             <Grid item xs={12} sm={3}>
               <Box
@@ -207,55 +195,39 @@ const Home = () => {
               infiniteLoop={true}
               className={classes_g.Carousel}
             >
-              <div>
+              <div className='carouselMini'>
                 <img src={spa2} alt='' />
                 <div className={classes_g.overlay} />
                 <Box className='legend'>
                   <div className={classes_g.contentContainer}>
-                    <Box
-                      sx={{ flexBasis: '45%', height: '100%' }}
-                      display='flex'
-                      flexDirection='column'
-                      justifyContent='space-between'
-                    >
-                      <div>
-                        <Typography variant='h5'>ABOUT</Typography>
-                        <Typography variant='body2'>{LoremIpsum}</Typography>
-                      </div>
+                    <div>
+                      <Typography variant='h5'>ABOUT</Typography>
+                      <Typography variant='body2'>{loremlong}</Typography>
+                    </div>
 
-                      <div>
-                        <Button color='secondary' variant='contained'>
-                          Explore
-                        </Button>
-                      </div>
+                    <Box mt={2}>
+                      <Button color='secondary' variant='contained'>
+                        Explore
+                      </Button>
                     </Box>
-                    <Box sx={{ flexBasis: '25%' }} />
                   </div>
                 </Box>
               </div>
-              <div>
+              <div className='carouselMini'>
                 <img src={spa1} alt='' />
                 <div className={classes_g.overlay} />
                 <Box className='legend'>
                   <div className={classes_g.contentContainer}>
-                    <Box
-                      sx={{ flexBasis: '45%', height: '100%' }}
-                      display='flex'
-                      flexDirection='column'
-                      justifyContent='space-between'
-                    >
-                      <div>
-                        <Typography variant='h5'>ABOUT</Typography>
-                        <Typography variant='body2'>{LoremIpsum}</Typography>
-                      </div>
+                    <div>
+                      <Typography variant='h5'>ABOUT</Typography>
+                      <Typography variant='body2'>{loremlong}</Typography>
+                    </div>
 
-                      <div>
-                        <Button color='secondary' variant='contained'>
-                          Explore
-                        </Button>
-                      </div>
+                    <Box mt={2}>
+                      <Button color='secondary' variant='contained'>
+                        Explore
+                      </Button>
                     </Box>
-                    <Box sx={{ flexBasis: '25%' }} />
                   </div>
                 </Box>
               </div>
@@ -265,9 +237,12 @@ const Home = () => {
       </section>
 
       {/* // ^ Products Banner Section */}
-      <section className={`${classes_g.sectionGap} ${classes_g.sectionFlex}`}>
-        <Search placeholder='Where to ?' submitForm={patnerSearch} />
-        <Box>
+      <section className={clsx(classes_g.sectionGap, classes_g.sectionFlex)}>
+        <div className={classes_g.sectHorAlignment}>
+          <Search placeholder='Product name' submitForm={patnerSearch} />
+        </div>
+
+        <div className={classes_g.sectHorAlignment}>
           <Typography variant='h2' align='center'>
             Our Products
           </Typography>
@@ -278,7 +253,7 @@ const Home = () => {
           >
             {loremShort}
           </Typography>
-        </Box>
+        </div>
 
         <Box className={classes_g.carouselDefaults}>
           <ProductCarousel isPromo={false} />
@@ -286,7 +261,8 @@ const Home = () => {
 
         <Box
           mt={2}
-          className={`${classes_g.sectionLink} ${classes.linkUnderline}`}
+          className={clsx(classes_g.sectionLink, classes_g.linkUnderline)}
+          // className={`${classes_g.sectionLink} ${classes.linkUnderline}`}
         >
           <NavLink to='/'>See More</NavLink>
         </Box>

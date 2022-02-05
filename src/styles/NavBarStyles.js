@@ -10,12 +10,17 @@ const useStyles = makeStyles((theme) => ({
       // boxShadow: 'rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px',
     },
 
+    '& .MuiBadge-badge': {
+      backgroundColor: '#fff',
+    },
+
     '& h4': {
       alignSelf: 'start',
     },
   },
   Appbar: {
     backgroundColor: theme.custom.darkFore,
+
     '& .MuiToolbar-regular': {
       alignItems: 'center',
       justifyContent: 'space-between',
@@ -24,11 +29,17 @@ const useStyles = makeStyles((theme) => ({
     '& a': {
       color: theme.custom.white,
       verticalAlign: 'middle',
-      '&.active': {
-        color: theme.palette.primary.main,
-      },
+      // '&.active': {
+      // color: theme.palette.primary.main,
+      // },
     },
     columnGap: 20,
+  },
+  navFixed: {
+    paddingTop: 64,
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: 57,
+    },
   },
   grow: {
     flexGrow: 1,

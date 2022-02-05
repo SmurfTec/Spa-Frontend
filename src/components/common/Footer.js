@@ -62,20 +62,40 @@ const Footer = () => {
                   {faker.lorem.paragraph(1)}
                 </Typography>
               </Box>
-              <Box mt={2}>
-                <Typography variant='h5'>CONTACT US</Typography>
-                <Typography variant='subtitle1'>
-                  Mon - Fri : 11AM - 10PM
-                </Typography>
-                <Typography variant='subtitle1'>
-                  Weekends : 3PM - 9PM
-                </Typography>
-              </Box>
-              <Box mt={2}>
-                <Typography variant='h5'>CALL US</Typography>
-                <Typography variant='subtitle1'>+11 123 123 44</Typography>
-                <Typography variant='subtitle1'>+13 123 123 44</Typography>
-              </Box>
+              <div className={classes.contactSecMobile}>
+                <div>
+                  <Typography variant='h5'>CONTACT US</Typography>
+                  <Typography variant='subtitle1'>
+                    Mon - Fri : 11AM - 10PM
+                  </Typography>
+                  <Typography variant='subtitle1'>
+                    Weekends : 3PM - 9PM
+                  </Typography>
+                </div>
+
+                <div>
+                  <Typography variant='h5'>CALL US</Typography>
+                  <Typography variant='subtitle1'>+11 123 123 44</Typography>
+                  <Typography variant='subtitle1'>+13 123 123 44</Typography>
+                </div>
+              </div>
+              <div className={classes.contactSecDesktop}>
+                <Box mt={2}>
+                  <Typography variant='h5'>CONTACT US</Typography>
+                  <Typography variant='subtitle1'>
+                    Mon - Fri : 11AM - 10PM
+                  </Typography>
+                  <Typography variant='subtitle1'>
+                    Weekends : 3PM - 9PM
+                  </Typography>
+                </Box>
+
+                <Box mt={2}>
+                  <Typography variant='h5'>CALL US</Typography>
+                  <Typography variant='subtitle1'>+11 123 123 44</Typography>
+                  <Typography variant='subtitle1'>+13 123 123 44</Typography>
+                </Box>
+              </div>
             </div>
             <div className='contentRight'>
               <div className={classes.menuDiv}>

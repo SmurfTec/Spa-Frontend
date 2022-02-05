@@ -28,6 +28,9 @@ const Theme = ({ children }) => {
             color: '#fff',
             fontWeight: 500,
           },
+          contained: {
+            backgroundColor: '#fff',
+          },
         },
       },
     };

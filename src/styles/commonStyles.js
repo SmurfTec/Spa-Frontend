@@ -13,9 +13,14 @@ const styles = makeStyles((theme) => ({
       transition: 'width .5s',
     },
 
-    '& a:hover::after': {
+    '& a:hover::after, a.active::after': {
       width: '100%',
-      //transition: width .3s;
+    },
+  },
+
+  linkUnderline: {
+    '& a': {
+      borderBottom: `2px solid ${theme.palette.primary.main}`,
     },
   },
 
@@ -25,9 +30,27 @@ const styles = makeStyles((theme) => ({
     rowGap: '1em',
   },
 
+  componentSectionGap: {
+    '& > div:first-child': {
+      marginTop: '1.5em',
+    },
+
+    '& > *': {
+      marginBottom: '1.5em',
+    },
+  },
+
   sectionGap: {
     marginBottom: '2em',
-    paddingInline: '1em',
+    // paddingInline: '1em',
+  },
+  sectHorAlignment: {
+    width: '80%',
+    margin: '0 auto',
+
+    // [theme.breakpoints.down('xs')]: {
+    //   width: '90%',
+    // },
   },
   subHeading: {
     maxWidth: 500,
@@ -50,22 +73,74 @@ const styles = makeStyles((theme) => ({
       background: 'transparent',
       bottom: 0,
       textAlign: 'left',
-      paddingBlock: 15,
+      paddingBlock: 10,
+
+      '& .MuiTypography-body2': {
+        lineHeight: '1.4',
+      },
+
+      [theme.breakpoints.up('md')]: {
+        maxWidth: 600,
+        paddingInline: '6rem',
+      },
+
+      [theme.breakpoints.down('md')]: {
+        maxWidth: 600,
+        paddingInline: '6rem',
+      },
+      [theme.breakpoints.down('sm')]: {
+        // maxWidth: 700,
+        width: '50%',
+        paddingInline: '1rem',
+      },
+
+      [theme.breakpoints.down('xs')]: {
+        width: '90%',
+        paddingInline: '1rem',
+      },
+
       '& p': {
         fontWeight: 300,
         overflow: 'hidden',
         display: '-webkit-box',
-        WebkitLineClamp: 3,
+        WebkitLineClamp: 4,
         WebkitBoxOrient: 'vertical',
       },
     },
+
+    '& .carousel .slide': {
+      '& .carouselMini': {
+        '&  .legend': {
+          paddingBlock: 12,
+          // '& > div': {
+          //   justifyContent: 'unset',
+          // },
+          '& p': {
+            WebkitLineClamp: 3,
+          },
+        },
+        '& img': {
+          height: 176,
+        },
+      },
+      '& .rndCornCarsl .legend': {
+        borderTopRightRadius: 14,
+        borderBottomRightRadius: 14,
+        overflow: 'hidden',
+      },
+    },
   },
+
+  // '& .carousel .slide .carouselMini': {},
   contentContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'baseline',
-    columnGap: '9rem',
+    // width: '60%',
     height: '100%',
+    margin: '0 auto',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
+
     '& h5': {
       [theme.breakpoints.down('xs')]: {
         fontSize: '1rem',
@@ -97,7 +172,7 @@ const styles = makeStyles((theme) => ({
 
   // ^ Vendors Carousel
   carouselDefaults: {
-    width: '85%',
+    width: '80%',
     margin: 'auto',
   },
 

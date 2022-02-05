@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactSwipe from 'react-swipe';
+import clsx from 'clsx';
+
 import { IconButton, makeStyles } from '@material-ui/core';
 import PreviousIcon from '@material-ui/icons/NavigateBefore';
 import NextIcon from '@material-ui/icons/NavigateNext';
@@ -48,12 +50,18 @@ const SimpleCarousel = ({ children }) => {
       >
         {children}
       </ReactSwipe>
-      <div className={`${classes.swipeButtons} ${classes.right}`}>
+      <div
+        className={clsx(classes.swipeButtons, classes.right)}
+        // className={`${classes.swipeButtons} ${classes.right}`}
+      >
         <IconButton onClick={() => reactSwipeEl.next()}>
           <NextIcon />
         </IconButton>
       </div>
-      <div className={`${classes.swipeButtons} ${classes.left}`}>
+      <div
+        className={clsx(classes.swipeButtons, classes.left)}
+        // className={`${classes.swipeButtons} ${classes.left}`}
+      >
         <IconButton onClick={() => reactSwipeEl.prev()}>
           <PreviousIcon />
         </IconButton>

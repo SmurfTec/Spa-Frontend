@@ -20,6 +20,9 @@ const styles = makeStyles((theme) => ({
         fontWeight: 600,
         height: 44,
       },
+      [theme.breakpoints.down('xs')]: {
+        paddingInline: '2.5em',
+      },
     },
   },
   cardMedia: {
