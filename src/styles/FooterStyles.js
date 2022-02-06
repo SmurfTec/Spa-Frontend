@@ -19,6 +19,7 @@ const styles = makeStyles((theme) => ({
     '& h5': {
       [theme.breakpoints.down('xs')]: {
         textDecoration: 'underline',
+        textAlign: 'left',
       },
     },
   },
@@ -60,7 +61,14 @@ const styles = makeStyles((theme) => ({
       '& svg': {
         width: theme.spacing(7),
         height: theme.spacing(7),
+        [theme.breakpoints.down('xs')]: {
+          width: theme.spacing(4),
+          height: theme.spacing(4),
+        },
       },
+    },
+    [theme.breakpoints.down('xs')]: {
+      justifyContent: 'center',
     },
   },
   menuDiv: {
@@ -70,12 +78,27 @@ const styles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     columnGap: 25,
     justifyContent: 'space-between',
+    [theme.breakpoints.down('sm')]: {
+      justifyContent: 'unset',
+    },
 
     [theme.breakpoints.up('xs')]: {
       position: 'absolute',
       transform: 'translateY(-50%)',
       top: '50%',
     },
+
+    [theme.breakpoints.down('xs')]: {
+      marginBlock: '1.5em',
+    },
+
+    // to resolve the slight mobile responsive issue
+    // [theme.breakpoints.down('xs')]: {
+    //   marginBlock: '1.5em',
+    //   position: 'relative',
+    //   transform: 'translateY(0%)',
+    //   top: 0,
+    // },
   },
   contactSecMobile: {
     display: 'none',
@@ -91,6 +114,9 @@ const styles = makeStyles((theme) => ({
       //   alignItems: 'center',
       // },
     },
+    '& hr': {
+      backgroundColor: theme.custom.white,
+    },
   },
   contactSecDesktop: {
     display: 'inline-block',
@@ -101,10 +127,16 @@ const styles = makeStyles((theme) => ({
   collaborators: {
     marginTop: '2em',
     display: 'flex',
-    justifyContent: 'space-between',
-    columnGap: 15,
-    rowGap: 15,
+    justifyContent: 'center',
+    columnGap: '2em',
+    rowGap: '2em',
     flexWrap: 'wrap',
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column',
+      justifyContent: 'unset',
+      rowGap: '1.5em',
+      columnGap: '1em',
+    },
   },
 }));
 

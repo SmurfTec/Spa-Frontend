@@ -24,6 +24,40 @@ const styles = makeStyles((theme) => ({
     },
   },
 
+  textWithlink: {
+    display: 'flex',
+    alignItems: 'center',
+    '& a': {
+      verticalAlign: 'unset',
+      color: theme.palette.text.secondary,
+      textDecoration: 'underline',
+
+      '&:hover': {
+        color: theme.palette.primary.main,
+        transition: 'color 0.5s ease-out',
+      },
+    },
+  },
+
+  lightPinkInputField: {
+    display: 'flex',
+    alignItems: 'start',
+    backgroundColor: `${theme.palette.secondary.main}1f`,
+    color: theme.palette.primary.main,
+    columnGap: '1em',
+    padding: '0.5em 1em',
+    borderRadius: 12,
+    '& .MuiInputBase-root': {
+      flex: 2,
+      '&:before': {
+        display: 'none',
+      },
+      '&.MuiInput-underline:after': {
+        transform: 'scaleX(0)',
+      },
+    },
+  },
+
   sectionFlex: {
     display: 'flex',
     flexDirection: 'column',
@@ -207,7 +241,77 @@ const styles = makeStyles((theme) => ({
     // [theme.breakpoints.down('sm')]: {},
   },
 
-  // ^ Offers section
+  // ^ Table Card Styles
+  //not used
+  tableContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    rowGap: '1em',
+    // flexWrap: 'nowrap',
+    marginBottom: '2rem',
+    columnGap: '2em',
+
+    '& .MuiCard-root': {
+      marginBottom: 0,
+      minWidth: 200,
+    },
+  },
+  //not used
+  tableCardsWrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    columnGap: '1em',
+    rowGap: '1em',
+    '& .productCard': {
+      minWidth: 200,
+    },
+  },
+
+  gridContainer: {
+    display: 'grid',
+    gridGap: 15,
+  },
+
+  gridContainerFill: {
+    marginBlock: '1em',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+    // [theme.breakpoints.up('md')]: {
+    //   gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+    // },
+  },
+
+  // not used
+  gridContainerFit: {
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+  },
+
+  gridElement: {
+    padding: 10,
+    minWidth: 220,
+  },
+  tablePagination: {
+    display: 'flex',
+    justifyContent: 'space-between',
+
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column',
+      alignItems: 'center',
+      rowGap: '1em',
+    },
+    '& > :first-child': {
+      paddingInline: '1em',
+      fontWeight: 500,
+    },
+
+    '& .MuiPagination-root': {
+      width: 'fit-content',
+      // '& .MuiPagination-ul button:not(.Mui-selected)':
+      //   {
+      //     backgroundColor: '#000',
+      //   },
+    },
+  },
 }));
 
 export default styles;

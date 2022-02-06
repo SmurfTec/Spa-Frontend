@@ -4,13 +4,13 @@ const styles = makeStyles((theme) => ({
   productCard: {
     position: 'relative',
     borderRadius: 18,
-    '&:hover': {
-      '& .MuiCardMedia-root': {
-        borderBottomRightRadius: 19,
-        borderBottomLeftRadius: 19,
-        transition: 'all 0.25s ease-in-out',
-      },
+    // '&:hover': {
+    '& .MuiCardMedia-root': {
+      borderBottomRightRadius: 19,
+      borderBottomLeftRadius: 19,
+      // transition: 'all 0.25s ease-in-out',
     },
+    // },
     '& .MuiCardContent-root': {
       display: 'flex',
       flexDirection: 'column',

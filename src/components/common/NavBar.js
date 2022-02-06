@@ -24,10 +24,14 @@ import { NavLink } from 'react-router-dom';
 import useStyles from 'styles/NavBarStyles';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
-import HomeIcon from '@material-ui/icons/Home';
 import globalStyles from 'styles/commonStyles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import clsx from 'clsx';
+import navServices from 'assets/navProductsServices.svg';
+import navHome from 'assets/navHome.svg';
+import navPartners from 'assets/navPartners.svg';
+import navContact from 'assets/navContact.svg';
+import navSales from 'assets/navSales.svg';
 
 const Navbar = (props) => {
   const classes = useStyles();
@@ -75,6 +79,13 @@ const Navbar = (props) => {
               </div>
               <Logo w={45} h={45} comp='nav' />
             </Box>
+          </div>
+          <div className={classes.sectionMobile}>
+            <IconButton aria-label='delete'>
+              <Badge badgeContent='0'>
+                <ShoppingCartIcon style={{ color: '#fff' }} fontSize='small' />
+              </Badge>
+            </IconButton>
           </div>
 
           <div className={classes.sectionDesktop}>
@@ -131,7 +142,7 @@ const Navbar = (props) => {
                 className={clsx(classes.customNavBtn, classes.navBtn)}
                 size='small'
                 endIcon={<FaceIcon />}
-                onClick={() => navigate('/register')}
+                onClick={() => navigate('/login')}
               >
                 SIGN IN
               </Button>
@@ -161,31 +172,95 @@ const Navbar = (props) => {
         }}
       >
         {/* <div className={classes_dr.drawerHeader}> */}
-        <div>
+        <Box
+          px={2}
+          display='flex'
+          alignItems='center'
+          justifyContent='space-between'
+        >
           <Logo w={45} h={45} comp='nav' />
 
-          <IconButton onClick={toggleSideBar}>
+          <IconButton onClick={toggleSideBar} size='small'>
             <NavigateBeforeIcon />
           </IconButton>
-        </div>
+        </Box>
+        <Box mx={2} sx={{ backgroundColor: '#fff' }}>
+          <Divider />
+        </Box>
 
         <Box mt={4} />
 
-        {/* <List className={classes_dr.list}> */}
-        <List>
-          <NavLink to='/'>
+        <List className={classes.drawerList}>
+          <NavLink to='/' className={classes_g.linkHover}>
             <ListItem button>
-              <ListItemIcon style={{ minWidth: 40 }}>
-                <HomeIcon />
+              <ListItemIcon style={{ minWidth: 35 }}>
+                <img src={navHome} alt='Services' />
               </ListItemIcon>
               <Typography variant='subtitle1'>Home</Typography>
             </ListItem>
           </NavLink>
+          <NavLink to='/products&services' className={classes_g.linkHover}>
+            <ListItem button>
+              <ListItemIcon style={{ minWidth: 35 }}>
+                <img src={navServices} alt='Services' />
+              </ListItemIcon>
+              <Typography variant='subtitle1'>Products</Typography>
+            </ListItem>
+          </NavLink>
+          <NavLink to='/partners' className={classes_g.linkHover}>
+            <ListItem button>
+              <ListItemIcon style={{ minWidth: 35 }}>
+                <img src={navPartners} alt='Services' />
+              </ListItemIcon>
+              <Typography variant='subtitle1'>Our Partners</Typography>
+            </ListItem>
+          </NavLink>
+          <NavLink to='/flashsales' className={classes_g.linkHover}>
+            <ListItem button>
+              <ListItemIcon style={{ minWidth: 35 }}>
+                <img src={navSales} alt='Services' />
+              </ListItemIcon>
+              <Typography variant='subtitle1'>Flash Sales</Typography>
+            </ListItem>
+          </NavLink>
+          <NavLink to='/contactus' className={classes_g.linkHover}>
+            <ListItem button>
+              <ListItemIcon style={{ minWidth: 35 }}>
+                <img src={navContact} alt='Services' />
+              </ListItemIcon>
+              <Typography variant='subtitle1'>Contact Us</Typography>
+            </ListItem>
+          </NavLink>
         </List>
 
-        <Box my={3}>
+        <Box my={2} mx={2}>
           <Divider />
         </Box>
+
+        <List className={classes.drawerList}>
+          <Box
+            my={2}
+            mx={2}
+            display='flex'
+            flexDirection='column'
+            gridRowGap={15}
+          >
+            <Button variant='contained' color='secondary' fullWidth>
+              BOOK NOW
+            </Button>
+            <Button
+              variant='contained'
+              color='default'
+              className={clsx(classes.customNavBtn, classes.navBtn)}
+              size='small'
+              endIcon={<FaceIcon />}
+              onClick={() => navigate('/login')}
+              fullWidth
+            >
+              SIGN IN
+            </Button>
+          </Box>
+        </List>
       </Drawer>
     </div>
   );

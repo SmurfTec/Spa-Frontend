@@ -1,20 +1,23 @@
-import { Box, Button, Grid, Link, Typography } from '@material-ui/core';
 import React from 'react';
-import styles from 'styles/HomeStyles';
-import globalStyles from 'styles/commonStyles';
-import { Carousel } from 'react-responsive-carousel';
-import clsx from 'clsx';
-import spa1 from 'assets/med.jpg';
-import spa2 from 'assets/spa2.jpg';
-import Search from 'components/common/Search/Search';
-import { LoremIpsum, shortVersion, vendors, loremShort, loremlong } from 'data';
 import { NavLink } from 'react-router-dom';
+import { Carousel } from 'react-responsive-carousel';
+import { Box, Button, Grid, Typography } from '@material-ui/core';
+import clsx from 'clsx';
+
+import Search from 'components/common/Search/Search';
 import VendorCarousel from 'components/Carousels/VendorCarousel';
-import Subscription from 'components/Subscription';
 import ProductCarousel from 'components/Carousels/ProductCarousel';
-import Footer from 'components/common/Footer';
+import AdsCarousel from 'components/Carousels/AdsCarousel';
 import Banner from './Banner';
 import Offers from './Offers';
+
+import { loremShort, loremlong } from 'data';
+
+import globalStyles from 'styles/commonStyles';
+import styles from 'styles/HomeStyles';
+import spa1 from 'assets/med.jpg';
+import spa2 from 'assets/spa2.jpg';
+
 const Home = () => {
   const classes = styles();
   const classes_g = globalStyles();
@@ -68,6 +71,22 @@ const Home = () => {
               </div>
             </Box>
           </div>
+          <div>
+            <img src={spa1} alt='' />
+            <div className={classes_g.overlay} />
+            <Box className='legend'>
+              <div className={classes_g.contentContainer}>
+                <div>
+                  <Typography variant='h5'>ABOUT</Typography>
+                  <Typography variant='body2'>{loremlong}</Typography>
+                </div>
+
+                <Box mt={2}>
+                  <NavLink to='/'>See More</NavLink>
+                </Box>
+              </div>
+            </Box>
+          </div>
         </Carousel>
 
         <Box className={classes_g.carouselDefaults}>
@@ -95,33 +114,9 @@ const Home = () => {
             {loremShort}
           </Typography>
         </div>
-        <Carousel
-          showArrows={true}
-          showThumbs={false}
-          animationHandler='fade'
-          swipeable={false}
-          showStatus={false}
-          autoPlay={true}
-          infiniteLoop={true}
-          className={classes_g.Carousel}
-        >
-          <div className='rndCornCarsl'>
-            <img src={spa2} alt='' />
-            <div className={classes_g.overlay} />
-            <Box className='legend'>
-              <div className={classes_g.contentContainer}>
-                <div>
-                  <Typography variant='h5'>ABOUT</Typography>
-                  <Typography variant='body2'>{loremlong}</Typography>
-                </div>
 
-                <Box mt={2}>
-                  <NavLink to='/'>See More</NavLink>
-                </Box>
-              </div>
-            </Box>
-          </div>
-        </Carousel>
+        {/* // ^ Ads Carousel */}
+        <AdsCarousel />
 
         <Box className={classes_g.carouselDefaults}>
           <ProductCarousel isPromo={true} />

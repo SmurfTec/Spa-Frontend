@@ -61,7 +61,7 @@ const ProductCard = ({
               </>
             )}
           </div>
-          <Typography variant='subtitle2'>{description}</Typography>
+          <Typography variant='body2'>{description}</Typography>
         </div>
 
         <Box sx={{ textAlign: 'center' }}>

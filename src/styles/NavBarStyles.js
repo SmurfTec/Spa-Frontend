@@ -120,13 +120,45 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
+    // backgroundColor: theme.palette.primary.main,
   },
   drawerPaper: {
     width: drawerWidth,
+    // backgroundColor: theme.palette.primary.main,
+
+    '& > :first-child': {
+      backgroundColor: theme.palette.primary.main,
+      padding: '1em 1em',
+    },
+    '& .MuiIconButton-root': {
+      border: '1px solid #fff',
+      '& svg': {
+        color: '#fff',
+      },
+    },
   },
-  list: {
+  drawerList: {
     '& a': {
       color: theme.palette.text.primary,
+
+      '& .MuiTypography-subtitle1::after': {
+        content: '""',
+        display: 'block',
+        width: 0,
+        height: 1,
+        background: '#000',
+        transition: 'width .5s',
+      },
+      '&.active,:hover': {
+        '& h6::after': {
+          width: '100%',
+        },
+      },
+      '& .MuiListItem-root': {
+        columnGap: '1.4em',
+      },
+
+      // borderLeft: `3px solid ${theme.palette.primary.main}`,
     },
   },
 }));

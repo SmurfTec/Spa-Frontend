@@ -1,10 +1,13 @@
-import { Avatar, Box, Typography } from '@material-ui/core';
+import { Avatar, Box, Divider, Typography } from '@material-ui/core';
 import React from 'react';
 import styles from 'styles/FooterStyles';
 import Logo from './Logo';
 import faker from 'faker';
 import brand1 from 'assets/brand3.png';
 import brand2 from 'assets/brand2.png';
+import brand3 from 'assets/brand1.png';
+import casetrust from 'assets/casetrust.svg';
+
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import YouTubeIcon from '@material-ui/icons/YouTube';
@@ -78,6 +81,8 @@ const Footer = () => {
                   <Typography variant='subtitle1'>+11 123 123 44</Typography>
                   <Typography variant='subtitle1'>+13 123 123 44</Typography>
                 </div>
+
+                <Divider />
               </div>
               <div className={classes.contactSecDesktop}>
                 <Box mt={2}>
@@ -100,11 +105,13 @@ const Footer = () => {
             <div className='contentRight'>
               <div className={classes.menuDiv}>
                 {menu &&
-                  menu.map((el) => (
-                    <Box>
+                  menu.map((el, ind) => (
+                    <Box key={`${el.url}_${ind}`}>
                       <Typography variant='subtitle1'>{el.item}</Typography>
-                      {el.subMenus.map((e) => (
-                        <Typography variant='subtitle2'>- {e.item}</Typography>
+                      {el.subMenus.map((e, i) => (
+                        <Typography variant='subtitle2' key={`${i}`}>
+                          - {e.item}
+                        </Typography>
                       ))}
                     </Box>
                   ))}
@@ -117,8 +124,8 @@ const Footer = () => {
                 OUR AWARDS
               </Typography>
               <div className={classes.brandsImg}>
-                <img src={brand1} alt='brand1' height='60px' width='90px' />
-                <img src={brand2} alt='brand2' height='60px' width='90px' />
+                <img src={brand1} alt='brand1' height='60px' />
+                <img src={casetrust} alt='brand2' height='60px' />
               </div>
             </Box>
             <Box>
@@ -126,8 +133,8 @@ const Footer = () => {
                 OUR PARTNERS
               </Typography>
               <div className={classes.brandsImg}>
-                <img src={brand1} alt='brand1' height='60px' width='90px' />
-                <img src={brand2} alt='brand2' height='60px' width='90px' />
+                <img src={brand1} alt='brand1' height='60px' />
+                <img src={brand2} alt='brand2' height='60px' />
               </div>
             </Box>
             <Box>
@@ -135,7 +142,7 @@ const Footer = () => {
                 FIND US ON
               </Typography>
               <div className={classes.brandsImg}>
-                <Avatar variant='rounded'>
+                <Avatar variant='rounded' size='small'>
                   <FacebookIcon />
                 </Avatar>
                 <Avatar variant='rounded'>
