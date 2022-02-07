@@ -5,6 +5,7 @@ import {
   Typography,
   CardActionArea,
   Box,
+  Button,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import spa1 from 'assets/spa1.svg';
@@ -13,6 +14,7 @@ import StarIcon from '@material-ui/icons/Star';
 const styles = makeStyles((theme) => ({
   vendorCard: {
     borderRadius: 8,
+
     '& .MuiCardContent-root': {
       display: 'flex',
       flexDirection: 'column',
@@ -26,6 +28,12 @@ const styles = makeStyles((theme) => ({
       '& .MuiTypography-subtitle2': {
         fontWeight: 600,
         // height: 44,
+      },
+      '& .overlay': {
+        display: 'none',
+      },
+      '&:hover': {
+        '& .overlay': {},
       },
       // '& .title': {
       //   height: 60,
@@ -62,6 +70,9 @@ const VendorCard = ({ title, description, image, rating, _id, history }) => {
               {description}
             </Typography>
           </Box>
+          <div className='overlay'>
+            <Button variant='contained' color='primary'></Button>
+          </div>
         </CardContent>
       </CardActionArea>
     </Card>

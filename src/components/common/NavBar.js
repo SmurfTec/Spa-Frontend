@@ -7,31 +7,22 @@ import {
   Divider,
   List,
   ListItem,
-  ListItemIcon,
-  Icon,
+  // ListItemIcon,
+  // Icon,
   Badge,
 } from '@material-ui/core';
 import { Box, Button, Typography } from '@material-ui/core';
 import { useLocation, useNavigate } from 'react-router-dom';
-// import AccountPopover from './AccountPopover';
 import Logo from './Logo';
 import FaceIcon from '@material-ui/icons/Face';
 // import { AuthContext } from 'contexts/AuthContext';
 import { NavLink } from 'react-router-dom';
-// import MHidden from 'components/layouts/DrawerLayout/MHidden';
-// import globalStyles from 'styles/commonStyles';
-// import drawerStyles from 'styles/DrawerStyles';
 import useStyles from 'styles/NavBarStyles';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import globalStyles from 'styles/commonStyles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import clsx from 'clsx';
-import navServices from 'assets/navProductsServices.svg';
-import navHome from 'assets/navHome.svg';
-import navPartners from 'assets/navPartners.svg';
-import navContact from 'assets/navContact.svg';
-import navSales from 'assets/navSales.svg';
 
 const Navbar = (props) => {
   const classes = useStyles();
@@ -193,41 +184,29 @@ const Navbar = (props) => {
         <List className={classes.drawerList}>
           <NavLink to='/' className={classes_g.linkHover}>
             <ListItem button>
-              <ListItemIcon style={{ minWidth: 35 }}>
-                <img src={navHome} alt='Services' />
-              </ListItemIcon>
+              {/* <ListItemIcon>
+                <DonutLargeIcon fontSize='small' />
+              </ListItemIcon> */}
               <Typography variant='subtitle1'>Home</Typography>
             </ListItem>
           </NavLink>
           <NavLink to='/products&services' className={classes_g.linkHover}>
             <ListItem button>
-              <ListItemIcon style={{ minWidth: 35 }}>
-                <img src={navServices} alt='Services' />
-              </ListItemIcon>
               <Typography variant='subtitle1'>Products</Typography>
             </ListItem>
           </NavLink>
           <NavLink to='/partners' className={classes_g.linkHover}>
             <ListItem button>
-              <ListItemIcon style={{ minWidth: 35 }}>
-                <img src={navPartners} alt='Services' />
-              </ListItemIcon>
               <Typography variant='subtitle1'>Our Partners</Typography>
             </ListItem>
           </NavLink>
           <NavLink to='/flashsales' className={classes_g.linkHover}>
             <ListItem button>
-              <ListItemIcon style={{ minWidth: 35 }}>
-                <img src={navSales} alt='Services' />
-              </ListItemIcon>
               <Typography variant='subtitle1'>Flash Sales</Typography>
             </ListItem>
           </NavLink>
           <NavLink to='/contactus' className={classes_g.linkHover}>
             <ListItem button>
-              <ListItemIcon style={{ minWidth: 35 }}>
-                <img src={navContact} alt='Services' />
-              </ListItemIcon>
               <Typography variant='subtitle1'>Contact Us</Typography>
             </ListItem>
           </NavLink>

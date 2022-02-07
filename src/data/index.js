@@ -1,5 +1,6 @@
 import faker from 'faker';
 // import faker from 'faker/locale/en';
+
 export const LoremIpsum =
   'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.';
 
@@ -28,17 +29,33 @@ export const products = [...Array(45)].map((_, index) => ({
   description: faker.commerce.productAdjective(),
   isFavourite: faker.datatype.boolean(),
   image: `assets/prod${index + 1}.jpg`,
+  type: 'product',
 }));
 
 export const services = [...Array(4)].map((_, index) => ({
   _id: faker.datatype.uuid(),
   title: 'Signature Thai Massage',
-  starting_price: faker.commerce.price(30, 70, 1, '$'),
-  oneHourRate: faker.commerce.price(120, 200, 1, '$'),
+  price: faker.commerce.price(30, 70, 1, '$'),
+  oneHourRate: `60-min (U.P. ${faker.commerce.price(120, 200, 1, '$')})`,
   rating: faker.datatype.number(500),
   isFavourite: faker.datatype.boolean(),
-  image: `assets/prod${index + 1}.jpg`,
+  description: 'Service from Bamboo Spa',
+  image: `assets/serv${index + 1}.svg`,
+  type: 'service',
 }));
+
+export const productsB = [...Array(4)].map((_, index) => ({
+  _id: faker.datatype.uuid(),
+  title: faker.commerce.productName(),
+  price: faker.commerce.price(10, 60, 1, '$'),
+  rating: faker.datatype.number(120),
+  description: 'Product from Bamboo Spa',
+  isFavourite: faker.datatype.boolean(),
+  image: `assets/prod${index + 1}.jpg`,
+  type: 'product',
+}));
+
+export const mixedProdServ = [...productsB, ...services];
 
 export const decreaseBy = [1, 5, 4, 3, 1, 5, 4, 3, 1, 5, 4, 3, 1, 5, 4, 3];
 

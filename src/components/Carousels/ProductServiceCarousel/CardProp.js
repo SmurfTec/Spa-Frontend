@@ -4,6 +4,16 @@ const styles = makeStyles((theme) => ({
   productCard: {
     position: 'relative',
     borderRadius: 18,
+
+    [theme.breakpoints.down('sm')]: {
+      maxWidth: 265,
+      margin: '0 auto',
+    },
+
+    // [theme.breakpoints.down('xs')]: {
+    //   maxWidth: 265,
+    //   margin: '0 auto',
+    // },
     // '&:hover': {
     '& .MuiCardMedia-root': {
       borderBottomRightRadius: 19,
@@ -15,18 +25,23 @@ const styles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
-      rowGap: 10,
-      '& .MuiTypography-subtitle2': {
+      rowGap: 5,
+      height: 'calc(100% - 135px)',
+      '& .MuiTypography-subtitle1': {
         fontWeight: 600,
-        height: 44,
       },
+      // ^ To Vertically hide after the mentioned lines
+      // display: '-webkit-box',
+      // overflow: 'hidden',
+      // WebkitLineClamp: 1, // hide after 1 line
+      // WebkitBoxOrient: 'vertical',
       [theme.breakpoints.down('xs')]: {
-        paddingInline: '2.5em',
+        paddingInline: '1em',
       },
     },
   },
   cardMedia: {
-    height: 150,
+    height: 135,
   },
   favourite: {
     position: 'absolute',
@@ -38,6 +53,15 @@ const styles = makeStyles((theme) => ({
     display: 'flex',
     columnGap: 10,
     alignItems: 'center',
+  },
+  servPricePromo: {
+    '& .MuiTypography-subtitle1': {
+      '& span': {
+        paddingInline: 2,
+        color: theme.palette.text.secondary,
+        textDecoration: 'line-through',
+      },
+    },
   },
 }));
 

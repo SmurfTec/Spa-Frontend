@@ -30,13 +30,13 @@ export const styles = makeStyles((theme) => ({
     '& .react-multiple-carousel__arrow--right ': {
       right: -45,
       [theme.breakpoints.down('xs')]: {
-        right: -18,
+        right: -30,
       },
     },
     '& .react-multiple-carousel__arrow--left': {
       left: -45,
       [theme.breakpoints.down('xs')]: {
-        left: -18,
+        left: -30,
       },
     },
     '& .carousel-container': {

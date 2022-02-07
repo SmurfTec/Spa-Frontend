@@ -7,7 +7,12 @@ const styles = makeStyles((theme) => ({
     // margin: '0 auto',
     display: 'flex',
     justifyContent: 'space-between',
-    columnGap: 15,
+    gap: 15,
+
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column',
+      rowGap: 10,
+    },
 
     '& > div': {
       display: 'flex',
@@ -15,16 +20,28 @@ const styles = makeStyles((theme) => ({
       columnGap: 15,
     },
 
-    '& div:last-child': {
+    '& > div:last-child': {
       flexDirection: 'column',
       justifyContent: 'center',
       flexWrap: 'nowrap',
-      '& > .MuiTypography-subtitle1': {
+      flexShrink: 0,
+      '& > .MuiTypography-subtitle2': {
         fontWeight: 600,
       },
       '& svg': {
         color: theme.palette.warning.main,
       },
+      '& > :first-child': {
+        [theme.breakpoints.down('sm')]: {
+          flexDirection: 'column',
+          alignItems: 'center',
+        },
+      },
+    },
+  },
+  tabButtons: {
+    '& > .MuiButton-root': {
+      minWidth: 120,
     },
   },
 }));

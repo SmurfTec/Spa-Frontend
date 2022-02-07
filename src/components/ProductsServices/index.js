@@ -6,11 +6,11 @@ import { Pagination } from '@material-ui/lab';
 import { Carousel } from 'react-responsive-carousel';
 
 import { useToggleInput } from 'hooks';
-import ProductCard from 'components/Carousels/ProductCarousel/ProductCard';
-import ProductCarousel from 'components/Carousels/ProductCarousel';
+import Card from 'components/Carousels/ProductServiceCarousel/Card';
+import ProductServiceCarousel from 'components/Carousels/ProductServiceCarousel';
 import Search from 'components/common/Search/Search';
 import AdsCarousel from 'components/Carousels/AdsCarousel';
-import { loremShort, loremlong, products } from 'data';
+import { loremShort, loremlong, products, mixedProdServ } from 'data';
 
 import globalStyles from 'styles/commonStyles';
 import styles from 'styles/ProductsServiceStyles';
@@ -19,6 +19,7 @@ import StarIcon from '@material-ui/icons/Star';
 import vendorLogo from 'assets/bambooSpa.svg';
 import spa2 from 'assets/spa2.jpg';
 import spa1 from 'assets/med.jpg';
+import VendorCard from 'components/Carousels/VendorCarousel/VendorCard';
 
 const ProductsServices = () => {
   const classes = styles();
@@ -73,7 +74,7 @@ const ProductsServices = () => {
               <Typography variant='h5'>4.6 (580)</Typography>
             </Box>
             {/* // ? Should it be NavLink or button */}
-            <Typography variant='subtitle1' color='primary'>
+            <Typography variant='subtitle2' color='primary' align='center'>
               view Reviews
             </Typography>
             <Box></Box>
@@ -82,13 +83,19 @@ const ProductsServices = () => {
       </div>
       {/* // ^ Ads Carousel */}
       <AdsCarousel />
-
       {/* // ^ Search Comp */}
       <div className={classes_g.sectHorAlignment}>
         <Search placeholder='Product or Service Name ' />
       </div>
       {/* // ^ Buttons (for Tabs layout) */}
-      <Box mt={3} display='flex' gridColumnGap={15} justifyContent='center'>
+      <Box
+        mt={3}
+        display='flex'
+        gridGap={15}
+        flexWrap='wrap'
+        justifyContent='center'
+        className={clsx(classes_g.sectHorAlignment, classes.tabButtons)}
+      >
         <Button
           name='all'
           variant='contained'
@@ -123,13 +130,12 @@ const ProductsServices = () => {
         </Button>
       </Box>
       {/* // ^  New arrivals Carousel */}
-
       <div className={classes_g.sectHorAlignment}>
         <Typography variant='h4'>New Arrivals</Typography>
       </div>
       <Box mt={3}>
         <Box className={classes_g.carouselDefaults}>
-          <ProductCarousel isPromo={false} />
+          <ProductServiceCarousel isPromo={false} showDesc={false} />
         </Box>
 
         <Box
@@ -143,11 +149,10 @@ const ProductsServices = () => {
       <div className={classes_g.sectHorAlignment}>
         <Typography variant='h4'>Just For You</Typography>
       </div>
-
       {/* // ^ Table Layout */}
       <div className={classes_g.sectHorAlignment}>
         <div className={classes_g.tableContainer}>
-          {products.length > 0 ? (
+          {mixedProdServ.length > 0 ? (
             <>
               <div
                 className={clsx(
@@ -156,25 +161,25 @@ const ProductsServices = () => {
                 )}
                 // class='grid-container grid-container--fit'
               >
-                {products
+                {mixedProdServ
                   ?.slice(
                     (page - 1) * rowsPerPage,
                     (page - 1) * rowsPerPage + rowsPerPage
                   )
                   .map((el) => (
                     <div key={el._id} className={classes_g.gridElement}>
-                      <ProductCard {...el} isPromo={false} type='product' />
+                      <Card {...el} isPromo={false} />
                     </div>
                   ))}
               </div>
               <div className={classes_g.tablePagination}>
                 <Typography variant='subtitle2'>
-                  {calcNoOfItems(products)}
+                  {calcNoOfItems(mixedProdServ)}
                 </Typography>
 
                 <Pagination
                   color='primary'
-                  count={Math.ceil(products.length / rowsPerPage)}
+                  count={Math.ceil(mixedProdServ.length / rowsPerPage)}
                   page={page}
                   size='small'
                   // variant='outlined'
@@ -192,7 +197,6 @@ const ProductsServices = () => {
       </div>
 
       {/* // ^ Table flex Layout
-
       <div className={classes_g.sectHorAlignment}>
         <Box my={2}>
           <Typography varaint='subtitle1'>FlexBox</Typography>
@@ -208,11 +212,14 @@ const ProductsServices = () => {
                   )
                   .map((prod, index) => (
                     // <div key={prod._id} className={classes_g.tableCardContainer}>
-                    <ProductCard
+                    <Card
+                      key={prod._id}
+                      {...prod}
                       isPromo={false}
                       type='product'
-                      key={prod._id}
+                      showDesc={false}
                     />
+
                     // </div>
                   ))}
               </div>

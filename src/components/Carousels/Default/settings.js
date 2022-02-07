@@ -47,16 +47,16 @@ export const responsive2 = {
     slidesToSlide: 1, //
   },
   tablet: {
-    breakpoint: { max: 992, min: 710 },
+    breakpoint: { max: 992, min: 750 },
     items: 3,
     slidesToSlide: 1, //
   },
   smTablet: {
-    breakpoint: { max: 710, min: 600 },
+    breakpoint: { max: 750, min: 540 },
     items: 2,
   },
   smMobile: {
-    breakpoint: { max: 600, min: 0 },
+    breakpoint: { max: 540, min: 0 },
     items: 1,
   },
 };

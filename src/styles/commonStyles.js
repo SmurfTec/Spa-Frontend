@@ -80,11 +80,11 @@ const styles = makeStyles((theme) => ({
   },
   sectHorAlignment: {
     width: '80%',
-    margin: '0 auto',
+    marginInline: 'auto',
 
-    // [theme.breakpoints.down('xs')]: {
-    //   width: '90%',
-    // },
+    [theme.breakpoints.down('sm')]: {
+      width: '85%',
+    },
   },
   subHeading: {
     maxWidth: 500,
@@ -208,6 +208,9 @@ const styles = makeStyles((theme) => ({
   carouselDefaults: {
     width: '80%',
     margin: 'auto',
+    // [theme.breakpoints.down('xs')]: {
+    //   width: '85%',
+    // },
   },
 
   carouselItem: {
@@ -217,6 +220,11 @@ const styles = makeStyles((theme) => ({
     '& .MuiPaper-root': {
       boxShadow: theme.custom.cardShadow,
       height: '100%',
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingInline: '0.5em',
+      maxWidth: 265,
+      margin: '0 auto',
     },
   },
   sectionLink: {
@@ -253,7 +261,7 @@ const styles = makeStyles((theme) => ({
 
     '& .MuiCard-root': {
       marginBottom: 0,
-      minWidth: 200,
+      // minWidth: 200,
     },
   },
   //not used
@@ -263,14 +271,14 @@ const styles = makeStyles((theme) => ({
     alignItems: 'center',
     columnGap: '1em',
     rowGap: '1em',
-    '& .productCard': {
-      minWidth: 200,
-    },
+    // '& .productCard': {
+    //   minWidth: 200,
+    // },
   },
 
   gridContainer: {
     display: 'grid',
-    gridGap: 15,
+    gridGap: 5,
   },
 
   gridContainerFill: {
@@ -278,6 +286,10 @@ const styles = makeStyles((theme) => ({
     gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
     // [theme.breakpoints.up('md')]: {
     //   gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+    // },
+
+    // [theme.breakpoints.down('md')]: {
+    //   gridTemplateColumns: 'repeat(4,  minmax(200px, 1fr))',
     // },
   },
 
@@ -288,7 +300,11 @@ const styles = makeStyles((theme) => ({
 
   gridElement: {
     padding: 10,
-    minWidth: 220,
+    // minWidth: 220,
+    '& > div': {
+      height: '100%',
+      // maxWidth: 200,
+    },
   },
   tablePagination: {
     display: 'flex',

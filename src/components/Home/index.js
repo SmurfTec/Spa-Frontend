@@ -6,7 +6,7 @@ import clsx from 'clsx';
 
 import Search from 'components/common/Search/Search';
 import VendorCarousel from 'components/Carousels/VendorCarousel';
-import ProductCarousel from 'components/Carousels/ProductCarousel';
+import ProductServiceCarousel from 'components/Carousels/ProductServiceCarousel';
 import AdsCarousel from 'components/Carousels/AdsCarousel';
 import Banner from './Banner';
 import Offers from './Offers';
@@ -119,7 +119,7 @@ const Home = () => {
         <AdsCarousel />
 
         <Box className={classes_g.carouselDefaults}>
-          <ProductCarousel isPromo={true} />
+          <ProductServiceCarousel isPromo={true} showDesc={true} />
         </Box>
         <Box
           mt={2}
@@ -251,7 +251,7 @@ const Home = () => {
         </div>
 
         <Box className={classes_g.carouselDefaults}>
-          <ProductCarousel isPromo={false} />
+          <ProductServiceCarousel isPromo={false} showDesc={true} />
         </Box>
 
         <Box

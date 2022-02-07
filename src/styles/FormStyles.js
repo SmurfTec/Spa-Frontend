@@ -35,6 +35,12 @@ const styles = makeStyles((theme) => ({
     marginBlock: '3em',
     flexDirection: 'column',
 
+    '& form': {
+      display: 'flex',
+      flexDirection: 'column',
+      rowGap: 15,
+    },
+
     [theme.breakpoints.down('xs')]: {
       width: '90%',
     },
