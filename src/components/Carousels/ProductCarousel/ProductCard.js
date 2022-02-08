@@ -31,7 +31,7 @@ const ProductCard = ({
   isPromo,
 }) => {
   const classes = styles();
-  console.log('promoPrice', promoPrice);
+  // console.log('promoPrice', promoPrice);
   return (
     <Card className={classes.productCard}>
       <CardMedia className={classes.cardMedia} image={prod1} />
@@ -57,11 +57,11 @@ const ProductCard = ({
             ) : (
               <>
                 <Typography variant='h5'>{price}</Typography>
-                {/* <Typography variant='h5'>- ${promoPrice}</Typography> */}
+                <Typography variant='body2'>{'  '} (100ml)</Typography>
               </>
             )}
           </div>
-          <Typography variant='subtitle2'>{description}</Typography>
+          <Typography variant='body2'>{description}</Typography>
         </div>
 
         <Box sx={{ textAlign: 'center' }}>

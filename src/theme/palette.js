@@ -32,6 +32,7 @@ const ERROR = {
 };
 
 const palette = {
+  type: 'light',
   primary: {
     main: '#67000e',
   },

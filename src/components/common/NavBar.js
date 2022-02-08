@@ -9,6 +9,7 @@ import {
   ListItem,
   ListItemIcon,
   Icon,
+  Badge,
 } from '@material-ui/core';
 import { Box, Button, Typography } from '@material-ui/core';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -23,9 +24,14 @@ import { NavLink } from 'react-router-dom';
 import useStyles from 'styles/NavBarStyles';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
-import HomeIcon from '@material-ui/icons/Home';
 import globalStyles from 'styles/commonStyles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import clsx from 'clsx';
+import navServices from 'assets/navProductsServices.svg';
+import navHome from 'assets/navHome.svg';
+import navPartners from 'assets/navPartners.svg';
+import navContact from 'assets/navContact.svg';
+import navSales from 'assets/navSales.svg';
 
 const Navbar = (props) => {
   const classes = useStyles();
@@ -45,13 +51,15 @@ const Navbar = (props) => {
   };
 
   return (
-    <div className={`${classes.root}`}>
+    <div className={classes.root}>
       <AppBar position='fixed' className={classes.Appbar}>
         <Toolbar>
           <div
           // className={`${classes_g.flexAlignDisp} ${classes.navSearch}`}
           >
             <Box
+              display='flex'
+              alignItems='center'
               // className={classes_g.flexAlignDisp}
               sx={{ columnGap: 5 }}
             >
@@ -72,84 +80,87 @@ const Navbar = (props) => {
               <Logo w={45} h={45} comp='nav' />
             </Box>
           </div>
+          <div className={classes.sectionMobile}>
+            <IconButton aria-label='delete'>
+              <Badge badgeContent='0'>
+                <ShoppingCartIcon style={{ color: '#fff' }} fontSize='small' />
+              </Badge>
+            </IconButton>
+          </div>
 
           <div className={classes.sectionDesktop}>
             {/* <Box
               display='flex'
-              justifyContent='space-around'
-              sx={{
-                columnGap: '2.5em',
-                marginLeft: 'auto',
-                textAlign: 'center',
-                alignItems: 'center',
-              }}
-            > */}
-            <Box
-              display='flex'
               minWidth='200px'
               sx={{ alignItems: 'center', columnGap: '2.5em' }}
               className={classes_g.linkHover}
+            > */}
+            <Box
+              display='flex'
+              alignItems='center'
+              sx={{ columnGap: 25 }}
+              className={classes_g.linkHover}
             >
-              <Box display='flex' alignItems='center' sx={{ columnGap: 25 }}>
-                <Typography variant='subtitle2' noWrap>
-                  <NavLink to='/contact-us'>Home </NavLink>
-                </Typography>
-                <Typography variant='subtitle2' noWrap>
-                  <NavLink to='/faq'>Our Partners</NavLink>
-                </Typography>
-                <Typography variant='subtitle2' noWrap>
-                  <NavLink to='/leaderboard'>Promotions</NavLink>
-                </Typography>
-                <Typography variant='subtitle2' noWrap>
-                  <NavLink to='/contact-us'>Products</NavLink>
-                </Typography>
-                <Typography variant='subtitle2' noWrap>
-                  <NavLink to='/leaderboard'>Contact Us</NavLink>
-                </Typography>
-              </Box>
-              <Box
-                display='flex'
-                alignItems='center'
-                justifyContent='center'
-                // gridColumnGap='20px'
-                sx={{ columnGap: 10 }}
+              <Typography variant='subtitle2' noWrap>
+                <NavLink to='/'>Home </NavLink>
+              </Typography>
+              <Typography variant='subtitle2' noWrap>
+                <NavLink to='/ourpartners'>Our Partners</NavLink>
+              </Typography>
+              <Typography variant='subtitle2' noWrap>
+                <NavLink to='/flashsales'>Flash Sales</NavLink>
+              </Typography>
+              <Typography variant='subtitle2' noWrap>
+                <NavLink to='/products&services'>Products</NavLink>
+              </Typography>
+              <Typography variant='subtitle2' noWrap>
+                <NavLink to='/contact-us'>Contact Us</NavLink>
+              </Typography>
+            </Box>
+            <Box
+              display='flex'
+              alignItems='center'
+              justifyContent='center'
+              // gridColumnGap='20px'
+              sx={{ columnGap: 10 }}
+            >
+              <Button
+                variant='contained'
+                color='secondary'
+                size='small'
+                style={{
+                  minWidth: 80,
+                  height: 'fit-content',
+                }}
+                onClick={() => navigate('/login')}
               >
-                <Button
-                  variant='contained'
-                  color='secondary'
-                  size='small'
-                  style={{
-                    minWidth: 80,
-                    height: 'fit-content',
-                  }}
-                  onClick={() => navigate('/login')}
-                >
-                  BOOK NOW
-                </Button>
-                <Button
-                  variant='contained'
-                  color='default'
-                  className={`${classes.customNavBtn} ${classes.navBtn}`}
-                  size='small'
-                  endIcon={<FaceIcon />}
-                  onClick={() => navigate('/register')}
-                >
-                  SIGN IN
-                </Button>
-                <IconButton aria-label='delete'>
+                BOOK NOW
+              </Button>
+              <Button
+                variant='contained'
+                color='default'
+                className={clsx(classes.customNavBtn, classes.navBtn)}
+                size='small'
+                endIcon={<FaceIcon />}
+                onClick={() => navigate('/login')}
+              >
+                SIGN IN
+              </Button>
+              <IconButton aria-label='delete'>
+                <Badge badgeContent='0'>
                   <ShoppingCartIcon
                     style={{ color: '#fff' }}
                     fontSize='small'
                   />
-                </IconButton>
-              </Box>
+                </Badge>
+              </IconButton>
             </Box>
             {/* </Box> */}
           </div>
         </Toolbar>
       </AppBar>
 
-      <Box paddingTop={'64px'} />
+      <div className={classes.navFixed} />
 
       <Drawer
         anchor='left'
@@ -161,31 +172,95 @@ const Navbar = (props) => {
         }}
       >
         {/* <div className={classes_dr.drawerHeader}> */}
-        <div>
+        <Box
+          px={2}
+          display='flex'
+          alignItems='center'
+          justifyContent='space-between'
+        >
           <Logo w={45} h={45} comp='nav' />
 
-          <IconButton onClick={toggleSideBar}>
+          <IconButton onClick={toggleSideBar} size='small'>
             <NavigateBeforeIcon />
           </IconButton>
-        </div>
+        </Box>
+        <Box mx={2} sx={{ backgroundColor: '#fff' }}>
+          <Divider />
+        </Box>
 
         <Box mt={4} />
 
-        {/* <List className={classes_dr.list}> */}
-        <List>
-          <NavLink to='/'>
+        <List className={classes.drawerList}>
+          <NavLink to='/' className={classes_g.linkHover}>
             <ListItem button>
-              <ListItemIcon style={{ minWidth: 40 }}>
-                <HomeIcon />
+              <ListItemIcon style={{ minWidth: 35 }}>
+                <img src={navHome} alt='Services' />
               </ListItemIcon>
               <Typography variant='subtitle1'>Home</Typography>
             </ListItem>
           </NavLink>
+          <NavLink to='/products&services' className={classes_g.linkHover}>
+            <ListItem button>
+              <ListItemIcon style={{ minWidth: 35 }}>
+                <img src={navServices} alt='Services' />
+              </ListItemIcon>
+              <Typography variant='subtitle1'>Products</Typography>
+            </ListItem>
+          </NavLink>
+          <NavLink to='/partners' className={classes_g.linkHover}>
+            <ListItem button>
+              <ListItemIcon style={{ minWidth: 35 }}>
+                <img src={navPartners} alt='Services' />
+              </ListItemIcon>
+              <Typography variant='subtitle1'>Our Partners</Typography>
+            </ListItem>
+          </NavLink>
+          <NavLink to='/flashsales' className={classes_g.linkHover}>
+            <ListItem button>
+              <ListItemIcon style={{ minWidth: 35 }}>
+                <img src={navSales} alt='Services' />
+              </ListItemIcon>
+              <Typography variant='subtitle1'>Flash Sales</Typography>
+            </ListItem>
+          </NavLink>
+          <NavLink to='/contactus' className={classes_g.linkHover}>
+            <ListItem button>
+              <ListItemIcon style={{ minWidth: 35 }}>
+                <img src={navContact} alt='Services' />
+              </ListItemIcon>
+              <Typography variant='subtitle1'>Contact Us</Typography>
+            </ListItem>
+          </NavLink>
         </List>
 
-        <Box my={3}>
+        <Box my={2} mx={2}>
           <Divider />
         </Box>
+
+        <List className={classes.drawerList}>
+          <Box
+            my={2}
+            mx={2}
+            display='flex'
+            flexDirection='column'
+            gridRowGap={15}
+          >
+            <Button variant='contained' color='secondary' fullWidth>
+              BOOK NOW
+            </Button>
+            <Button
+              variant='contained'
+              color='default'
+              className={clsx(classes.customNavBtn, classes.navBtn)}
+              size='small'
+              endIcon={<FaceIcon />}
+              onClick={() => navigate('/login')}
+              fullWidth
+            >
+              SIGN IN
+            </Button>
+          </Box>
+        </List>
       </Drawer>
     </div>
   );

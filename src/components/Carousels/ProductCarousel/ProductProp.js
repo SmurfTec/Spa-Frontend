@@ -4,22 +4,24 @@ const styles = makeStyles((theme) => ({
   productCard: {
     position: 'relative',
     borderRadius: 18,
-    '&:hover': {
-      '& .MuiCardMedia-root': {
-        borderBottomRightRadius: 19,
-        borderBottomLeftRadius: 19,
-        transition: 'all 0.25s ease-in-out',
-      },
+    // '&:hover': {
+    '& .MuiCardMedia-root': {
+      borderBottomRightRadius: 19,
+      borderBottomLeftRadius: 19,
+      // transition: 'all 0.25s ease-in-out',
     },
+    // },
     '& .MuiCardContent-root': {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
-      //   height: '60%',
       rowGap: 10,
-
       '& .MuiTypography-subtitle2': {
         fontWeight: 600,
+        height: 44,
+      },
+      [theme.breakpoints.down('xs')]: {
+        paddingInline: '2.5em',
       },
     },
   },

@@ -2,50 +2,59 @@ const { makeStyles } = require('@material-ui/core');
 
 const styles = makeStyles((theme) => ({
   divbackImg: {
-    backgroundOrigin: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    backgroundPosition: 'center center',
+    backgroundPosition: 'center',
     width: '100%',
     height: '100%',
+    minHeight: 200,
     padding: '1em',
     position: 'relative',
   },
-  offerCard: {
+  offerWrapper: {
     flex: 2,
-    // height: '100%',
-    // '& .MuiGrid-item': {
-    //   paddingBlock: '1em',
-    // },
-    '& .MuiGrid-item:not(last-child)': {
-      paddingLeft: '1em',
-    },
-    '& .MuiGrid-item:last-child': {
-      paddingRight: '1em',
-    },
-  },
-  offerProduct: {
-    background: '#00000026',
-    width: 'fit-content',
-    padding: '5px 10px',
-    margin: '0 auto',
-    marginTop: '4em',
-    color: '#fff',
-    '& h4': {
-      fontWeight: 500,
-      // width: 'fit-content',
+
+    '& > .MuiGrid-item:not(:first-child)': {
+      [theme.breakpoints.up('sm')]: {
+        paddingLeft: '1em',
+      },
+      [theme.breakpoints.between('sm', 'xs')]: {
+        paddingLeft: '1em',
+      },
+
+      [theme.breakpoints.down('xs')]: {
+        paddingTop: '1em',
+      },
     },
   },
+  // offerProduct: {
+  //   background: '#00000026',
+  //   width: 'fit-content',
+  //   padding: '5px 10px',
+  //   margin: '0 auto',
+  //   marginTop: '4em',
+
+  //   [theme.breakpoints.down('sm')]: {
+  //     marginTop: 0,
+  //   },
+  //   color: '#fff',
+  //   '& h4': {
+  //     fontWeight: 500,
+  //     // width: 'fit-content',
+  //   },
+  // },
+  // offerCard: {
+  //   display: 'flex',
+  //   flexDirection: 'column',
+  //   justifyContent: 'center',
+  //   height: '100%',
+  //   rowGap: 15,
+  // },
   homePromoBg: {
     display: 'flex',
     flexDirection: 'column',
     rowGap: 15,
-    paddingBlock: '1em',
-  },
-  linkUnderline: {
-    '& a': {
-      borderBottom: `2px solid ${theme.palette.primary.main}`,
-    },
+    padding: '1em',
   },
 }));
 

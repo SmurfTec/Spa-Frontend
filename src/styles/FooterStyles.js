@@ -3,7 +3,7 @@ const { makeStyles } = require('@material-ui/core');
 const styles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    marginTop: '8rem',
+    // marginTop: '1rem',
     backgroundColor: theme.palette.primary.main,
     display: 'flex',
     flexDirection: 'column',
@@ -12,24 +12,37 @@ const styles = makeStyles((theme) => ({
   },
 
   wrapper: {
-    width: '70%',
+    width: '80%',
     margin: '0 auto',
     paddingBlock: '1em',
+
+    '& h5': {
+      [theme.breakpoints.down('xs')]: {
+        textDecoration: 'underline',
+        textAlign: 'left',
+      },
+    },
   },
   contentWrapper: {
     display: 'flex',
     columnGap: 10,
 
-    '& .contentLeft': {
-      paddingRight: '1em',
-      borderRight: '2px solid #fff',
-      flexBasis: '35%',
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column',
     },
 
-    '& .contentRight': {
-      flexBasis: '65%',
-      marginLeft: '1em',
-      position: 'relative',
+    [theme.breakpoints.up('xs')]: {
+      '& .contentLeft': {
+        paddingRight: '1em',
+        borderRight: '2px solid #fff',
+        flexBasis: '35%',
+      },
+
+      '& .contentRight': {
+        flexBasis: '65%',
+        marginLeft: '1em',
+        position: 'relative',
+      },
     },
   },
   copyright: {
@@ -42,25 +55,88 @@ const styles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     columnGap: 15,
     paddingTop: '0.5em',
+    '& .MuiAvatar-colorDefault': {
+      backgroundColor: 'transparent',
+
+      '& svg': {
+        width: theme.spacing(7),
+        height: theme.spacing(7),
+        [theme.breakpoints.down('xs')]: {
+          width: theme.spacing(4),
+          height: theme.spacing(4),
+        },
+      },
+    },
+    [theme.breakpoints.down('xs')]: {
+      justifyContent: 'center',
+    },
   },
   menuDiv: {
-    top: '50%',
     width: '100%',
     display: 'flex',
     rowGap: 25,
-    position: 'absolute',
     flexWrap: 'wrap',
-    transform: 'translateY(-50%)',
     columnGap: 25,
     justifyContent: 'space-between',
+    [theme.breakpoints.down('sm')]: {
+      justifyContent: 'unset',
+    },
+
+    [theme.breakpoints.up('xs')]: {
+      position: 'absolute',
+      transform: 'translateY(-50%)',
+      top: '50%',
+    },
+
+    [theme.breakpoints.down('xs')]: {
+      marginBlock: '1.5em',
+    },
+
+    // to resolve the slight mobile responsive issue
+    // [theme.breakpoints.down('xs')]: {
+    //   marginBlock: '1.5em',
+    //   position: 'relative',
+    //   transform: 'translateY(0%)',
+    //   top: 0,
+    // },
+  },
+  contactSecMobile: {
+    display: 'none',
+    [theme.breakpoints.down('xs')]: {
+      display: 'flex',
+      flexDirection: 'column',
+      rowGap: 15,
+      // alignItems: 'center',
+      marginTop: '2em',
+      // '& > div': {
+      //   display: 'flex',
+      //   flexDirection: 'column',
+      //   alignItems: 'center',
+      // },
+    },
+    '& hr': {
+      backgroundColor: theme.custom.white,
+    },
+  },
+  contactSecDesktop: {
+    display: 'inline-block',
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
   },
   collaborators: {
     marginTop: '2em',
     display: 'flex',
-    justifyContent: 'space-between',
-    columnGap: 15,
-    rowGap: 15,
+    justifyContent: 'center',
+    columnGap: '2em',
+    rowGap: '2em',
     flexWrap: 'wrap',
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column',
+      justifyContent: 'unset',
+      rowGap: '1.5em',
+      columnGap: '1em',
+    },
   },
 }));
 

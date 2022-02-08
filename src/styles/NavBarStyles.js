@@ -10,25 +10,36 @@ const useStyles = makeStyles((theme) => ({
       // boxShadow: 'rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px',
     },
 
+    '& .MuiBadge-badge': {
+      backgroundColor: '#fff',
+    },
+
     '& h4': {
       alignSelf: 'start',
     },
   },
   Appbar: {
     backgroundColor: theme.custom.darkFore,
+
     '& .MuiToolbar-regular': {
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'space-between',
       columnGap: '2.5em',
     },
     '& a': {
       color: theme.custom.white,
       verticalAlign: 'middle',
-      '&.active': {
-        color: theme.palette.primary.main,
-      },
+      // '&.active': {
+      // color: theme.palette.primary.main,
+      // },
     },
     columnGap: 20,
+  },
+  navFixed: {
+    paddingTop: 64,
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: 57,
+    },
   },
   grow: {
     flexGrow: 1,
@@ -65,9 +76,10 @@ const useStyles = makeStyles((theme) => ({
 
   sectionDesktop: {
     display: 'none',
-    alignItems: 'center',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: 'flex',
+      alignItems: 'center',
+      columnGap: '2.5em',
     },
   },
 
@@ -75,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     marginLeft: 'auto',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: 'none',
     },
   },
@@ -108,13 +120,45 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
+    // backgroundColor: theme.palette.primary.main,
   },
   drawerPaper: {
     width: drawerWidth,
+    // backgroundColor: theme.palette.primary.main,
+
+    '& > :first-child': {
+      backgroundColor: theme.palette.primary.main,
+      padding: '1em 1em',
+    },
+    '& .MuiIconButton-root': {
+      border: '1px solid #fff',
+      '& svg': {
+        color: '#fff',
+      },
+    },
   },
-  list: {
+  drawerList: {
     '& a': {
       color: theme.palette.text.primary,
+
+      '& .MuiTypography-subtitle1::after': {
+        content: '""',
+        display: 'block',
+        width: 0,
+        height: 1,
+        background: '#000',
+        transition: 'width .5s',
+      },
+      '&.active,:hover': {
+        '& h6::after': {
+          width: '100%',
+        },
+      },
+      '& .MuiListItem-root': {
+        columnGap: '1.4em',
+      },
+
+      // borderLeft: `3px solid ${theme.palette.primary.main}`,
     },
   },
 }));
