@@ -21,6 +21,14 @@ const styles = makeStyles((theme) => ({
     },
   },
 
+  customGreyBack: {
+    backgroundColor: theme.custom.backLightGrey,
+  },
+
+  fontWeight600: {
+    fontWeight: 600,
+  },
+
   linkUnderline: {
     '& a': {
       borderBottom: `2px solid ${theme.palette.primary.main}`,
@@ -75,7 +83,7 @@ const styles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       width: '85%',
     },
-    '& > div:first-child': {
+    '& > *:first-child': {
       marginTop: '1.5em',
     },
 
@@ -83,7 +91,7 @@ const styles = makeStyles((theme) => ({
       marginBottom: '1.5em',
     },
 
-    '& > div:last-child': {
+    '& > *:last-child': {
       marginBottom: '2em',
     },
   },

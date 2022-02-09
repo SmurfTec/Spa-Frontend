@@ -120,7 +120,7 @@ const styles = makeStyles((theme) => ({
   },
   tabs: {
     '& .MuiTab-root': {
-      fontSize: '1.1rem',
+      fontSize: '1rem',
       fontWeight: 600,
       color: '#000',
       opacity: 1,

@@ -60,12 +60,10 @@ const SingleProdServ = () => {
 
   // const { addItemToCart, userOrders } = useContext(StoreContext);
 
-  const { _id, type, _realId } = useParams();
+  const { _id, type } = useParams();
   console.log('id,type', _id, type);
 
   useEffect(() => {
-    console.log('Use Effect', _id, type);
-
     if (type === 'product')
       setState((st) => ({
         ...st,
@@ -124,10 +122,16 @@ const SingleProdServ = () => {
           }
         />
       )} */}
-      {console.log('prodServ', state.prodServ)}
       {/* <div> */}
+
       {state.prodServ ? (
-        <div className={classes.servViewWrapper}>
+        <div
+          className={
+            type === 'product'
+              ? classes.prodViewWrapper
+              : classes.servViewWrapper
+          }
+        >
           {type === 'product' ? (
             <>
               <div>
@@ -160,57 +164,23 @@ const SingleProdServ = () => {
                   </Grid>
                   <Grid item xs={8} sm={12}>
                     <Grid container spacing={2}>
-                      {/* {state.prodServ.images?.slice(1, 4).map((el) => ( */}
-                      {/* //^ First Image */}
-                      <Grid item xs={4} sm={4}>
-                        <Card
-                          sx={{
-                            boxShadow: 'none',
-                            borderRadius: 1,
-                          }}
-                        >
-                          <CardMedia
-                            className={classes.cardMediaSm}
-                            image={prod2}
-                            data-image={state.prodServ.image}
-                            onClick={handleImageClick}
-                          />
-                        </Card>
-                      </Grid>
-
-                      {/* //^ Second Image */}
-                      <Grid item xs={4} sm={4}>
-                        <Card
-                          sx={{
-                            boxShadow: 'none',
-                            borderRadius: 1,
-                          }}
-                        >
-                          <CardMedia
-                            className={classes.cardMediaSm}
-                            image={prod3}
-                            data-image={state.prodServ.image}
-                            onClick={handleImageClick}
-                          />
-                        </Card>
-                      </Grid>
-
-                      {/* //^ third Image */}
-                      <Grid item xs={4} sm={4}>
-                        <Card
-                          sx={{
-                            boxShadow: 'none',
-                            borderRadius: 1,
-                          }}
-                        >
-                          <CardMedia
-                            className={classes.cardMediaSm}
-                            image={prod4}
-                            data-image={state.prodServ.image}
-                            onClick={handleImageClick}
-                          />
-                        </Card>
-                      </Grid>
+                      {[...Array(3)].map((_, index) => (
+                        <Grid item xs={4} sm={4}>
+                          <Card
+                            sx={{
+                              boxShadow: 'none',
+                              borderRadius: 1,
+                            }}
+                          >
+                            <CardMedia
+                              className={classes.cardMediaSm}
+                              image={`${prod2}`}
+                              data-image={state.prodServ.image}
+                              onClick={handleImageClick}
+                            />
+                          </Card>
+                        </Grid>
+                      ))}
                     </Grid>
                   </Grid>
                 </Grid>
@@ -233,14 +203,14 @@ const SingleProdServ = () => {
                       >
                         <Box display='flex' alignItems='center' gridGap='2em'>
                           <Typography
-                            variant='h4'
+                            variant='h5'
                             component='span'
                             className={classes_g.lightText}
                           >
                             {state.prodServ.title}
                           </Typography>
                           <Typography
-                            variant='h5'
+                            variant='subtitle1'
                             component='span'
                             color='textSecondary'
                             className={classes_g.lightText}
@@ -249,20 +219,20 @@ const SingleProdServ = () => {
                           </Typography>
                         </Box>
                         <Box display='flex' gridGap={10} alignItems='center'>
-                          <Rating value={4} readOnly />
+                          <Rating value={4} readOnly size='small' />
                           <Typography
-                            variant='h5'
+                            variant='subtitle1'
                             className={classes_g.lightText}
                           >
                             {state.prodServ.rating}
                           </Typography>
                         </Box>
-                        <Typography variant='h4' sx={{ mt: 1 }}>
+                        <Typography variant='h5' sx={{ mt: 1 }}>
                           {state.prodServ.price}
                         </Typography>
                       </Box>
 
-                      <Typography variant='body1' sx={{ mt: 1 }}>
+                      <Typography variant='body2' sx={{ mt: 1 }}>
                         {faker.lorem.sentences(2)}
                       </Typography>
                       <Box
@@ -270,6 +240,7 @@ const SingleProdServ = () => {
                         display='flex'
                         gridGap='1em'
                         justifyContent='space-between'
+                        alignItems='center'
                       >
                         <div className={classes.quantBtnWrapper}>
                           <IconButton
@@ -279,7 +250,11 @@ const SingleProdServ = () => {
                           >
                             <RemoveRounded />
                           </IconButton>
-                          <Typography variant='h5' sx={{ userSelect: 'none' }}>
+                          <Typography
+                            variant='subtitle1'
+                            style={{ fontWeight: 600 }}
+                            sx={{ userSelect: 'none' }}
+                          >
                             {state.quantity}
                           </Typography>
                           <IconButton
@@ -292,7 +267,7 @@ const SingleProdServ = () => {
                         </div>
                         <Box sx={{ flexShrink: 0 }}>
                           <Typography
-                            variant='h5'
+                            variant='subtitle1'
                             component='span'
                             className={classes_g.lightText}
                             sx={{ userSelect: 'none' }}
@@ -300,7 +275,7 @@ const SingleProdServ = () => {
                             Status :
                           </Typography>{' '}
                           <Typography
-                            variant='h5'
+                            variant='subtitle1'
                             component='span'
                             className={clsx(
                               classes_g.lightText,

@@ -41,6 +41,10 @@ const Navbar = (props) => {
     setOpen((prev) => !prev);
   };
 
+  const handleCart = () => {
+    navigate('/cart');
+  };
+
   return (
     <div className={classes.root}>
       <AppBar position='fixed' className={classes.Appbar}>
@@ -72,8 +76,8 @@ const Navbar = (props) => {
             </Box>
           </div>
           <div className={classes.sectionMobile}>
-            <IconButton aria-label='delete'>
-              <Badge badgeContent='0'>
+            <IconButton aria-label='cart' onClick={handleCart}>
+              <Badge badgeContent='1'>
                 <ShoppingCartIcon style={{ color: '#fff' }} fontSize='small' />
               </Badge>
             </IconButton>
@@ -137,8 +141,8 @@ const Navbar = (props) => {
               >
                 SIGN IN
               </Button>
-              <IconButton aria-label='delete'>
-                <Badge badgeContent='0'>
+              <IconButton aria-label='cart' onClick={handleCart}>
+                <Badge badgeContent='1'>
                   <ShoppingCartIcon
                     style={{ color: '#fff' }}
                     fontSize='small'

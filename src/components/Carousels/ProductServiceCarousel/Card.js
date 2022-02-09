@@ -43,7 +43,8 @@ const ProductCard = (props) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`products&services/${type}/${dummyId}/${_id}`);
+    // navigate(`/products&services/${type}/${_id}`);
+    navigate(`/products&services/${type}/${dummyId}`);
   };
 
   return (

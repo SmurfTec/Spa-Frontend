@@ -7,7 +7,7 @@ import ProductsServices from 'components/ProductsServices';
 import Login from 'components/common/Login';
 import SingleProdServ from 'components/SingleProdServ';
 import Join from 'components/common/Join';
-import Cart from 'components/Cart';
+import Cart from 'components/Checkout';
 
 const Router = () => {
   return (
@@ -15,11 +15,11 @@ const Router = () => {
       <Route path='/' element={<CommonLayout />}>
         {/* Common Routes / Public Routes */}
         <Route path='/' element={<HomePage />} />
-        <Route path='products&services' element={<ProductsServices />} />
         <Route
-          path='products&services/:type/:_id/:_realId'
+          path='products&services/:type/:_id'
           element={<SingleProdServ />}
         />
+        <Route path='products&services' element={<ProductsServices />} />
 
         <Route path='cart' element={<Cart />} />
         <Route path='join' element={<Join />} />

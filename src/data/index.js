@@ -58,6 +58,31 @@ export const productsB = [...Array(4)].map((_, index) => ({
   type: 'product',
 }));
 
+export const cartProd = [...Array(2)].map((_, index) => ({
+  dummyId: 123,
+  _id: faker.datatype.uuid(),
+  title: faker.commerce.productName(),
+  price: faker.commerce.price(10, 60, 1, '$'),
+  rating: faker.datatype.number(120),
+  description: 'Product from Bamboo Spa',
+  isFavourite: faker.datatype.boolean(),
+  image: `assets/prod${index + 1}.jpg`,
+  type: 'product',
+}));
+
+export const cartServ = [...Array(2)].map((_, index) => ({
+  dummyId: 123,
+  _id: faker.datatype.uuid(),
+  title: faker.commerce.productName(),
+  price: faker.commerce.price(10, 60, 1, '$'),
+  rating: faker.datatype.number(120),
+  description: 'Product from Bamboo Spa',
+  isFavourite: faker.datatype.boolean(),
+  image: `assets/prod${index + 1}.jpg`,
+  type: 'service',
+  date: faker.date.recent(3, new Date()),
+}));
+
 export const mixedProdServ = [...productsB, ...services];
 
 export const decreaseBy = [1, 5, 4, 3, 1, 5, 4, 3, 1, 5, 4, 3, 1, 5, 4, 3];
@@ -71,4 +96,4 @@ export const bannerContent = [...Array(4)].map((_, index) => ({
   description: faker.lorem.lines(3),
 }));
 
-export const dropDownNumbers = [...Array(4)].map((_, index) => index);
+export const dropDownNumbers = [...Array(8)].map((_, index) => index + 1);

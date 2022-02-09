@@ -28,6 +28,7 @@ const GlobalStyles = withStyles((theme) => ({
       width: '100%',
       height: '100%',
       overflowY: 'auto',
+      backgroundColor: '#fff',
     },
     input: {
       '&[type=number]': {
