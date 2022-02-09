@@ -165,7 +165,7 @@ const SingleProdServ = () => {
                   <Grid item xs={8} sm={12}>
                     <Grid container spacing={2}>
                       {[...Array(3)].map((_, index) => (
-                        <Grid item xs={4} sm={4}>
+                        <Grid item xs={4} sm={4} key={index}>
                           <Card
                             sx={{
                               boxShadow: 'none',
@@ -399,7 +399,7 @@ const SingleProdServ = () => {
                     </div>
                     <img
                       alt={state.prodServ.title}
-                      srcset={`${prod1}`}
+                      srcSet={`${prod1}`}
                       src={`${prod1}`}
                       decoding='async'
                       // class='LazyImage-tufn0p-0 eIalbs'
@@ -503,7 +503,9 @@ const SingleProdServ = () => {
                             fullWidth
                           >
                             {dropDownNumbers.map((el) => (
-                              <MenuItem value={el}>{el}</MenuItem>
+                              <MenuItem value={el} key={el}>
+                                {el}
+                              </MenuItem>
                             ))}
                           </Select>
                         </FormControl>

@@ -100,7 +100,7 @@ const styles = makeStyles((theme) => ({
       },
     },
 
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('xs')]: {
       flexDirection: 'column',
     },
   },
