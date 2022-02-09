@@ -5,7 +5,9 @@ import CommonLayout from 'components/layouts/CommonLayout';
 import HomePage from 'components/Home';
 import ProductsServices from 'components/ProductsServices';
 import Login from 'components/common/Login';
+import SingleProdServ from 'components/SingleProdServ';
 import Join from 'components/common/Join';
+import Cart from 'components/Cart';
 
 const Router = () => {
   return (
@@ -14,6 +16,12 @@ const Router = () => {
         {/* Common Routes / Public Routes */}
         <Route path='/' element={<HomePage />} />
         <Route path='products&services' element={<ProductsServices />} />
+        <Route
+          path='products&services/:type/:_id/:_realId'
+          element={<SingleProdServ />}
+        />
+
+        <Route path='cart' element={<Cart />} />
         <Route path='join' element={<Join />} />
 
         <Route path='login' element={<Login />} />

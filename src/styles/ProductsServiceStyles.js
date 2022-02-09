@@ -40,6 +40,10 @@ const styles = makeStyles((theme) => ({
     },
   },
   tabButtons: {
+    display: 'flex',
+    gap: 15,
+    flexWrap: 'wrap',
+    justifyContent: 'center',
     '& > .MuiButton-root': {
       minWidth: 120,
     },

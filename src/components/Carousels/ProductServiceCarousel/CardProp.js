@@ -21,20 +21,21 @@ const styles = makeStyles((theme) => ({
       // transition: 'all 0.25s ease-in-out',
     },
     // },
+
+    '& .MuiCardActionArea-root': {
+      height: '100%',
+    },
     '& .MuiCardContent-root': {
       display: 'flex',
+      height: 'calc(100% - 135px)',
       flexDirection: 'column',
       justifyContent: 'space-between',
       rowGap: 5,
-      height: 'calc(100% - 135px)',
+
       '& .MuiTypography-subtitle1': {
         fontWeight: 600,
       },
-      // ^ To Vertically hide after the mentioned lines
-      // display: '-webkit-box',
-      // overflow: 'hidden',
-      // WebkitLineClamp: 1, // hide after 1 line
-      // WebkitBoxOrient: 'vertical',
+
       [theme.breakpoints.down('xs')]: {
         paddingInline: '1em',
       },

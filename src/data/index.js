@@ -22,9 +22,10 @@ export const vendors = [...Array(5)].map((_, index) => ({
 }));
 
 export const products = [...Array(45)].map((_, index) => ({
+  dummyId: 123,
   _id: faker.datatype.uuid(),
   title: faker.commerce.productName(),
-  price: faker.commerce.price(10, 60, 1, '$'),
+  price: faker.commerce.price(10, 60, 0, '$'),
   rating: faker.datatype.number(120),
   description: faker.commerce.productAdjective(),
   isFavourite: faker.datatype.boolean(),
@@ -33,6 +34,7 @@ export const products = [...Array(45)].map((_, index) => ({
 }));
 
 export const services = [...Array(4)].map((_, index) => ({
+  dummyId: 123,
   _id: faker.datatype.uuid(),
   title: 'Signature Thai Massage',
   price: faker.commerce.price(30, 70, 1, '$'),
@@ -45,6 +47,7 @@ export const services = [...Array(4)].map((_, index) => ({
 }));
 
 export const productsB = [...Array(4)].map((_, index) => ({
+  dummyId: 123,
   _id: faker.datatype.uuid(),
   title: faker.commerce.productName(),
   price: faker.commerce.price(10, 60, 1, '$'),
@@ -67,3 +70,5 @@ export const bannerContent = [...Array(4)].map((_, index) => ({
       : 'Welcome to Land of Smiles',
   description: faker.lorem.lines(3),
 }));
+
+export const dropDownNumbers = [...Array(4)].map((_, index) => index);

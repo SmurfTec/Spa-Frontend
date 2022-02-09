@@ -3,6 +3,9 @@ const bgImg =
   'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80';
 
 const styles = makeStyles((theme) => ({
+  lightText: {
+    fontWeight: 400,
+  },
   linkHover: {
     '& a::after': {
       content: '""',
@@ -65,12 +68,23 @@ const styles = makeStyles((theme) => ({
   },
 
   componentSectionGap: {
+    width: '80%',
+    marginInline: 'auto',
+    maxWidth: 1200,
+
+    [theme.breakpoints.down('sm')]: {
+      width: '85%',
+    },
     '& > div:first-child': {
       marginTop: '1.5em',
     },
 
     '& > *': {
       marginBottom: '1.5em',
+    },
+
+    '& > div:last-child': {
+      marginBottom: '2em',
     },
   },
 
@@ -207,7 +221,7 @@ const styles = makeStyles((theme) => ({
   // ^ Vendors Carousel
   carouselDefaults: {
     width: '80%',
-    margin: 'auto',
+    marginInline: 'auto',
     // [theme.breakpoints.down('xs')]: {
     //   width: '85%',
     // },
@@ -250,14 +264,12 @@ const styles = makeStyles((theme) => ({
   },
 
   // ^ Table Card Styles
-  //not used
+
   tableContainer: {
     display: 'flex',
     flexDirection: 'column',
-    rowGap: '1em',
-    // flexWrap: 'nowrap',
-    marginBottom: '2rem',
-    columnGap: '2em',
+    rowGap: '2em',
+    // columnGap: '2em',
 
     '& .MuiCard-root': {
       marginBottom: 0,
@@ -282,7 +294,7 @@ const styles = makeStyles((theme) => ({
   },
 
   gridContainerFill: {
-    marginBlock: '1em',
+    // marginBlock: '1em',
     gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
     // [theme.breakpoints.up('md')]: {
     //   gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
