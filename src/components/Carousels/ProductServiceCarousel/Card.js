@@ -79,7 +79,7 @@ const ProductCard = (props) => {
                 </div>
               ) : (
                 <Box display='flex' gridGap={10}>
-                  <Typography variant='subtitle1'>{price}</Typography>
+                  <Typography variant='subtitle1'>${price}</Typography>
                   <Typography variant='body2'>{'  '} (100ml)</Typography>
                 </Box>
               )
@@ -88,7 +88,7 @@ const ProductCard = (props) => {
                 <Typography variant='body2'>{props.oneHourRate}</Typography>
                 <div className={classes.servPricePromo}>
                   <Typography variant='subtitle1'>
-                    From <span>{price}</span> - ${props.promoPrice}
+                    From <span>${price}</span> - ${props.promoPrice}
                   </Typography>
                 </div>
               </>

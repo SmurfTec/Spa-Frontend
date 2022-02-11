@@ -18,7 +18,7 @@ const Router = () => {
         <Route
           path='products&services/:type/:_id'
           element={<SingleProdServ />}
-        />
+        ></Route>
         <Route path='products&services' element={<ProductsServices />} />
 
         <Route path='cart' element={<Cart />} />

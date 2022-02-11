@@ -25,86 +25,135 @@ import { getMuiDateFormat } from 'utils/constants';
 
 import CloseIcon from '@material-ui/icons/Close';
 import PaymentIcon from '@material-ui/icons/CallToAction';
+import { useManyInputs } from 'hooks';
 
 const Cart = ({ validateStep, cart, removeItemFromCart, handleTxtChange }) => {
+  console.log('Cart', cart);
   const classes_g = globalStyles();
   const classes = styles();
-
-  const [guests, setGuests] = useState(1);
-
-  const handleGuests = (e) => {
-    setGuests(e.target.value);
+  const initialState = {
+    guests: 1,
+    quantity: 1,
   };
 
+  const [state, handleChange, , , ,] = useManyInputs(initialState);
+
   return (
-    <div className={classes_g.componentSectionGap}>
-      <Typography variant='h4' className={classes_g.fontWeight600}>
-        Cart
-      </Typography>
-      <TableContainer>
-        <Table className={classes.tableWrapper}>
-          <TableHead className={classes.tableHeader}>
-            <TableRow>
-              <TableCell />
-              <TableCell>Product</TableCell>
-              <TableCell>Price</TableCell>
-              <TableCell align='center' style={{ minWidth: 120 }}>
-                Date
-              </TableCell>
-              <TableCell align='center'>Guests</TableCell>
-              <TableCell align='center'>Subtotal</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {cart && cart.length > 0 ? (
-              cart.map(
-                (el) => (
-                  <TableRow key={el._id}>
-                    <TableCell>
-                      <IconButton onClick={removeItemFromCart}>
-                        <CloseIcon />
-                      </IconButton>
-                    </TableCell>
-                    <TableCell>{el.title}</TableCell>
-                    <TableCell>{el.price}</TableCell>
-                    <TableCell align='center'>
-                      {getMuiDateFormat(el.date)}
-                    </TableCell>
-                    <TableCell align='center'>
-                      <FormControl
-                        variant='outlined'
-                        margin='dense'
-                        size='small'
-                        fullWidth
-                      >
-                        <Select
-                          value={guests}
-                          onChange={handleGuests}
-                          displayEmpty
-                        >
-                          {dropDownNumbers.map((el) => (
-                            <MenuItem value={el} key={el}>
-                              {el}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    </TableCell>
-                    <TableCell align='center'>
-                      {el.price.split('$')[1] * guests}
-                    </TableCell>
-                  </TableRow>
-                )
-                // )
-              )
-            ) : (
+    <>
+      {/* // ^ Services  */}
+      {cart.services && cart.services.length > 0 && (
+        <TableContainer>
+          <Table className={classes.tableWrapper}>
+            <TableHead className={classes.tableHeader}>
               <TableRow>
-                <TableCell align='center'>No Items in the cart</TableCell>
+                <TableCell />
+                <TableCell>Service</TableCell>
+                <TableCell>Price</TableCell>
+                <TableCell align='center' style={{ minWidth: 120 }}>
+                  Date
+                </TableCell>
+                <TableCell align='center'>Guests</TableCell>
+                <TableCell align='center'>Subtotal</TableCell>
               </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {cart.services.map((el) => (
+                <TableRow key={el._id}>
+                  <TableCell>
+                    <IconButton onClick={removeItemFromCart}>
+                      <CloseIcon />
+                    </IconButton>
+                  </TableCell>
+                  <TableCell>{el.title}</TableCell>
+                  <TableCell>{el.price}</TableCell>
+                  <TableCell align='center'>
+                    {getMuiDateFormat(el.date)}
+                  </TableCell>
+                  <TableCell align='center'>
+                    <FormControl
+                      variant='outlined'
+                      margin='dense'
+                      size='small'
+                      fullWidth
+                    >
+                      <Select
+                        name='guests'
+                        value={state.guests}
+                        onChange={handleChange}
+                        displayEmpty
+                      >
+                        {dropDownNumbers.map((el) => (
+                          <MenuItem value={el} key={el}>
+                            {el}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </TableCell>
+                  <TableCell align='center'>
+                    {el.price * state.guests}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+      {/* // ^ Products in Cart  */}
+      {cart.products && cart.products.length > 0 && (
+        <TableContainer>
+          <Table className={classes.tableWrapper}>
+            <TableHead className={classes.tableHeader}>
+              <TableRow>
+                <TableCell />
+                <TableCell>Product</TableCell>
+                <TableCell>Price</TableCell>
+                <TableCell align='center'>Quantity</TableCell>
+                <TableCell align='center'>Subtotal</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {cart.products.map((el) => (
+                <TableRow key={el._id}>
+                  <TableCell>
+                    <IconButton onClick={removeItemFromCart}>
+                      <CloseIcon />
+                    </IconButton>
+                  </TableCell>
+                  <TableCell>{el.title}</TableCell>
+                  <TableCell>{el.price}</TableCell>
+                  <TableCell align='center'>
+                    <FormControl
+                      variant='outlined'
+                      margin='dense'
+                      size='small'
+                      fullWidth
+                    >
+                      <Select
+                        name='quantity'
+                        value={state.quantity}
+                        onChange={handleChange}
+                        displayEmpty
+                      >
+                        {dropDownNumbers.map((el) => (
+                          <MenuItem value={el} key={el}>
+                            {el}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </TableCell>
+                  <TableCell align='center'>
+                    {el.price * state.quantity}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+
+      {/* //^ Promo Code */}
       {/* <Box display='flex' alignItems='center' gridGap='1em'>
      
         <FormControl
@@ -144,7 +193,8 @@ const Cart = ({ validateStep, cart, removeItemFromCart, handleTxtChange }) => {
               >
                 <Typography variant='h5'>Subtotal</Typography>
                 <Typography variant='h5' className={classes_g.lightText}>
-                  ${cart.subtotal}
+                  {/* ${cart.subtotal} */}
+                  $100
                 </Typography>
               </Box>
               <Box
@@ -156,7 +206,7 @@ const Cart = ({ validateStep, cart, removeItemFromCart, handleTxtChange }) => {
                 className={classes_g.customGreyBack}
               >
                 <Typography variant='h5'>Subtotal</Typography>
-                <Typography variant='h5'>${cart.subtotal}</Typography>
+                <Typography variant='h5'>$100</Typography>
               </Box>
               <Box>
                 <Button
@@ -172,7 +222,7 @@ const Cart = ({ validateStep, cart, removeItemFromCart, handleTxtChange }) => {
           </Grid>
         </Grid>
       </Box>
-    </div>
+    </>
   );
 };
 

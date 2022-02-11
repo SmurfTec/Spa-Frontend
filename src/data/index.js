@@ -62,7 +62,8 @@ export const cartProd = [...Array(2)].map((_, index) => ({
   dummyId: 123,
   _id: faker.datatype.uuid(),
   title: faker.commerce.productName(),
-  price: faker.commerce.price(10, 60, 1, '$'),
+  price: faker.datatype.number({ min: 80, max: 160 }),
+
   rating: faker.datatype.number(120),
   description: 'Product from Bamboo Spa',
   isFavourite: faker.datatype.boolean(),
@@ -70,11 +71,11 @@ export const cartProd = [...Array(2)].map((_, index) => ({
   type: 'product',
 }));
 
-export const cartServ = [...Array(2)].map((_, index) => ({
+export const cartServ = [...Array(1)].map((_, index) => ({
   dummyId: 123,
   _id: faker.datatype.uuid(),
   title: faker.commerce.productName(),
-  price: faker.commerce.price(10, 60, 1, '$'),
+  price: faker.datatype.number({ min: 80, max: 160 }),
   rating: faker.datatype.number(120),
   description: 'Product from Bamboo Spa',
   isFavourite: faker.datatype.boolean(),
@@ -82,6 +83,8 @@ export const cartServ = [...Array(2)].map((_, index) => ({
   type: 'service',
   date: faker.date.recent(3, new Date()),
 }));
+
+export const cartItems = [...cartProd, ...cartServ];
 
 export const mixedProdServ = [...productsB, ...services];
 

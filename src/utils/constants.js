@@ -19,3 +19,8 @@ export const getMuiDateFormat = (givenDate) => {
 
   return `${year}-${month}-${date}`; // * combining to format for defaultValue or value attribute of material <TextField>
 };
+export const getTotal = (items, prop) => {
+  return items.reduce((a, b) => {
+    return a + b[prop];
+  }, 0);
+};

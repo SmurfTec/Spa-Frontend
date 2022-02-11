@@ -1,6 +1,11 @@
 const { makeStyles } = require('@material-ui/core');
 
 const styles = makeStyles((theme) => ({
+  stepIcon: {
+    '& .MuiIconButton-sizeSmall': {
+      padding: 6,
+    },
+  },
   tableWrapper: {
     backgroundColor: '#fff',
     '& .MuiTableRow-root > :first-child': {
@@ -32,21 +37,33 @@ const styles = makeStyles((theme) => ({
     '& > div': {
       padding: '10px 15px',
     },
-    '& > div:nth-last-child(3)': {
-      borderBottom: `1px solid #707070`,
-    },
-    '& > div:nth-last-child(2)': {
-      marginTop: '3em',
-    },
+
     '& > div:last-child': {
       paddingInline: 0,
       textAlign: 'right',
+    },
+  },
+  listDivider: {
+    '&:not(:nth-last-child(2))': {
+      borderBottom: `1px solid #707070`,
     },
   },
   customTextField: {
     '& .MuiOutlinedInput-input': {
       backgroundColor: theme.custom.backLightGrey,
       color: '#000',
+    },
+  },
+  dispFlex: {
+    width: '100%',
+    display: 'flex',
+    gap: 15,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  iconColor: {
+    '& svg': {
+      color: theme.palette.secondary.light,
     },
   },
 }));

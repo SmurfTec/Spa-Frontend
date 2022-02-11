@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { IconButton } from '@material-ui/core';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { IconButton, Typography, Box } from '@material-ui/core';
 import { useManyInputs } from 'hooks';
 
 import globalStyles from 'styles/commonStyles';
+import useStyles from 'styles/CartStyles';
 
 import { cartProd, cartServ } from 'data';
 
-import Cart from './Cart';
+// import Cart from './Cart';
+import Cart from './CartRep';
 import ReviewCart from './Step2';
 import PaymentStep from './Step3';
 import PaymentDetails from './Step4';
 
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import clsx from 'clsx';
+import { getTotal } from 'utils/constants';
 
 // function getSteps() {
 //   return ['Cart', 'Checkout', 'Payment', 'PaymentDetails'];
@@ -19,35 +23,64 @@ import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 
 const Checkout = () => {
   const classes_g = globalStyles();
+  const classes = useStyles();
   const [activeStep, setActiveStep] = useState(-1);
 
   // const type = 'product';
   // const steps = getSteps();
 
   const initialState = {
-    cartItems: [],
+    products: [],
+    services: [],
     phone: '',
-    total: '200',
-    subtotal: '200',
-    promoCode: '',
+    total: 0,
+    subtotal: 0,
+    shippingAddress: { address: '' },
+    email: '',
+    phoneNumber: '',
+
+    toggleEdit: false,
   };
 
   const [cartState, handleTxtChange, , , , setState] =
     useManyInputs(initialState);
 
   useEffect(() => {
-    if (cartServ && cartServ.length > 0) {
+    let total = 0;
+    if (cartProd && cartProd.length > 0) {
+      total += getTotal(cartProd, 'price');
       setState((st) => ({
         ...st,
-        cartItems: cartServ,
+        products: cartProd,
       }));
-      setActiveStep(0);
     }
-  }, []);
+    if (cartServ && cartServ.length > 0) {
+      total += getTotal(cartServ, 'price');
+      setState((st) => ({
+        ...st,
+        services: cartServ,
+      }));
+    }
+    setState((st) => ({
+      ...st,
+      total,
+      subtotal: total,
+    }));
+    setActiveStep(0);
+  }, [setState]);
 
   const removeFromCart = () => {
     console.log('item removed');
   };
+
+  const handleChange = (e) => {
+    console.log('e.target.name', e.target.name);
+    // if(e.target.name === 'quantity')
+  };
+
+  const handleEditedField = useCallback((name, value) => {
+    console.log('target :', name, value);
+  }, []);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -72,13 +105,15 @@ const Checkout = () => {
     console.log('validated step 1');
   };
 
-  const getStepContent = (stepIndex) => {
-    switch (stepIndex) {
+  const getStepContent = useMemo(() => {
+    console.log('rerender');
+
+    switch (activeStep) {
       case 0:
         return (
           <Cart
             validateStep={validateStep1}
-            cart={cartState.cartItems}
+            cart={cartState}
             // increaseQuantity={increaseQuantity}
             // decreaseQuantity={decreaseQuantity}
             handleTxtChange={handleTxtChange}
@@ -87,12 +122,12 @@ const Checkout = () => {
         );
       case 1:
         return (
-          <ReviewCart
+          <Cart
+            cart={cartState}
             validateStep={validateStep2}
-            cart={cartState.cartItems}
-            changeDeliveryMethod={(val) =>
-              setState((st) => ({ ...st, deliveryMethod: val }))
-            }
+            removeItemFromCart={removeFromCart}
+            editField={handleEditedField}
+            review
           />
         );
       case 2:
@@ -104,39 +139,29 @@ const Checkout = () => {
         );
 
       case 3:
-        return (
-          // order && (
-          // <PayPalButton
-          //   amount={order.total}
-          //   options={{
-          //     clientId: process.env.REACT_APP_PAYPAL_CLIENT_ID,
-          //     disableFunding: 'credit',
-          //     currency: 'EUR',
-          //   }}
-          //   onSuccess={async (details, data) => {
-          //     payOrder(order._id, '/store');
-          //   }}
-          // />
-          <PaymentDetails />
-          // )
-        );
+        return <PaymentDetails />;
 
       default:
         return <div className='loader'></div>;
     }
-  };
+  }, [activeStep]);
 
   return (
-    <div className={classes_g.componentSectionGap}>
+    <div className={clsx(classes_g.componentSectionGap, classes.stepIcon)}>
       {/* Back to Specific Section of Checkout */}
-      {activeStep > 0 && activeStep < 4 && (
-        <>
-          <IconButton onClick={handleBack}>
-            <NavigateBeforeIcon />
-          </IconButton>
-        </>
-      )}
-      {getStepContent(activeStep)}
+      <Box display='flex' gridGap={15}>
+        {activeStep > 0 && activeStep < 4 && (
+          <>
+            <IconButton onClick={handleBack} color='primary' size='small'>
+              <NavigateBeforeIcon />
+            </IconButton>
+          </>
+        )}
+        <Typography variant='h4' className={classes_g.fontWeight600}>
+          Cart
+        </Typography>
+      </Box>
+      {getStepContent}
     </div>
   );
 };

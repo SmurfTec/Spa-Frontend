@@ -18,7 +18,7 @@ const ProductCarousel = (props) => {
               {...el}
               isPromo={props.isPromo}
               showDesc={props.showDesc}
-              promoPrice={el.price.split('$')[1] - decreaseBy[index]}
+              promoPrice={el.price - decreaseBy[index]}
             />
           </div>
         ))}
