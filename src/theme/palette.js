@@ -36,11 +36,11 @@ const palette = {
   primary: {
     main: '#67000e',
   },
-  // text: {
-  //   primary: '#161C24',
-  //   secondary: '#62646a',
-  //   disabled: '#637381',
-  // },
+  text: {
+    primary: '#000',
+    // secondary: '#62646a',
+    // disabled: '#637381',
+  },
   secondary: { main: '#ff679b', light: '#e39b9e' },
   success: { ...SUCCESS },
   warning: { ...WARNING },

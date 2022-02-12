@@ -48,12 +48,7 @@ const styles = makeStyles((theme) => ({
       borderBottom: `1px solid #707070`,
     },
   },
-  customTextField: {
-    '& .MuiOutlinedInput-input': {
-      backgroundColor: theme.custom.backLightGrey,
-      color: '#000',
-    },
-  },
+
   dispFlex: {
     width: '100%',
     display: 'flex',
@@ -64,6 +59,18 @@ const styles = makeStyles((theme) => ({
   iconColor: {
     '& svg': {
       color: theme.palette.secondary.light,
+    },
+  },
+  editBtns: {
+    '& .MuiIconButton-root': {
+      boxShadow:
+        '0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12)',
+    },
+    '& .doneBtn svg': {
+      color: theme.palette.success.main,
+    },
+    '& .cancelBtn svg': {
+      color: theme.palette.error.main,
     },
   },
 }));

@@ -17,7 +17,7 @@ const Theme = ({ children }) => {
         customBlue: '#5da9dd',
         customYellow: '#ffbf2d',
         backDark: '#262626',
-        backLightGrey: '#DEDEDE',
+        backLightGrey: '#EDEDED',
         white: '#fff',
         shadowOne: 'rgba(0, 0, 0, 0.18) 0px 2px 4px',
         shadowTwo:

@@ -348,6 +348,16 @@ const styles = makeStyles((theme) => ({
       //   },
     },
   },
+  // customTextField: {
+  //   '& .MuiOutlinedInput-input': {
+  //     backgroundColor: theme.custom.backLightGrey,
+  //     color: '#000',
+  //   },
+  // },
+
+  avatar: {
+    backgroundColor: 'transparent',
+  },
 }));
 
 export default styles;

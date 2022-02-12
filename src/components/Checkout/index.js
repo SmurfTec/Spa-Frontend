@@ -8,23 +8,28 @@ import useStyles from 'styles/CartStyles';
 import { cartProd, cartServ } from 'data';
 
 // import Cart from './Cart';
-import Cart from './CartRep';
+import Cart from './Cart';
 import ReviewCart from './Step2';
 import PaymentStep from './Step3';
-import PaymentDetails from './Step4';
+import OrderDetails from './Step4';
 
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import clsx from 'clsx';
 import { getTotal } from 'utils/constants';
 
 // function getSteps() {
-//   return ['Cart', 'Checkout', 'Payment', 'PaymentDetails'];
+//   return ['Cart', 'Checkout', 'Payment', 'OrderDetails'];
 // }
+
+function getSteps() {
+  return ['Cart', 'Cart', 'Payment Method', 'OrderDetails'];
+}
 
 const Checkout = () => {
   const classes_g = globalStyles();
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(-1);
+  const steps = getSteps();
 
   // const type = 'product';
   // const steps = getSteps();
@@ -32,17 +37,21 @@ const Checkout = () => {
   const initialState = {
     products: [],
     services: [],
-    phone: '',
+
     total: 0,
     subtotal: 0,
-    shippingAddress: { address: '' },
-    email: '',
-    phoneNumber: '',
-
+    shippingAddress: {
+      street: 'abc',
+      city: 'abc',
+      country: 'abc',
+      postalCode: 112,
+    },
+    email: 'abc@gmail.com',
+    phoneNumber: 9231232133,
     toggleEdit: false,
   };
 
-  const [cartState, handleTxtChange, , , , setState] =
+  const [cartState, handleTxtChange, , changeInput, , setState] =
     useManyInputs(initialState);
 
   useEffect(() => {
@@ -79,7 +88,17 @@ const Checkout = () => {
   };
 
   const handleEditedField = useCallback((name, value) => {
-    console.log('target :', name, value);
+    if (name === 'address') {
+      setState((st) => ({
+        ...st,
+        shippingAddress: {
+          street: value.street,
+          city: value.city,
+          postalCode: value.postalCode,
+          country: value.country,
+        },
+      }));
+    } else changeInput(name, value);
   }, []);
 
   const handleNext = () => {
@@ -91,7 +110,7 @@ const Checkout = () => {
   };
 
   const validateStep1 = () => {
-    console.log('validated step 1');
+    // console.log('validated step 1');
     // * If user if NOT Logged in , move him to Login page
     // if (!user) history.push('/auth/login?redirect=/store/cart');
     // else handleNext();
@@ -99,14 +118,23 @@ const Checkout = () => {
     handleNext();
   };
   const validateStep2 = () => {
-    console.log('validated step 1');
+    if (
+      cartState.shippingAddress.address !== '' &&
+      cartState.phoneNumber !== -1 &&
+      cartState.email !== ''
+    ) {
+      // console.log('validated step 2');
+      handleNext();
+    } else console.log('Invalid Step 2');
   };
+
   const validateStep3 = () => {
-    console.log('validated step 1');
+    console.log('validated step 3');
+    handleNext();
   };
 
   const getStepContent = useMemo(() => {
-    console.log('rerender');
+    // console.log('Get Content rerender');
 
     switch (activeStep) {
       case 0:
@@ -126,31 +154,49 @@ const Checkout = () => {
             cart={cartState}
             validateStep={validateStep2}
             removeItemFromCart={removeFromCart}
-            editField={handleEditedField}
+            editedValue={handleEditedField}
             review
           />
         );
       case 2:
         return (
           <PaymentStep
+            shippingAddress={{
+              fullAddress: cartState.shippingAddress,
+              phone: cartState.phoneNumber,
+              email: cartState.email,
+            }}
+            cartTotal={cartState.total}
+            totalItems={cartState.products.length + cartState.services.length}
             validateStep={validateStep3}
-            cart={cartState.cartItems}
           />
         );
 
       case 3:
-        return <PaymentDetails />;
+        return (
+          <OrderDetails
+            shippingAddress={{
+              fullAddress: cartState.shippingAddress,
+              phone: cartState.phoneNumber,
+              email: cartState.email,
+            }}
+            cartItems={cartState.products}
+            cartTotal={cartState.total}
+            totalItems={cartState.products.length}
+          />
+        );
 
       default:
         return <div className='loader'></div>;
     }
-  }, [activeStep]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeStep, cartState, removeFromCart, handleEditedField]);
 
   return (
     <div className={clsx(classes_g.componentSectionGap, classes.stepIcon)}>
-      {/* Back to Specific Section of Checkout */}
-      <Box display='flex' gridGap={15}>
-        {activeStep > 0 && activeStep < 4 && (
+      <Box display='flex' alignItems='center' gridGap={15}>
+        {console.log('cart', cartState)}
+        {activeStep > 0 && activeStep < 3 && (
           <>
             <IconButton onClick={handleBack} color='primary' size='small'>
               <NavigateBeforeIcon />
@@ -158,7 +204,7 @@ const Checkout = () => {
           </>
         )}
         <Typography variant='h4' className={classes_g.fontWeight600}>
-          Cart
+          {steps[activeStep]}
         </Typography>
       </Box>
       {getStepContent}
