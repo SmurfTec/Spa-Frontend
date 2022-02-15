@@ -18,6 +18,7 @@ const Theme = ({ children }) => {
         customYellow: '#ffbf2d',
         backDark: '#262626',
         backLightGrey: '#EDEDED',
+        bordersColor: '#C4C4C4',
         white: '#fff',
         shadowOne: 'rgba(0, 0, 0, 0.18) 0px 2px 4px',
         shadowTwo:

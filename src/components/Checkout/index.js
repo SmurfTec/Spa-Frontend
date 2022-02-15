@@ -36,8 +36,6 @@ const Checkout = () => {
 
   const initialState = {
     products: [],
-    services: [],
-
     total: 0,
     subtotal: 0,
     shippingAddress: {
@@ -63,13 +61,7 @@ const Checkout = () => {
         products: cartProd,
       }));
     }
-    if (cartServ && cartServ.length > 0) {
-      total += getTotal(cartServ, 'price');
-      setState((st) => ({
-        ...st,
-        services: cartServ,
-      }));
-    }
+
     setState((st) => ({
       ...st,
       total,
@@ -167,7 +159,7 @@ const Checkout = () => {
               email: cartState.email,
             }}
             cartTotal={cartState.total}
-            totalItems={cartState.products.length + cartState.services.length}
+            totalItems={cartState.products.length}
             validateStep={validateStep3}
           />
         );

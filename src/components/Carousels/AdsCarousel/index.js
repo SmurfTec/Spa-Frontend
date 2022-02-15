@@ -14,7 +14,8 @@ const AdsCarousel = () => {
     <Carousel
       showArrows={false}
       showThumbs={false}
-      animationHandler='fade'
+      interval={4000}
+      // animationHandler='fade'
       swipeable={false}
       showStatus={false}
       autoPlay={true}

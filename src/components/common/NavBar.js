@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -12,7 +12,7 @@ import {
   Badge,
 } from '@material-ui/core';
 import { Box, Button, Typography } from '@material-ui/core';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 import FaceIcon from '@material-ui/icons/Face';
 // import { AuthContext } from 'contexts/AuthContext';
@@ -37,12 +37,20 @@ const Navbar = (props) => {
 
   const [open, setOpen] = React.useState(false);
 
+  const myRef = useRef(null);
+
   const toggleSideBar = () => {
     setOpen((prev) => !prev);
   };
 
   const handleCart = () => {
     navigate('/cart');
+  };
+
+  const scrollToSection = () => {
+    // const currentLocation = location.pathname;
+    // console.log('currentLocation', currentLocation);
+    navigate('/#ourProducts');
   };
 
   return (
@@ -97,19 +105,27 @@ const Navbar = (props) => {
               className={classes_g.linkHover}
             >
               <Typography variant='subtitle2' noWrap>
-                <NavLink to='/'>Home </NavLink>
+                <Link to='/'>Home </Link>
+              </Typography>
+              {/* <Typography
+                variant='subtitle2'
+                className={clsx(classes_g.linkHover1, classes_g.lightText)}
+                onClick={scrollToSection}
+              >
+                Our Partners
+              </Typography> */}
+
+              <Typography variant='subtitle2' noWrap>
+                <Link to='/#ourPartners'>Our Partners</Link>
               </Typography>
               <Typography variant='subtitle2' noWrap>
-                <NavLink to='/ourpartners'>Our Partners</NavLink>
+                <Link to='/#flashSales'>Flash Sales</Link>
               </Typography>
               <Typography variant='subtitle2' noWrap>
-                <NavLink to='/flashsales'>Flash Sales</NavLink>
+                <Link to='/#ourProducts'>Products</Link>
               </Typography>
               <Typography variant='subtitle2' noWrap>
-                <NavLink to='/products&services'>Products</NavLink>
-              </Typography>
-              <Typography variant='subtitle2' noWrap>
-                <NavLink to='/contact-us'>Contact Us</NavLink>
+                <Link to='/contact-us'>Contact Us</Link>
               </Typography>
             </Box>
             <Box
@@ -186,34 +202,34 @@ const Navbar = (props) => {
         <Box mt={4} />
 
         <List className={classes.drawerList}>
-          <NavLink to='/' className={classes_g.linkHover}>
+          <Link to='/' className={classes_g.linkHover}>
             <ListItem button>
               {/* <ListItemIcon>
                 <DonutLargeIcon fontSize='small' />
               </ListItemIcon> */}
               <Typography variant='subtitle1'>Home</Typography>
             </ListItem>
-          </NavLink>
-          <NavLink to='/products&services' className={classes_g.linkHover}>
+          </Link>
+          <Link to='/#ourProducts' className={classes_g.linkHover}>
             <ListItem button>
               <Typography variant='subtitle1'>Products</Typography>
             </ListItem>
-          </NavLink>
-          <NavLink to='/partners' className={classes_g.linkHover}>
+          </Link>
+          <Link to='/#ourPartners' className={classes_g.linkHover}>
             <ListItem button>
               <Typography variant='subtitle1'>Our Partners</Typography>
             </ListItem>
-          </NavLink>
-          <NavLink to='/flashsales' className={classes_g.linkHover}>
+          </Link>
+          <Link to='/#flashSales' className={classes_g.linkHover}>
             <ListItem button>
               <Typography variant='subtitle1'>Flash Sales</Typography>
             </ListItem>
-          </NavLink>
-          <NavLink to='/contactus' className={classes_g.linkHover}>
+          </Link>
+          <Link to='/contactus' className={classes_g.linkHover}>
             <ListItem button>
               <Typography variant='subtitle1'>Contact Us</Typography>
             </ListItem>
-          </NavLink>
+          </Link>
         </List>
 
         <Box my={2} mx={2}>

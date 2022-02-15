@@ -1,7 +1,7 @@
 import ThemeConfig from 'theme';
 import Router from 'router';
 
-function App() {
+const App = () => {
   return (
     <>
       <ThemeConfig>
@@ -9,6 +9,6 @@ function App() {
       </ThemeConfig>
     </>
   );
-}
+};
 
 export default App;

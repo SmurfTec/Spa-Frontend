@@ -67,7 +67,9 @@ const Footer = () => {
               </Box>
               <div className={classes.contactSecMobile}>
                 <div>
-                  <Typography variant='h5'>CONTACT US</Typography>
+                  <Typography variant='h5' align='center'>
+                    CONTACT US
+                  </Typography>
                   <Typography variant='subtitle1'>
                     Mon - Fri : 11AM - 10PM
                   </Typography>
@@ -108,11 +110,15 @@ const Footer = () => {
                   menu.map((el, ind) => (
                     <Box key={`${el.url}_${ind}`}>
                       <Typography variant='subtitle1'>{el.item}</Typography>
-                      {el.subMenus.map((e, i) => (
-                        <Typography variant='subtitle2' key={`${i}`}>
-                          - {e.item}
-                        </Typography>
-                      ))}
+                      <ul style={{ marginLeft: 20 }}>
+                        {el.subMenus.map((e, i) => (
+                          <li key={`${i}`}>
+                            <Typography variant='subtitle2' key={`${i}`}>
+                              {e.item}
+                            </Typography>
+                          </li>
+                        ))}
+                      </ul>
                     </Box>
                   ))}
               </div>

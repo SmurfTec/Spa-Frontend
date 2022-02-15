@@ -77,75 +77,9 @@ const CartStep = ({
     toggle();
   };
 
-  // console.log('cart', cart);
-
   return (
     <>
-      {/* // ^ Services  */}
-      {cart.services && cart.services.length > 0 && (
-        <TableContainer>
-          <Table className={classes.tableWrapper}>
-            <TableHead className={classes.tableHeader}>
-              <TableRow>
-                <TableCell />
-                <TableCell>Service</TableCell>
-                <TableCell>Price</TableCell>
-                <TableCell align='center' style={{ minWidth: 120 }}>
-                  Date
-                </TableCell>
-                <TableCell align='center'>Guests</TableCell>
-                <TableCell align='center'>Subtotal</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {cart.services.map((el) => (
-                <TableRow key={el._id}>
-                  <TableCell>
-                    <IconButton onClick={removeItemFromCart}>
-                      <CloseIcon />
-                    </IconButton>
-                  </TableCell>
-                  <TableCell>{el.title}</TableCell>
-                  <TableCell>${el.price}</TableCell>
-                  <TableCell align='center'>
-                    {getMuiDateFormat(el.date)}
-                  </TableCell>
-                  <TableCell align='center'>
-                    {review ? (
-                      2
-                    ) : (
-                      <FormControl
-                        variant='outlined'
-                        margin='dense'
-                        size='small'
-                        fullWidth
-                      >
-                        <Select
-                          name='guests'
-                          value={state.guests}
-                          onChange={handleChange}
-                          displayEmpty
-                        >
-                          {dropDownNumbers.map((el) => (
-                            <MenuItem value={el} key={el}>
-                              {el}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    )}
-                  </TableCell>
-                  <TableCell align='center'>
-                    ${el.price * state.guests}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
-
-      {/* // ^ Products in Cart  */}
+      {/* // ^ Cart Items  */}
       {cart.products && cart.products.length > 0 && (
         <TableContainer>
           <Table className={classes.tableWrapper}>
@@ -209,9 +143,24 @@ const CartStep = ({
           <Grid item xs={12} sm={7}>
             <div className={classes.cartTotalInfo}>
               <div className={classes_g.customGreyBack}>
-                <Typography variant='h5' className={classes_g.fontWeight600}>
-                  Cart Total
-                </Typography>
+                <Box
+                  display='flex'
+                  alignItems='center'
+                  justifyContent='space-between'
+                  gridGap={15}
+                >
+                  <Typography variant='h5' className={classes_g.fontWeight600}>
+                    Cart Total
+                  </Typography>
+                  {review && (
+                    <Typography
+                      variant='subtitle1'
+                      className={classes_g.fontWeight600}
+                    >
+                      ${cart.total}
+                    </Typography>
+                  )}
+                </Box>
               </div>
 
               {review ? (

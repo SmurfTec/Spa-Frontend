@@ -6,6 +6,24 @@ const styles = makeStyles((theme) => ({
   lightText: {
     fontWeight: 400,
   },
+  // cursorPointer: { cursor: 'pointer' },
+  // check it already exists but to be managed by 2 components
+  // fix to one className
+  linkHover1: {
+    cursor: 'pointer',
+    '&::after': {
+      content: '""',
+      display: 'block',
+      width: 0,
+      height: 1,
+      background: theme.custom.white,
+      transition: 'width .5s',
+    },
+
+    '&:hover::after,.active::after': {
+      width: '100%',
+    },
+  },
   linkHover: {
     '& a::after': {
       content: '""',
@@ -96,6 +114,10 @@ const styles = makeStyles((theme) => ({
     },
   },
 
+  smallOutletGap: {
+    marginBlock: '4em',
+  },
+
   sectionGap: {
     marginBottom: '2em',
     // paddingInline: '1em',
@@ -110,7 +132,7 @@ const styles = makeStyles((theme) => ({
   },
   subHeading: {
     maxWidth: 500,
-    margin: '0 auto',
+    margin: 'auto !important',
     [theme.breakpoints.up('sm')]: {
       width: '55%',
     },
@@ -185,9 +207,11 @@ const styles = makeStyles((theme) => ({
         overflow: 'hidden',
       },
     },
+    '& > .carousel .slider-wrapper > ul > li': {
+      zIndex: '0 !important',
+    },
   },
 
-  // '& .carousel .slide .carouselMini': {},
   contentContainer: {
     // width: '60%',
     height: '100%',
@@ -237,7 +261,8 @@ const styles = makeStyles((theme) => ({
 
   carouselItem: {
     display: 'block',
-    padding: 10,
+    // padding: 10,
+    padding: 7,
     height: '100%',
     '& .MuiPaper-root': {
       boxShadow: theme.custom.cardShadow,
@@ -298,7 +323,7 @@ const styles = makeStyles((theme) => ({
 
   gridContainer: {
     display: 'grid',
-    gridGap: 5,
+    gridRowGap: 15,
   },
 
   gridContainerFill: {
@@ -319,7 +344,7 @@ const styles = makeStyles((theme) => ({
   },
 
   gridElement: {
-    padding: 10,
+    padding: 5,
     // minWidth: 220,
     '& > div': {
       height: '100%',

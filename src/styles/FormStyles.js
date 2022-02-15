@@ -1,6 +1,20 @@
-const { makeStyles } = require('@material-ui/core');
+import bgImg from 'assets/bg1.svg';
+import { makeStyles } from '@material-ui/core';
 
 const styles = makeStyles((theme) => ({
+  backWrapper: {
+    maxHeight: '100%',
+    display: 'flex',
+    position: 'relative',
+    '& .overlay': {
+      width: '100%',
+      height: '100%',
+      background: `url(${bgImg})`,
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      opacity: 0.3,
+    },
+  },
   root: {
     backgroundColor: '#fff',
     borderRadius: 12,
@@ -30,10 +44,15 @@ const styles = makeStyles((theme) => ({
   },
   loginWrapper: {
     width: '80%',
+    backgroundColor: '#fff',
+    zIndex: 2,
     maxWidth: 490,
     margin: '0 auto',
     marginBlock: '3em',
     flexDirection: 'column',
+    '& .MuiIconButton-colorPrimary': {
+      boxShadow: 'none',
+    },
 
     '& form': {
       display: 'flex',
@@ -82,6 +101,10 @@ const styles = makeStyles((theme) => ({
     columnGap: '1em',
     padding: '2em 3em',
 
+    '& .MuiIconButton-colorPrimary': {
+      boxShadow: 'none',
+    },
+
     '& > div': {
       flexBasis: '45%',
       display: 'flex',
@@ -89,7 +112,8 @@ const styles = makeStyles((theme) => ({
       rowGap: '1em',
 
       '&:last-child': {
-        rowGap: '2em',
+        // rowGap: '2em',
+        rowGap: '1em',
       },
     },
     [theme.breakpoints.down('sm')]: {

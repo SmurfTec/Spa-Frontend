@@ -4,9 +4,10 @@ const styles = makeStyles((theme) => ({
   productCard: {
     position: 'relative',
     borderRadius: 18,
+    maxWidth: 190,
+    margin: '0 auto',
 
     [theme.breakpoints.down('sm')]: {
-      maxWidth: 265,
       margin: '0 auto',
     },
 
@@ -22,18 +23,22 @@ const styles = makeStyles((theme) => ({
     },
     // },
 
-    '& .MuiCardActionArea-root': {
-      height: '100%',
-    },
+    // '& .MuiCardActionArea-root': {
+    //   height: '100%',
+    // },
     '& .MuiCardContent-root': {
       display: 'flex',
-      height: 'calc(100% - 135px)',
+      height: 'calc(100% - 125px)',
       flexDirection: 'column',
       justifyContent: 'space-between',
       rowGap: 5,
+      padding: '10px 8px',
 
       '& .MuiTypography-subtitle1': {
         fontWeight: 600,
+      },
+      '& .MuiTypography-caption': {
+        fontSize: '0.65rem',
       },
 
       [theme.breakpoints.down('xs')]: {
@@ -42,18 +47,25 @@ const styles = makeStyles((theme) => ({
     },
   },
   cardMedia: {
-    height: 135,
+    height: 125,
   },
   favourite: {
     position: 'absolute',
     top: 0,
     right: 0,
-    color: theme.palette.error.main,
+    color: `${theme.palette.error.main} !important`,
   },
   dispFlex: {
     display: 'flex',
     columnGap: 10,
     alignItems: 'center',
+    '& .MuiRating-root': {
+      fontSize: '0.95rem',
+    },
+    '& .MuiTypography-body2': {
+      fontSize: '0.775rem',
+      fontWeight: 500,
+    },
   },
   servPricePromo: {
     '& .MuiTypography-subtitle1': {

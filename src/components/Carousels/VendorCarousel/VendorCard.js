@@ -10,12 +10,17 @@ import {
 import { makeStyles } from '@material-ui/styles';
 import spa1 from 'assets/spa1.svg';
 import StarIcon from '@material-ui/icons/Star';
+import { useNavigate } from 'react-router-dom';
 
 const styles = makeStyles((theme) => ({
   vendorCard: {
     borderRadius: 8,
+    '& .MuiCardActionArea-root': {
+      height: '100%',
+    },
 
     '& .MuiCardContent-root': {
+      height: '100%',
       display: 'flex',
       flexDirection: 'column',
       rowGap: 15,
@@ -29,12 +34,12 @@ const styles = makeStyles((theme) => ({
         fontWeight: 600,
         // height: 44,
       },
-      '& .overlay': {
-        display: 'none',
-      },
-      '&:hover': {
-        '& .overlay': {},
-      },
+      // '& .overlay': {
+      //   display: 'none',
+      // },
+      // '&:hover': {
+      //   '& .overlay': {},
+      // },
       // '& .title': {
       //   height: 60,
       // },
@@ -44,10 +49,15 @@ const styles = makeStyles((theme) => ({
 
 const VendorCard = ({ title, description, image, rating, _id, history }) => {
   const classes = styles();
+  const navigate = useNavigate();
+
+  const vendorDetails = () => {
+    navigate(`/vendors/${_id}`);
+  };
 
   return (
     <Card className={classes.vendorCard}>
-      <CardActionArea>
+      <CardActionArea onClick={vendorDetails}>
         <CardContent>
           <Box
             display='flex'
@@ -70,9 +80,9 @@ const VendorCard = ({ title, description, image, rating, _id, history }) => {
               {description}
             </Typography>
           </Box>
-          <div className='overlay'>
+          {/* <div className='overlay'>
             <Button variant='contained' color='primary'></Button>
-          </div>
+          </div> */}
         </CardContent>
       </CardActionArea>
     </Card>

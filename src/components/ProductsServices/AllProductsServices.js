@@ -3,42 +3,36 @@ import { NavLink, useParams } from 'react-router-dom';
 import clsx from 'clsx';
 import { Box, Button, Typography } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
-import { Carousel } from 'react-responsive-carousel';
 
 import { useToggleInput } from 'hooks';
 import Card from 'components/Carousels/ProductServiceCarousel/Card';
 import ProductServiceCarousel from 'components/Carousels/ProductServiceCarousel';
 import Search from 'components/common/Search/Search';
-import AdsCarousel from 'components/Carousels/AdsCarousel';
 import { loremShort, loremlong, products, mixedProdServ } from 'data';
 
 import globalStyles from 'styles/commonStyles';
 import styles from 'styles/ProductsServiceStyles';
 
-import StarIcon from '@material-ui/icons/Star';
-import vendorLogo from 'assets/bambooSpa.svg';
-import spa2 from 'assets/spa2.jpg';
-import spa1 from 'assets/med.jpg';
-
-const VendorProductsServices = () => {
+const AllProductsServices = () => {
   const classes = styles();
   const classes_g = globalStyles();
   const [active, setActive] = useState('all');
   const [loading, setLoading] = useToggleInput(false);
 
-  const { vendorId } = useParams();
+  const { type } = useParams();
+
+  useEffect(() => {
+    console.log('type', type);
+    setActive(type);
+  }, [type]);
 
   // * Pagination Stuff
   const [page, setPage] = React.useState(1);
-  const [rowsPerPage, setRowsPerPage] = React.useState(8);
+  const [rowsPerPage] = React.useState(8);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
-  useEffect(() => {
-    console.log('vendorId', vendorId);
-  }, []);
 
   const calcNoOfItems = (arr) => {
     let st = (page - 1) * rowsPerPage + 1;
@@ -55,32 +49,6 @@ const VendorProductsServices = () => {
 
   return (
     <div className={classes_g.componentSectionGap}>
-      <div className={classes.vendorContainer}>
-        <div>
-          <img src={vendorLogo} alt='Bamboo Spa' width='100px' height='100px' />
-          <div>
-            <Typography variant='h5'>Bamboo Spa Products & Services</Typography>
-
-            <Typography variant='body2'>{loremShort}</Typography>
-          </div>
-        </div>
-        <div>
-          <Box display='flex' gridColumnGap={5} alignItems='center'>
-            <StarIcon />
-            <Typography variant='h5'>4.6 (580)</Typography>
-          </Box>
-          {/* // ? Should it be NavLink or button */}
-          <Typography variant='subtitle2' color='primary' align='center'>
-            view Reviews
-          </Typography>
-          <Box></Box>
-        </div>
-      </div>
-
-      {/* // ^ Ads Carousel */}
-
-      <AdsCarousel />
-
       {/* // ^ Search Comp */}
       <Search placeholder='Product or Service Name ' />
 
@@ -231,4 +199,4 @@ const VendorProductsServices = () => {
   );
 };
 
-export default VendorProductsServices;
+export default AllProductsServices;

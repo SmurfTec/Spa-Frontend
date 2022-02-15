@@ -42,21 +42,21 @@ export const responsive2 = {
     slidesToSlide: 2,
   },
   desktop: {
-    breakpoint: { max: 1200, min: 992 },
+    breakpoint: { max: 1200, min: 900 },
     items: 4,
     slidesToSlide: 1, //
   },
   tablet: {
-    breakpoint: { max: 992, min: 750 },
+    breakpoint: { max: 900, min: 660 },
     items: 3,
     slidesToSlide: 1, //
   },
   smTablet: {
-    breakpoint: { max: 750, min: 540 },
+    breakpoint: { max: 660, min: 485 },
     items: 2,
   },
   smMobile: {
-    breakpoint: { max: 540, min: 0 },
+    breakpoint: { max: 485, min: 0 },
     items: 1,
   },
 };

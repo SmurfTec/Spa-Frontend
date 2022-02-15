@@ -83,12 +83,12 @@ const Join = () => {
             />
           </div>
 
-          <div className={classes_g.lightPinkInputField}>
+          {/* <div className={classes_g.lightPinkInputField}>
             <IconButton size='small' color='secondary'>
               <LocationOnIcon />
             </IconButton>
             <Input
-              // className={classes_g.lightPinkInputField}
+              className={classes_g.lightPinkInputField}
               name='address'
               multiline={true}
               rows={4}
@@ -96,7 +96,7 @@ const Join = () => {
               onChange={handleTxtChange}
               placeholder='Address (Street Address & City)'
             />
-          </div>
+          </div> */}
 
           <div className={classes_g.lightPinkInputField}>
             <IconButton size='small' color='secondary'>
@@ -122,6 +122,19 @@ const Join = () => {
               value={inputState.password}
               onChange={handleTxtChange}
               placeholder='Password'
+            />
+          </div>
+          <div className={classes_g.lightPinkInputField}>
+            <IconButton size='small' color='secondary'>
+              <LockIcon />
+            </IconButton>
+            <Input
+              // className={classes_g.lightPinkInputField}
+              name='confirmPassword'
+              type='password'
+              value={inputState.confirmPassword}
+              onChange={handleTxtChange}
+              placeholder='Confirm Password'
             />
           </div>
         </div>

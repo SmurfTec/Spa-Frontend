@@ -1,4 +1,6 @@
 import faker from 'faker';
+import userImg from 'assets/user.jpg';
+
 // import faker from 'faker/locale/en';
 
 export const LoremIpsum =
@@ -25,7 +27,7 @@ export const products = [...Array(45)].map((_, index) => ({
   dummyId: 123,
   _id: faker.datatype.uuid(),
   title: faker.commerce.productName(),
-  price: faker.commerce.price(10, 60, 0, '$'),
+  price: faker.datatype.number({ min: 80, max: 160 }),
   rating: faker.datatype.number(120),
   description: faker.commerce.productAdjective(),
   isFavourite: faker.datatype.boolean(),
@@ -37,7 +39,7 @@ export const services = [...Array(4)].map((_, index) => ({
   dummyId: 123,
   _id: faker.datatype.uuid(),
   title: 'Signature Thai Massage',
-  price: faker.commerce.price(30, 70, 1, '$'),
+  price: faker.datatype.number({ min: 80, max: 160 }),
   oneHourRate: `60-min (U.P. ${faker.commerce.price(120, 200, 1, '$')})`,
   rating: faker.datatype.number(500),
   isFavourite: faker.datatype.boolean(),
@@ -50,7 +52,7 @@ export const productsB = [...Array(4)].map((_, index) => ({
   dummyId: 123,
   _id: faker.datatype.uuid(),
   title: faker.commerce.productName(),
-  price: faker.commerce.price(10, 60, 1, '$'),
+  price: faker.datatype.number({ min: 80, max: 160 }),
   rating: faker.datatype.number(120),
   description: 'Product from Bamboo Spa',
   isFavourite: faker.datatype.boolean(),
@@ -69,6 +71,17 @@ export const cartProd = [...Array(2)].map((_, index) => ({
   isFavourite: faker.datatype.boolean(),
   image: `assets/prod${index + 1}.jpg`,
   type: 'product',
+}));
+
+export const reviews = [...Array(4)].map((_, index) => ({
+  user: {
+    _id: faker.datatype.uuid(),
+    name: `${faker.name.findName()}`,
+    image: userImg,
+  },
+  comment: faker.lorem.paragraph(1),
+  rating: faker.datatype.number({ min: 0, max: 5 }),
+  createdAt: faker.date.recent(3, new Date()),
 }));
 
 export const cartServ = [...Array(1)].map((_, index) => ({

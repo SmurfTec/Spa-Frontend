@@ -16,12 +16,12 @@ const styles = makeStyles((theme) => ({
     margin: '0 auto',
     paddingBlock: '1em',
 
-    '& h5': {
-      [theme.breakpoints.down('xs')]: {
-        textDecoration: 'underline',
-        textAlign: 'left',
-      },
-    },
+    // '& h5': {
+    //   [theme.breakpoints.down('xs')]: {
+    //     textDecoration: 'underline',
+    //     textAlign: 'left',
+    //   },
+    // },
   },
   contentWrapper: {
     display: 'flex',
@@ -29,6 +29,10 @@ const styles = makeStyles((theme) => ({
 
     [theme.breakpoints.down('xs')]: {
       flexDirection: 'column',
+    },
+
+    '& .contentLeft': {
+      textAlign: 'center',
     },
 
     [theme.breakpoints.up('xs')]: {
@@ -127,14 +131,15 @@ const styles = makeStyles((theme) => ({
   collaborators: {
     marginTop: '2em',
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     columnGap: '2em',
     rowGap: '2em',
     flexWrap: 'wrap',
     [theme.breakpoints.down('xs')]: {
       flexDirection: 'column',
-      justifyContent: 'unset',
-      rowGap: '1.5em',
+      justifyContent: 'center',
+
+      rowGap: '2.5em',
       columnGap: '1em',
     },
   },

@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import { Box, Button, Grid, Typography } from '@material-ui/core';
 import clsx from 'clsx';
@@ -28,7 +28,10 @@ const Home = () => {
       {/* // ^ Banner */}
       <Banner />
       {/* // ^ Partners*/}
-      <section className={clsx(classes_g.sectionGap, classes_g.sectionFlex)}>
+      <section
+        id='ourPartners'
+        className={clsx(classes_g.sectionGap, classes_g.sectionFlex)}
+      >
         <div className={classes_g.sectHorAlignment}>
           <Search placeholder='Where to ?' submitForm={patnerSearch} />
         </div>
@@ -51,6 +54,7 @@ const Home = () => {
           animationHandler='fade'
           swipeable={false}
           showStatus={false}
+          interval={4000}
           autoPlay={true}
           infiniteLoop={true}
           className={classes_g.Carousel}
@@ -92,16 +96,19 @@ const Home = () => {
         <Box className={classes_g.carouselDefaults}>
           <VendorCarousel />
         </Box>
-        <Box mt={2} className={classes_g.sectionLink}>
+        {/* <Box mt={2} className={classes_g.sectionLink}>
           <NavLink to='/'>See More</NavLink>
-        </Box>
+        </Box> */}
       </section>
       {/* // ^ Offers Section */}
       <section className={classes_g.sectionGap}>
         <Offers />
       </section>
-      {/* // ^ Promotions Section */}
-      <section className={clsx(classes_g.sectionGap, classes_g.sectionFlex)}>
+      {/* // ^ Flash Sales Section */}
+      <section
+        id='flashSales'
+        className={clsx(classes_g.sectionGap, classes_g.sectionFlex)}
+      >
         <div className={classes_g.sectHorAlignment}>
           <Typography variant='h2' align='center'>
             Flash Sales
@@ -125,10 +132,10 @@ const Home = () => {
           mt={2}
           className={clsx(classes_g.sectionLink, classes_g.linkUnderline)}
         >
-          <NavLink to='/'>See More</NavLink>
+          <NavLink to='/products&services/flashSales'>See More</NavLink>
         </Box>
       </section>
-      {/* // ^ Promotions Banner Section */}
+      {/* // ^ Flash Sales Banner Section */}
       <section className={classes_g.sectionGap}>
         <div className={clsx(classes_g.secBackImage, classes.homePromoBg)}>
           <Grid container className={classes.offerWrapper}>
@@ -179,13 +186,14 @@ const Home = () => {
             </Grid>
           </Grid>
 
-          <Box sx={{ zIndex: 2 }}>
+          <Box>
             <Carousel
               showArrows={false}
               showThumbs={false}
               animationHandler='fade'
               swipeable={false}
               showStatus={false}
+              interval={4000}
               autoPlay={true}
               infiniteLoop={true}
               className={classes_g.Carousel}
@@ -232,7 +240,10 @@ const Home = () => {
       </section>
 
       {/* // ^ Products Banner Section */}
-      <section className={clsx(classes_g.sectionGap, classes_g.sectionFlex)}>
+      <section
+        id='ourProducts'
+        className={clsx(classes_g.sectionGap, classes_g.sectionFlex)}
+      >
         <div className={classes_g.sectHorAlignment}>
           <Search placeholder='Product name' submitForm={patnerSearch} />
         </div>
@@ -259,7 +270,7 @@ const Home = () => {
           className={clsx(classes_g.sectionLink, classes_g.linkUnderline)}
           // className={`${classes_g.sectionLink} ${classes.linkUnderline}`}
         >
-          <NavLink to='/'>See More</NavLink>
+          <NavLink to='/products&services/products'>See More</NavLink>
         </Box>
       </section>
     </>

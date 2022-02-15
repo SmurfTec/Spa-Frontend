@@ -1,10 +1,15 @@
 import { makeStyles } from '@material-ui/core';
 
 const styles = makeStyles((theme) => ({
+  root: {
+    '& .tabPanel': {
+      marginTop: '2em',
+    },
+  },
   cardMedia: {
     position: 'relative',
-    height: 400,
-    backgroundSize: 'contain',
+    height: 350,
+    backgroundSize: 'cover',
     [theme.breakpoints.down('sm')]: {
       //   height: 100,
       maxHeight: 300,
@@ -64,17 +69,19 @@ const styles = makeStyles((theme) => ({
     },
     '& > div:last-child': {
       display: 'flex',
-      alignItems: 'center',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      // alignItems: 'center',
       webkitBoxPack: 'center',
       flexBasis: '55%',
       [theme.breakpoints.down('md')]: {
         flexBasis: '45%',
       },
 
-      //   '& > div': {
-      //     width: '80%',
-      //     margin: '0 auto',
-      //   },
+      '& > .MuiBox-root': {
+        rowGap: '1em',
+        justifyContent: 'space-between',
+      },
     },
   },
   servViewWrapper: {
@@ -158,6 +165,12 @@ const styles = makeStyles((theme) => ({
       maxWidth: 250,
       minWidth: 180,
     },
+  },
+
+  reviewWrapper: {
+    display: 'flex',
+    border: `1px solid #eee`,
+    padding: '2em',
   },
 }));
 
