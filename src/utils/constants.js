@@ -24,3 +24,5 @@ export const getTotal = (items, prop) => {
     return a + b[prop];
   }, 0);
 };
+
+export const LOCALSTORAGE_TOKEN_KEY = 'spa-token';
