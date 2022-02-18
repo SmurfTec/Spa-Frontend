@@ -16,7 +16,7 @@ const styles = makeStyles((theme) => ({
     flexDirection: 'column',
     // alignItems: 'center',
     gridGap: '1em',
-    border: `1px solid ${theme.custom.bordersColor}`,
+    border: `1px solid ${theme.custom.backLightGrey}`,
     borderRadius: 10,
     padding: '2em',
 

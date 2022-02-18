@@ -125,20 +125,7 @@ const styles = makeStyles((theme) => ({
   statusLabel: {
     color: theme.palette.success.main,
   },
-  tabs: {
-    '& .MuiTab-root': {
-      fontSize: '1rem',
-      fontWeight: 600,
-      color: '#000',
-      opacity: 1,
-    },
-    '& .MuiTabs-flexContainer': {
-      gap: 15,
-      [theme.breakpoints.down('sm')]: {
-        justifyContent: 'center',
-      },
-    },
-  },
+
   prodImgWrapper: {
     boxSizing: 'border-box',
     display: 'inline-block',

@@ -1,20 +1,17 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
-import {
-  Box,
-  Typography,
-  Checkbox,
-  Input,
-  IconButton,
-  Button,
-} from '@material-ui/core';
 
+import { Box, Typography, Checkbox, Input, Button } from '@material-ui/core';
+
+import { login } from 'store/slices/Auth';
 import useManyInputs from 'hooks/useManyInputs';
 
 import FaceIcon from '@material-ui/icons/Face';
 import LockIcon from '@material-ui/icons/Lock';
 import FacebookIcon from '@material-ui/icons/Facebook';
+
 // import googleIcon from 'assets/googleIcon.svg';
 
 import styles from 'styles/FormStyles';
@@ -23,8 +20,14 @@ import useStyles from 'styles/commonStyles';
 const Login = () => {
   const classes = styles();
   const classes_g = useStyles();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // const { isLoggedIn, signInUser } = useContext(AuthContext);
+  const { isLoggedIn } = useSelector((st) => st.auth);
+
+  useEffect(() => {
+    if (isLoggedIn) navigate('/');
+  }, [isLoggedIn, navigate]);
 
   const initialState = {
     email: '',
@@ -35,8 +38,10 @@ const Login = () => {
   const [inputState, handleTxtChange, handleToggleChange, , , ,] =
     useManyInputs(initialState);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     // console.log('Login Form Submitted');
+    dispatch(login({ email: inputState.email, password: inputState.password }));
   };
 
   return (
@@ -53,21 +58,18 @@ const Login = () => {
         </Box>
         <form id='loginForm' onSubmit={handleSubmit}>
           <div className={classes_g.lightPinkInputField}>
-            <IconButton size='small' color='secondary'>
-              <FaceIcon />
-            </IconButton>
+            <FaceIcon />
             <Input
               name='email'
               value={inputState.email}
               type='email'
               onChange={handleTxtChange}
-              placeholder='Username'
+              placeholder='Email'
+              required
             />
           </div>
           <div className={classes_g.lightPinkInputField}>
-            <IconButton size='small' color='secondary'>
-              <LockIcon />
-            </IconButton>
+            <LockIcon />
             <Input
               name='password'
               value={inputState.password}
@@ -75,6 +77,7 @@ const Login = () => {
               onChange={handleTxtChange}
               fullWidth
               placeholder='Password'
+              required
             />
           </div>
         </form>

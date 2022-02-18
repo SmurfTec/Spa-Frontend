@@ -43,6 +43,10 @@ const styles = makeStyles((theme) => ({
     backgroundColor: theme.custom.backLightGrey,
   },
 
+  boxBorder: {
+    border: `1px solid ${theme.custom.backLightGrey}`,
+  },
+
   fontWeight600: {
     fontWeight: 600,
   },
@@ -70,12 +74,15 @@ const styles = makeStyles((theme) => ({
 
   lightPinkInputField: {
     display: 'flex',
-    alignItems: 'start',
+    alignItems: 'center',
     backgroundColor: `${theme.palette.secondary.main}1f`,
     color: theme.palette.primary.main,
     columnGap: '1em',
     padding: '0.5em 1em',
     borderRadius: 12,
+    '& svg': {
+      color: theme.palette.secondary.main,
+    },
     '& .MuiInputBase-root': {
       flex: 2,
       '&:before': {
@@ -382,6 +389,32 @@ const styles = makeStyles((theme) => ({
 
   avatar: {
     backgroundColor: 'transparent',
+  },
+  tabButtons: {
+    display: 'flex',
+    gap: 15,
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    '& > .MuiButton-root': {
+      minWidth: 120,
+    },
+  },
+  customBoxShadow: {
+    boxShadow: theme.custom.cardShadow,
+  },
+  tabs: {
+    '& .MuiTab-root': {
+      fontSize: '1rem',
+      fontWeight: 600,
+      color: '#000',
+      opacity: 1,
+    },
+    '& .MuiTabs-flexContainer': {
+      gap: 15,
+      [theme.breakpoints.down('sm')]: {
+        justifyContent: 'center',
+      },
+    },
   },
 }));
 

@@ -13,20 +13,23 @@ import {
 } from '@material-ui/core';
 import { Box, Button, Typography } from '@material-ui/core';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
 import Logo from './Logo';
 import FaceIcon from '@material-ui/icons/Face';
 // import { AuthContext } from 'contexts/AuthContext';
-import { NavLink } from 'react-router-dom';
 import useStyles from 'styles/NavBarStyles';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import globalStyles from 'styles/commonStyles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import clsx from 'clsx';
+import AccountPopover from 'components/common/AccountPopover';
 
 const Navbar = (props) => {
   const classes = useStyles();
   const classes_g = globalStyles();
+  const { isLoggedIn } = useSelector((st) => st.auth);
   // const classes_dr = drawerStyles();
   // const { isLoggedIn } = useContext(AuthContext);
   // console.log(`isLoggedIn`, isLoggedIn);
@@ -84,6 +87,7 @@ const Navbar = (props) => {
             </Box>
           </div>
           <div className={classes.sectionMobile}>
+            {isLoggedIn && <AccountPopover />}
             <IconButton aria-label='cart' onClick={handleCart}>
               <Badge badgeContent='1'>
                 <ShoppingCartIcon style={{ color: '#fff' }} fontSize='small' />
@@ -147,16 +151,21 @@ const Navbar = (props) => {
               >
                 BOOK NOW
               </Button>
-              <Button
-                variant='contained'
-                color='default'
-                className={clsx(classes.customNavBtn, classes.navBtn)}
-                size='small'
-                endIcon={<FaceIcon />}
-                onClick={() => navigate('/login')}
-              >
-                SIGN IN
-              </Button>
+              {isLoggedIn ? (
+                <AccountPopover />
+              ) : (
+                <Button
+                  variant='contained'
+                  color='default'
+                  className={clsx(classes.customNavBtn, classes.navBtn)}
+                  size='small'
+                  endIcon={<FaceIcon />}
+                  onClick={() => navigate('/login')}
+                >
+                  SIGN IN
+                </Button>
+              )}
+
               <IconButton aria-label='cart' onClick={handleCart}>
                 <Badge badgeContent='1'>
                   <ShoppingCartIcon
@@ -247,6 +256,7 @@ const Navbar = (props) => {
             <Button variant='contained' color='secondary' fullWidth>
               BOOK NOW
             </Button>
+
             <Button
               variant='contained'
               color='default'

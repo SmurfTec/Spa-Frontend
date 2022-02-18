@@ -1,5 +1,6 @@
 import faker from 'faker';
 import userImg from 'assets/user.jpg';
+import { sample } from 'lodash';
 
 // import faker from 'faker/locale/en';
 
@@ -110,6 +111,23 @@ export const bannerContent = [...Array(4)].map((_, index) => ({
       ? 'Welcome To the Royal Thai Spa'
       : 'Welcome to Land of Smiles',
   description: faker.lorem.lines(3),
+}));
+
+export const orders = [...Array(6)].map((_, index) => ({
+  _id: faker.datatype.uuid(),
+  status: index <= 3 ? 'Un Paid' : 'In Progress',
+  total: index <= 3 ? 150 : 300,
+  createdAt: faker.date.recent(3, new Date()),
+}));
+
+export const orderDetails = [...Array(6)].map((_, index) => ({
+  _id: orders[index]._id,
+  products: [...productsB],
+  services: [...services],
+  isProduct: faker.datatype.boolean(),
+  status: index <= 3 ? 'Un Paid' : 'In Progress',
+  total: index <= 3 ? 150 : 300,
+  createdAt: faker.date.recent(3, new Date()),
 }));
 
 export const dropDownNumbers = [...Array(8)].map((_, index) => index + 1);

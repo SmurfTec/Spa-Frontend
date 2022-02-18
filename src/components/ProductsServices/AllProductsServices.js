@@ -53,7 +53,7 @@ const AllProductsServices = () => {
       <Search placeholder='Product or Service Name ' />
 
       {/* // ^ Buttons (for Tabs layout) */}
-      <div className={classes.tabButtons}>
+      <div className={classes_g.tabButtons}>
         <Button
           data-tabname='all'
           variant='contained'

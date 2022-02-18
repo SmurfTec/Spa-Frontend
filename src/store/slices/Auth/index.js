@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { makeReq, API_BASE_URL } from 'utils/makeReq';
+import { makeReq } from 'utils/makeReq';
 import { LOCALSTORAGE_TOKEN_KEY } from 'utils/constants';
 
 export const getMe = createAsyncThunk(
@@ -13,8 +13,17 @@ export const getMe = createAsyncThunk(
 
 export const login = createAsyncThunk(
   'auth/login',
-  async (_, { rejectWithValue }) => {
-    return makeReq(`/auth/login`)
+  async ({ email, password }, { rejectWithValue }) => {
+    return makeReq(
+      `/auth/login`,
+      {
+        body: {
+          email,
+          password,
+        },
+      },
+      'POST'
+    )
       .then((resData) => ({ token: resData.token, user: resData.user }))
       .catch((err) => rejectWithValue(err));
   }
@@ -62,21 +71,36 @@ const authSlice = createSlice({
     // [getMe.pending] : {
 
     // }
-    [getMe.fulfilled]: (state, payload) => {
+    [getMe.fulfilled]: (state, { payload }) => {
       state.authenticating = false;
       state.isLoggedIn = true;
       state.user = payload.user;
       state.token = payload.token;
     },
-    [getMe.rejected]: (state, payload) => {
+    [getMe.rejected]: (state) => {
       state.authenticating = false;
       state.isLoggedIn = false;
     },
 
-    [login.pending]: (state, payload) => {
+    [login.pending]: (state) => {
       state.loading = true;
     },
-    [login.fulfilled]: (state, payload) => {
+    [login.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.isLoggedIn = true;
+      state.user = payload.user;
+      state.token = payload.token;
+      window.localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, payload.token);
+    },
+    [login.rejected]: (state) => {
+      state.loading = false;
+      state.isLoggedIn = false;
+    },
+
+    [signUp.pending]: (state) => {
+      state.loading = true;
+    },
+    [signUp.fulfilled]: (state, { payload }) => {
       console.log('payload', payload);
       state.loading = false;
       state.isLoggedIn = true;
@@ -84,23 +108,7 @@ const authSlice = createSlice({
       state.token = payload.token;
       window.localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, payload.token);
     },
-    [login.rejected]: (state, payload) => {
-      state.loading = false;
-      state.isLoggedIn = false;
-    },
-
-    [signUp.pending]: (state, payload) => {
-      state.loading = true;
-    },
-    [signUp.fulfilled]: (state, payload) => {
-      console.log('payload', payload);
-      state.loading = false;
-      state.isLoggedIn = true;
-      state.user = payload.user;
-      state.token = payload.token;
-      window.localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, payload.token);
-    },
-    [signUp.rejected]: (state, payload) => {
+    [signUp.rejected]: (state) => {
       state.loading = false;
       state.isLoggedIn = false;
     },

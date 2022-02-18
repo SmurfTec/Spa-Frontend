@@ -355,7 +355,7 @@ const SingleProdServ = () => {
                             value={tabValue}
                             onChange={handleTabChange}
                             indicatorColor='primary'
-                            className={classes.tabs}
+                            className={classes_g.tabs}
                           >
                             <Tab label='Review' {...a11yProps(0)} />
                             <Tab {...a11yProps(1)} label='Related Products' />
