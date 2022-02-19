@@ -33,8 +33,6 @@ const styles = makeStyles((theme) => ({
 const Review = ({ user, comment, rating, createdAt }) => {
   const classes = styles();
 
-  console.log('user,comment, rating', user, comment, rating, createdAt);
-
   return (
     <div className={classes.root}>
       {/* //^ user and commment section */}

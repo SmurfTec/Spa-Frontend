@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import Loading from 'components/common/Loading';
 import UserInfo from 'components/UserInfo';
@@ -22,111 +23,115 @@ const Wishlist = lazy(() => import('components/UserInfo/Wishlist'));
 // const Reviews = lazy(() => import('components/UserInfo/Reviews'));
 
 const Router = () => {
+  const { authenticating } = useSelector((st) => st.auth);
+
   return (
     <Routes>
-      <Route path='/loading' element={<Loading />} />
-      <Route
-        path='/'
-        element={
-          <Suspense fallback={<Loading />}>
-            <CommonLayout />
-          </Suspense>
-        }
-      >
-        {/* Common Routes / Public Routes */}
+      {authenticating ? (
+        <Route path='*' element={<Loading />} />
+      ) : (
         <Route
           path='/'
           element={
             <Suspense fallback={<Loading />}>
-              <HomePage />
-            </Suspense>
-          }
-        />
-        <Route
-          path='products&services/:type/:_id'
-          element={
-            <Suspense fallback={<Loading />}>
-              <SingleProdServ />
-            </Suspense>
-          }
-        />
-        <Route
-          path='products&services/:type'
-          element={
-            <Suspense fallback={<Loading />}>
-              <AllProductsServices />
-            </Suspense>
-          }
-        />
-
-        <Route
-          // path='products&services'
-          path='vendors/:vendorId'
-          element={
-            <Suspense fallback={<Loading />}>
-              <VendorProdServ />
-            </Suspense>
-          }
-        />
-
-        <Route
-          path='cart'
-          element={
-            <Suspense fallback={<Loading />}>
-              <Cart />
-            </Suspense>
-          }
-        />
-        <Route
-          path='customer'
-          element={
-            <Suspense fallback={<Loading />}>
-              <UserInfo />
+              <CommonLayout />
             </Suspense>
           }
         >
+          {/* Common Routes / Public Routes */}
           <Route
-            path='profile'
+            path='/'
             element={
               <Suspense fallback={<Loading />}>
-                <Profile />
+                <HomePage />
               </Suspense>
             }
           />
           <Route
-            path='orders'
+            path='products&services/:type/:_id'
             element={
               <Suspense fallback={<Loading />}>
-                <Orders />
+                <SingleProdServ />
+              </Suspense>
+            }
+          />
+          <Route
+            path='products&services/:type'
+            element={
+              <Suspense fallback={<Loading />}>
+                <AllProductsServices />
               </Suspense>
             }
           />
 
           <Route
-            path='orders/:orderid'
+            // path='products&services'
+            path='vendors/:vendorId'
             element={
               <Suspense fallback={<Loading />}>
-                <OrderDetails />
+                <VendorProdServ />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path='cart'
+            element={
+              <Suspense fallback={<Loading />}>
+                <Cart />
               </Suspense>
             }
           />
           <Route
-            path='orderhistory'
+            path='customer'
             element={
               <Suspense fallback={<Loading />}>
-                <OrderHistory />
+                <UserInfo />
               </Suspense>
             }
-          />
-          <Route
-            path='wishlist'
-            element={
-              <Suspense fallback={<Loading />}>
-                <Wishlist />
-              </Suspense>
-            }
-          />
-          {/* <Route
+          >
+            <Route
+              path='profile'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <Profile />
+                </Suspense>
+              }
+            />
+            <Route
+              path='orders'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <Orders />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path='orders/:orderid'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <OrderDetails />
+                </Suspense>
+              }
+            />
+            <Route
+              path='orderhistory'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <OrderHistory />
+                </Suspense>
+              }
+            />
+            <Route
+              path='wishlist'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <Wishlist />
+                </Suspense>
+              }
+            />
+            {/* <Route
             path='reviews'
             element={
               <Suspense fallback={<Loading />}>
@@ -134,26 +139,27 @@ const Router = () => {
               </Suspense>
             }
           /> */}
-        </Route>
-        <Route
-          path='join'
-          element={
-            <Suspense fallback={<Loading />}>
-              <Join />
-            </Suspense>
-          }
-        />
+          </Route>
+          <Route
+            path='join'
+            element={
+              <Suspense fallback={<Loading />}>
+                <Join />
+              </Suspense>
+            }
+          />
 
-        <Route
-          path='login'
-          element={
-            <Suspense fallback={<Loading />}>
-              <Login />
-            </Suspense>
-          }
-        />
-        <Route path='*' element={<Navigate to='/' />} />
-      </Route>
+          <Route
+            path='login'
+            element={
+              <Suspense fallback={<Loading />}>
+                <Login />
+              </Suspense>
+            }
+          />
+          <Route path='*' element={<Navigate to='/' />} />
+        </Route>
+      )}
     </Routes>
   );
 };

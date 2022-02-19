@@ -1,4 +1,6 @@
 import { makeStyles } from '@material-ui/core';
+import patternImg from 'assets/bg1.svg';
+
 const bgImg =
   'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80';
 
@@ -127,7 +129,9 @@ const styles = makeStyles((theme) => ({
 
   sectionGap: {
     marginBottom: '2em',
-    // paddingInline: '1em',
+  },
+  homesectionGap: {
+    paddingBlock: '1.5em',
   },
   sectHorAlignment: {
     width: '80%',
@@ -414,6 +418,23 @@ const styles = makeStyles((theme) => ({
       [theme.breakpoints.down('sm')]: {
         justifyContent: 'center',
       },
+    },
+  },
+
+  // ^ Back Pattern
+  backWrapper: {
+    maxHeight: '100%',
+    display: 'flex',
+    position: 'relative',
+    overflow: 'hidden',
+
+    '& .overlay': {
+      width: '100%',
+      height: '100%',
+      background: `url(${patternImg})`,
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      opacity: 0.2,
     },
   },
 }));

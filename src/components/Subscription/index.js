@@ -8,6 +8,9 @@ import {
 } from '@material-ui/core';
 import { useTextInput } from 'hooks';
 import SendIcon from '@material-ui/icons/Send';
+import globalStyles from 'styles/commonStyles';
+import clsx from 'clsx';
+import patternImg from 'assets/bg1.svg';
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -15,6 +18,22 @@ const styles = makeStyles((theme) => ({
     paddingBlock: 10,
     borderRadius: 10,
     margin: '0 auto',
+    position: 'relative',
+
+    '& .MuiButton-root': {
+      backgroundColor: '#fff',
+    },
+
+    '& .overlay': {
+      width: '100%',
+      height: '100%',
+      background: `url(${patternImg})`,
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      opacity: 0.1,
+      left: 0,
+      top: 0,
+    },
 
     [theme.breakpoints.up('sm')]: {
       paddingInline: '7em',
@@ -48,11 +67,13 @@ const styles = makeStyles((theme) => ({
 }));
 const Subscription = () => {
   const classes = styles();
+  const classes_g = globalStyles();
   const [state, handleChange, ,] = useTextInput('');
 
   const handleSubmit = () => {};
   return (
     <div className={classes.root}>
+      <Box className='overlay' position='absolute' />
       <Typography variant='h5' color='primary' align='center'>
         Sign up & get latest offers
       </Typography>
@@ -77,7 +98,7 @@ const Subscription = () => {
             variant='outlined'
             size='small'
             onChange={handleChange}
-            style={{ flex: 2 }}
+            style={{ flex: 2, background: '#fff' }}
           />
           <Button color='secondary' endIcon={<SendIcon />}>
             Subscribe

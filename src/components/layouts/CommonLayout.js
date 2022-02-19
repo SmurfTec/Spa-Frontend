@@ -4,6 +4,7 @@ import { Box } from '@material-ui/core';
 import Footer from 'components/common/Footer';
 import Navbar from 'components/common/NavBar';
 import ScrollTop from 'components/common/ScrollTop';
+import { useSelector } from 'react-redux';
 
 const CommonLayout = (props) => {
   const location = useLocation();
@@ -20,7 +21,7 @@ const CommonLayout = (props) => {
         console.log('Above Height', targetCard.offsetTop - 80);
         if (!root || !targetCard) return;
         root.scroll({
-          top: targetCard.offsetTop - 80,
+          top: targetCard.offsetTop - 65,
           behavior: 'smooth',
         });
       }, 0);
@@ -52,7 +53,7 @@ const CommonLayout = (props) => {
         }}
       >
         <Navbar />
-        <Box width='100%' minHeight='70vh'>
+        <Box width='100%'>
           <Outlet />
         </Box>
         <Footer />

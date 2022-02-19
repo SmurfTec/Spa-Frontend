@@ -15,14 +15,14 @@ import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 // * ------------- *//
 
 ReactDOM.render(
-  <React.StrictMode>
-    <StoreProvider store={store}>
-      <BrowserRouter>
-        <ToastContainer position='top-right' />
-        <App />
-      </BrowserRouter>
-    </StoreProvider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <StoreProvider store={store}>
+    <BrowserRouter>
+      <ToastContainer position='top-right' />
+      <App />
+    </BrowserRouter>
+  </StoreProvider>,
+  // </React.StrictMode>,
   document.getElementById('root')
 );
 

@@ -16,8 +16,7 @@ const Profile = () => {
   const classes_g = styles();
   const { user } = useSelector((st) => st.auth);
   const initialState = {
-    firstName: '',
-    lastName: '',
+    fullName: '',
     email: '',
     currentPassword: '',
     newPassword: '',
@@ -37,11 +36,10 @@ const Profile = () => {
 
   useEffect(() => {
     console.log('user', user);
-    const { firstName, lastName, email, phoneNumber, info } = user;
+    const { fullName, email, phoneNumber, info } = user;
     setState((st) => ({
       ...st,
-      firstName,
-      lastName,
+      fullName,
       email,
       phoneNumber: phoneNumber || 123123123 * 1,
       info,
@@ -60,32 +58,21 @@ const Profile = () => {
       </Box>
       <form onSubmit={handleProfile}>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={6}>
             <TextField
-              name='firstName'
-              value={inputState.firstName}
+              name='fullName'
+              value={inputState.fullName}
               onChange={handleTxtChange}
-              label='First Name'
-              placeholder='first name'
+              label='Full Name'
+              placeholder='full name'
               variant='outlined'
               margin='dense'
               fullWidth
-              // autoFocus
+              autoFocus
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
-            <TextField
-              name='lastName'
-              value={inputState.lastName}
-              onChange={handleTxtChange}
-              label='Last Name'
-              placeholder='last name'
-              variant='outlined'
-              margin='dense'
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12} sm={4}>
+
+          <Grid item xs={12} sm={6}>
             <TextField
               name='phoneNumber'
               value={inputState.phoneNumber}

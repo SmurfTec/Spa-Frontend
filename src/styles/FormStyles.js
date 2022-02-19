@@ -1,22 +1,20 @@
-import bgImg from 'assets/bg1.svg';
 import { makeStyles } from '@material-ui/core';
 
 const styles = makeStyles((theme) => ({
-  backWrapper: {
-    maxHeight: '100%',
-    display: 'flex',
-    position: 'relative',
-    '& .overlay': {
-      width: '100%',
-      height: '100%',
-      background: `url(${bgImg})`,
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-      opacity: 0.3,
-    },
-  },
+  // backWrapper: {
+  //   maxHeight: '100%',
+  //   display: 'flex',
+  //   position: 'relative',
+  //   '& .overlay': {
+  //     width: '100%',
+  //     height: '100%',
+  //     background: `url(${bgImg})`,
+  //     backgroundSize: 'cover',
+  //     backgroundRepeat: 'no-repeat',
+  //     opacity: 0.3,
+  //   },
+  // },
   root: {
-    backgroundColor: '#fff',
     borderRadius: 12,
     padding: '2em',
     display: 'flex',
@@ -48,7 +46,7 @@ const styles = makeStyles((theme) => ({
     zIndex: 2,
     maxWidth: 490,
     margin: '0 auto',
-    marginBlock: '3em',
+    marginBlock: '6em',
     flexDirection: 'column',
     '& .MuiIconButton-colorPrimary': {
       boxShadow: 'none',
@@ -95,12 +93,13 @@ const styles = makeStyles((theme) => ({
     width: '90%',
     maxWidth: 850,
     margin: '0 auto',
-    marginBlock: '3em',
+    marginBlock: '6em',
     display: 'flex',
     justifyContent: 'space-between',
     columnGap: '1em',
     padding: '2em 3em',
-
+    backgroundColor: '#fff',
+    zIndex: 2,
     '& .MuiIconButton-colorPrimary': {
       boxShadow: 'none',
     },

@@ -5,6 +5,7 @@ const styles = makeStyles((theme) => ({
     width: '100%',
     display: 'flex',
     gap: '2em',
+    justifyContent: 'center',
 
     '& > div:first-child': {
       minWidth: 200,
@@ -16,6 +17,7 @@ const styles = makeStyles((theme) => ({
     },
     '& > div:last-child': {
       flex: 1,
+      maxWidth: 700,
     },
 
     [theme.breakpoints.up('lg')]: {

@@ -17,6 +17,7 @@ import {
 import MenuPopover from './MenuPopover';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { logout } from 'store/slices/Auth';
 // import AccountBoxIcon from '@material-ui/icons/AccountBox';
 // import FavoriteIcon from '@material-ui/icons/Favorite';
 
@@ -31,12 +32,14 @@ const styles = makeStyles((theme) => ({
 
 export default function AccountPopover() {
   const classes = styles();
-  const { user, isLoggedIn } = useSelector((st) => st.auth);
+  const { user } = useSelector((st) => st.auth);
 
   const anchorRef = useRef(null);
 
   const [open, setOpen] = useState(false);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
+
+  const dispatch = useDispatch();
 
   const handleOpen = () => {
     setOpen(true);
@@ -47,7 +50,7 @@ export default function AccountPopover() {
 
   const handleLogout = () => {
     setOpen(false);
-    // logoutUser();
+    dispatch(logout());
   };
   return (
     <>
@@ -84,7 +87,8 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant='subtitle2' noWrap>
-            {`${user.firstName.toUpperCase()} ${user.lastName.toUpperCase()}`}
+            {user.fullName.toUpperCase()}
+            {/* {`${user.firstName.toUpperCase()} ${user.lastName.toUpperCase()}`} */}
           </Typography>
         </Box>
 
@@ -127,10 +131,10 @@ export default function AccountPopover() {
             <ExitToAppIcon fontSize='small' />
           </ListItemIcon>
         </MenuItem>
-        {error !== null &&
+        {/* {error !== null &&
           toast.error(error, {
             position: toast.POSITION.TOP_CENTER,
-          })}
+          })} */}
       </MenuPopover>
     </>
   );

@@ -1,42 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { makeReq } from 'utils/makeReq';
 import { LOCALSTORAGE_TOKEN_KEY } from 'utils/constants';
-
-export const getMe = createAsyncThunk(
-  'auth/getMe',
-  async (_, { rejectWithValue }) => {
-    return makeReq(`/users/me`)
-      .then((resData) => ({ token: resData.token, user: resData.user }))
-      .catch((err) => rejectWithValue(err));
-  }
-);
-
-export const login = createAsyncThunk(
-  'auth/login',
-  async ({ email, password }, { rejectWithValue }) => {
-    return makeReq(
-      `/auth/login`,
-      {
-        body: {
-          email,
-          password,
-        },
-      },
-      'POST'
-    )
-      .then((resData) => ({ token: resData.token, user: resData.user }))
-      .catch((err) => rejectWithValue(err));
-  }
-);
-
-export const signUp = createAsyncThunk(
-  'auth/signUp',
-  async (_, { rejectWithValue }) => {
-    return makeReq(`/auth/signUp`)
-      .then((resData) => ({ token: resData.token, user: resData.user }))
-      .catch((err) => rejectWithValue(err));
-  }
-);
+import { toast } from 'react-toastify';
+import { getMe, login, signUp } from './extraReducers';
 
 const initialState = {
   authenticating: true,
@@ -52,7 +18,7 @@ const authSlice = createSlice({
   reducers: {
     logout: {
       reducer: (state, action) => {
-        console.log(`action`, action);
+        console.log('In Logout');
         state.isLoggedIn = false;
         state.user = null;
         state.token = null;
@@ -101,12 +67,12 @@ const authSlice = createSlice({
       state.loading = true;
     },
     [signUp.fulfilled]: (state, { payload }) => {
-      console.log('payload', payload);
       state.loading = false;
       state.isLoggedIn = true;
       state.user = payload.user;
       state.token = payload.token;
       window.localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, payload.token);
+      toast.success('You have been registered successfully');
     },
     [signUp.rejected]: (state) => {
       state.loading = false;

@@ -16,16 +16,15 @@ export const styles = makeStyles((theme) => ({
     '& .react-multiple-carousel__arrow': {
       backgroundColor: theme.custom.white,
       borderRadius: '50%',
-      opacity: 0.6,
       boxShadow: theme.custom.shadowOne,
       // boxShadow: 'rgb(0 0 0 / 15%) 2.4px 2.4px 3.2px',
 
-      [theme.breakpoints.down('xs')]: {
-        opacity: 1,
-      },
+      // [theme.breakpoints.down('xs')]: {
+      //   opacity: 1,
+      // },
 
       '&:hover': {
-        opacity: 1,
+        // opacity: 1,
         background: '#fafafa',
       },
     },

@@ -1,11 +1,18 @@
 import React, { useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 
-import { Box, Typography, Checkbox, Input, Button } from '@material-ui/core';
+import {
+  Box,
+  Typography,
+  Checkbox,
+  Input,
+  Button,
+  CircularProgress,
+} from '@material-ui/core';
 
-import { login } from 'store/slices/Auth';
+import { login } from 'store/slices/Auth/extraReducers';
 import useManyInputs from 'hooks/useManyInputs';
 
 import FaceIcon from '@material-ui/icons/Face';
@@ -23,7 +30,10 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isLoggedIn } = useSelector((st) => st.auth);
+  const { isLoggedIn, loading } = useSelector((st) => st.auth);
+  // const location = useLocation();
+
+  // let redirect = location.search ? location.search.split('=')[1] : '/';
 
   useEffect(() => {
     if (isLoggedIn) navigate('/');
@@ -45,7 +55,7 @@ const Login = () => {
   };
 
   return (
-    <Box className={classes.backWrapper}>
+    <Box className={clsx(classes_g.backWrapper)} justifyContent='center'>
       <Box className='overlay' position='absolute' />
       <div className={clsx(classes.root, classes.loginWrapper)}>
         <Box>
@@ -104,8 +114,9 @@ const Login = () => {
           color='secondary'
           type='submit'
           form='loginForm'
+          disabled={loading}
         >
-          Sign In
+          {loading ? <CircularProgress size={25} color='inherit' /> : 'Sign In'}
         </Button>
         <Typography variant='subtitle1' color='textSecondary'>
           Or

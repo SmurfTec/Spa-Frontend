@@ -8,7 +8,7 @@ import SimpleCarousel from './SimpleCarousel';
 const styles = makeStyles((theme) => ({
   root: {
     height: 400,
-    marginBottom: 40,
+    // marginBottom: 40,
     backgroundImage: `url(${spa1})`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',

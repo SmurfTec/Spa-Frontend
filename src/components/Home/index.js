@@ -27,116 +27,117 @@ const Home = () => {
     <>
       {/* // ^ Banner */}
       <Banner />
-      {/* // ^ Partners*/}
-      <section
-        id='ourPartners'
-        className={clsx(classes_g.sectionGap, classes_g.sectionFlex)}
-      >
-        <div className={classes_g.sectHorAlignment}>
-          <Search placeholder='Where to ?' submitForm={patnerSearch} />
-        </div>
 
-        <div className={classes_g.sectHorAlignment}>
-          <Typography variant='h2' align='center'>
-            Our Partners
-          </Typography>
-          <Typography
-            variant='subtitle1'
-            align='center'
-            className={classes_g.subHeading}
+      {/* // ^ Partners section*/}
+      <section id='ourPartners' className={classes_g.backWrapper}>
+        <Box className='overlay' position='absolute' />
+        <Box py={5} zIndex={2} width='100%' className={classes_g.sectionFlex}>
+          <div className={classes_g.sectHorAlignment}>
+            <Search placeholder='Where to ?' submitForm={patnerSearch} />
+          </div>
+          <div className={classes_g.sectHorAlignment}>
+            <Typography variant='h2' align='center'>
+              Our Partners
+            </Typography>
+            <Typography
+              variant='subtitle1'
+              align='center'
+              className={classes_g.subHeading}
+            >
+              {loremShort}
+            </Typography>
+          </div>
+
+          <Carousel
+            showArrows={false}
+            showThumbs={false}
+            animationHandler='fade'
+            swipeable={false}
+            showStatus={false}
+            interval={4000}
+            autoPlay={true}
+            infiniteLoop={true}
+            className={classes_g.Carousel}
           >
-            {loremShort}
-          </Typography>
-        </div>
-        <Carousel
-          showArrows={false}
-          showThumbs={false}
-          animationHandler='fade'
-          swipeable={false}
-          showStatus={false}
-          interval={4000}
-          autoPlay={true}
-          infiniteLoop={true}
-          className={classes_g.Carousel}
-        >
-          <div>
-            <img src={spa2} alt='' />
-            <div className={classes_g.overlay} />
-            <Box className='legend'>
-              <div className={classes_g.contentContainer}>
-                <div>
-                  <Typography variant='h5'>ABOUT</Typography>
-                  <Typography variant='body2'>{loremlong}</Typography>
+            <div>
+              <img src={spa2} alt='' />
+              <div className={classes_g.overlay} />
+              <Box className='legend'>
+                <div className={classes_g.contentContainer}>
+                  <div>
+                    <Typography variant='h5'>ABOUT</Typography>
+                    <Typography variant='body2'>{loremlong}</Typography>
+                  </div>
+
+                  <Box mt={2}>
+                    <NavLink to='/'>See More</NavLink>
+                  </Box>
                 </div>
+              </Box>
+            </div>
+            <div>
+              <img src={spa1} alt='' />
+              <div className={classes_g.overlay} />
+              <Box className='legend'>
+                <div className={classes_g.contentContainer}>
+                  <div>
+                    <Typography variant='h5'>ABOUT</Typography>
+                    <Typography variant='body2'>{loremlong}</Typography>
+                  </div>
 
-                <Box mt={2}>
-                  <NavLink to='/'>See More</NavLink>
-                </Box>
-              </div>
-            </Box>
-          </div>
-          <div>
-            <img src={spa1} alt='' />
-            <div className={classes_g.overlay} />
-            <Box className='legend'>
-              <div className={classes_g.contentContainer}>
-                <div>
-                  <Typography variant='h5'>ABOUT</Typography>
-                  <Typography variant='body2'>{loremlong}</Typography>
+                  <Box mt={2}>
+                    <NavLink to='/'>See More</NavLink>
+                  </Box>
                 </div>
+              </Box>
+            </div>
+          </Carousel>
 
-                <Box mt={2}>
-                  <NavLink to='/'>See More</NavLink>
-                </Box>
-              </div>
-            </Box>
-          </div>
-        </Carousel>
-
-        <Box className={classes_g.carouselDefaults}>
-          <VendorCarousel />
+          <Box className={classes_g.carouselDefaults}>
+            <VendorCarousel />
+          </Box>
         </Box>
-        {/* <Box mt={2} className={classes_g.sectionLink}>
-          <NavLink to='/'>See More</NavLink>
-        </Box> */}
       </section>
+
       {/* // ^ Offers Section */}
-      <section className={classes_g.sectionGap}>
+      <section>
         <Offers />
       </section>
+
       {/* // ^ Flash Sales Section */}
-      <section
-        id='flashSales'
-        className={clsx(classes_g.sectionGap, classes_g.sectionFlex)}
-      >
-        <div className={classes_g.sectHorAlignment}>
-          <Typography variant='h2' align='center'>
-            Flash Sales
-          </Typography>
-          <Typography
-            variant='subtitle1'
-            align='center'
-            className={classes_g.subHeading}
+      <section id='flashSales' className={classes_g.backWrapper}>
+        <Box className='overlay' position='absolute' />
+        <Box py={5} zIndex={2} width='100%' className={classes_g.sectionFlex}>
+          <div className={classes_g.sectHorAlignment}>
+            <Typography variant='h2' align='center'>
+              Flash Sales
+            </Typography>
+            <Typography
+              variant='subtitle1'
+              align='center'
+              className={classes_g.subHeading}
+            >
+              {loremShort}
+            </Typography>
+          </div>
+
+          {/* // ^ Ads Carousel */}
+          <AdsCarousel />
+
+          <Box className={classes_g.carouselDefaults}>
+            <ProductServiceCarousel isPromo={true} showDesc={true} />
+          </Box>
+          <Box
+            mt={2}
+            className={clsx(classes_g.sectionLink, classes_g.linkUnderline)}
           >
-            {loremShort}
-          </Typography>
-        </div>
-
-        {/* // ^ Ads Carousel */}
-        <AdsCarousel />
-
-        <Box className={classes_g.carouselDefaults}>
-          <ProductServiceCarousel isPromo={true} showDesc={true} />
-        </Box>
-        <Box
-          mt={2}
-          className={clsx(classes_g.sectionLink, classes_g.linkUnderline)}
-        >
-          <NavLink to='/products&services/flashSales'>See More</NavLink>
+            <NavLink to='/products&services/flashSales'>See More</NavLink>
+          </Box>
         </Box>
       </section>
+
       {/* // ^ Flash Sales Banner Section */}
-      <section className={classes_g.sectionGap}>
+      <section>
         <div className={clsx(classes_g.secBackImage, classes.homePromoBg)}>
           <Grid container className={classes.offerWrapper}>
             <Grid item xs={12} sm={3}>
@@ -240,37 +241,37 @@ const Home = () => {
       </section>
 
       {/* // ^ Products Banner Section */}
-      <section
-        id='ourProducts'
-        className={clsx(classes_g.sectionGap, classes_g.sectionFlex)}
-      >
-        <div className={classes_g.sectHorAlignment}>
-          <Search placeholder='Product name' submitForm={patnerSearch} />
-        </div>
+      <section id='ourProducts' className={classes_g.backWrapper}>
+        <Box className='overlay' position='absolute' />
+        <Box py={5} zIndex={2} width='100%' className={classes_g.sectionFlex}>
+          <div className={classes_g.sectHorAlignment}>
+            <Search placeholder='Product name' submitForm={patnerSearch} />
+          </div>
 
-        <div className={classes_g.sectHorAlignment}>
-          <Typography variant='h2' align='center'>
-            Our Products
-          </Typography>
-          <Typography
-            variant='subtitle1'
-            align='center'
-            className={classes_g.subHeading}
+          <div className={classes_g.sectHorAlignment}>
+            <Typography variant='h2' align='center'>
+              Our Products
+            </Typography>
+            <Typography
+              variant='subtitle1'
+              align='center'
+              className={classes_g.subHeading}
+            >
+              {loremShort}
+            </Typography>
+          </div>
+
+          <Box className={classes_g.carouselDefaults}>
+            <ProductServiceCarousel isPromo={false} showDesc={true} />
+          </Box>
+
+          <Box
+            mt={2}
+            className={clsx(classes_g.sectionLink, classes_g.linkUnderline)}
+            // className={`${classes_g.sectionLink} ${classes.linkUnderline}`}
           >
-            {loremShort}
-          </Typography>
-        </div>
-
-        <Box className={classes_g.carouselDefaults}>
-          <ProductServiceCarousel isPromo={false} showDesc={true} />
-        </Box>
-
-        <Box
-          mt={2}
-          className={clsx(classes_g.sectionLink, classes_g.linkUnderline)}
-          // className={`${classes_g.sectionLink} ${classes.linkUnderline}`}
-        >
-          <NavLink to='/products&services/products'>See More</NavLink>
+            <NavLink to='/products&services/products'>See More</NavLink>
+          </Box>
         </Box>
       </section>
     </>

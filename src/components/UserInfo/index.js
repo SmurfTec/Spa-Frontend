@@ -34,12 +34,12 @@ const menuItems = [
 const UserInfo = () => {
   const classes_g = globalStyles();
   const classes = styles();
-  //   const navigate = useNavigate();
-  //   const { user, isLoggedIn } = useSelector((st) => st.auth);
+  const navigate = useNavigate();
+  const { isLoggedIn } = useSelector((st) => st.auth);
 
-  //   useEffect(() => {
-  //     if (!isLoggedIn) navigate('/login');
-  //   }, [isLoggedIn, navigate]);
+  useEffect(() => {
+    if (!isLoggedIn) navigate('/login');
+  }, [isLoggedIn, navigate]);
 
   return (
     <div
