@@ -71,11 +71,11 @@ const Checkout = () => {
   }, [setState]);
 
   const removeFromCart = () => {
-    console.log('item removed');
+    // console.log('item removed');
   };
 
   const handleChange = (e) => {
-    console.log('e.target.name', e.target.name);
+    // console.log('e.target.name', e.target.name);
     // if(e.target.name === 'quantity')
   };
 
@@ -121,7 +121,7 @@ const Checkout = () => {
   };
 
   const validateStep3 = () => {
-    console.log('validated step 3');
+    // console.log('validated step 3');
     handleNext();
   };
 

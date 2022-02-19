@@ -23,7 +23,7 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
 import { useDispatch, useSelector } from 'react-redux';
-import { signUp } from 'store/slices/Auth/extraReducers';
+import { signUp } from 'store/slices/auth/extraReducers';
 import { toast } from 'react-toastify';
 
 const Join = () => {

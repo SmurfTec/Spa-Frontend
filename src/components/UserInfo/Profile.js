@@ -1,3 +1,6 @@
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Box,
   Grid,
@@ -5,16 +8,17 @@ import {
   Typography,
   Divider,
   Button,
+  CircularProgress,
 } from '@material-ui/core';
 import { useManyInputs } from 'hooks';
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { updateMe } from 'store/slices/auth/extraReducers';
 import styles from 'styles/commonStyles';
 
 const Profile = () => {
   const classes_g = styles();
-  const { user } = useSelector((st) => st.auth);
+  const { user, loading } = useSelector((st) => st.auth);
+  const dispatch = useDispatch();
+
   const initialState = {
     fullName: '',
     email: '',
@@ -22,7 +26,7 @@ const Profile = () => {
     newPassword: '',
     confirmNewPassword: '',
     info: '',
-    phoneNumber: 12312231111,
+    phoneNumber: 112231111,
     shippingAddress: {
       street: '',
       city: '',
@@ -36,17 +40,32 @@ const Profile = () => {
 
   useEffect(() => {
     console.log('user', user);
-    const { fullName, email, phoneNumber, info } = user;
+    const { fullName, email, phoneNumber, info, shippingAddress } = user;
     setState((st) => ({
       ...st,
       fullName,
       email,
-      phoneNumber: phoneNumber || 123123123 * 1,
+      phoneNumber: (phoneNumber || 123123123) * 1,
       info,
+      shippingAddress: shippingAddress || st.shippingAddress,
     }));
   }, [user, setState]);
 
-  const handleProfile = () => {};
+  const handleShippingState = (e) => {
+    setState((st) => ({
+      ...st,
+      shippingAddress: {
+        ...st.shippingAddress,
+        [e.target.name]: e.target.value,
+      },
+    }));
+  };
+
+  const updateProfile = (e) => {
+    e.preventDefault();
+    const { fullName, phoneNumber, info, shippingAddress } = inputState;
+    dispatch(updateMe({ fullName, phoneNumber, info, shippingAddress }));
+  };
   const handleNewPassword = () => {};
 
   return (
@@ -56,7 +75,7 @@ const Profile = () => {
           Personal Information
         </Typography>
       </Box>
-      <form onSubmit={handleProfile}>
+      <form onSubmit={updateProfile}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -124,7 +143,7 @@ const Profile = () => {
             <TextField
               name='street'
               value={inputState.shippingAddress.street}
-              onChange={handleTxtChange}
+              onChange={handleShippingState}
               label='Street'
               placeholder='street'
               variant='outlined'
@@ -137,7 +156,7 @@ const Profile = () => {
             <TextField
               name='city'
               value={inputState.shippingAddress.city}
-              onChange={handleTxtChange}
+              onChange={handleShippingState}
               label='City'
               placeholder='city'
               variant='outlined'
@@ -149,7 +168,7 @@ const Profile = () => {
             <TextField
               name='country'
               value={inputState.shippingAddress.country}
-              onChange={handleTxtChange}
+              onChange={handleShippingState}
               label='Country'
               placeholder='country'
               variant='outlined'
@@ -161,7 +180,7 @@ const Profile = () => {
             <TextField
               name='postalCode'
               value={inputState.shippingAddress.postalCode}
-              onChange={handleTxtChange}
+              onChange={handleShippingState}
               label='Postal Code'
               placeholder='postal code'
               variant='outlined'
@@ -185,9 +204,14 @@ const Profile = () => {
               <Button
                 color='primary'
                 style={{ minWidth: '10em' }}
+                type='submit'
                 // endIcon={<SendIcon />}
               >
-                Update Profile Info
+                {loading ? (
+                  <CircularProgress size={20} color='inherit' />
+                ) : (
+                  'Update Profile Info'
+                )}
               </Button>
             </Box>
           </Grid>

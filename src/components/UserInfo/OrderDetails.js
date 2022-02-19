@@ -36,7 +36,7 @@ const OrderDetails = () => {
   useEffect(() => {
     if (orderid) {
       const orderDetail = orderDetails.filter((o) => o._id === orderid && o);
-      console.log('orderDetail', orderDetail);
+      // console.log('orderDetail', orderDetail);
       setState(...orderDetail);
     }
   }, [orderid]);

@@ -22,7 +22,7 @@ const AllProductsServices = () => {
   const { type } = useParams();
 
   useEffect(() => {
-    console.log('type', type);
+    // console.log('type', type);
     setActive(type);
   }, [type]);
 
@@ -43,7 +43,7 @@ const AllProductsServices = () => {
 
   const handleActive = (e) => {
     const { tabname } = e.currentTarget.dataset;
-    console.log(tabname);
+    // console.log(tabname);
     setActive(tabname);
   };
 

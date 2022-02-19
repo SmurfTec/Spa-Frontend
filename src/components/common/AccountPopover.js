@@ -17,7 +17,7 @@ import {
 import MenuPopover from './MenuPopover';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { logout } from 'store/slices/Auth';
+import { logout } from 'store/slices/auth';
 // import AccountBoxIcon from '@material-ui/icons/AccountBox';
 // import FavoriteIcon from '@material-ui/icons/Favorite';
 

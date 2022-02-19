@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { makeReq } from 'utils/makeReq';
 import { LOCALSTORAGE_TOKEN_KEY } from 'utils/constants';
 import { toast } from 'react-toastify';
-import { getMe, login, signUp } from './extraReducers';
+import { getMe, login, signUp, updateMe } from './extraReducers';
 
 const initialState = {
   authenticating: true,
@@ -37,17 +37,20 @@ const authSlice = createSlice({
     // [getMe.pending] : {
 
     // }
+    // ^ GetMe Reducers
     [getMe.fulfilled]: (state, { payload }) => {
       state.authenticating = false;
       state.isLoggedIn = true;
       state.user = payload.user;
       state.token = payload.token;
+      console.log('payload.user', payload.user);
     },
     [getMe.rejected]: (state) => {
       state.authenticating = false;
       state.isLoggedIn = false;
     },
 
+    // ^ Login Reducers
     [login.pending]: (state) => {
       state.loading = true;
     },
@@ -63,6 +66,7 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
     },
 
+    // ^ Signup Reducers
     [signUp.pending]: (state) => {
       state.loading = true;
     },
@@ -77,6 +81,19 @@ const authSlice = createSlice({
     [signUp.rejected]: (state) => {
       state.loading = false;
       state.isLoggedIn = false;
+    },
+
+    // ^ Update Me Reducers
+    [updateMe.pending]: (state) => {
+      state.loading = true;
+    },
+    [updateMe.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.user = payload;
+      toast.success('Your profile have been updated successfully');
+    },
+    [updateMe.rejected]: (state) => {
+      state.loading = false;
     },
   },
 });

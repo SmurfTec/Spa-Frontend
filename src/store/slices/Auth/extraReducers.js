@@ -45,3 +45,20 @@ export const signUp = createAsyncThunk(
       .catch((err) => rejectWithValue(err));
   }
 );
+
+export const updateMe = createAsyncThunk(
+  'users/me',
+  async (userInfo, { rejectWithValue }) => {
+    return makeReq(
+      '/users/me',
+      {
+        body: {
+          ...userInfo,
+        },
+      },
+      'PATCH'
+    )
+      .then((resData) => resData.user)
+      .catch((err) => rejectWithValue(err));
+  }
+);

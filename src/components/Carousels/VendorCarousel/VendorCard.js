@@ -5,7 +5,6 @@ import {
   Typography,
   CardActionArea,
   Box,
-  Button,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import spa1 from 'assets/spa1.svg';
@@ -18,7 +17,6 @@ const styles = makeStyles((theme) => ({
     '& .MuiCardActionArea-root': {
       height: '100%',
     },
-
     '& .MuiCardContent-root': {
       height: '100%',
       display: 'flex',
@@ -32,22 +30,12 @@ const styles = makeStyles((theme) => ({
       },
       '& .MuiTypography-subtitle2': {
         fontWeight: 600,
-        // height: 44,
       },
-      // '& .overlay': {
-      //   display: 'none',
-      // },
-      // '&:hover': {
-      //   '& .overlay': {},
-      // },
-      // '& .title': {
-      //   height: 60,
-      // },
     },
   },
 }));
 
-const VendorCard = ({ title, description, image, rating, _id, history }) => {
+const VendorCard = ({ fullName, bannerImages, rating, _id, history, info }) => {
   const classes = styles();
   const navigate = useNavigate();
 
@@ -64,7 +52,7 @@ const VendorCard = ({ title, description, image, rating, _id, history }) => {
             justifyContent='space-between'
             sx={{ columnGap: 15 }}
           >
-            <img src={spa1} width='40px' height='40px' alt='' />
+            <img src={bannerImages[0]} width='40px' height='40px' alt='' />
             <Box display='flex' alignItems='center' sx={{ columnGap: 5 }}>
               <StarIcon fontSize='small' />
               <Typography variant='subtitle1' component='span'>
@@ -74,10 +62,10 @@ const VendorCard = ({ title, description, image, rating, _id, history }) => {
           </Box>
           <Box>
             <Typography variant='h5' className='title'>
-              {title}
+              {fullName}
             </Typography>
             <Typography variant='subtitle2' color='textSecondary'>
-              {description}
+              {info}
             </Typography>
           </Box>
           {/* <div className='overlay'>

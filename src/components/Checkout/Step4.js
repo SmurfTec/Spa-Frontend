@@ -39,7 +39,7 @@ const OrderDetails = ({
 
   const productQuantity = 2;
 
-  console.log('cartItems', cartItems);
+  // console.log('cartItems', cartItems);
 
   return (
     <>

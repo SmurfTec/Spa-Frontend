@@ -100,7 +100,7 @@ const SingleProdServ = () => {
   // const { addItemToCart, userOrders } = useContext(StoreContext);
 
   const { _id, type } = useParams();
-  console.log('id,type', _id, type);
+  // console.log('id,type', _id, type);
 
   useEffect(() => {
     if (type === 'product')
@@ -126,7 +126,7 @@ const SingleProdServ = () => {
   const handleImageClick = (e) => {
     const { image } = e.currentTarget.dataset;
 
-    console.log(`image`, image);
+    // console.log(`image`, image);
 
     // toggleOpen();
   };
