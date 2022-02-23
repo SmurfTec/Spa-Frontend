@@ -35,6 +35,20 @@ const useStyles = makeStyles((theme) => ({
     },
     columnGap: 20,
   },
+  link: {
+    '& a::after': {
+      content: '""',
+      display: 'block',
+      width: 0,
+      height: 1,
+      background: theme.custom.white,
+      transition: 'width .5s',
+    },
+    '& a:hover::after, & a.active::after': {
+      width: '100%',
+    },
+  },
+
   navFixed: {
     paddingTop: 64,
     [theme.breakpoints.down('xs')]: {
@@ -76,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
 
   sectionDesktop: {
     display: 'none',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up(1015)]: {
       display: 'flex',
       alignItems: 'center',
       columnGap: '2.5em',
@@ -87,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     marginLeft: 'auto',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up(1015)]: {
       display: 'none',
     },
   },

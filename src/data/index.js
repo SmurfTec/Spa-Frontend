@@ -130,4 +130,12 @@ export const orderDetails = [...Array(6)].map((_, index) => ({
   createdAt: faker.date.recent(3, new Date()),
 }));
 
+export const blogs = [
+  ...Array(7).map((_, index) => ({
+    _id: faker.datatype.uuid(),
+    title: 'Ayurveda WonderHerbs Infusions',
+    createdAt: faker.date.recent(3, new Date()),
+    description: faker.lorem.paragraph(5),
+  })),
+];
 export const dropDownNumbers = [...Array(8)].map((_, index) => index + 1);

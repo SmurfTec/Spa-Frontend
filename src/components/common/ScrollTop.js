@@ -4,7 +4,7 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 const styles = makeStyles((theme) => ({
   root: {
-    display: '',
+    zIndex: 9999,
     position: 'absolute',
     bottom: 20,
     right: 20,

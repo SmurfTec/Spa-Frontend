@@ -5,7 +5,9 @@ import Logo from './Logo';
 import faker from 'faker';
 import brand1 from 'assets/brand3.png';
 import brand2 from 'assets/brand2.png';
-import brand3 from 'assets/brand1.png';
+import brand5 from 'assets/brand5.png';
+import brand4 from 'assets/brand4.png';
+import bambooSpa from 'assets/bambooSpa.svg';
 import casetrust from 'assets/casetrust.svg';
 
 import FacebookIcon from '@material-ui/icons/Facebook';
@@ -56,6 +58,7 @@ const Footer = () => {
   return (
     <>
       <div className={classes.root}>
+        <div className={classes.overlay} />
         <div className={classes.wrapper}>
           <div className={classes.contentWrapper}>
             <div className='contentLeft'>
@@ -130,8 +133,12 @@ const Footer = () => {
                 OUR AWARDS
               </Typography>
               <div className={classes.brandsImg}>
-                <img src={brand1} alt='brand1' height='60px' />
-                <img src={casetrust} alt='brand2' height='60px' />
+                <Avatar variant='square' className={classes.avatar}>
+                  <img src={brand1} alt='brand1' width='100%' />
+                </Avatar>
+                <Avatar variant='square' className={classes.avatar}>
+                  <img src={casetrust} alt='brand2' height='60px' />
+                </Avatar>
               </div>
             </Box>
             <Box>
@@ -139,8 +146,12 @@ const Footer = () => {
                 OUR PARTNERS
               </Typography>
               <div className={classes.brandsImg}>
-                <img src={brand1} alt='brand1' height='60px' />
-                <img src={brand2} alt='brand2' height='60px' />
+                <Avatar variant='square' className={classes.avatar}>
+                  <img src={brand1} alt='brand1' width='100%' />
+                </Avatar>
+                <Avatar variant='square' className={classes.avatar}>
+                  <img src={bambooSpa} alt='brand2' width='100%' />
+                </Avatar>
               </div>
             </Box>
             <Box>

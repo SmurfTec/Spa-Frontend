@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getMe } from 'store/slices/Auth/extraReducers';
 import { fetchVendors } from 'store/slices/vendors';
+import { topProducts, flashSales } from 'store/slices/products';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -11,6 +12,8 @@ const App = () => {
   useEffect(() => {
     dispatch(getMe());
     dispatch(fetchVendors());
+    dispatch(topProducts());
+    dispatch(flashSales());
   }, [dispatch]);
 
   return (

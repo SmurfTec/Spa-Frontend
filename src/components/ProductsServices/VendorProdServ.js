@@ -29,6 +29,8 @@ const VendorProductsServices = () => {
     vendor: getVendor(state, vendorId),
   }));
 
+  console.log('vendor', vendor);
+
   // useEffect(() => {
   //   setvendor(vendorDetails);
   // }, [loading, vendorDetails]);
@@ -125,8 +127,7 @@ const VendorProductsServices = () => {
       <Box mt={4}>
         <Typography variant='h4'>New Arrivals</Typography>
       </Box>
-
-      <ProductServiceCarousel isPromo={false} showDesc={false} />
+      <ProductServiceCarousel data={mixedProdServ} showVendor={false} />
 
       {/* // ^  Just For You Table  */}
       <Box mt={4}>

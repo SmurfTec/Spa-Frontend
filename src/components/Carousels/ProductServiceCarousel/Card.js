@@ -4,71 +4,69 @@ import {
   Card,
   CardContent,
   Typography,
-  CardActions,
   CardMedia,
   Button,
   CardActionArea,
   Box,
-  Avatar,
   IconButton,
-  Tooltip,
 } from '@material-ui/core';
-import prod1 from 'assets/prod1.jpg';
-import serv2 from 'assets/prod3.jpg';
-// import spa1 from 'assets/spa1.svg';
+import { Rating } from '@material-ui/lab';
+
 import Favorite from '@material-ui/icons/Favorite';
 import UnFavorite from '@material-ui/icons/FavoriteBorder';
-import { Rating } from '@material-ui/lab';
-import styles from './CardProp';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import SendIcon from '@material-ui/icons/Send';
-import clsx from 'clsx';
+
+import styles from './CardProp';
 import useStyles from 'styles/commonStyles';
+
+import prodImg from 'assets/prod3.jpg';
 
 const ProductCard = (props) => {
   const classes = styles();
   const classes_g = useStyles();
   const {
-    type,
+    isService,
     isPromo,
-    title,
+    name,
     description,
-    image,
+    images,
     rating,
     isFavourite,
     _id,
-    showDesc,
     price,
     dummyId,
+    numReviews,
+    info,
+    sale,
+    showVendor,
+    discount,
   } = props;
 
   const navigate = useNavigate();
 
   const handleClick = () => {
     // navigate(`/products&services/${type}/${_id}`);
-    navigate(`/products&services/${type}/${dummyId}`);
+    // navigate(`/products&services/${type}/${dummyId}`);
   };
 
   return (
     <Card className={classes.productCard}>
       <CardActionArea onClick={handleClick}>
-        <CardMedia
-          className={classes.cardMedia}
-          image={type === 'product' ? prod1 : serv2}
-        />
+        <CardMedia className={classes.cardMedia} image={prodImg} />
       </CardActionArea>
 
       <CardContent>
         <div className={classes.dispFlex}>
-          <Typography variant='body2'>{props.title}</Typography>
+          <Typography variant='body2'>{name}</Typography>
         </div>
         <Box display='flex' flexDirection='column' gridGap={2}>
           <div className={classes.dispFlex}>
-            <Rating value={4} readOnly size='small' />
-            <Typography variant='body2'>({props.rating})</Typography>
+            <Rating value={rating} readOnly size='small' />
+            <Typography variant='body2'>({numReviews})</Typography>
           </div>
-          {type === 'product' ? (
-            isPromo ? (
+          {!isService ? (
+            sale ? (
               <div className={classes.dispFlex}>
                 <Typography
                   variant='body2'
@@ -82,7 +80,7 @@ const ProductCard = (props) => {
                   variant='subtitle2'
                   className={classes_g.fontWeight600}
                 >
-                  - ${props.promoPrice}
+                  - ${price - props.discount}
                 </Typography>
               </div>
             ) : (
@@ -93,24 +91,26 @@ const ProductCard = (props) => {
                 >
                   ${price}
                 </Typography>
-                <Typography variant='caption'>{'  '} (100ml)</Typography>
+                <Typography variant='caption'>
+                  {'  '} ({info})
+                </Typography>
               </Box>
             )
-          ) : isPromo ? (
+          ) : sale ? (
             <>
-              <Typography variant='caption'>{props.oneHourRate}</Typography>
+              <Typography variant='caption'>{info}</Typography>
               <div className={classes.servPricePromo}>
                 <Typography
                   variant='subtitle2'
                   className={classes_g.fontWeight600}
                 >
-                  From <span>${price}</span> - ${props.promoPrice}
+                  From <span>${price}</span> - ${price - discount}
                 </Typography>
               </div>
             </>
           ) : (
             <>
-              <Typography variant='caption'>{props.oneHourRate}</Typography>
+              <Typography variant='caption'>{info}</Typography>
               <Typography
                 variant='subtitle2'
                 className={classes_g.fontWeight600}
@@ -119,11 +119,16 @@ const ProductCard = (props) => {
               </Typography>
             </>
           )}
-          {showDesc && <Typography variant='caption'>{description}</Typography>}
+          {showVendor && (
+            <Typography variant='caption'>
+              {isService ? 'Service from ' : 'Product from '}{' '}
+              {props?.vendor?.fullName}
+            </Typography>
+          )}
         </Box>
 
         <Box mb={1} component='span' sx={{ textAlign: 'center' }}>
-          {type === 'product' ? (
+          {!isService ? (
             <Button
               variant='contained'
               color='secondary'

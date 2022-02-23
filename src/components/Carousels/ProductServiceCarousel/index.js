@@ -6,24 +6,19 @@ import CarouselLayout from '../Default/CarouselLayout';
 import styles from 'styles/commonStyles';
 import { responsive2 } from '../Default/settings';
 
-const ProductCarousel = (props) => {
+const ProdServCarousel = (props) => {
   const classes = styles();
+  const { data } = props;
   return (
     <CarouselLayout respSettings={responsive2}>
-      {mixedProdServ &&
-        mixedProdServ.length > 0 &&
-        mixedProdServ.map((el, index) => (
+      {data.length > 0 &&
+        data.map((el, index) => (
           <div key={el._id} className={classes.carouselItem}>
-            <Card
-              {...el}
-              isPromo={props.isPromo}
-              showDesc={props.showDesc}
-              promoPrice={el.price - decreaseBy[index]}
-            />
+            <Card {...el} showVendor={props.showVendor} />
           </div>
         ))}
     </CarouselLayout>
   );
 };
 
-export default ProductCarousel;
+export default ProdServCarousel;

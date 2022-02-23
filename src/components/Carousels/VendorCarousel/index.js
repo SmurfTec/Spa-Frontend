@@ -12,15 +12,10 @@ import { globalVendorsSelectors } from 'store/slices/vendors';
 
 const VendorCarousel = () => {
   const classes = styles();
-  const dispatch = useDispatch();
   const { loading, vendors } = useSelector((state) => ({
     loading: state.vendors.loading,
     vendors: globalVendorsSelectors.selectAll(state),
   }));
-
-  useEffect(() => {
-    dispatch(fetchVendors());
-  }, [dispatch]);
 
   return (
     <CarouselLayout respSettings={responsive1}>
