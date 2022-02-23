@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Button, Grid, Typography } from '@material-ui/core';
 import clsx from 'clsx';
 
@@ -17,10 +18,13 @@ import globalStyles from 'styles/commonStyles';
 import styles from 'styles/HomeStyles';
 import spa1 from 'assets/med.jpg';
 import spa2 from 'assets/spa2.jpg';
+import Blog from 'components/Blog';
 
 const Home = () => {
   const classes = styles();
   const classes_g = globalStyles();
+  // const dispatch = useDispatch();
+  const { sales, topSelling } = useSelector((st) => st.products);
 
   const patnerSearch = () => {};
   return (
@@ -125,7 +129,7 @@ const Home = () => {
           <AdsCarousel />
 
           <Box className={classes_g.carouselDefaults}>
-            <ProductServiceCarousel isPromo={true} showDesc={true} />
+            <ProductServiceCarousel data={sales} showVendor={true} />
           </Box>
           <Box
             mt={2}
@@ -262,7 +266,7 @@ const Home = () => {
           </div>
 
           <Box className={classes_g.carouselDefaults}>
-            <ProductServiceCarousel isPromo={false} showDesc={true} />
+            <ProductServiceCarousel data={topSelling} showVendor={true} />
           </Box>
 
           <Box
@@ -273,6 +277,38 @@ const Home = () => {
             <NavLink to='/products&services/products'>See More</NavLink>
           </Box>
         </Box>
+      </section>
+
+      {/* //^ Blog Section */}
+
+      <section
+        id='blog'
+        className={clsx(
+          classes_g.sectionGap,
+          classes_g.sectionFlex,
+          classes_g.homesectionGap
+        )}
+      >
+        <div className={classes_g.sectHorAlignment}>
+          <Typography variant='h2' align='center'>
+            Our Blog
+          </Typography>
+          <Typography
+            variant='subtitle1'
+            align='center'
+            className={classes_g.subHeading}
+          >
+            {loremShort}
+          </Typography>
+          <Blog />
+
+          <Box
+            mt={3}
+            className={clsx(classes_g.sectionLink, classes_g.linkUnderline)}
+          >
+            <NavLink to='/blog'>See More</NavLink>
+          </Box>
+        </div>
       </section>
     </>
   );

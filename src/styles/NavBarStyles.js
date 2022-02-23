@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
 
   sectionDesktop: {
     display: 'none',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up(1015)]: {
       display: 'flex',
       alignItems: 'center',
       columnGap: '2.5em',
@@ -87,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     marginLeft: 'auto',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up(1015)]: {
       display: 'none',
     },
   },

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import clsx from 'clsx';
+
 import { Box, Button, Typography } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 
@@ -8,6 +9,7 @@ import { useToggleInput } from 'hooks';
 import Card from 'components/Carousels/ProductServiceCarousel/Card';
 import ProductServiceCarousel from 'components/Carousels/ProductServiceCarousel';
 import Search from 'components/common/Search/Search';
+
 import { loremShort, loremlong, products, mixedProdServ } from 'data';
 
 import globalStyles from 'styles/commonStyles';
@@ -94,7 +96,7 @@ const AllProductsServices = () => {
       </Box>
 
       {/* <div className={classes_g.carouselDefaults}> */}
-      <ProductServiceCarousel isPromo={false} showDesc={false} />
+      <ProductServiceCarousel data={mixedProdServ} showVendor={false} />
       {/* </div> */}
 
       {/* <div className={clsx(classes_g.sectionLink, classes_g.linkUnderline)}>
@@ -175,7 +177,7 @@ const AllProductsServices = () => {
                       {...prod}
                       isPromo={false}
                       type='product'
-                      showDesc={false}
+                      showVendor={false}
                     />
 
                     // </div>

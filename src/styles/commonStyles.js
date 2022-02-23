@@ -136,6 +136,7 @@ const styles = makeStyles((theme) => ({
   sectHorAlignment: {
     width: '80%',
     marginInline: 'auto',
+    maxWidth: 1200,
 
     [theme.breakpoints.down('sm')]: {
       width: '85%',

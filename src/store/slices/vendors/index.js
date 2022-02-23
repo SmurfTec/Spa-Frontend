@@ -38,6 +38,7 @@ const vendorSlice = createSlice({
 });
 
 export const simpleVendorsSelectors = vendorAdapter.getSelectors();
+
 //^ get part of state(vendors) from slice
 export const globalVendorsSelectors = vendorAdapter.getSelectors(
   (st) => st.vendors

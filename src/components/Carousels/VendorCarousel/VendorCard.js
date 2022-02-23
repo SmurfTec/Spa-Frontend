@@ -5,6 +5,7 @@ import {
   Typography,
   CardActionArea,
   Box,
+  Avatar,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import spa1 from 'assets/spa1.svg';
@@ -33,6 +34,13 @@ const styles = makeStyles((theme) => ({
       },
     },
   },
+  avatar: {
+    backgroundColor: 'transparent',
+    '&.MuiAvatar-root': {
+      width: 50,
+      height: 50,
+    },
+  },
 }));
 
 const VendorCard = ({ fullName, bannerImages, rating, _id, history, info }) => {
@@ -52,7 +60,9 @@ const VendorCard = ({ fullName, bannerImages, rating, _id, history, info }) => {
             justifyContent='space-between'
             sx={{ columnGap: 15 }}
           >
-            <img src={bannerImages[0]} width='40px' height='40px' alt='' />
+            <Avatar variant='square' className={classes.avatar}>
+              <img src={bannerImages[0]} height='100%' alt='' />
+            </Avatar>
             <Box display='flex' alignItems='center' sx={{ columnGap: 5 }}>
               <StarIcon fontSize='small' />
               <Typography variant='subtitle1' component='span'>

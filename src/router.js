@@ -9,7 +9,9 @@ import Orders from 'components/UserInfo/Orders';
 
 const CommonLayout = lazy(() => import('components/layouts/CommonLayout'));
 const HomePage = lazy(() => import('components/Home'));
-const VendorProdServ = lazy(() => import('components/ProductsServices'));
+const VendorProdServ = lazy(() =>
+  import('components/ProductsServices/VendorProdServ')
+);
 const AllProductsServices = lazy(() =>
   import('components/ProductsServices/AllProductsServices')
 );
