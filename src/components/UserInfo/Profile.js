@@ -11,7 +11,7 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 import { useManyInputs } from 'hooks';
-import { updateMe } from 'store/slices/auth/extraReducers';
+import { updateMe } from 'store/slices/Auth/extraReducers';
 import styles from 'styles/commonStyles';
 
 const Profile = () => {

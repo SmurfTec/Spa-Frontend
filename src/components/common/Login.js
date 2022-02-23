@@ -12,7 +12,7 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 
-import { login } from 'store/slices/auth/extraReducers';
+import { login } from 'store/slices/Auth/extraReducers';
 import useManyInputs from 'hooks/useManyInputs';
 
 import FaceIcon from '@material-ui/icons/Face';
