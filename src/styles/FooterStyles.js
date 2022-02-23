@@ -1,4 +1,5 @@
-const { makeStyles } = require('@material-ui/core');
+import { makeStyles } from '@material-ui/core';
+import bgImg from 'assets/bg1.svg';
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -9,6 +10,17 @@ const styles = makeStyles((theme) => ({
     flexDirection: 'column',
     columnGap: 15,
     color: '#fff',
+    position: 'relative',
+  },
+  overlay: {
+    zIndex: 2,
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    backgroundImage: `url(${bgImg})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    opacity: 0.1,
   },
 
   wrapper: {
@@ -73,6 +85,17 @@ const styles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down('xs')]: {
       justifyContent: 'center',
+    },
+  },
+  avatar: {
+    backgroundColor: 'transparent',
+    '&.MuiAvatar-root': {
+      width: 100,
+      height: 70,
+      '& img': {
+        width: '100%',
+        height: '100%',
+      },
     },
   },
   menuDiv: {

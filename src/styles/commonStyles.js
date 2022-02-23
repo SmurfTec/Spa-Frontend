@@ -11,21 +11,7 @@ const styles = makeStyles((theme) => ({
   // cursorPointer: { cursor: 'pointer' },
   // check it already exists but to be managed by 2 components
   // fix to one className
-  linkHover1: {
-    cursor: 'pointer',
-    '&::after': {
-      content: '""',
-      display: 'block',
-      width: 0,
-      height: 1,
-      background: theme.custom.white,
-      transition: 'width .5s',
-    },
 
-    '&:hover::after,.active::after': {
-      width: '100%',
-    },
-  },
   linkHover: {
     '& a::after': {
       content: '""',

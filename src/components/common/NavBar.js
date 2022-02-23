@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate, useLocation, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 import {
@@ -28,12 +28,18 @@ import useStyles from 'styles/NavBarStyles';
 import globalStyles from 'styles/commonStyles';
 
 const Navbar = (props) => {
-  const classes = useStyles();
   const classes_g = globalStyles();
   const { isLoggedIn } = useSelector((st) => st.auth);
 
   const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = React.useState(false);
+  const [locHash, setLocHash] = useState('');
+  const classes = useStyles();
+
+  useEffect(() => {
+    setLocHash(location.hash);
+  }, [location.hash]);
 
   const toggleSideBar = () => {
     setOpen((prev) => !prev);
@@ -41,12 +47,6 @@ const Navbar = (props) => {
   const handleCart = () => {
     navigate('/cart');
   };
-
-  // const scrollToSection = () => {
-  //   // const currentLocation = location.pathname;
-  //   // console.log('currentLocation', currentLocation);
-  //   navigate('/#ourProducts');
-  // };
 
   return (
     <div className={classes.root}>
@@ -84,22 +84,51 @@ const Navbar = (props) => {
               display='flex'
               alignItems='center'
               sx={{ columnGap: 25 }}
-              className={classes_g.linkHover}
+              className={classes.link}
             >
               <Typography variant='subtitle2' noWrap>
-                <Link to='/'>Home </Link>
+                <Link
+                  to='/'
+                  className={
+                    locHash === '' && location.pathname === '/'
+                      ? 'active'
+                      : undefined
+                  }
+                >
+                  Home
+                </Link>
               </Typography>
               <Typography variant='subtitle2' noWrap>
-                <Link to='/#ourPartners'>Our Partners</Link>
+                <Link
+                  to='/#ourPartners'
+                  className={locHash === '#ourPartners' ? 'active' : undefined}
+                >
+                  Our Partners
+                </Link>
               </Typography>
               <Typography variant='subtitle2' noWrap>
-                <Link to='/#flashSales'>Flash Sales</Link>
+                <Link
+                  to='/#flashSales'
+                  className={locHash === '#flashSales' ? 'active' : undefined}
+                >
+                  Flash Sales
+                </Link>
               </Typography>
               <Typography variant='subtitle2' noWrap>
-                <Link to='/#ourProducts'>Products</Link>
+                <Link
+                  to='/#ourProducts'
+                  className={locHash === '#ourProducts' ? 'active' : undefined}
+                >
+                  Products
+                </Link>
               </Typography>
               <Typography variant='subtitle2' noWrap>
-                <Link to='/#blog'>Blog</Link>
+                <Link
+                  to='/#blog'
+                  className={locHash === '#blog' ? 'active' : undefined}
+                >
+                  Blog
+                </Link>
               </Typography>
               <Typography variant='subtitle2' noWrap>
                 <Link to='/contact-us'>Contact Us</Link>

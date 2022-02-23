@@ -35,6 +35,20 @@ const useStyles = makeStyles((theme) => ({
     },
     columnGap: 20,
   },
+  link: {
+    '& a::after': {
+      content: '""',
+      display: 'block',
+      width: 0,
+      height: 1,
+      background: theme.custom.white,
+      transition: 'width .5s',
+    },
+    '& a:hover::after, & a.active::after': {
+      width: '100%',
+    },
+  },
+
   navFixed: {
     paddingTop: 64,
     [theme.breakpoints.down('xs')]: {
