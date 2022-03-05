@@ -113,14 +113,14 @@ export const bannerContent = [...Array(4)].map((_, index) => ({
   description: faker.lorem.lines(3),
 }));
 
-export const orders = [...Array(6)].map((_, index) => ({
+export const orders = [...Array(2)].map((_, index) => ({
   _id: faker.datatype.uuid(),
   status: index <= 3 ? 'Un Paid' : 'In Progress',
   total: index <= 3 ? 150 : 300,
   createdAt: faker.date.recent(3, new Date()),
 }));
 
-export const orderDetails = [...Array(6)].map((_, index) => ({
+export const orderDetails = [...Array(2)].map((_, index) => ({
   _id: orders[index]._id,
   products: [...productsB],
   services: [...services],

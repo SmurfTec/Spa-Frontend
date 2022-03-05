@@ -55,7 +55,7 @@ const styles = makeStyles((theme) => ({
     '& form': {
       display: 'flex',
       flexDirection: 'column',
-      rowGap: 15,
+      rowGap: '1em',
     },
 
     [theme.breakpoints.down('xs')]: {

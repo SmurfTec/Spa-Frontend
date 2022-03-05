@@ -15,9 +15,9 @@ const VendorProdServ = lazy(() =>
 const AllProductsServices = lazy(() =>
   import('components/ProductsServices/AllProductsServices')
 );
-const Login = lazy(() => import('components/common/Login'));
+const Login = lazy(() => import('components/common/Form/Login'));
 const SingleProdServ = lazy(() => import('components/SingleProdServ'));
-const Join = lazy(() => import('components/common/Join'));
+const Join = lazy(() => import('components/common/Form/Join'));
 const Cart = lazy(() => import('components/Checkout'));
 const Profile = lazy(() => import('components/UserInfo/Profile'));
 const OrderDetails = lazy(() => import('components/UserInfo/OrderDetails'));

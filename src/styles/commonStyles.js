@@ -60,26 +60,19 @@ const styles = makeStyles((theme) => ({
     },
   },
 
-  lightPinkInputField: {
-    display: 'flex',
-    alignItems: 'center',
-    backgroundColor: `${theme.palette.secondary.main}1f`,
-    color: theme.palette.primary.main,
-    columnGap: '1em',
-    padding: '0.5em 1em',
-    borderRadius: 12,
-    '& svg': {
-      color: theme.palette.secondary.main,
-    },
-    '& .MuiInputBase-root': {
-      flex: 2,
-      '&:before': {
-        display: 'none',
-      },
-      '&.MuiInput-underline:after': {
-        transform: 'scaleX(0)',
+  lghtPinkInpField: {
+    '& .MuiOutlinedInput-root': {
+      backgroundColor: `${theme.palette.secondary.main}1f`,
+      borderRadius: 12,
+      '& > *:last-child': {
+        borderWidth: '0',
       },
     },
+    '& .MuiOutlinedInput-colorSecondary.Mui-focused .MuiOutlinedInput-notchedOutline':
+      {
+        borderWidth: 1,
+        borderRadius: 12,
+      },
   },
 
   sectionFlex: {

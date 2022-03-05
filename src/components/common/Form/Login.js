@@ -7,13 +7,13 @@ import {
   Box,
   Typography,
   Checkbox,
-  Input,
   Button,
   CircularProgress,
+  TextField,
+  InputAdornment,
 } from '@material-ui/core';
 
 import { login } from 'store/slices/Auth/extraReducers';
-import useManyInputs from 'hooks/useManyInputs';
 
 import FaceIcon from '@material-ui/icons/Face';
 import LockIcon from '@material-ui/icons/Lock';
@@ -23,6 +23,9 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 
 import styles from 'styles/FormStyles';
 import useStyles from 'styles/commonStyles';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import FormTextField from './FormTextField';
 
 const Login = () => {
   const classes = styles();
@@ -30,29 +33,39 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isLoggedIn, loading } = useSelector((st) => st.auth);
-  // const location = useLocation();
-
-  // let redirect = location.search ? location.search.split('=')[1] : '/';
-
-  useEffect(() => {
-    if (isLoggedIn) navigate('/');
-  }, [isLoggedIn, navigate]);
-
-  const initialState = {
+  const initialValues = {
     email: '',
     password: '',
     rememberMe: false,
   };
 
-  const [inputState, handleTxtChange, handleToggleChange, , , ,] =
-    useManyInputs(initialState);
+  const validationSchema = yup.object({
+    email: yup.string('Enter your email').email().required('Email is required'),
+    password: yup
+      .string('Enter your password')
+      .required('Password is required'),
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // console.log('Login Form Submitted');
-    dispatch(login({ email: inputState.email, password: inputState.password }));
-  };
+  const formik = useFormik({
+    initialValues,
+    validationSchema: validationSchema,
+    validateOnBlur: false,
+    validateOnChange: true,
+    onSubmit: (values) => {
+      dispatch(login({ email: values.email, password: values.password }));
+    },
+  });
+
+  const { isLoggedIn, loading } = useSelector((st) => st.auth);
+
+  useEffect(() => {
+    if (isLoggedIn) navigate('/');
+  }, [isLoggedIn, navigate]);
+
+  // const handleFormikChange = (e) => {
+  //   handleChange(e);
+  //   handleBlur(e);
+  // };
 
   return (
     <Box className={clsx(classes_g.backWrapper)} justifyContent='center'>
@@ -66,39 +79,29 @@ const Login = () => {
             To sign in enter your details
           </Typography>
         </Box>
-        <form id='loginForm' onSubmit={handleSubmit}>
-          <div className={classes_g.lightPinkInputField}>
-            <FaceIcon />
-            <Input
-              name='email'
-              value={inputState.email}
-              type='email'
-              onChange={handleTxtChange}
-              placeholder='Email'
-              required
-            />
-          </div>
-          <div className={classes_g.lightPinkInputField}>
-            <LockIcon />
-            <Input
-              name='password'
-              value={inputState.password}
-              type='password'
-              onChange={handleTxtChange}
-              fullWidth
-              placeholder='Password'
-              required
-            />
-          </div>
-        </form>
+
+        <FormTextField
+          name='email'
+          type='email'
+          placeholder='Email'
+          inputIcon={<FaceIcon color='secondary' />}
+          {...formik}
+        />
+        <FormTextField
+          name='password'
+          type='password'
+          placeholder='Password'
+          inputIcon={<LockIcon color='secondary' />}
+          {...formik}
+        />
 
         <div className={classes.rememberMeWrapper}>
           <Box display='flex' alignItems='center' sx={{ columnGap: 10 }}>
             <Checkbox
               color='primary'
               name='rememberMe'
-              checked={inputState.rememberMe}
-              onChange={(e) => handleToggleChange(e)}
+              checked={formik.values.rememberMe}
+              onChange={formik.handleChange}
             />
             <Typography variant='subtitle2'>Remember Me</Typography>
           </Box>
@@ -112,8 +115,7 @@ const Login = () => {
         <Button
           variant='contained'
           color='secondary'
-          type='submit'
-          form='loginForm'
+          onClick={formik.handleSubmit}
           disabled={loading}
         >
           {loading ? <CircularProgress size={25} color='inherit' /> : 'Sign In'}
@@ -121,7 +123,6 @@ const Login = () => {
         <Typography variant='subtitle1' color='textSecondary'>
           Or
         </Typography>
-
         <Button
           variant='contained'
           color='default'
@@ -130,7 +131,6 @@ const Login = () => {
         >
           Facebook
         </Button>
-
         <Button
           className={classes.googleBtn}
           variant='contained'

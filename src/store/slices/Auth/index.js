@@ -64,6 +64,7 @@ const authSlice = createSlice({
     [login.rejected]: (state) => {
       state.loading = false;
       state.isLoggedIn = false;
+      toast.error('Error: email or password entered is incorrect');
     },
 
     // ^ Signup Reducers
