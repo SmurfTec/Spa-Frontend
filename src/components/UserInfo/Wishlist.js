@@ -47,7 +47,6 @@ const Wishlist = () => {
   const [tabValue, setTabValue] = React.useState(1);
 
   const handleTabChange = (event, newValue) => {
-    // console.log('event.target.name', event.target.name);
     setTabValue(newValue);
   };
 

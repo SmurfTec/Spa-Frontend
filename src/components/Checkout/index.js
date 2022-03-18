@@ -75,7 +75,6 @@ const Checkout = () => {
   };
 
   const handleChange = (e) => {
-    // console.log('e.target.name', e.target.name);
     // if(e.target.name === 'quantity')
   };
 
@@ -102,7 +101,6 @@ const Checkout = () => {
   };
 
   const validateStep1 = () => {
-    // console.log('validated step 1');
     // * If user if NOT Logged in , move him to Login page
     // if (!user) history.push('/auth/login?redirect=/store/cart');
     // else handleNext();
@@ -115,19 +113,15 @@ const Checkout = () => {
       cartState.phoneNumber !== -1 &&
       cartState.email !== ''
     ) {
-      // console.log('validated step 2');
       handleNext();
     } else console.log('Invalid Step 2');
   };
 
   const validateStep3 = () => {
-    // console.log('validated step 3');
     handleNext();
   };
 
   const getStepContent = useMemo(() => {
-    // console.log('Get Content rerender');
-
     switch (activeStep) {
       case 0:
         return (
@@ -187,7 +181,6 @@ const Checkout = () => {
   return (
     <div className={clsx(classes_g.componentSectionGap, classes.stepIcon)}>
       <Box display='flex' alignItems='center' gridGap={15}>
-        {console.log('cart', cartState)}
         {activeStep > 0 && activeStep < 3 && (
           <>
             <IconButton onClick={handleBack} color='primary' size='small'>

@@ -46,6 +46,13 @@ const styles = makeStyles((theme) => ({
       },
     },
   },
+  title: {
+    height: 39,
+    overflow: 'hidden',
+    display: '-webkit-box',
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: 'vertical',
+  },
   cardMedia: {
     height: 125,
   },

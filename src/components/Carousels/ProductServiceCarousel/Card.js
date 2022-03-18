@@ -58,7 +58,9 @@ const ProductCard = (props) => {
 
       <CardContent>
         <div className={classes.dispFlex}>
-          <Typography variant='body2'>{name}</Typography>
+          <Typography variant='body2' className={classes.title}>
+            {name}
+          </Typography>
         </div>
         <Box display='flex' flexDirection='column' gridGap={2}>
           <div className={classes.dispFlex}>
@@ -127,7 +129,7 @@ const ProductCard = (props) => {
           )}
         </Box>
 
-        <Box mb={1} component='span' sx={{ textAlign: 'center' }}>
+        <Box component='span' sx={{ textAlign: 'center', marginBlock: 5 }}>
           {!isService ? (
             <Button
               variant='contained'

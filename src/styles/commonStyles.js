@@ -252,9 +252,10 @@ const styles = makeStyles((theme) => ({
 
   carouselItem: {
     display: 'block',
+    height: '100%',
+    // minHeight: 225,
     // padding: 10,
     padding: 7,
-    height: '100%',
     '& .MuiPaper-root': {
       boxShadow: theme.custom.cardShadow,
       height: '100%',

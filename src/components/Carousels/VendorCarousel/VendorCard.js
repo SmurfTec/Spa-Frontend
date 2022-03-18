@@ -29,8 +29,15 @@ const styles = makeStyles((theme) => ({
       '& span': {
         paddingTop: 2,
       },
+      '& .MuiTypography-h5': {
+        fontWeight: 500,
+      },
       '& .MuiTypography-subtitle2': {
-        fontWeight: 600,
+        fontWeight: 500,
+        overflow: 'hidden',
+        display: '-webkit-box',
+        WebkitLineClamp: 2,
+        WebkitBoxOrient: 'vertical',
       },
     },
   },
@@ -64,17 +71,19 @@ const VendorCard = ({ fullName, bannerImages, rating, _id, history, info }) => {
               <img src={bannerImages[0]} height='100%' alt='' />
             </Avatar>
             <Box display='flex' alignItems='center' sx={{ columnGap: 5 }}>
-              <StarIcon fontSize='small' />
+              <StarIcon />
               <Typography variant='subtitle1' component='span'>
                 4.5
               </Typography>
             </Box>
           </Box>
           <Box>
-            <Typography variant='h5' className='title'>
-              {fullName}
-            </Typography>
-            <Typography variant='subtitle2' color='textSecondary'>
+            <Typography variant='h5'>{fullName}</Typography>
+            <Typography
+              variant='subtitle2'
+              color='textSecondary'
+              className={classes.titleWrap}
+            >
               {info}
             </Typography>
           </Box>

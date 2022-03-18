@@ -33,7 +33,6 @@ const CheckOutStep = ({
   removeItemFromCart,
   handleTxtChange,
 }) => {
-  console.log('Cart', cart);
   const classes_g = globalStyles();
   const classes = styles();
   const initialState = {

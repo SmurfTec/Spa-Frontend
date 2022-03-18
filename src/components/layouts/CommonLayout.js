@@ -14,11 +14,8 @@ const CommonLayout = (props) => {
     if (location.hash !== '') {
       setTimeout(() => {
         const id = location.hash.split('#').pop();
-        // console.log('id', id);
         const targetCard = document.getElementById(id);
 
-        // console.log('Target', targetCard.offsetTop);
-        // console.log('Above Height', targetCard.offsetTop - 80);
         if (!root || !targetCard) return;
         root.scroll({
           top: targetCard.offsetTop - 65,

@@ -41,8 +41,6 @@ const styles = makeStyles((theme) => ({
 const Banner = () => {
   const classes = styles();
   const classes_g = useStyles();
-  // console.log('bannerContent', bannerContent);
-  // console.log('products', products);
 
   return (
     <section className={classes.root}>

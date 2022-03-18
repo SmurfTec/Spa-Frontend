@@ -15,7 +15,6 @@ const FormTextField = ({
   size,
 }) => {
   const classes = styles();
-  console.log('values', values);
   return (
     <TextField
       name={name}

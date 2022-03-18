@@ -41,7 +41,6 @@ const vendorSlice = createSlice({
     [topProducts.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.topSelling = payload;
-      console.log('Top Products', payload);
     },
     [topProducts.rejected]: (state) => {
       state.loading = false;
@@ -54,7 +53,6 @@ const vendorSlice = createSlice({
     [flashSales.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.sales = payload;
-      console.log('Sales', payload);
     },
     [flashSales.rejected]: (state) => {
       state.loading = false;

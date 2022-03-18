@@ -18,7 +18,6 @@ const authSlice = createSlice({
   reducers: {
     logout: {
       reducer: (state, action) => {
-        console.log('In Logout');
         state.isLoggedIn = false;
         state.user = null;
         state.token = null;
@@ -28,7 +27,6 @@ const authSlice = createSlice({
       // * its usage is to modify payload before passing it to reducer
       // * e.g in our case , we are adding id
       // prepare: (value) => {
-      //   console.log(`value`, value);
       //   return { payload: { completed: false, id: nanoid(5), task: value } };
       // },
     },
@@ -43,7 +41,6 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.user = payload.user;
       state.token = payload.token;
-      console.log('payload.user', payload.user);
     },
     [getMe.rejected]: (state) => {
       state.authenticating = false;

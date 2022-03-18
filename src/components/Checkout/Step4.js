@@ -36,10 +36,7 @@ const OrderDetails = ({
   const orderArrives = '27/9 - 29/10';
   const classes_g = useStyles();
   const classes = styles();
-
   const productQuantity = 2;
-
-  // console.log('cartItems', cartItems);
 
   return (
     <>

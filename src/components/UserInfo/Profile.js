@@ -39,7 +39,6 @@ const Profile = () => {
     useManyInputs(initialState);
 
   useEffect(() => {
-    console.log('user', user);
     const { fullName, email, phoneNumber, info, shippingAddress } = user;
     setState((st) => ({
       ...st,
