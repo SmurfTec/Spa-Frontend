@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Navigate, withRouter, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import clsx from 'clsx';
 import {
@@ -47,6 +48,8 @@ import Addrounded from '@material-ui/icons/AddRounded';
 import BookIcon from '@material-ui/icons/Book';
 
 import Review from 'components/common/Review';
+import useFetch from 'hooks/useFetch';
+import { API_BASE_URL } from 'utils/makeReq';
 
 function TabPanel(props) {
   const { children, value, index, classes, ...other } = props;
@@ -79,7 +82,7 @@ function a11yProps(index) {
   };
 }
 
-const SingleProdServ = () => {
+const SingleProdServ = (props) => {
   const classes_g = globalStyles();
   const classes = styles();
   const status = 'In Stock';
@@ -99,21 +102,54 @@ const SingleProdServ = () => {
 
   // const { addItemToCart, userOrders } = useContext(StoreContext);
 
-  const { _id, type } = useParams();
+  const { id, type } = useParams();
+
+  // let {
+  //   value: auction,
+  //   loading,
+  //   error,
+  //   setValue: setAuction,
+  // } = useFetch(
+  //   `${API_BASE_URL}/products/${id}`,
+  //   {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   },
+  //   [id],
+  //   'product'
+  // );
+  let {
+    error,
+    loading,
+    value,
+    setValue: setProdServ,
+  } = useFetch(
+    `${API_BASE_URL}/${props.type}s/${id}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+    [id],
+    'product'
+  );
+
+  console.log('value', error, loading, value);
 
   useEffect(() => {
-    if (type === 'product')
-      setState((st) => ({
-        ...st,
-        prodServ: products?.filter((el) => el.dummyId === parseInt(_id))[0],
-      }));
-    else {
-      setState((st) => ({
-        ...st,
-        prodServ: services?.filter((el) => el.dummyId === parseInt(_id))[0],
-      }));
+    if (type === 'product') {
+      // setState((st) => ({
+      //   ...st,
+      //   prodServ: products?.filter((el) => el.dummyId === parseInt(_id))[0],
+      // }));
+    } else {
+      // setState((st) => ({
+      //   ...st,
+      //   prodServ: services?.filter((el) => el.dummyId === parseInt(_id))[0],
+      // }));
     }
-  }, [_id, type]);
+  }, [id, type]);
 
   const increaseNoOfItems = () => {
     setState((st) => ({ ...st, quantity: st.quantity + 1 }));

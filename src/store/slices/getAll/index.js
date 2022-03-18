@@ -29,7 +29,7 @@ export const allServices = createAsyncThunk(
 );
 
 export const getFlashSales = createAsyncThunk(
-  'allServices',
+  'allFlashSales',
   async (_, { rejectWithValue }) => {
     return makeReq('/flash-sales')
       .then((reqData) => reqData.flashSales)
@@ -60,6 +60,17 @@ const getAllSlice = createSlice({
       state.services = payload;
     },
     [allServices.rejected]: (state) => {
+      state.fetching = false;
+    },
+
+    [getFlashSales.pending]: (state) => {
+      state.fetching = true;
+    },
+    [getFlashSales.fulfilled]: (state, { payload }) => {
+      state.fetching = false;
+      state.sales = payload;
+    },
+    [getFlashSales.rejected]: (state) => {
       state.fetching = false;
     },
   },

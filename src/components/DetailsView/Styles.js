@@ -122,8 +122,12 @@ const styles = makeStyles((theme) => ({
       padding: 2,
     },
   },
-  statusLabel: {
+  statusSuccess: {
     color: theme.palette.success.main,
+  },
+
+  statusFail: {
+    color: theme.palette.error.main,
   },
 
   prodImgWrapper: {

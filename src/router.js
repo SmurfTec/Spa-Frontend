@@ -16,7 +16,8 @@ const AllProductsServices = lazy(() =>
   import('components/ProductsServices/AllProductsServices')
 );
 const Login = lazy(() => import('components/common/Form/Login'));
-const SingleProdServ = lazy(() => import('components/SingleProdServ'));
+const SingleProdServ = lazy(() => import('components/DetailsView'));
+const ProductView = lazy(() => import('components/DetailsView/ProductDetails'));
 const Join = lazy(() => import('components/common/Form/Join'));
 const Cart = lazy(() => import('components/Checkout'));
 const Profile = lazy(() => import('components/UserInfo/Profile'));
@@ -50,13 +51,29 @@ const Router = () => {
             }
           />
           <Route
-            path='products&services/:type/:_id'
+            path='products/:id'
+            element={
+              <Suspense fallback={<Loading />}>
+                <ProductView />
+              </Suspense>
+            }
+          />
+          <Route
+            path='services/:id'
+            element={
+              <Suspense fallback={<Loading />}>
+                <SingleProdServ type='service' />
+              </Suspense>
+            }
+          />
+          {/* <Route
+            path='products&services/:type/:id'
             element={
               <Suspense fallback={<Loading />}>
                 <SingleProdServ />
               </Suspense>
             }
-          />
+          /> */}
           <Route
             path='products&services/:type'
             element={

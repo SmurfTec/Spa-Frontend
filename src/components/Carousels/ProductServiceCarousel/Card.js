@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   Card,
   CardContent,
@@ -33,7 +33,7 @@ const ProductCard = (props) => {
     images,
     rating,
     isFavourite,
-    _id,
+    id,
     price,
     dummyId,
     numReviews,
@@ -44,9 +44,11 @@ const ProductCard = (props) => {
   } = props;
 
   const navigate = useNavigate();
+  const { type } = useParams();
 
   const handleClick = () => {
-    // navigate(`/products&services/${type}/${_id}`);
+    if (isService) navigate(`/services/${id}`);
+    else navigate(`/products/${id}`);
     // navigate(`/products&services/${type}/${dummyId}`);
   };
 
