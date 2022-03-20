@@ -161,7 +161,11 @@ const ProductDetails = (props) => {
                 <Typography variant='h3'>
                   <Skeleton animation='wave' variant='text' />
                 </Typography>
-                <Typography variant='h4' color='textSecondary' sx={{ mt: 1 }}>
+                <Typography
+                  variant='h4'
+                  color='textSecondary'
+                  sx={{ mt: 1 }}
+                >
                   <Skeleton animation='wave' variant='text' />
                 </Typography>
                 <Typography variant='h5' sx={{ mt: 1 }}>
@@ -276,8 +280,16 @@ const ProductDetails = (props) => {
             {/* //^ Product Info */}
             <div>
               <Box width='100%' display='flex' flexDirection='column'>
-                <Box display='flex' flexDirection='column' gridGap='0.5em'>
-                  <Box display='flex' alignItems='center' gridGap='2em'>
+                <Box
+                  display='flex'
+                  flexDirection='column'
+                  gridGap='0.5em'
+                >
+                  <Box
+                    display='flex'
+                    alignItems='center'
+                    gridGap='2em'
+                  >
                     <Typography
                       variant='h5'
                       component='span'
@@ -294,7 +306,11 @@ const ProductDetails = (props) => {
                       ({capitalizeFirstLetter(product.info)})
                     </Typography>
                   </Box>
-                  <Box display='flex' gridGap={10} alignItems='center'>
+                  <Box
+                    display='flex'
+                    gridGap={10}
+                    alignItems='center'
+                  >
                     <Rating value={4} readOnly size='small' />
                     <Typography
                       variant='subtitle1'
@@ -354,12 +370,16 @@ const ProductDetails = (props) => {
                       variant='subtitle1'
                       component='span'
                       className={clsx(classes_g.lightText, {
-                        [classes.statusSuccess]: product.countInStock > 0,
-                        [classes.statusFail]: product.countInStock <= 0,
+                        [classes.statusSuccess]:
+                          product.countInStock > 0,
+                        [classes.statusFail]:
+                          product.countInStock <= 0,
                       })}
                       sx={{ userSelect: 'none' }}
                     >
-                      {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
+                      {product.countInStock > 0
+                        ? 'In Stock'
+                        : 'Out of Stock'}
                     </Typography>
                   </Box>
                 </Box>
@@ -391,9 +411,15 @@ const ProductDetails = (props) => {
 
           {/* //^ Product Option Panel */}
           {/* //^ Product Reviews */}
-          <TabPanel className={classes.TabPanel} value={tabValue} index={0}>
+          <TabPanel
+            className={classes.TabPanel}
+            value={tabValue}
+            index={0}
+          >
             {product.reviews.length > 0 ? (
-              product.reviews.map((el) => <Review {...el} key={el.user._id} />)
+              product.reviews.map((el) => (
+                <Review {...el} key={el.user._id} />
+              ))
             ) : (
               <Typography variant='body1' align='center'>
                 No Reviews
@@ -401,7 +427,11 @@ const ProductDetails = (props) => {
             )}
           </TabPanel>
           {/* //^ Related Products */}
-          <TabPanel className={classes.TabPanel} value={tabValue} index={1}>
+          <TabPanel
+            className={classes.TabPanel}
+            value={tabValue}
+            index={1}
+          >
             <Box>
               <Box my={3}>
                 <Typography variant='h4' align='center'>
@@ -411,7 +441,10 @@ const ProductDetails = (props) => {
               {productsB && productsB.length > 0 ? (
                 <CarouselLayout respSettings={responsive2}>
                   {productsB.map((el) => (
-                    <div key={el._id} className={classes_g.carouselItem}>
+                    <div
+                      key={el._id}
+                      className={classes_g.carouselItem}
+                    >
                       <ProdServCard {...el} isPromo={false} />
                     </div>
                   ))}
