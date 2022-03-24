@@ -12,6 +12,7 @@ import { globalVendorsSelectors } from 'store/slices/vendors';
 
 const VendorCarousel = () => {
   const classes = styles();
+
   const { loading, vendors } = useSelector((state) => ({
     loading: state.vendors.loading,
     vendors: globalVendorsSelectors.selectAll(state),
@@ -24,7 +25,11 @@ const VendorCarousel = () => {
             .fill()
             .map((_, idx) => (
               <div key={idx} className={classes.carouselItem}>
-                <Skeleton varaint='rect' height='250px' width='100%' />
+                <Skeleton
+                  varaint='rect'
+                  height='250px'
+                  width='100%'
+                />
               </div>
             ))
         : vendors.map((el) => (

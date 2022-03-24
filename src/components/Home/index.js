@@ -261,7 +261,7 @@ const Home = () => {
               align='center'
               className={classes_g.subHeading}
             >
-              {loremShort}
+              {loremShort} 
             </Typography>
           </div>
 

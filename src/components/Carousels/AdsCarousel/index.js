@@ -4,11 +4,9 @@ import { Carousel } from 'react-responsive-carousel';
 import { Box, Typography } from '@material-ui/core';
 import styles from 'styles/commonStyles';
 
-import spa2 from 'assets/spa2.jpg';
-import spa1 from 'assets/med.jpg';
 import { loremlong } from 'data';
 
-const AdsCarousel = () => {
+const AdsCarousel = ({ images }) => {
   const classes_g = styles();
   return (
     <Carousel
@@ -22,38 +20,25 @@ const AdsCarousel = () => {
       infiniteLoop={true}
       className={classes_g.Carousel}
     >
-      <div className='rndCornCarsl'>
-        <img src={spa2} alt='Spa Vendor' />
-        <div className={classes_g.overlay} />
-        <Box className='legend'>
-          <div className={classes_g.contentContainer}>
-            <div>
-              <Typography variant='h5'>ABOUT</Typography>
-              <Typography variant='body2'>{loremlong}</Typography>
-            </div>
+      {images &&
+        images.map((image, ind) => (
+          <div className='rndCornCarsl' key={ind}>
+            <img src={image} alt='Spa Vendor' />
+            <div className={classes_g.overlay} />
+            <Box className='legend'>
+              <div className={classes_g.contentContainer}>
+                <div>
+                  <Typography variant='h5'>ABOUT</Typography>
+                  <Typography variant='body2'>{loremlong}</Typography>
+                </div>
 
-            <Box mt={2}>
-              <NavLink to='/'>See More</NavLink>
+                <Box mt={2}>
+                  <NavLink to='/'>See More</NavLink>
+                </Box>
+              </div>
             </Box>
           </div>
-        </Box>
-      </div>
-      <div className='rndCornCarsl'>
-        <img src={spa1} alt='Spa Vendor' />
-        <div className={classes_g.overlay} />
-        <Box className='legend'>
-          <div className={classes_g.contentContainer}>
-            <div>
-              <Typography variant='h5'>ABOUT</Typography>
-              <Typography variant='body2'>{loremlong}</Typography>
-            </div>
-
-            <Box mt={2}>
-              <NavLink to='/'>See More</NavLink>
-            </Box>
-          </div>
-        </Box>
-      </div>
+        ))}
     </Carousel>
   );
 };

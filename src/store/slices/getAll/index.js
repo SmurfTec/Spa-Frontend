@@ -1,13 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { makeReq } from 'utils/makeReq';
-
-const initialState = {
-  fetching: false,
-  products: undefined,
-  services: undefined,
-  sales: undefined,
-};
-
 export const allProducts = createAsyncThunk(
   'allProducts',
   async (_, { rejectWithValue }) => {
@@ -36,6 +28,13 @@ export const getFlashSales = createAsyncThunk(
       .catch((err) => rejectWithValue(err));
   }
 );
+
+const initialState = {
+  fetching: false,
+  products: undefined,
+  services: undefined,
+  sales: undefined,
+};
 
 const getAllSlice = createSlice({
   name: 'common',

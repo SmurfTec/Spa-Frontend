@@ -50,7 +50,12 @@ const CommonLayout = (props) => {
         }}
       >
         <Navbar />
-        <Box width='100%'>
+        <Box
+          style={{
+            width: '100%',
+            minHeight: '100vh',
+          }}
+        >
           <Outlet />
         </Box>
         <Footer />

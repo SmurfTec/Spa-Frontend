@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ProdServContent from './ProdServContent';
 
-import { allProducts, allServices, getFlashSales } from 'store/slices/getAll';
+import {
+  allProducts,
+  allServices,
+  getFlashSales,
+} from 'store/slices/getAll';
 
 import globalStyles from 'styles/commonStyles';
 
@@ -38,7 +42,7 @@ const AllProductsServices = () => {
         products={products || []}
         services={services || []}
         flashSales={flaseSales || []}
-        link='/'
+        link='products&services'
       />
     </div>
   );

@@ -7,7 +7,9 @@ import UserInfo from 'components/UserInfo';
 import OrderHistory from 'components/UserInfo/OrderHistory';
 import Orders from 'components/UserInfo/Orders';
 
-const CommonLayout = lazy(() => import('components/layouts/CommonLayout'));
+const CommonLayout = lazy(() =>
+  import('components/layouts/CommonLayout')
+);
 const HomePage = lazy(() => import('components/Home'));
 const VendorProdServ = lazy(() =>
   import('components/ProductsServices/VendorProdServ')
@@ -17,11 +19,15 @@ const AllProductsServices = lazy(() =>
 );
 const Login = lazy(() => import('components/common/Form/Login'));
 const SingleProdServ = lazy(() => import('components/DetailsView'));
-const ProductView = lazy(() => import('components/DetailsView/ProductDetails'));
+const ProductView = lazy(() =>
+  import('components/DetailsView/ProductDetails')
+);
 const Join = lazy(() => import('components/common/Form/Join'));
 const Cart = lazy(() => import('components/Checkout'));
 const Profile = lazy(() => import('components/UserInfo/Profile'));
-const OrderDetails = lazy(() => import('components/UserInfo/OrderDetails'));
+const OrderDetails = lazy(() =>
+  import('components/UserInfo/OrderDetails')
+);
 const Wishlist = lazy(() => import('components/UserInfo/Wishlist'));
 // const Reviews = lazy(() => import('components/UserInfo/Reviews'));
 
@@ -85,7 +91,7 @@ const Router = () => {
 
           <Route
             // path='products&services'
-            path='vendors/:vendorId'
+            path='vendors/:vendorId/:type'
             element={
               <Suspense fallback={<Loading />}>
                 <VendorProdServ />
