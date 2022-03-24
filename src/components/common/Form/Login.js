@@ -106,8 +106,8 @@ const Login = () => {
             <Typography variant='subtitle2'>Remember Me</Typography>
           </Box>
           <div className={classes_g.linkHover}>
-            <Typography variant='body1' color='textSecondary'>
-              <NavLink to='/forgotpassword'>Forgot password ?</NavLink>
+            <Typography variant='body2' color='textSecondary'>
+              <NavLink to='/forgotPassword'>Forgot password ?</NavLink>
             </Typography>
           </div>
         </div>

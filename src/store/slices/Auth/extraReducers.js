@@ -41,19 +41,77 @@ export const signUp = createAsyncThunk(
       },
       'POST'
     )
-      .then((resData) => ({ token: resData.token, user: resData.user }))
-      .catch((err) => rejectWithValue(err));
+      .then((resData) => resData.message)
+      .catch((err) => rejectWithValue(err.message));
   }
 );
 
+export const forgotPassword = createAsyncThunk(
+  'forgotPassword',
+  async (email, { rejectWithValue }) => {
+    return makeReq(
+      `/auth/forgotPassword`,
+      {
+        body: {
+          ...email,
+        },
+      },
+      'POST'
+    )
+      .then((resData) => resData.message)
+      .catch((err) => rejectWithValue(err.message));
+  }
+);
+
+export const resetPassword = createAsyncThunk(
+  'resetPassword',
+  async (values, { rejectWithValue }) =>
+    makeReq(
+      `/auth/resetPassword/${values.token}`,
+      {
+        body: {
+          ...values.pass,
+        },
+      },
+      'PATCH'
+    )
+      .then((resData) => resData)
+      .catch((err) => rejectWithValue(err.message))
+);
+
+export const confirmMail = createAsyncThunk(
+  'confirmMail',
+  async (token, { rejectWithValue }) =>
+    makeReq(`/auth/confirmMail/${token}`)
+      .then((resData) => resData.message)
+      .catch((err) => rejectWithValue(err.message))
+);
+
 export const updateMe = createAsyncThunk(
-  'users/me',
+  'auth/updateMe',
   async (userInfo, { rejectWithValue }) => {
     return makeReq(
       '/users/me',
       {
         body: {
           ...userInfo,
+        },
+      },
+      'PATCH'
+    )
+      .then((resData) => resData.user)
+      .catch((err) => rejectWithValue(err));
+  }
+);
+
+export const updatePassword = createAsyncThunk(
+  'auth/updatePassword',
+  async (values, { rejectWithValue }) => {
+    return makeReq(
+      `/auth/update-password`,
+      {
+        body: {
+          ...values,
         },
       },
       'PATCH'

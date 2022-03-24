@@ -30,6 +30,7 @@ import globalStyles from 'styles/commonStyles';
 const Navbar = (props) => {
   const classes_g = globalStyles();
   const { isLoggedIn } = useSelector((st) => st.auth);
+  const { cartItems } = useSelector((st) => st.cart);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -46,6 +47,11 @@ const Navbar = (props) => {
   };
   const handleCart = () => {
     navigate('/cart');
+  };
+
+  const handleSignIn = () => {
+    toggleSideBar();
+    navigate('/login');
   };
 
   return (
@@ -73,7 +79,7 @@ const Navbar = (props) => {
           <div className={classes.sectionMobile}>
             {isLoggedIn && <AccountPopover />}
             <IconButton aria-label='cart' onClick={handleCart}>
-              <Badge badgeContent='1'>
+              <Badge badgeContent={`${cartItems.length}`}>
                 <ShoppingCart style={{ color: '#fff' }} fontSize='small' />
               </Badge>
             </IconButton>
@@ -167,7 +173,7 @@ const Navbar = (props) => {
                 </Button>
               )}
               <IconButton aria-label='cart' onClick={handleCart}>
-                <Badge badgeContent='1'>
+                <Badge badgeContent={`${cartItems.length}`}>
                   <ShoppingCart style={{ color: '#fff' }} fontSize='small' />
                 </Badge>
               </IconButton>
@@ -205,32 +211,52 @@ const Navbar = (props) => {
         <Box mt={4} />
 
         <List className={classes.drawerList}>
-          <Link to='/' className={classes_g.linkHover}>
+          <Link to='/' className={classes_g.linkHover} onClick={toggleSideBar}>
             <ListItem button>
               <Typography variant='subtitle1'>Home</Typography>
             </ListItem>
           </Link>
-          <Link to='/#ourProducts' className={classes_g.linkHover}>
+          <Link
+            to='/#ourProducts'
+            className={classes_g.linkHover}
+            onClick={toggleSideBar}
+          >
             <ListItem button>
               <Typography variant='subtitle1'>Products</Typography>
             </ListItem>
           </Link>
-          <Link to='/#ourPartners' className={classes_g.linkHover}>
+          <Link
+            to='/#ourPartners'
+            className={classes_g.linkHover}
+            onClick={toggleSideBar}
+          >
             <ListItem button>
               <Typography variant='subtitle1'>Our Partners</Typography>
             </ListItem>
           </Link>
-          <Link to='/#flashSales' className={classes_g.linkHover}>
+          <Link
+            to='/#flashSales'
+            className={classes_g.linkHover}
+            onClick={toggleSideBar}
+          >
             <ListItem button>
               <Typography variant='subtitle1'>Flash Sales</Typography>
             </ListItem>
           </Link>
-          <Link to='/#blog' className={classes_g.linkHover}>
+          <Link
+            to='/#blog'
+            className={classes_g.linkHover}
+            onClick={toggleSideBar}
+          >
             <ListItem button>
               <Typography variant='subtitle1'>Blog</Typography>
             </ListItem>
           </Link>
-          <Link to='/contactus' className={classes_g.linkHover}>
+          <Link
+            to='/contactus'
+            className={classes_g.linkHover}
+            onClick={toggleSideBar}
+          >
             <ListItem button>
               <Typography variant='subtitle1'>Contact Us</Typography>
             </ListItem>
@@ -249,20 +275,27 @@ const Navbar = (props) => {
             flexDirection='column'
             gridRowGap={15}
           >
-            <Button variant='contained' color='secondary' fullWidth>
-              BOOK NOW
-            </Button>
             <Button
               variant='contained'
-              color='default'
-              className={clsx(classes.customNavBtn, classes.navBtn)}
-              size='small'
-              endIcon={<Face />}
-              onClick={() => navigate('/login')}
+              color='secondary'
               fullWidth
+              onClick={toggleSideBar}
             >
-              SIGN IN
+              BOOK NOW
             </Button>
+            {!isLoggedIn && (
+              <Button
+                variant='contained'
+                color='default'
+                className={clsx(classes.customNavBtn, classes.navBtn)}
+                size='small'
+                endIcon={<Face />}
+                onClick={handleSignIn}
+                fullWidth
+              >
+                SIGN IN
+              </Button>
+            )}
           </Box>
         </List>
       </Drawer>

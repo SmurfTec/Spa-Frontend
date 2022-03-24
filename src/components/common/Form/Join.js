@@ -87,7 +87,10 @@ const Join = () => {
           password,
           passwordConfirm,
         })
-      );
+      ).then((value) => {
+        if (value.error) return;
+        navigate('/');
+      });
     },
   });
 
