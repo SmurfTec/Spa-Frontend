@@ -34,7 +34,6 @@ const ProdServContent = memo(
     const parsedQuery = useMemo(() => {
       return queryString.parse(location.search);
     }, [location.search]);
-    console.log(`parsedQuery`, parsedQuery);
 
     useEffect(() => {
       if (

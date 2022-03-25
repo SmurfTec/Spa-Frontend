@@ -20,11 +20,11 @@ const useStyles = makeStyles((theme) => ({
   },
   Appbar: {
     backgroundColor: theme.custom.darkFore,
-
     '& .MuiToolbar-regular': {
       alignItems: 'center',
       justifyContent: 'space-between',
       columnGap: '2.5em',
+      margin: '0rem 2rem 0rem',
     },
     '& a': {
       color: theme.custom.white,
@@ -33,9 +33,17 @@ const useStyles = makeStyles((theme) => ({
       // color: theme.palette.primary.main,
       // },
     },
-    columnGap: 20,
+    columnGap: 10,
+    [theme.breakpoints.up('lg')]: {
+      '& .MuiToolbar-regular': {
+        margin: '0rem 8rem 0rem',
+      },
+    },
   },
   link: {
+    display: 'flex',
+    alignItems: 'center',
+    columnGap: 15,
     '& a::after': {
       content: '""',
       display: 'block',
@@ -46,6 +54,9 @@ const useStyles = makeStyles((theme) => ({
     },
     '& a:hover::after, & a.active::after': {
       width: '100%',
+    },
+    [theme.breakpoints.up('lg')]: {
+      columnGap: 30,
     },
   },
 
@@ -86,6 +97,7 @@ const useStyles = makeStyles((theme) => ({
   navBtn: {
     minWidth: 80,
     height: 'fit-content',
+    width: 'max-content',
   },
 
   sectionDesktop: {

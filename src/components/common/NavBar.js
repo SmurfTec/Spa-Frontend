@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useLocation, NavLink } from 'react-router-dom';
+import {
+  Link,
+  useNavigate,
+  useLocation,
+  NavLink,
+} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 import {
@@ -13,7 +18,6 @@ import {
   Badge,
 } from '@material-ui/core';
 import { Box, Button, Typography } from '@material-ui/core';
-
 import AccountPopover from 'components/common/AccountPopover';
 import Logo from './Logo';
 
@@ -53,7 +57,11 @@ const Navbar = (props) => {
       <AppBar position='fixed' className={classes.Appbar}>
         <Toolbar>
           <div>
-            <Box display='flex' alignItems='center' sx={{ columnGap: 5 }}>
+            <Box
+              display='flex'
+              alignItems='center'
+              sx={{ columnGap: 5 }}
+            >
               <div className={classes.sectionMobile}>
                 <IconButton
                   aria-label='show more'
@@ -74,18 +82,16 @@ const Navbar = (props) => {
             {isLoggedIn && <AccountPopover />}
             <IconButton aria-label='cart' onClick={handleCart}>
               <Badge badgeContent='1'>
-                <ShoppingCart style={{ color: '#fff' }} fontSize='small' />
+                <ShoppingCart
+                  style={{ color: '#fff' }}
+                  fontSize='small'
+                />
               </Badge>
             </IconButton>
           </div>
 
           <div className={classes.sectionDesktop}>
-            <Box
-              display='flex'
-              alignItems='center'
-              sx={{ columnGap: 25 }}
-              className={classes.link}
-            >
+            <Box className={classes.link}>
               <Typography variant='subtitle2' noWrap>
                 <Link
                   to='/'
@@ -101,7 +107,9 @@ const Navbar = (props) => {
               <Typography variant='subtitle2' noWrap>
                 <Link
                   to='/#ourPartners'
-                  className={locHash === '#ourPartners' ? 'active' : undefined}
+                  className={
+                    locHash === '#ourPartners' ? 'active' : undefined
+                  }
                 >
                   Our Partners
                 </Link>
@@ -109,7 +117,9 @@ const Navbar = (props) => {
               <Typography variant='subtitle2' noWrap>
                 <Link
                   to='/#flashSales'
-                  className={locHash === '#flashSales' ? 'active' : undefined}
+                  className={
+                    locHash === '#flashSales' ? 'active' : undefined
+                  }
                 >
                   Flash Sales
                 </Link>
@@ -117,7 +127,9 @@ const Navbar = (props) => {
               <Typography variant='subtitle2' noWrap>
                 <Link
                   to='/#ourProducts'
-                  className={locHash === '#ourProducts' ? 'active' : undefined}
+                  className={
+                    locHash === '#ourProducts' ? 'active' : undefined
+                  }
                 >
                   Products
                 </Link>
@@ -125,7 +137,9 @@ const Navbar = (props) => {
               <Typography variant='subtitle2' noWrap>
                 <Link
                   to='/#blog'
-                  className={locHash === '#blog' ? 'active' : undefined}
+                  className={
+                    locHash === '#blog' ? 'active' : undefined
+                  }
                 >
                   Blog
                 </Link>
@@ -144,10 +158,7 @@ const Navbar = (props) => {
                 variant='contained'
                 color='secondary'
                 size='small'
-                style={{
-                  minWidth: 80,
-                  height: 'fit-content',
-                }}
+                className={classes.navBtn}
                 onClick={() => navigate('/login')}
               >
                 BOOK NOW
@@ -158,7 +169,10 @@ const Navbar = (props) => {
                 <Button
                   variant='contained'
                   color='default'
-                  className={clsx(classes.customNavBtn, classes.navBtn)}
+                  className={clsx(
+                    classes.customNavBtn,
+                    classes.navBtn
+                  )}
                   size='small'
                   endIcon={<Face />}
                   onClick={() => navigate('/login')}
@@ -168,7 +182,10 @@ const Navbar = (props) => {
               )}
               <IconButton aria-label='cart' onClick={handleCart}>
                 <Badge badgeContent='1'>
-                  <ShoppingCart style={{ color: '#fff' }} fontSize='small' />
+                  <ShoppingCart
+                    style={{ color: '#fff' }}
+                    fontSize='small'
+                  />
                 </Badge>
               </IconButton>
             </Box>
@@ -217,7 +234,9 @@ const Navbar = (props) => {
           </Link>
           <Link to='/#ourPartners' className={classes_g.linkHover}>
             <ListItem button>
-              <Typography variant='subtitle1'>Our Partners</Typography>
+              <Typography variant='subtitle1'>
+                Our Partners
+              </Typography>
             </ListItem>
           </Link>
           <Link to='/#flashSales' className={classes_g.linkHover}>
