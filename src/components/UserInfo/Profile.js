@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useFormik } from 'formik';
+import { Formik, useFormik } from 'formik';
 import * as yup from 'yup';
 import {
   Box,
@@ -11,6 +11,7 @@ import {
   CircularProgress,
   InputAdornment,
   IconButton,
+  TextField,
 } from '@material-ui/core';
 
 import { updateMe, updatePassword } from 'store/slices/Auth/extraReducers';
@@ -19,85 +20,101 @@ import CustomTextField from './CustomTextField';
 import styles from 'styles/commonStyles';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 
+import { removeEmptyNullProps, clearEmptiesObj } from 'utils/constants';
+
 const Profile = () => {
   const classes_g = styles();
-  const { user, loading } = useSelector((st) => st.auth);
   const dispatch = useDispatch();
+  const { user, loading, authenticating } = useSelector((st) => st.auth);
   const [passUpdating, setPassUpdating] = useState(false);
   const [profileUpdating, setProfileUpdating] = useState(false);
   const [showPassword, setshowPassword] = useState(false);
 
-  const initialValues = {
-    fullName: '',
-    email: '',
-    currentPassword: '',
-    newPassword: '',
-    confirmNewPassword: '',
-    info: '',
-    phoneNumber: 112231111,
-    shippingAddress: {
-      street: '',
-      city: '',
-      country: '',
-      postalCode: '',
+  const profileInfoFormik = useFormik({
+    initialValues: {
+      fullName: '',
+      email: '',
+      info: '',
+      phoneNumber: 112231111,
+      shippingAddress: {
+        street: '',
+        city: '',
+        country: '',
+        postalCode: '',
+      },
     },
-  };
-
-  const validationSchema = yup.object({
-    fullName: yup
-      .string()
-      .required('Full name is required')
-      .min(4, 'Fullname must be atleast 3 characters long'),
-    newPassword: yup
-      .string()
-      .min(8, 'Password should be atleast 8 characters long'),
-    confirmNewPassword: yup
-      .string()
-      .oneOf(
-        [yup.ref('newPassword'), null],
-        'Confirm New Password must match with New Password'
-      ),
+    validationSchema: yup.object({
+      fullName: yup
+        .string()
+        .min(3, 'Fullname must be atleast 3 characters long')
+        .required('Enter your fullname'),
+    }),
+    validateOnChange: true,
+    validateOnBlur: false,
+    onSubmit: (values) => {
+      setProfileUpdating(true);
+      console.log('values', values);
+      const remEmpValues = removeEmptyNullProps(values);
+      dispatch(updateMe(clearEmptiesObj(remEmpValues))).then(() =>
+        setProfileUpdating(false)
+      );
+    },
   });
 
-  const formik = useFormik({
-    initialValues,
-    validationSchema,
+  const passFormik = useFormik({
+    initialValues: {
+      passwordCurrent: '',
+      password: '',
+      passwordConfirm: '',
+    },
+    validationSchema: yup.object({
+      passwordCurrent: yup
+        .string()
+        .min(8, 'Password should be atleast 8 characters long')
+        .required('Enter current password'),
+      password: yup
+        .string()
+        .min(8, 'Password should be atleast 8 characters long')
+        .when('passwordCurrent', {
+          is: (passwordCurrent) => passwordCurrent && passwordCurrent !== '',
+          then: yup.string().required('Enter new Password'),
+        }),
+      passwordConfirm: yup
+        .string()
+        .oneOf(
+          [yup.ref('password'), null],
+          'Confirm New Password must match with New Password'
+        ),
+    }),
     validateOnChange: true,
-    validateOnBlur: true,
-    validate: true,
+    validateOnBlur: false,
+    onSubmit: (values) => {
+      setPassUpdating(true);
+      dispatch(updatePassword(values)).then(() => {
+        setPassUpdating(false);
+        return passFormik.resetForm();
+      });
+    },
   });
 
   useEffect(() => {
     if (user) {
-      const { fullName, email, phoneNumber, info, shippingAddress } = user;
-      formik.setValues({ fullName, email, phoneNumber, info, shippingAddress });
+      const { fullName, email } = user;
+      console.log('user', user);
+      profileInfoFormik.setValues({
+        fullName,
+        email,
+        phoneNumber: user.phoneNumber || '',
+        info: user.info || '',
+        shippingAddress: {
+          street: user?.shippingAddress?.street || '',
+          city: user?.shippingAddress?.city || '',
+          country: user?.shippingAddress?.country || '',
+          postalCode: user?.shippingAddress?.postalCode || '',
+        },
+      });
     }
   }, [user]);
-
-  const updateProfile = (e) => {
-    setProfileUpdating(true);
-    e.preventDefault();
-    console.log('In Profile');
-    const { fullName, phoneNumber, info, shippingAddress } = formik.values;
-    dispatch(updateMe({ fullName, phoneNumber, info, shippingAddress })).then(
-      () => setProfileUpdating(false)
-    );
-  };
-
-  const handleNewPassword = (e) => {
-    console.log('In Pasword');
-
-    e.preventDefault();
-    setPassUpdating(true);
-    const { newPassword, confirmNewPassword, currentPassword } = formik.values;
-    dispatch(
-      updatePassword({
-        password: newPassword,
-        passwordConfirm: confirmNewPassword,
-        passwordCurrent: currentPassword,
-      })
-    ).then(() => setPassUpdating(false));
-  };
 
   const handleClickShowPassword = () => {
     setshowPassword((st) => !st);
@@ -120,7 +137,7 @@ const Profile = () => {
           <CustomTextField
             name='fullName'
             placeholder='Full Name'
-            {...formik}
+            {...profileInfoFormik}
           />
         </Grid>
 
@@ -129,7 +146,7 @@ const Profile = () => {
             name='phoneNumber'
             placeholder='Phone Number'
             type='number'
-            {...formik}
+            {...profileInfoFormik}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -137,7 +154,7 @@ const Profile = () => {
             name='info'
             placeholder='About'
             extras={{ multiline: true, minRows: 3 }}
-            {...formik}
+            {...profileInfoFormik}
           />
         </Grid>
         <Grid item xs={12} sm={7} md={7} lg={6}>
@@ -146,7 +163,7 @@ const Profile = () => {
             placeholder='Email'
             type='email'
             extras={{ disabled: true }}
-            {...formik}
+            {...profileInfoFormik}
           />
         </Grid>
       </Grid>
@@ -158,20 +175,35 @@ const Profile = () => {
 
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
-          <CustomTextField name='street' placeholder='Street' {...formik} />
+          <CustomTextField
+            name='shippingAddress.street'
+            value={profileInfoFormik?.values['shippingAddress']?.street}
+            placeholder='Street'
+            {...profileInfoFormik}
+          />
         </Grid>
         <Grid item xs={12} sm={3}>
-          <CustomTextField name='city' placeholder='City' {...formik} />
+          <CustomTextField
+            name='shippingAddress.city'
+            placeholder='City'
+            value={profileInfoFormik?.values['shippingAddress']?.city}
+            {...profileInfoFormik}
+          />
         </Grid>
         <Grid item xs={12} sm={3}>
-          <CustomTextField name='country' placeholder='Country' {...formik} />
+          <CustomTextField
+            name='shippingAddress.country'
+            value={profileInfoFormik?.values['shippingAddress']?.country}
+            placeholder='Country'
+            {...profileInfoFormik}
+          />
         </Grid>
         <Grid item xs={12} sm={4}>
           <CustomTextField
-            name='postalCode'
+            name='shippingAddress.postalCode'
+            value={profileInfoFormik?.values['shippingAddress']?.postalCode}
             placeholder='Postal Code'
-            type='number'
-            {...formik}
+            {...profileInfoFormik}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
@@ -183,7 +215,7 @@ const Profile = () => {
               color='primary'
               style={{ minWidth: '10em' }}
               disabled={profileUpdating}
-              onClick={updateProfile}
+              onClick={profileInfoFormik.handleSubmit}
             >
               {profileUpdating ? (
                 <CircularProgress size={20} color='inherit' />
@@ -204,11 +236,11 @@ const Profile = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={4}>
           <CustomTextField
-            name='currentPassword'
+            name='passwordCurrent'
             placeholder='Current Password'
             type='password'
             extras={{
-              endAdornment: (
+              endadornment: (
                 <InputAdornment position='end'>
                   <IconButton
                     aria-label='toggle password visibility'
@@ -221,23 +253,23 @@ const Profile = () => {
                 </InputAdornment>
               ),
             }}
-            {...formik}
+            {...passFormik}
           />
         </Grid>
         <Grid item xs={12} sm={4}>
           <CustomTextField
-            name='newPassword'
+            name='password'
             placeholder='New Password'
             type='password'
-            {...formik}
+            {...passFormik}
           />
         </Grid>
         <Grid item xs={12} sm={4}>
           <CustomTextField
-            name='confirmNewPassword'
+            name='passwordConfirm'
             placeholder='Confirm New Password'
             type='password'
-            {...formik}
+            {...passFormik}
           />
         </Grid>
       </Grid>
@@ -249,7 +281,7 @@ const Profile = () => {
             color='secondary'
             style={{ minWidth: '10em', fontWeight: 600 }}
             disabled={passUpdating}
-            onClick={handleNewPassword}
+            onClick={passFormik.handleSubmit}
           >
             {passUpdating ? (
               <CircularProgress size={20} color='inherit' />

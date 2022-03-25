@@ -3,12 +3,13 @@ import React from 'react';
 
 const CustomTextField = ({
   name,
+  value,
   type = 'text',
   values,
   handleChange,
-  //   touched,
+  touched,
   handleBlur,
-  //   errors,
+  errors,
   placeholder,
   size,
   extras,
@@ -17,12 +18,12 @@ const CustomTextField = ({
     <TextField
       name={name}
       type={type || 'text'}
-      value={values[name]}
+      value={value || values[name]}
       onChange={handleChange}
       label={placeholder}
       placeholder={placeholder.toLowerCase()}
-      //   error={touched[name] && Boolean(errors[name])}
-      //   helperText={touched[name] && errors[name]}
+      error={touched[name] && Boolean(errors[name])}
+      helperText={touched[name] && errors[name]}
       onBlur={handleBlur}
       variant='outlined'
       color='secondary'

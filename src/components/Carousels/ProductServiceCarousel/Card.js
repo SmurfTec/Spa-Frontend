@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Card,
   CardContent,
@@ -21,10 +22,12 @@ import styles from './CardProp';
 import useStyles from 'styles/commonStyles';
 
 import prodImg from 'assets/prod3.jpg';
+import { addToCart } from 'store/slices/cart';
 
 const ProductCard = (props) => {
   const classes = styles();
   const classes_g = useStyles();
+
   const {
     isService,
     isPromo,
@@ -45,11 +48,25 @@ const ProductCard = (props) => {
 
   const navigate = useNavigate();
   const { type } = useParams();
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     if (isService) navigate(`/services/${id}`);
     else navigate(`/products/${id}`);
     // navigate(`/products&services/${type}/${dummyId}`);
+  };
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    const cartItem = {
+      id,
+      price: price - discount,
+      name,
+      quantity: 1,
+    };
+
+    console.log('cartItem', cartItem);
+    // dispatch(addToCart(cartItem));
   };
 
   return (
@@ -138,6 +155,7 @@ const ProductCard = (props) => {
               color='secondary'
               endIcon={<ShoppingCartIcon />}
               size='small'
+              onClick={handleAddToCart}
             >
               ADD TO CART
             </Button>
