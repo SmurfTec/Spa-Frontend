@@ -7,7 +7,7 @@ import SimpleCarousel from './SimpleCarousel';
 
 const styles = makeStyles((theme) => ({
   root: {
-    height: 400,
+    height: 500,
     // marginBottom: 40,
     backgroundImage: `url(${spa1})`,
     backgroundPosition: 'center',
@@ -51,7 +51,9 @@ const Banner = () => {
             bannerContent.map((el, index) => (
               <div key={el._id} className={classes.carouselItem}>
                 <Typography variant='h4'>{el.title}</Typography>
-                <Typography variant='subtitle1'>{el.description}</Typography>
+                <Typography variant='subtitle1'>
+                  {el.description}
+                </Typography>
               </div>
             ))}
         </SimpleCarousel>

@@ -90,7 +90,6 @@ const Router = () => {
           />
 
           <Route
-            // path='products&services'
             path='vendors/:vendorId/:type'
             element={
               <Suspense fallback={<Loading />}>

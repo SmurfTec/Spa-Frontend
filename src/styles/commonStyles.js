@@ -132,7 +132,7 @@ const styles = makeStyles((theme) => ({
   //  ^  Service Promo Carousel Styles
   Carousel: {
     '& img': {
-      height: 180,
+      height: 200,
       objectFit: 'cover',
     },
 

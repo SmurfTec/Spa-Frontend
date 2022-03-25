@@ -78,7 +78,6 @@ const ProductDetails = (props) => {
 
   const handleImageClick = (e) => {
     const { image } = e.currentTarget.dataset;
-
     // toggleOpen();
   };
 

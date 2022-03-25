@@ -78,13 +78,13 @@ const ProductCard = (props) => {
                   style={{ textDecoration: 'line-through' }}
                   className={classes_g.fontWeight600}
                 >
-                  ${price}
+                  ${Math.floor(price)}
                 </Typography>
                 <Typography
                   variant='subtitle2'
                   className={classes_g.fontWeight600}
                 >
-                  - ${price - props.discount}
+                  - ${Math.floor(price - props.discount)}
                 </Typography>
               </div>
             ) : (
@@ -131,13 +131,17 @@ const ProductCard = (props) => {
           )}
         </Box>
 
-        <Box component='span' sx={{ textAlign: 'center', marginBlock: 5 }}>
+        <Box
+          component='span'
+          sx={{ textAlign: 'center', marginBlock: 5 }}
+        >
           {!isService ? (
             <Button
               variant='contained'
               color='secondary'
               endIcon={<ShoppingCartIcon />}
               size='small'
+              style={{ padding: '3px 6px' }}
             >
               ADD TO CART
             </Button>
@@ -146,14 +150,18 @@ const ProductCard = (props) => {
               color='primary'
               endIcon={<SendIcon />}
               size='small'
-              style={{ width: 130 }}
+              style={{ width: 130, padding: '3px 6px' }}
             >
               BOOK
             </Button>
           )}
         </Box>
         <IconButton className={classes.favourite}>
-          {isFavourite ? <Favorite /> : <UnFavorite />}
+          {isFavourite ? (
+            <Favorite style={{ color: '#67000e' }} />
+          ) : (
+            <UnFavorite style={{ color: '#111' }} />
+          )}
         </IconButton>
       </CardContent>
     </Card>
