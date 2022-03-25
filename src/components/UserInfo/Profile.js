@@ -65,6 +65,7 @@ const Profile = () => {
     const { fullName, phoneNumber, info, shippingAddress } = inputState;
     dispatch(updateMe({ fullName, phoneNumber, info, shippingAddress }));
   };
+  
   const handleNewPassword = () => {};
 
   return (
