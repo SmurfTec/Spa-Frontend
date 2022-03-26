@@ -16,7 +16,7 @@ import {
 } from '@material-ui/core';
 
 import globalStyles from 'styles/commonStyles';
-import styles from './userInfoProps';
+import styles from './styles';
 
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import FavoriteIcon from '@material-ui/icons/Favorite';

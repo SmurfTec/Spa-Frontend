@@ -82,9 +82,9 @@ const styles = makeStyles((theme) => ({
   },
 
   componentSectionGap: {
-    width: '80%',
+    width: '90%',
     marginInline: 'auto',
-    maxWidth: 1200,
+    maxWidth: 1400,
 
     [theme.breakpoints.down('sm')]: {
       width: '85%',

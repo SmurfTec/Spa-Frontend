@@ -5,7 +5,7 @@ const styles = makeStyles((theme) => ({
     width: '100%',
     display: 'flex',
     gap: '2em',
-    justifyContent: 'center',
+    justifyContent: 'left',
 
     '& > div:first-child': {
       minWidth: 200,

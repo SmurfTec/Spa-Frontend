@@ -3,6 +3,7 @@ import authSlice from './slices/Auth';
 import vendorSlice from './slices/vendors';
 import productSlice from './slices/products';
 import getAllSlice from './slices/getAll';
+import getMyOrders from './slices/orders';
 
 const store = configureStore({
   reducer: combineReducers({
@@ -10,6 +11,7 @@ const store = configureStore({
     vendors: vendorSlice.reducer,
     products: productSlice.reducer,
     getAll: getAllSlice.reducer,
+    orders: getMyOrders.reducer,
   }),
 });
 

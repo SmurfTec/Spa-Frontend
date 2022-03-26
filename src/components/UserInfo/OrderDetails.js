@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
 import {
   Avatar,
   Box,
@@ -13,35 +12,29 @@ import {
   DialogTitle,
   DialogContentText,
 } from '@material-ui/core';
-
 import { Rating } from '@material-ui/lab';
-
 import Chip from 'components/common/CustChipLabel';
-
 import { getMuiDateFormat } from 'utils/constants';
 import { orders, orderDetails } from 'data';
-
 import globalStyles from 'styles/commonStyles';
-import styles from './userInfoProps';
-
+import styles from './styles';
 import prodImg from 'assets/prod1.jpg';
+import { getOrder } from 'store/slices/orders';
+import { useDispatch, useSelector } from 'react-redux';
 
 const OrderDetails = () => {
   const classes_g = globalStyles();
   const classes = styles();
+  const dispatch = useDispatch();
 
   const { orderid } = useParams();
-  const [state, setState] = useState(null);
-
-  useEffect(() => {
-    if (orderid) {
-      const orderDetail = orderDetails.filter((o) => o._id === orderid && o);
-      setState(...orderDetail);
-    }
-  }, [orderid]);
-
   const [open, setOpen] = React.useState(false);
   const [rating, setRating] = React.useState(0);
+
+  const { order } = useSelector((state) => ({
+    order: orderid ? getOrder(state, orderid) : undefined,
+  }));
+  console.log('ORDER', order);
 
   const handleToggleDialog = () => {
     setOpen((st) => !st);
@@ -57,7 +50,7 @@ const OrderDetails = () => {
           Order Details
         </Typography>
       </Box>
-      {state && (
+      {order && (
         <>
           <Box
             display='flex'
@@ -71,9 +64,13 @@ const OrderDetails = () => {
                 color='textSecondary'
                 component='span'
               >
-                Order ID :{' '}
+                Order ID :
               </Typography>
-              <Typography variant='body2' color='textPrimary' component='span'>
+              <Typography
+                variant='body2'
+                color='textPrimary'
+                component='span'
+              >
                 {orderid.split('-')[0]}
               </Typography>
             </Box>
@@ -85,12 +82,16 @@ const OrderDetails = () => {
               >
                 Placed On :{' '}
               </Typography>
-              <Typography variant='body2' color='textPrimary' component='span'>
-                {getMuiDateFormat(state.createdAt)}
+              <Typography
+                variant='body2'
+                color='textPrimary'
+                component='span'
+              >
+                {getMuiDateFormat(order.createdAt)}
               </Typography>
             </Box>
 
-            <Chip color='warning'>{state.status}</Chip>
+            <Chip color='warning'>{order.status}</Chip>
           </Box>
           <Box
             mt={2}
@@ -99,105 +100,111 @@ const OrderDetails = () => {
             borderRadius={8}
             px={1}
           >
-            {state.isProduct
-              ? state.products &&
-                state.products.length > 0 &&
-                state.products.map((el) => (
+            {!order.serviceDate && order.products.length > 0 ? (
+              order.products.map((el) => (
+                <Box
+                  display='flex'
+                  padding='8px 0'
+                  flexWrap='wrap'
+                  alignItems='center'
+                  // gridGap={10}
+                >
                   <Box
-                    display='flex'
-                    padding='8px 0'
-                    flexWrap='wrap'
-                    alignItems='center'
-                    // gridGap={10}
+                    className={classes.orderItems}
+                    gridGap={10}
+                    flex='2 2 190px'
                   >
-                    <Box
-                      className={classes.orderItems}
-                      gridGap={10}
-                      flex='2 2 190px'
+                    <Avatar
+                      variant='square'
+                      className={classes.orderItemImage}
                     >
-                      <Avatar
-                        variant='square'
-                        className={classes.orderItemImage}
-                      >
-                        <img
-                          src={prodImg}
-                          width='100%'
-                          height='100%'
-                          alt={el.title}
-                        />
-                      </Avatar>
-                      <Typography
-                        variant='subtitle2'
-                        style={{ fontWeight: 500 }}
-                      >
-                        {el.title}
-                      </Typography>
-                    </Box>
-                    <Box className={classes.orderItems} flex='1 1 200px'>
-                      <Typography variant='body2'>{el.description}</Typography>
-                    </Box>
-                    <Box className={classes.orderItems} flex='1 1 100px'>
-                      <Button
-                        variant='outlined'
-                        color='secondary'
-                        size='small'
-                        style={{ fontWeight: 400 }}
-                        onClick={handleToggleDialog}
-                      >
-                        Add Review
-                      </Button>
-                    </Box>
+                      <img
+                        src={prodImg}
+                        width='100%'
+                        height='100%'
+                        alt={el.product.name}
+                      />
+                    </Avatar>
+                    <Typography
+                      variant='subtitle2'
+                      style={{ fontWeight: 500 }}
+                    >
+                      {el.product.name}
+                    </Typography>
                   </Box>
-                ))
-              : state.services &&
-                state.services.length > 0 &&
-                state.services.map((el) => (
                   <Box
-                    display='flex'
-                    padding='8px 0'
-                    flexWrap='wrap'
-                    alignItems='center'
-                    // gridGap={10}
+                    className={classes.orderItems}
+                    flex='1 1 200px'
                   >
-                    <Box
-                      className={classes.orderItems}
-                      gridGap={10}
-                      flex='2 2 190px'
-                    >
-                      <Avatar
-                        variant='square'
-                        className={classes.orderItemImage}
-                      >
-                        <img
-                          src={prodImg}
-                          width='100%'
-                          height='100%'
-                          alt={el.title}
-                        />
-                      </Avatar>
-                      <Typography
-                        variant='subtitle2'
-                        style={{ fontWeight: 500 }}
-                      >
-                        {el.title}
-                      </Typography>
-                    </Box>
-                    <Box className={classes.orderItems} flex='1 1 200px'>
-                      <Typography variant='body2'>{el.description}</Typography>
-                    </Box>
-                    <Box className={classes.orderItems} flex='1 1 100px'>
-                      <Button
-                        variant='outlined'
-                        color='secondary'
-                        style={{ fontWeight: 400 }}
-                        size='small'
-                        onClick={handleToggleDialog}
-                      >
-                        Add Review
-                      </Button>
-                    </Box>
+                    <Typography variant='body2'>
+                      {el.product.description}
+                    </Typography>
                   </Box>
-                ))}
+                  <Box
+                    className={classes.orderItems}
+                    flex='1 1 100px'
+                  >
+                    <Button
+                      variant='outlined'
+                      color='secondary'
+                      size='small'
+                      style={{ fontWeight: 400 }}
+                      onClick={handleToggleDialog}
+                    >
+                      Add Review
+                    </Button>
+                  </Box>
+                </Box>
+              ))
+            ) : (
+              <Box
+                display='flex'
+                padding='8px 0'
+                flexWrap='wrap'
+                alignItems='center'
+                // gridGap={10}
+              >
+                <Box
+                  className={classes.orderItems}
+                  gridGap={10}
+                  flex='2 2 190px'
+                >
+                  <Avatar
+                    variant='square'
+                    className={classes.orderItemImage}
+                  >
+                    <img
+                      src={prodImg}
+                      width='100%'
+                      height='100%'
+                      alt={order.service.service.name}
+                    />
+                  </Avatar>
+                  <Typography
+                    variant='subtitle2'
+                    style={{ fontWeight: 500 }}
+                  >
+                    {order.service.service.name}
+                  </Typography>
+                </Box>
+                <Box className={classes.orderItems} flex='1 1 200px'>
+                  <Typography variant='body2'>
+                    {order.service.service.description}
+                  </Typography>
+                </Box>
+                <Box className={classes.orderItems} flex='1 1 100px'>
+                  <Button
+                    variant='outlined'
+                    color='secondary'
+                    style={{ fontWeight: 400 }}
+                    size='small'
+                    onClick={handleToggleDialog}
+                  >
+                    Add Review
+                  </Button>
+                </Box>
+              </Box>
+            )}
           </Box>
         </>
       )}

@@ -8,7 +8,7 @@ import Card from 'components/Carousels/ProductServiceCarousel/Card';
 import { productsB, services } from 'data';
 
 import globalStyles from 'styles/commonStyles';
-import styles from './userInfoProps';
+import styles from './styles';
 
 function TabPanel(props) {
   const { children, value, index, classes, ...other } = props;
