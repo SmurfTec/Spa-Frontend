@@ -5,7 +5,10 @@ export const getMe = createAsyncThunk(
   'auth/getMe',
   async (_, { rejectWithValue }) => {
     return makeReq(`/users/me`)
-      .then((resData) => ({ token: resData.token, user: resData.user }))
+      .then((resData) => ({
+        token: resData.token,
+        user: resData.user,
+      }))
       .catch((err) => rejectWithValue(err));
   }
 );
@@ -23,7 +26,10 @@ export const login = createAsyncThunk(
       },
       'POST'
     )
-      .then((resData) => ({ token: resData.token, user: resData.user }))
+      .then((resData) => ({
+        token: resData.token,
+        user: resData.user,
+      }))
       .catch((err) => rejectWithValue(err));
   }
 );
@@ -41,7 +47,10 @@ export const signUp = createAsyncThunk(
       },
       'POST'
     )
-      .then((resData) => ({ token: resData.token, user: resData.user }))
+      .then((resData) => ({
+        token: resData.token,
+        user: resData.user,
+      }))
       .catch((err) => rejectWithValue(err));
   }
 );
