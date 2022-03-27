@@ -71,6 +71,22 @@ export const resetPassword = createAsyncThunk(
       .catch((err) => rejectWithValue(err.message))
 );
 
+export const forgotPassword = createAsyncThunk(
+  'forgotPassword',
+  async (values, { rejectWithValue }) =>
+    makeReq(
+      `/auth/forgotPassword/${values.token}`,
+      {
+        body: {
+          ...values.email,
+        },
+      },
+      'PATCH'
+    )
+      .then((resData) => resData)
+      .catch((err) => rejectWithValue(err.message))
+);
+
 export const confirmMail = createAsyncThunk(
   'confirmMail',
   async (token, { rejectWithValue }) =>
