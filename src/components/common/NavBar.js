@@ -78,7 +78,7 @@ const Navbar = (props) => {
           <div className={classes.sectionMobile}>
             {isLoggedIn && <AccountPopover />}
             <IconButton aria-label='cart' onClick={handleCart}>
-              <Badge badgeContent={`${cartItems.length}`}>
+              <Badge badgeContent={`${cartItems?.length || 0}`}>
                 <ShoppingCart style={{ color: '#fff' }} fontSize='small' />
               </Badge>
             </IconButton>
@@ -164,7 +164,7 @@ const Navbar = (props) => {
                 </Button>
               )}
               <IconButton aria-label='cart' onClick={handleCart}>
-                <Badge badgeContent={`${cartItems.length}`}>
+                <Badge badgeContent={`${cartItems?.length || 0}`}>
                   <ShoppingCart style={{ color: '#fff' }} fontSize='small' />
                 </Badge>
               </IconButton>
