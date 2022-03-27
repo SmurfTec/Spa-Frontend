@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
 import clsx from 'clsx';
@@ -21,45 +21,34 @@ import CarouselLayout from 'components/Carousels/Default/CarouselLayout';
 import { responsive2 } from 'components/Carousels/Default/settings';
 import Review from 'components/common/Review';
 import TabPanel, { a11yProps } from './TabPanel';
-
 import { useManyInputs, useToggleInput, useFetch } from 'hooks';
 import { productsB } from 'data';
 import { API_BASE_URL } from 'utils/makeReq';
 import { capitalizeFirstLetter } from 'utils/constants';
-
 import prod2 from 'assets/prod2.jpg';
-
 import globalStyles from 'styles/commonStyles';
 import styles from './Styles';
-
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import RemoveRounded from '@material-ui/icons/RemoveRounded';
 import Addrounded from '@material-ui/icons/AddRounded';
 import Lightbox from 'react-image-lightbox';
+import { addToCart } from 'store/slices/cart';
+import { useDispatch } from 'react-redux';
 
 const ProductDetails = (props) => {
   const classes_g = globalStyles();
   const classes = styles();
-  const initialState = {
-    prodServ: {},
-    quantity: 1,
-  };
+  const dispatch = useDispatch();
 
-  const [state, handleTxtChange, , changeInput, , setState] =
-    useManyInputs(initialState);
+  const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
 
-  // const [isOpen, toggleOpen] = useToggleInput(false); // done
   const [tabValue, setTabValue] = React.useState(1);
-
+  // const [isOpen, toggleOpen] = useToggleInput(false); // done
   // const { addItemToCart, userOrders } = useContext(StoreContext);
-
   const { id } = useParams();
 
-  let {
-    error,
-    loading,
-    value: product,
-  } = useFetch(
+  let { error, loading, value } = useFetch(
     `${API_BASE_URL}/products/${id}`,
     {
       headers: {
@@ -70,21 +59,25 @@ const ProductDetails = (props) => {
     'product'
   );
 
+  useEffect(() => {
+    if (!value) return;
+    setProduct(value);
+  }, [value]);
+
   const increaseNoOfItems = () => {
-    setState((st) => ({ ...st, quantity: st.quantity + 1 }));
+    setQuantity(quantity + 1);
   };
   const decreaseNoOfItems = () => {
-    setState((st) => ({ ...st, quantity: st.quantity - 1 }));
+    setQuantity(quantity - 1);
   };
 
   const handleImageClick = (e) => {
     const { image } = e.currentTarget.dataset;
-
     // toggleOpen();
   };
 
   const handleAddToCart = () => {
-    // addItemToCart(product, noOfItem);
+    dispatch(addToCart({ product, quantity }));
   };
 
   const handleTabChange = (event, newValue) => {
@@ -95,6 +88,7 @@ const ProductDetails = (props) => {
     console.log('error', error);
     return <Navigate to='/' />;
   }
+
   return (
     <div
       className={clsx(
@@ -234,22 +228,6 @@ const ProductDetails = (props) => {
                       onClick={handleImageClick}
                     />
                   </Card>
-                  {/* <Box
-                  display='flex'
-                  justify-content='center'
-                  sx={{
-                    webkitBoxPack: 'center',
-                  }}
-                >
-                  <span className={classes.prodImgWrapper}>
-                    <img
-                      src={prod4}
-                      alt={state?.prodServ?.title}
-                      height='100%'
-                      width='100%'
-                    />
-                  </span>
-                </Box> */}
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <Grid container spacing={2}>
@@ -322,7 +300,7 @@ const ProductDetails = (props) => {
                   <div className={classes.quantBtnWrapper}>
                     <IconButton
                       color='primary'
-                      disabled={state.quantity <= 1}
+                      disabled={quantity <= 1}
                       onClick={decreaseNoOfItems}
                     >
                       <RemoveRounded />
@@ -332,12 +310,12 @@ const ProductDetails = (props) => {
                       style={{ fontWeight: 600 }}
                       sx={{ userSelect: 'none' }}
                     >
-                      {state.quantity}
+                      {quantity}
                     </Typography>
                     <IconButton
                       color='primary'
                       onClick={increaseNoOfItems}
-                      disabled={state.quantity >= 10}
+                      disabled={quantity >= 10}
                     >
                       <Addrounded />
                     </IconButton>

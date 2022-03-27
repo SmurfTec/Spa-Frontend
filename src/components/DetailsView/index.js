@@ -86,6 +86,7 @@ const SingleProdServ = (props) => {
   const classes_g = globalStyles();
   const classes = styles();
   const status = 'In Stock';
+
   const initialState = {
     prodServ: {},
     quantity: 1,
@@ -160,7 +161,6 @@ const SingleProdServ = (props) => {
 
   const handleImageClick = (e) => {
     const { image } = e.currentTarget.dataset;
-
     // toggleOpen();
   };
 

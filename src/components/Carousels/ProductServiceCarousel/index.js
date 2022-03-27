@@ -1,16 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Box, Typography } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
-
 import CarouselLayout from '../Default/CarouselLayout';
 import Card from './Card';
-
 import styles from 'styles/commonStyles';
 import { responsive2 } from '../Default/settings';
+import queryString from 'query-string';
+import { useLocation } from 'react-router-dom';
 
 const ProdServCarousel = (props) => {
   const classes = styles();
   const { data, fetching } = props;
+  const location = useLocation();
+  const [dataa, setData] = useState([]);
+
+  const parsedQuery = useMemo(() => {
+    return queryString.parse(location.search);
+  }, [location.search]);
+
+  useEffect(() => {
+    if (!data) return;
+    if (parsedQuery.search) {
+      setData(
+        data.filter((d) =>
+          d.name
+            .toLowerCase()
+            .includes(parsedQuery.search.toLowerCase())
+        )
+      );
+    } else {
+      setData(data);
+    }
+  }, [data, parsedQuery]);
 
   return (
     <CarouselLayout respSettings={responsive2}>
@@ -34,8 +55,8 @@ const ProdServCarousel = (props) => {
               </Box>
             </div>
           ))
-      ) : data.length > 0 ? (
-        data.map((el, index) => (
+      ) : dataa.length > 0 ? (
+        dataa.map((el, index) => (
           <div key={el._id} className={classes.carouselItem}>
             <Card item={el} showVendor={props.showVendor} />
           </div>

@@ -82,9 +82,9 @@ const styles = makeStyles((theme) => ({
   },
 
   componentSectionGap: {
-    width: '80%',
+    width: '90%',
     marginInline: 'auto',
-    maxWidth: 1200,
+    maxWidth: 1400,
 
     [theme.breakpoints.down('sm')]: {
       width: '85%',
@@ -132,7 +132,7 @@ const styles = makeStyles((theme) => ({
   //  ^  Service Promo Carousel Styles
   Carousel: {
     '& img': {
-      height: 180,
+      height: 200,
       objectFit: 'cover',
     },
 

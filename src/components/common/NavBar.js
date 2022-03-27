@@ -13,7 +13,6 @@ import {
   Badge,
 } from '@material-ui/core';
 import { Box, Button, Typography } from '@material-ui/core';
-
 import AccountPopover from 'components/common/AccountPopover';
 import Logo from './Logo';
 
@@ -86,12 +85,7 @@ const Navbar = (props) => {
           </div>
 
           <div className={classes.sectionDesktop}>
-            <Box
-              display='flex'
-              alignItems='center'
-              sx={{ columnGap: 25 }}
-              className={classes.link}
-            >
+            <Box className={classes.link}>
               <Typography variant='subtitle2' noWrap>
                 <Link
                   to='/'
@@ -150,10 +144,7 @@ const Navbar = (props) => {
                 variant='contained'
                 color='secondary'
                 size='small'
-                style={{
-                  minWidth: 80,
-                  height: 'fit-content',
-                }}
+                className={classes.navBtn}
                 onClick={() => navigate('/login')}
               >
                 BOOK NOW

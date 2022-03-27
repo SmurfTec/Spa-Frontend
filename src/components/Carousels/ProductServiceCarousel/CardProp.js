@@ -4,8 +4,9 @@ const styles = makeStyles((theme) => ({
   productCard: {
     position: 'relative',
     borderRadius: 18,
-    maxWidth: 190,
+    maxWidth: 210,
     margin: '0 auto',
+    padding: '3px',
 
     [theme.breakpoints.down('sm')]: {
       margin: '0 auto',
@@ -47,7 +48,7 @@ const styles = makeStyles((theme) => ({
     },
   },
   title: {
-    height: 39,
+    height: 35,
     overflow: 'hidden',
     display: '-webkit-box',
     WebkitLineClamp: 2,

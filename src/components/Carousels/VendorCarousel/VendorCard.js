@@ -50,12 +50,19 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-const VendorCard = ({ fullName, bannerImages, rating, _id, history, info }) => {
+const VendorCard = ({
+  fullName,
+  bannerImages,
+  rating,
+  _id,
+  history,
+  info,
+}) => {
   const classes = styles();
   const navigate = useNavigate();
 
   const vendorDetails = () => {
-    navigate(`/vendors/${_id}`);
+    navigate(`/vendors/${_id}/all`);
   };
 
   return (
@@ -70,7 +77,11 @@ const VendorCard = ({ fullName, bannerImages, rating, _id, history, info }) => {
             <Avatar variant='square' className={classes.avatar}>
               <img src={bannerImages[0]} height='100%' alt='' />
             </Avatar>
-            <Box display='flex' alignItems='center' sx={{ columnGap: 5 }}>
+            <Box
+              display='flex'
+              alignItems='center'
+              sx={{ columnGap: 5 }}
+            >
               <StarIcon />
               <Typography variant='subtitle1' component='span'>
                 4.5

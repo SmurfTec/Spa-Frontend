@@ -46,26 +46,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomizedInputBase({ placeholder, submitForm }) {
+export default function CustomizedInputBase({
+  placeholder,
+  submitForm,
+}) {
   const classes = useStyles();
   const [search, handleChange] = useTextInput('');
   const [hover, handleHover] = useToggleInput(false);
 
-  // const navigate = useNavigate();
-  // const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  // const searchResults = (e) => {
-  //   e.preventDefault();
+  const searchResults = (e) => {
+    e.preventDefault();
 
-  //   // * if search is empty , navigate to '/' from '/search='blabla'
-  //   if (!search) navigate(location.pathname);
-  //   else navigate(`?search=${search}`);
-  //   // * navigate to '/' from '/search='blabla'
-  // };
+    // * if search is empty , navigate to '/' from '/search='blabla'
+    if (!search) navigate(location.pathname);
+    else navigate(`?search=${search}`);
+    // * navigate to '/' from '/search='blabla'
+  };
 
   return (
     <>
-      <form onSubmit={submitForm}>
+      <form onSubmit={searchResults}>
         <div
           className={clsx(classes.container, {
             [classes.hoverStyles]: hover,

@@ -18,6 +18,7 @@ const ResetPassword = lazy(() =>
   import('components/common/Form/ResetPassword')
 );
 const CommonLayout = lazy(() => import('components/layouts/CommonLayout'));
+
 const HomePage = lazy(() => import('components/Home'));
 const VendorProdServ = lazy(() =>
   import('components/ProductsServices/VendorProdServ')
@@ -94,8 +95,7 @@ const Router = () => {
           />
 
           <Route
-            // path='products&services'
-            path='vendors/:vendorId'
+            path='vendors/:vendorId/:type'
             element={
               <Suspense fallback={<Loading />}>
                 <VendorProdServ />

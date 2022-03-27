@@ -126,7 +126,7 @@ const ProductCard = ({ item }) => {
                   style={{ textDecoration: 'line-through' }}
                   className={classes_g.fontWeight600}
                 >
-                  ${price}
+                  ${Math.floor(price)}
                 </Typography>
                 <Typography
                   variant='subtitle2'
@@ -194,7 +194,7 @@ const ProductCard = ({ item }) => {
               color='primary'
               endIcon={<SendIcon />}
               size='small'
-              style={{ width: 130 }}
+              style={{ width: 130, padding: '3px 6px' }}
             >
               BOOK
             </Button>
