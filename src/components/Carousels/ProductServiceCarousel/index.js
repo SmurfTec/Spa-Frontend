@@ -33,6 +33,8 @@ const ProdServCarousel = (props) => {
     }
   }, [data, parsedQuery]);
 
+  console.log('Data', dataa);
+
   return (
     <CarouselLayout respSettings={responsive2}>
       {fetching ? (

@@ -1,5 +1,9 @@
 import React, { useMemo } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   Card,
@@ -177,12 +181,16 @@ const ProductCard = ({ item }) => {
           )}
           {showVendor && (
             <Typography variant='caption'>
-              {isService ? 'Service from ' : 'Product from '} {vendor?.fullName}
+              {isService ? 'Service from ' : 'Product from '}{' '}
+              {vendor?.fullName}
             </Typography>
           )}
         </Box>
 
-        <Box component='span' sx={{ textAlign: 'center', marginBlock: 5 }}>
+        <Box
+          component='span'
+          sx={{ textAlign: 'center', marginBlock: 5 }}
+        >
           {!isService ? (
             <Button
               variant='contained'
@@ -204,8 +212,15 @@ const ProductCard = ({ item }) => {
             </Button>
           )}
         </Box>
-        <IconButton className={classes.favourite} onClick={handleFavourite}>
-          {isFavourite ? <Favorite /> : <UnFavorite />}
+        <IconButton
+          className={classes.favourite}
+          onClick={handleFavourite}
+        >
+          {isFavourite ? (
+            <Favorite style={{ color: '#67000e' }} />
+          ) : (
+            <UnFavorite style={{ color: '#111' }} />
+          )}
         </IconButton>
       </CardContent>
     </Card>

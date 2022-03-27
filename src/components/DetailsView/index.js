@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Navigate, withRouter, useParams } from 'react-router-dom';
+import {
+  Link,
+  Navigate,
+  withRouter,
+  useParams,
+} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import clsx from 'clsx';
@@ -31,7 +36,13 @@ import { responsive2 } from 'components/Carousels/Default/settings';
 
 import { useManyInputs, useToggleInput } from 'hooks';
 
-import { products, services, productsB, dropDownNumbers, reviews } from 'data';
+import {
+  products,
+  services,
+  productsB,
+  dropDownNumbers,
+  reviews,
+} from 'data';
 import { getMuiDateFormat } from 'utils/constants';
 
 import prod1 from 'assets/prod1.jpg';
@@ -216,7 +227,9 @@ const SingleProdServ = (props) => {
                 <div>
                   <Grid container spacing={2}>
                     <Grid item xs={8} sm={12}>
-                      <Card sx={{ boxShadow: 'none', borderRadius: 1 }}>
+                      <Card
+                        sx={{ boxShadow: 'none', borderRadius: 1 }}
+                      >
                         <CardMedia
                           className={classes.cardMedia}
                           image={prod2}
@@ -270,7 +283,11 @@ const SingleProdServ = (props) => {
                       <Navigate to='/' />
                     ) : (
                       <>
-                        <Box width='100%' display='flex' flexDirection='column'>
+                        <Box
+                          width='100%'
+                          display='flex'
+                          flexDirection='column'
+                        >
                           <Box
                             display='flex'
                             flexDirection='column'
@@ -302,7 +319,11 @@ const SingleProdServ = (props) => {
                               gridGap={10}
                               alignItems='center'
                             >
-                              <Rating value={4} readOnly size='small' />
+                              <Rating
+                                value={4}
+                                readOnly
+                                size='small'
+                              />
                               <Typography
                                 variant='subtitle1'
                                 className={classes_g.lightText}
@@ -390,7 +411,10 @@ const SingleProdServ = (props) => {
                             className={classes_g.tabs}
                           >
                             <Tab label='Review' {...a11yProps(0)} />
-                            <Tab {...a11yProps(1)} label='Related Products' />
+                            <Tab
+                              {...a11yProps(1)}
+                              label='Related Products'
+                            />
                           </Tabs>
                         </Box>
                       </>
@@ -514,7 +538,11 @@ const SingleProdServ = (props) => {
                             {state.prodServ.title}
                           </Typography>
 
-                          <Box display='flex' gridGap={10} alignItems='center'>
+                          <Box
+                            display='flex'
+                            gridGap={10}
+                            alignItems='center'
+                          >
                             <Rating value={4} readOnly />
                             <Typography
                               variant='h5'
@@ -524,7 +552,10 @@ const SingleProdServ = (props) => {
                             </Typography>
                           </Box>
 
-                          <Typography variant='body1' color='textPrimary'>
+                          <Typography
+                            variant='body1'
+                            color='textPrimary'
+                          >
                             {state.prodServ.oneHourRate}
                           </Typography>
 
@@ -651,27 +682,41 @@ const SingleProdServ = (props) => {
               </>
             )}
           </div>
-          <TabPanel className={classes.TabPanel} value={tabValue} index={0}>
+          <TabPanel
+            className={classes.TabPanel}
+            value={tabValue}
+            index={0}
+          >
             {reviews && reviews.length > 0 ? (
-              reviews.map((el) => <Review {...el} key={el.user._id} />)
+              reviews.map((el) => (
+                <Review {...el} key={el.user._id} />
+              ))
             ) : (
               <Typography variant='body1' align='center'>
                 No Reviews
               </Typography>
             )}
           </TabPanel>
-          <TabPanel className={classes.TabPanel} value={tabValue} index={1}>
+          <TabPanel
+            className={classes.TabPanel}
+            value={tabValue}
+            index={1}
+          >
             <Box>
               <Box my={3}>
                 <Typography variant='h4' fullWidth align='center'>
-                  Related {type === 'product' ? ' Products' : 'Services'}
+                  Related{' '}
+                  {type === 'product' ? ' Products' : 'Services'}
                 </Typography>
               </Box>
               {type === 'product' ? (
-                productsB && products.length > 0 ? (
+                products && products.length > 0 ? (
                   <CarouselLayout respSettings={responsive2}>
-                    {productsB.map((el) => (
-                      <div key={el._id} className={classes_g.carouselItem}>
+                    {products.map((el) => (
+                      <div
+                        key={el._id}
+                        className={classes_g.carouselItem}
+                      >
                         <ProdServCard item={el} isPromo={false} />
                       </div>
                     ))}
@@ -684,7 +729,10 @@ const SingleProdServ = (props) => {
               ) : services && services.length > 0 ? (
                 <CarouselLayout respSettings={responsive2}>
                   {services.map((el) => (
-                    <div key={el._id} className={classes_g.carouselItem}>
+                    <div
+                      key={el._id}
+                      className={classes_g.carouselItem}
+                    >
                       <ProdServCard item={el} isPromo={false} />
                     </div>
                   ))}
@@ -715,7 +763,11 @@ const SingleProdServ = (props) => {
                             borderRadius: 1,
                           }}
                         >
-                          <Skeleton variant='rect' width={'100%'} height={50} />
+                          <Skeleton
+                            variant='rect'
+                            width={'100%'}
+                            height={50}
+                          />
                         </Card>
                       </Grid>
                     ))}
@@ -728,7 +780,11 @@ const SingleProdServ = (props) => {
               <Typography variant='h3'>
                 <Skeleton variant='text' />
               </Typography>
-              <Typography variant='h4' color='textSecondary' sx={{ mt: 1 }}>
+              <Typography
+                variant='h4'
+                color='textSecondary'
+                sx={{ mt: 1 }}
+              >
                 <Skeleton variant='text' />
               </Typography>
               <Typography variant='h5' sx={{ mt: 1 }}>
