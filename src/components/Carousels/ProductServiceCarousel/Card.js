@@ -72,9 +72,13 @@ const ProductCard = ({ item }) => {
     if (!user || !item) return false;
     let condition = false;
     if (isService) {
-      condition = Boolean(user.serviceFavourites.find((el) => el === item._id));
+      condition = Boolean(
+        user.serviceFavourites?.find((el) => el === item._id)
+      );
     } else {
-      condition = Boolean(user.productFavourites.find((el) => el === item._id));
+      condition = Boolean(
+        user.productFavourites?.find((el) => el === item._id)
+      );
     }
 
     return condition;

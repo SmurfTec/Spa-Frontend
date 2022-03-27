@@ -11,6 +11,7 @@ import {
   DialogContent,
   DialogTitle,
   DialogContentText,
+  CircularProgress,
 } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import Chip from 'components/common/CustChipLabel';
@@ -21,6 +22,7 @@ import styles from './styles';
 import prodImg from 'assets/prod1.jpg';
 import { getOrder } from 'store/slices/orders';
 import { useDispatch, useSelector } from 'react-redux';
+import { addReview, getmyOrders } from 'store/slices/orders/extraReducers';
 
 const OrderDetails = () => {
   const classes_g = globalStyles();
@@ -30,18 +32,39 @@ const OrderDetails = () => {
   const { orderid } = useParams();
   const [open, setOpen] = React.useState(false);
   const [rating, setRating] = React.useState(0);
+  const [comment, setComment] = useState('');
 
-  const { order } = useSelector((state) => ({
+  const { loading, order } = useSelector((state) => ({
     order: orderid ? getOrder(state, orderid) : undefined,
+    loading: state.orders.fetching,
   }));
-  console.log('ORDER', order);
 
-  const handleToggleDialog = () => {
+  useEffect(() => {
+    if (loading) dispatch(getmyOrders());
+  }, [loading]);
+
+  const toggleReviewOpen = () => {
     setOpen((st) => !st);
   };
 
-  const showReviewModal = () => {};
-  const saveReview = () => {};
+  const saveReview = (e) => {
+    e.preventDefault();
+    console.log('rating', rating);
+    console.log('comment', comment);
+
+    dispatch(
+      addReview({
+        id: order._id,
+        data: {
+          comment,
+          rating,
+        },
+      })
+    ).then(({ error }) => {
+      if (error) return;
+      toggleReviewOpen();
+    });
+  };
 
   return (
     <>
@@ -66,11 +89,7 @@ const OrderDetails = () => {
               >
                 Order ID :
               </Typography>
-              <Typography
-                variant='body2'
-                color='textPrimary'
-                component='span'
-              >
+              <Typography variant='body2' color='textPrimary' component='span'>
                 {orderid.split('-')[0]}
               </Typography>
             </Box>
@@ -82,11 +101,7 @@ const OrderDetails = () => {
               >
                 Placed On :{' '}
               </Typography>
-              <Typography
-                variant='body2'
-                color='textPrimary'
-                component='span'
-              >
+              <Typography variant='body2' color='textPrimary' component='span'>
                 {getMuiDateFormat(order.createdAt)}
               </Typography>
             </Box>
@@ -100,7 +115,7 @@ const OrderDetails = () => {
             borderRadius={8}
             px={1}
           >
-            {!order.serviceDate && order.products.length > 0 ? (
+            {!order.serviceDate && order.products?.length > 0 ? (
               order.products.map((el) => (
                 <Box
                   display='flex'
@@ -114,10 +129,7 @@ const OrderDetails = () => {
                     gridGap={10}
                     flex='2 2 190px'
                   >
-                    <Avatar
-                      variant='square'
-                      className={classes.orderItemImage}
-                    >
+                    <Avatar variant='square' className={classes.orderItemImage}>
                       <img
                         src={prodImg}
                         width='100%'
@@ -125,35 +137,32 @@ const OrderDetails = () => {
                         alt={el.product.name}
                       />
                     </Avatar>
-                    <Typography
-                      variant='subtitle2'
-                      style={{ fontWeight: 500 }}
-                    >
+                    <Typography variant='subtitle2' style={{ fontWeight: 500 }}>
                       {el.product.name}
                     </Typography>
                   </Box>
-                  <Box
-                    className={classes.orderItems}
-                    flex='1 1 200px'
-                  >
+                  <Box className={classes.orderItems} flex='1 1 200px'>
                     <Typography variant='body2'>
                       {el.product.description}
                     </Typography>
                   </Box>
-                  <Box
-                    className={classes.orderItems}
-                    flex='1 1 100px'
-                  >
-                    <Button
-                      variant='outlined'
-                      color='secondary'
-                      size='small'
-                      style={{ fontWeight: 400 }}
-                      onClick={handleToggleDialog}
-                    >
-                      Add Review
-                    </Button>
-                  </Box>
+                  {!order.review && (
+                    <Box className={classes.orderItems} flex='1 1 100px'>
+                      <Button
+                        variant='outlined'
+                        color='secondary'
+                        size='small'
+                        style={{ fontWeight: 400 }}
+                        onClick={toggleReviewOpen}
+                        disabled={loading}
+                      >
+                        Add Review{' '}
+                        {loading && (
+                          <CircularProgress style={{ marginRight: 10 }} />
+                        )}
+                      </Button>
+                    </Box>
+                  )}
                 </Box>
               ))
             ) : (
@@ -169,27 +178,21 @@ const OrderDetails = () => {
                   gridGap={10}
                   flex='2 2 190px'
                 >
-                  <Avatar
-                    variant='square'
-                    className={classes.orderItemImage}
-                  >
+                  <Avatar variant='square' className={classes.orderItemImage}>
                     <img
                       src={prodImg}
                       width='100%'
                       height='100%'
-                      alt={order.service.service.name}
+                      alt={order.service?.name}
                     />
                   </Avatar>
-                  <Typography
-                    variant='subtitle2'
-                    style={{ fontWeight: 500 }}
-                  >
-                    {order.service.service.name}
+                  <Typography variant='subtitle2' style={{ fontWeight: 500 }}>
+                    {order.service?.name}
                   </Typography>
                 </Box>
                 <Box className={classes.orderItems} flex='1 1 200px'>
                   <Typography variant='body2'>
-                    {order.service.service.description}
+                    {order.service?.description}
                   </Typography>
                 </Box>
                 <Box className={classes.orderItems} flex='1 1 100px'>
@@ -198,9 +201,13 @@ const OrderDetails = () => {
                     color='secondary'
                     style={{ fontWeight: 400 }}
                     size='small'
-                    onClick={handleToggleDialog}
+                    onClick={toggleReviewOpen}
+                    disabled={loading}
                   >
-                    Add Review
+                    Add Review{' '}
+                    {loading && (
+                      <CircularProgress style={{ marginRight: 10 }} />
+                    )}
                   </Button>
                 </Box>
               </Box>
@@ -211,7 +218,7 @@ const OrderDetails = () => {
 
       <Dialog
         open={open}
-        onClose={handleToggleDialog}
+        onClose={toggleReviewOpen}
         fullWidth={true}
         maxWidth='sm'
         aria-labelledby='form-dialog-title'
@@ -248,15 +255,13 @@ const OrderDetails = () => {
               multiline
               rows={4}
               required
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
             />
           </form>
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={handleToggleDialog}
-            color='primary'
-            variant='outlined'
-          >
+          <Button onClick={toggleReviewOpen} color='primary' variant='outlined'>
             Cancel
           </Button>
           <Button

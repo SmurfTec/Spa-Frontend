@@ -4,10 +4,11 @@ import {
   createEntityAdapter,
 } from '@reduxjs/toolkit';
 import {
-  myOrders,
+  getmyOrders,
   createOrder,
   updateOrder,
   deleteOrder,
+  addReview,
 } from './extraReducers';
 import { toast } from 'react-toastify';
 
@@ -16,12 +17,13 @@ const myOrdersAdapter = createEntityAdapter({
 });
 
 const initialState = {
+  fetching: true,
   loading: true,
   isOpen: false,
 };
 
 const myOrdersSlice = createSlice({
-  name: 'myOrders',
+  name: 'getmyOrders',
   initialState: myOrdersAdapter.getInitialState(initialState),
 
   reducers: {
@@ -34,16 +36,16 @@ const myOrdersSlice = createSlice({
 
   extraReducers: {
     //* Get my Orders
-    [myOrders.pending]: (state) => {
-      state.loading = true;
+    [getmyOrders.pending]: (state) => {
+      state.fetching = true;
     },
-    [myOrders.fulfilled]: (state, { payload }) => {
+    [getmyOrders.fulfilled]: (state, { payload }) => {
       console.log('PAYLOAD', payload);
-      state.loading = false;
+      state.fetching = false;
       myOrdersAdapter.addMany(state, payload);
     },
-    [myOrders.rejected]: (state) => {
-      state.loading = false;
+    [getmyOrders.rejected]: (state) => {
+      state.fetching = false;
     },
 
     //* CREATE REQUESTS
@@ -57,6 +59,7 @@ const myOrdersSlice = createSlice({
     },
     [createOrder.rejected]: (state) => {
       state.addingNew = false;
+      state.loading = false;
     },
 
     //* UPDATE REQUESTS
@@ -76,6 +79,26 @@ const myOrdersSlice = createSlice({
       //
     },
     [updateOrder.rejected]: (state) => {
+      state.loading = false;
+    },
+
+    //* AddReview
+    [addReview.pending]: (state) => {
+      state.loading = true;
+    },
+    [addReview.fulfilled]: (state, { payload }) => {
+      console.log('PAYLOAD', payload);
+      toast.success('Success');
+      state.loading = false;
+      state.isOpen = true;
+      myOrdersAdapter.updateOne(state, {
+        id: payload.post._id,
+        changes: { ...payload },
+      });
+
+      //
+    },
+    [addReview.rejected]: (state) => {
       state.loading = false;
     },
 

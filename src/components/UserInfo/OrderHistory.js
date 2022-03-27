@@ -16,7 +16,7 @@ import Chip from 'components/common/CustChipLabel';
 import globalStyles from 'styles/commonStyles';
 import styles from './styles';
 import { globalMyOrdersSelectors } from 'store/slices/orders';
-import { myOrders } from 'store/slices/orders/extraReducers';
+import { getmyOrders } from 'store/slices/orders/extraReducers';
 import { useDispatch, useSelector } from 'react-redux';
 import { Skeleton } from '@material-ui/lab';
 
@@ -29,20 +29,18 @@ const OrderHistory = () => {
   const [filteredOrders, setFilteredOrders] = useState([]);
 
   const { loading, orders } = useSelector((state) => ({
-    loading: state.orders.loading,
+    loading: state.orders.fetching,
     orders: globalMyOrdersSelectors.selectAll(state),
   }));
 
   useEffect(() => {
     if (loading) {
-      dispatch(myOrders());
+      dispatch(getmyOrders());
     }
   }, [dispatch]);
 
   useEffect(() => {
-    setFilteredOrders(
-      orders.filter((order) => order.status === 'completed')
-    );
+    setFilteredOrders(orders.filter((order) => order.status === 'completed'));
   }, [orders]);
 
   const showOrderDetails = (e) => {
@@ -95,19 +93,14 @@ const OrderHistory = () => {
                       data-orderid={order._id}
                     >
                       <TableCell>
-                        <Typography variant='subtitle2'>
-                          {order._id}
-                        </Typography>
+                        <Typography variant='subtitle2'>{order._id}</Typography>
                       </TableCell>
                       <TableCell>
                         <Typography variant='subtitle2'>
                           {order.serviceDate ? 'Service' : 'Product'}
                         </Typography>
                       </TableCell>
-                      <TableCell
-                        align='center'
-                        className={classes.chipCell}
-                      >
+                      <TableCell align='center' className={classes.chipCell}>
                         <Chip color='warning'>{order.status}</Chip>
                       </TableCell>
 
@@ -117,9 +110,7 @@ const OrderHistory = () => {
                         </Typography>
                       </TableCell>
                       <TableCell align='right'>
-                        <Typography variant='body2'>
-                          ${order.total}
-                        </Typography>
+                        <Typography variant='body2'>${order.total}</Typography>
                       </TableCell>
                     </TableRow>
                   );
