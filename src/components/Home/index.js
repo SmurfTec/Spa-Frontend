@@ -27,6 +27,7 @@ const Home = () => {
   const { sales, topSelling } = useSelector((st) => st.products);
 
   const patnerSearch = () => {};
+
   return (
     <>
       {/* // ^ Banner */}

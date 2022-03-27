@@ -32,7 +32,8 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import RemoveRounded from '@material-ui/icons/RemoveRounded';
 import Addrounded from '@material-ui/icons/AddRounded';
 import { addToCart } from 'store/slices/cart';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { allProducts } from 'store/slices/getAll/extraReducers';
 
 const ProductDetails = (props) => {
   const classes_g = globalStyles();
@@ -41,12 +42,22 @@ const ProductDetails = (props) => {
 
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
+  const [relatedProduct, setRelatedProduct] = useState([]);
 
   const [tabValue, setTabValue] = React.useState(1);
-  // const [isOpen, toggleOpen] = useToggleInput(false); // done
-  // const { addItemToCart, userOrders } = useContext(StoreContext);
-  const { id } = useParams();
+  const { products: Products, loading: productLoading } = useSelector(
+    (st) => st.getAll
+  );
+  useEffect(() => {
+    if (productLoading || !Products) {
+      dispatch(allProducts());
+    }
+  }, [dispatch, productLoading]);
 
+  // console.log('PRODUCTS', Products);
+  // console.log('PRODUCT', product);
+
+  const { id } = useParams();
   let { error, loading, value } = useFetch(
     `${API_BASE_URL}/products/${id}`,
     {
@@ -62,6 +73,15 @@ const ProductDetails = (props) => {
     if (!value) return;
     setProduct(value);
   }, [value]);
+
+  //* set Related Proucts
+  useEffect(() => {
+    setRelatedProduct(
+      Products?.filter((el) => {
+        return el?.category?.name === product?.category?.name;
+      })
+    );
+  }, [product, Products]);
 
   const increaseNoOfItems = () => {
     setQuantity(quantity + 1);
@@ -281,7 +301,7 @@ const ProductDetails = (props) => {
                     </Typography>
                   </Box>
                   <Typography variant='h5' sx={{ mt: 1 }}>
-                    ${product.price}
+                    ${Math.floor(product.price)}
                   </Typography>
                 </Box>
 
@@ -399,9 +419,9 @@ const ProductDetails = (props) => {
                   Related Products
                 </Typography>
               </Box>
-              {productsB && productsB.length > 0 ? (
+              {relatedProduct && relatedProduct.length > 0 ? (
                 <CarouselLayout respSettings={responsive2}>
-                  {productsB.map((el) => (
+                  {relatedProduct.map((el) => (
                     <div
                       key={el._id}
                       className={classes_g.carouselItem}

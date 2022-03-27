@@ -1,9 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 const initialState = {
-  cart: {
-    orderItems: [],
-  },
+  products: [],
+  total: 0,
 };
 
 const myCartSlice = createSlice({
@@ -13,47 +12,57 @@ const myCartSlice = createSlice({
   reducers: {
     addToCart: {
       reducer: (state, action) => {
-        const { quantity, product } = action.payload;
-        const alreadyInCart = !!state.cart.orderItems.find(
-          (el) => el._id === product._id
-        );
-        console.log('CHECK', alreadyInCart);
-        console.log('quantity', quantity);
-        console.log('product', product);
-        console.log('state', state.cart);
+        let spaCart = localStorage.getItem('mycart')
+          ? JSON.parse(localStorage.getItem('mycart'))
+          : { products: [] };
 
-        // if (alreadyInCart)
-        //   state.cart = {...state,
-        //     products: state.products.map((el) =>
-        //       el._id === product._id
-        //         ? {
-        //             ...el,
-        //             quantity: el.quantity + quantity,
-        //             subTotal: el.price * (el.quantity + quantity),
-        //           }
-        //         : el
-        //     ),
-        //   };
-        // else
-        //   setCart((st) => ({
-        //     ...st,
-        //     products: [
-        //       ...st.products,
-        //       {
-        //         ...state,
-        //         quantity,
-        //         subTotal: item.price * quantity,
-        //       },
-        //     ],
-        //   }));
-        // set localStorage
-        // localStorage.setItem('spaCart', JSON.stringify(cart));
+        console.log('SPACART', spaCart);
+
+        let Cart;
+        const { quantity, product } = action.payload;
+        const alreadyInCart = !!state.products.find(
+          (el) => el.product._id === product._id
+        );
+
+        if (alreadyInCart) {
+          console.log('HERE 1');
+          state.products = state.products.map((el) =>
+            el.product._id === product._id
+              ? {
+                  product,
+                  quantity: el.quantity + quantity,
+                  subTotal:
+                    el.product.price * (el.quantity + quantity),
+                }
+              : el
+          );
+          Cart = state;
+        } else {
+          console.log('HERE 2');
+          console.log('state products', state.products);
+          state.products = [
+            ...state.products,
+            {
+              product,
+              quantity,
+              subTotal: product.price * quantity,
+            },
+          ];
+          Cart = state;
+        }
+        // set to localStorage
+        localStorage.setItem('spaCart', JSON.stringify(Cart));
       },
     },
-    removeFromCart: {
-      reducer: (state, action) => {
-        // localStorage.setItem('spaCart', JSON.stringify(cart));
-      },
+  },
+  removeFromCart: {
+    reducer: (state, action) => {
+      const { id } = action.payload;
+      state.cart = {
+        ...state,
+        products: state.products.filter((item) => item._id !== id),
+      };
+      // localStorage.setItem('spaCart', JSON.stringify(cart));
     },
   },
 });

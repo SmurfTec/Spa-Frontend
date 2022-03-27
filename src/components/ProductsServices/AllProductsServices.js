@@ -8,7 +8,7 @@ import {
   allProducts,
   allServices,
   getFlashSales,
-} from 'store/slices/getAll';
+} from 'store/slices/getAll/extraReducers';
 
 import globalStyles from 'styles/commonStyles';
 
