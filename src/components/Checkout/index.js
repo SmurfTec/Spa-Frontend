@@ -9,22 +9,17 @@ import { useManyInputs } from 'hooks';
 
 import globalStyles from 'styles/commonStyles';
 import useStyles from 'styles/CartStyles';
-
 import { cartProd, cartServ } from 'data';
-
 // import Cart from './Cart';
 import Cart from './Cart';
 import ReviewCart from './Step2';
 import PaymentStep from './Step3';
 import OrderDetails from './Step4';
-
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import clsx from 'clsx';
 import { getTotal } from 'utils/constants';
-
-// function getSteps() {
-//   return ['Cart', 'Checkout', 'Payment', 'OrderDetails'];
-// }
+import { useSelector, useDispatch } from 'react-redux';
+import { removeFromCart } from 'store/slices/cart';
 
 function getSteps() {
   return ['Cart', 'Cart', 'Payment Method', 'OrderDetails'];
@@ -35,23 +30,25 @@ const Checkout = () => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(-1);
   const steps = getSteps();
+  const dispatch = useDispatch();
 
   // const type = 'product';
   // const steps = getSteps();
+  const { products } = useSelector((st) => st.cart);
 
   const initialState = {
     products: [],
-    total: 0,
     subtotal: 0,
     shippingAddress: {
-      street: 'abc',
-      city: 'abc',
-      country: 'abc',
-      postalCode: 112,
+      street: '...',
+      city: '...',
+      country: '...',
+      postalCode: 123,
     },
     email: 'abc@gmail.com',
     phoneNumber: 9231232133,
     toggleEdit: false,
+    total: 0,
   };
 
   const [cartState, handleTxtChange, , changeInput, , setState] =
@@ -59,11 +56,12 @@ const Checkout = () => {
 
   useEffect(() => {
     let total = 0;
-    if (cartProd && cartProd.length > 0) {
-      total += getTotal(cartProd, 'price');
+    products.map((p) => (total += p.subTotal));
+
+    if (products && products.length > 0) {
       setState((st) => ({
         ...st,
-        products: cartProd,
+        products: products,
       }));
     }
 
@@ -75,8 +73,9 @@ const Checkout = () => {
     setActiveStep(0);
   }, [setState]);
 
-  const removeFromCart = () => {
-    // console.log('item removed');
+  const removeItemFromCart = () => {
+    console.log('item removed');
+    dispatch(removeFromCart());
   };
 
   const handleChange = (e) => {
@@ -136,7 +135,7 @@ const Checkout = () => {
             // increaseQuantity={increaseQuantity}
             // decreaseQuantity={decreaseQuantity}
             handleTxtChange={handleTxtChange}
-            removeItemFromCart={removeFromCart}
+            // removeItemFromCart={removeItemFromCart}
           />
         );
       case 1:
@@ -144,7 +143,7 @@ const Checkout = () => {
           <Cart
             cart={cartState}
             validateStep={validateStep2}
-            removeItemFromCart={removeFromCart}
+            // removeItemFromCart={removeItemFromCart}
             editedValue={handleEditedField}
             review
           />

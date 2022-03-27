@@ -23,6 +23,7 @@ import Blog from 'components/Blog';
 const Home = () => {
   const classes = styles();
   const classes_g = globalStyles();
+
   // const dispatch = useDispatch();
   const { sales, topSelling } = useSelector((st) => st.products);
 

@@ -16,7 +16,7 @@ ReactDOM.render(
   // <React.StrictMode>
   <StoreProvider store={store}>
     <BrowserRouter>
-      <ToastContainer position='top-right' />
+      <ToastContainer position='top-right' autoClose={2000} />
       <App />
     </BrowserRouter>
   </StoreProvider>,

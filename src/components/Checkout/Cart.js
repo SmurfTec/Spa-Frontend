@@ -16,24 +16,21 @@ import {
   Typography,
   OutlinedInput,
 } from '@material-ui/core';
-
 import { useManyInputs, useToggleInput, useTextInput } from 'hooks';
+import { getMuiDateFormat } from 'utils/constants';
 import EditForm from './EditForm';
-
 import globalStyles from 'styles/commonStyles';
 import styles from 'styles/CartStyles';
-
 import { dropDownNumbers } from 'data';
-import { getMuiDateFormat } from 'utils/constants';
-
 import CloseIcon from '@material-ui/icons/Close';
 import PaymentIcon from '@material-ui/icons/CallToAction';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
 import DoneIcon from '@material-ui/icons/Done';
-
+import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
+import { removeFromCart } from 'store/slices/cart';
 
 const shippingFields = [
   { label: 'Address', name: 'address', icon: <LocationOnIcon /> },
@@ -53,7 +50,7 @@ const shippingFields = [
 const CartStep = ({
   validateStep,
   cart,
-  removeItemFromCart,
+  // removeItemFromCart,
   handleTxtChange,
   review,
   handleEdit,
@@ -61,15 +58,11 @@ const CartStep = ({
 }) => {
   const classes_g = globalStyles();
   const classes = styles();
-  const initialState = {
-    guests: 1,
-    quantity: 1,
-  };
-
-  const [state, handleChange, , , ,] = useManyInputs(initialState);
+  const dispatch = useDispatch();
 
   const [isEditing, toggle] = useToggleInput(false);
   const [editField, setEditField] = useState(-1);
+  const [quantityState, setQuantityState] = useState(1);
 
   const fieldEditing = (e) => {
     const { fieldid } = e.currentTarget.dataset;
@@ -77,6 +70,24 @@ const CartStep = ({
     toggle();
   };
 
+  console.log('CART', cart);
+
+  const handleQuantity = (e) => {
+    console.log('E', e.target.value);
+    setQuantityState(e.target.value);
+  };
+
+  const handleRemoveItemFromCart = (e) => {
+    const { product } = e.currentTarget.dataset;
+    dispatch(removeFromCart(product));
+    // removeItemFromCart(cart);
+  };
+
+  const handleProceedToPay = () => {
+    // create Order
+
+    validateStep();
+  };
   return (
     <>
       {/* // ^ Cart Items  */}
@@ -94,15 +105,18 @@ const CartStep = ({
             </TableHead>
             <TableBody>
               {cart.products.map((el) => (
-                <TableRow key={el._id}>
+                <TableRow key={el.product._id}>
                   <TableCell>
-                    <IconButton onClick={removeItemFromCart}>
+                    <IconButton
+                      onClick={handleRemoveItemFromCart}
+                      data-product={el.product._id}
+                    >
                       <CloseIcon />
                     </IconButton>
                   </TableCell>
-                  <TableCell>{el.title}</TableCell>
-                  <TableCell>${el.price}</TableCell>
-                  <TableCell align='center'>
+                  <TableCell>{el.product.name}</TableCell>
+                  <TableCell>${el.product.price}</TableCell>
+                  {/* <TableCell align='center'>
                     {review ? (
                       2
                     ) : (
@@ -114,8 +128,8 @@ const CartStep = ({
                       >
                         <Select
                           name='quantity'
-                          value={state.quantity}
-                          onChange={handleChange}
+                          value={el.quantity}
+                          onChange={handleQuantity}
                           displayEmpty
                         >
                           {dropDownNumbers.map((el) => (
@@ -126,9 +140,10 @@ const CartStep = ({
                         </Select>
                       </FormControl>
                     )}
-                  </TableCell>
+                  </TableCell> */}
+                  <TableCell align='center'>{el.quantity}</TableCell>
                   <TableCell align='center'>
-                    ${el.price * state.quantity}
+                    ${el.product.price * el.quantity}
                   </TableCell>
                 </TableRow>
               ))}
@@ -286,7 +301,7 @@ const CartStep = ({
                       color='secondary'
                       variant='contained'
                       endIcon={<PaymentIcon />}
-                      onClick={validateStep}
+                      onClick={handleProceedToPay}
                     >
                       Proceed To Pay
                     </Button>

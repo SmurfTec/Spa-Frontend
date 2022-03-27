@@ -41,7 +41,12 @@ export const services = [...Array(4)].map((_, index) => ({
   _id: faker.datatype.uuid(),
   title: 'Signature Thai Massage',
   price: faker.datatype.number({ min: 80, max: 160 }),
-  oneHourRate: `60-min (U.P. ${faker.commerce.price(120, 200, 1, '$')})`,
+  oneHourRate: `60-min (U.P. ${faker.commerce.price(
+    120,
+    200,
+    1,
+    '$'
+  )})`,
   rating: faker.datatype.number(500),
   isFavourite: faker.datatype.boolean(),
   description: 'Service from Bamboo Spa',
@@ -102,7 +107,9 @@ export const cartItems = [...cartProd, ...cartServ];
 
 export const mixedProdServ = [...productsB, ...services];
 
-export const decreaseBy = [1, 5, 4, 3, 1, 5, 4, 3, 1, 5, 4, 3, 1, 5, 4, 3];
+export const decreaseBy = [
+  1, 5, 4, 3, 1, 5, 4, 3, 1, 5, 4, 3, 1, 5, 4, 3,
+];
 
 export const bannerContent = [...Array(4)].map((_, index) => ({
   _id: faker.datatype.uuid(),
@@ -138,4 +145,6 @@ export const blogs = [
     description: faker.lorem.paragraph(5),
   })),
 ];
-export const dropDownNumbers = [...Array(8)].map((_, index) => index + 1);
+export const dropDownNumbers = [...Array(10)].map(
+  (_, index) => index + 1
+);

@@ -6,8 +6,6 @@ import getAllSlice from './slices/getAll';
 import getMyOrders from './slices/orders';
 import myCartSlice from './slices/cart';
 
-
-
 const store = configureStore({
   reducer: combineReducers({
     auth: authSlice.reducer,
