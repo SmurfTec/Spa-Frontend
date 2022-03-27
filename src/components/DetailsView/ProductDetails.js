@@ -35,6 +35,7 @@ import styles from './Styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import RemoveRounded from '@material-ui/icons/RemoveRounded';
 import Addrounded from '@material-ui/icons/AddRounded';
+import Lightbox from 'react-image-lightbox';
 
 const ProductDetails = (props) => {
   const classes_g = globalStyles();
@@ -104,7 +105,7 @@ const ProductDetails = (props) => {
     >
       {/* {state.prodServ && isOpen && (
         <Lightbox
-          mainSrc={ [photoIndex]}
+          mainSrc={[photoIndex]}
           // mainSrc={images[0]}
           nextSrc={images[(photoIndex + 1) % images.length]}
           prevSrc={images[(photoIndex + images.length - 1) % images.length]}
@@ -224,12 +225,12 @@ const ProductDetails = (props) => {
             {/* //^ Product Images  */}
             <div>
               <Grid container spacing={2}>
-                <Grid item xs={8} sm={12}>
+                <Grid item xs={12} sm={12}>
                   <Card sx={{ boxShadow: 'none', borderRadius: 1 }}>
                     <CardMedia
                       className={classes.cardMedia}
-                      image={product.images[0] || prod2}
-                      data-image={product.images[0]}
+                      image={product.images[0]?.url}
+                      data-image={product.images[0]?.url}
                       onClick={handleImageClick}
                     />
                   </Card>
@@ -250,10 +251,10 @@ const ProductDetails = (props) => {
                   </span>
                 </Box> */}
                 </Grid>
-                <Grid item xs={8} sm={12}>
+                <Grid item xs={12} sm={12}>
                   <Grid container spacing={2}>
-                    {[...Array(3)].map((_, index) => (
-                      <Grid item xs={4} sm={4} key={index}>
+                    {product.images.slice(1).map((img) => (
+                      <Grid item xs={4} sm={4} key={img}>
                         <Card
                           sx={{
                             boxShadow: 'none',
@@ -262,8 +263,8 @@ const ProductDetails = (props) => {
                         >
                           <CardMedia
                             className={classes.cardMediaSm}
-                            image={`${prod2}`}
-                            data-image={product.images[0]}
+                            image={img.url}
+                            data-image={img.url}
                             onClick={handleImageClick}
                           />
                         </Card>
@@ -412,7 +413,7 @@ const ProductDetails = (props) => {
                 <CarouselLayout respSettings={responsive2}>
                   {productsB.map((el) => (
                     <div key={el._id} className={classes_g.carouselItem}>
-                      <ProdServCard {...el} isPromo={false} />
+                      <ProdServCard item={el} isPromo={false} />
                     </div>
                   ))}
                 </CarouselLayout>

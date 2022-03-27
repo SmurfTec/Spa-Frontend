@@ -163,7 +163,7 @@ const ProdServContent = memo(({ products, flashSales, services, fetching }) => {
                 )
                 .map((el) => (
                   <div key={el._id} className={classes_g.gridElement}>
-                    <Card {...el} isPromo={false} />
+                    <Card item={el} isPromo={false} />
                   </div>
                 ))}
             </div>

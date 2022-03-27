@@ -125,7 +125,7 @@ const Profile = () => {
   };
 
   return (
-    <>
+    <Box style={{ minHeight: 745 }}>
       <Box mb={2}>
         <Typography variant='h5' className={classes_g.fontWeight600}>
           Personal Information
@@ -291,7 +291,7 @@ const Profile = () => {
           </Button>
         </Box>
       </Grid>
-    </>
+    </Box>
   );
 };
 

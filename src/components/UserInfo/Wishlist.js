@@ -9,6 +9,7 @@ import { productsB, services } from 'data';
 
 import globalStyles from 'styles/commonStyles';
 import styles from './userInfoProps';
+import { useSelector } from 'react-redux';
 
 function TabPanel(props) {
   const { children, value, index, classes, ...other } = props;
@@ -45,6 +46,7 @@ const Wishlist = () => {
   const classes_g = globalStyles();
   const classes = styles();
   const [tabValue, setTabValue] = React.useState(1);
+  const { user } = useSelector((st) => st.auth);
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
@@ -53,7 +55,7 @@ const Wishlist = () => {
   useEffect(() => {}, []);
 
   return (
-    <>
+    <Box style={{ minHeight: 745 }}>
       <Box mb={2}>
         <Typography variant='h5' className={classes_g.fontWeight600}>
           WishList
@@ -73,16 +75,16 @@ const Wishlist = () => {
 
       {/* //^ Products Panel */}
       <TabPanel value={tabValue} index={0}>
-        {productsB && productsB.length > 0 ? (
+        {user.productFavourites.length > 0 ? (
           <div
             className={clsx(
               classes_g.gridContainer,
               classes_g.gridContainerFill
             )}
           >
-            {productsB.map((el) => (
+            {user.productFavourites.map((el) => (
               <div key={el._id} className={classes_g.gridElement}>
-                <Card {...el} isPromo={false} />
+                <Card item={el} isPromo={false} />
               </div>
             ))}
           </div>
@@ -95,16 +97,16 @@ const Wishlist = () => {
 
       {/* //^ Services Panel */}
       <TabPanel value={tabValue} index={1}>
-        {services && services.length > 0 ? (
+        {user.serviceFavourites.length > 0 ? (
           <div
             className={clsx(
               classes_g.gridContainer,
               classes_g.gridContainerFill
             )}
           >
-            {services.map((el) => (
+            {user.serviceFavourites.map((el) => (
               <div key={el._id} className={classes_g.gridElement}>
-                <Card {...el} isPromo={false} />
+                <Card item={el} isPromo={false} />
               </div>
             ))}
           </div>
@@ -114,7 +116,7 @@ const Wishlist = () => {
           </Typography>
         )}
       </TabPanel>
-    </>
+    </Box>
   );
 };
 

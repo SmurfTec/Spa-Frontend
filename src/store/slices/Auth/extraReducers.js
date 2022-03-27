@@ -120,3 +120,17 @@ export const updatePassword = createAsyncThunk(
       .catch((err) => rejectWithValue(err));
   }
 );
+
+export const handleFavourities = createAsyncThunk(
+  'auth/handleFavourities',
+  async ({ resource, action, itemId }, { rejectWithValue }) => {
+    const resResource =
+      resource === 'products' ? 'productFavourites' : 'serviceFavourites';
+
+    return makeReq(`/${resource}/${itemId}/${action}`, {}, 'PATCH')
+      .then((resData) => ({
+        [resResource]: resData[resResource],
+      }))
+      .catch((err) => rejectWithValue(err));
+  }
+);

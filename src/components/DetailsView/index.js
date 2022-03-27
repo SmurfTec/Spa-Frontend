@@ -672,7 +672,7 @@ const SingleProdServ = (props) => {
                   <CarouselLayout respSettings={responsive2}>
                     {productsB.map((el) => (
                       <div key={el._id} className={classes_g.carouselItem}>
-                        <ProdServCard {...el} isPromo={false} />
+                        <ProdServCard item={el} isPromo={false} />
                       </div>
                     ))}
                   </CarouselLayout>
@@ -685,7 +685,7 @@ const SingleProdServ = (props) => {
                 <CarouselLayout respSettings={responsive2}>
                   {services.map((el) => (
                     <div key={el._id} className={classes_g.carouselItem}>
-                      <ProdServCard {...el} isPromo={false} />
+                      <ProdServCard item={el} isPromo={false} />
                     </div>
                   ))}
                 </CarouselLayout>

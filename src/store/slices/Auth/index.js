@@ -11,6 +11,7 @@ import {
   resetPassword,
   confirmMail,
   updatePassword,
+  handleFavourities,
 } from './extraReducers';
 
 const initialState = {
@@ -135,6 +136,24 @@ const authSlice = createSlice({
       toast.success('Your password have been updated successfully');
     },
     [resetPassword.rejected]: (state, { payload }) => {
+      state.loading = false;
+      toast.error(payload);
+    },
+    // ^ Confirm Mail Reducers
+    [handleFavourities.pending]: (state) => {
+      state.loading = true;
+    },
+    [handleFavourities.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      toast.success('Success', {
+        hideProgressBar: true,
+        autoClose: 5,
+      });
+      console.log('payload', payload);
+      const responseKey = [Object.keys(payload)[0]];
+      state.user[responseKey] = payload[responseKey];
+    },
+    [handleFavourities.rejected]: (state, { payload }) => {
       state.loading = false;
       toast.error(payload);
     },

@@ -34,7 +34,7 @@ const Orders = () => {
   };
 
   return (
-    <>
+    <Box style={{ minHeight: 745 }}>
       <Box mb={2}>
         <Typography variant='h5' className={classes_g.fontWeight600}>
           Orders
@@ -103,7 +103,7 @@ const Orders = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </>
+    </Box>
   );
 };
 

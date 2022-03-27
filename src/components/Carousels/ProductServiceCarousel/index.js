@@ -37,7 +37,7 @@ const ProdServCarousel = (props) => {
       ) : data.length > 0 ? (
         data.map((el, index) => (
           <div key={el._id} className={classes.carouselItem}>
-            <Card {...el} showVendor={props.showVendor} />
+            <Card item={el} showVendor={props.showVendor} />
           </div>
         ))
       ) : (
