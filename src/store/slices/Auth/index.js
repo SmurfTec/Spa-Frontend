@@ -2,7 +2,17 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { makeReq } from 'utils/makeReq';
 import { LOCALSTORAGE_TOKEN_KEY } from 'utils/constants';
 import { toast } from 'react-toastify';
-import { getMe, login, signUp, updateMe } from './extraReducers';
+import {
+  getMe,
+  login,
+  signUp,
+  updateMe,
+  forgotPassword,
+  resetPassword,
+  confirmMail,
+  updatePassword,
+  handleFavourities,
+} from './extraReducers';
 
 const initialState = {
   authenticating: true,
@@ -58,10 +68,9 @@ const authSlice = createSlice({
       state.token = payload.token;
       window.localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, payload.token);
     },
-    [login.rejected]: (state) => {
+    [login.rejected]: (state, { payload }) => {
       state.loading = false;
-      state.isLoggedIn = false;
-      toast.error('Error: email or password entered is incorrect');
+      toast.error(payload.message);
     },
 
     // ^ Signup Reducers
@@ -70,15 +79,11 @@ const authSlice = createSlice({
     },
     [signUp.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.isLoggedIn = true;
-      state.user = payload.user;
-      state.token = payload.token;
-      window.localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, payload.token);
-      toast.success('You have been registered successfully');
+      toast.success(payload);
     },
-    [signUp.rejected]: (state) => {
+    [signUp.rejected]: (state, { payload }) => {
       state.loading = false;
-      state.isLoggedIn = false;
+      toast.error(payload);
     },
 
     // ^ Update Me Reducers
@@ -90,8 +95,79 @@ const authSlice = createSlice({
       state.user = payload;
       toast.success('Your profile have been updated successfully');
     },
-    [updateMe.rejected]: (state) => {
+    [updateMe.rejected]: (state, { payload }) => {
       state.loading = false;
+      toast.success(payload.message);
+    },
+    // ^ Update Password Reducers
+    [updatePassword.pending]: (state) => {
+      state.loading = true;
+    },
+    [updatePassword.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      toast.success('Your password have been updated successfully');
+    },
+    [updatePassword.rejected]: (state, { payload }) => {
+      state.loading = false;
+      toast.success(payload.message);
+    },
+
+    // ^ Forgot Password Reducers
+    [forgotPassword.pending]: (state) => {
+      state.loading = true;
+    },
+    [forgotPassword.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      toast.success(payload);
+    },
+    [forgotPassword.rejected]: (state, { payload }) => {
+      state.loading = false;
+      toast.error(payload);
+    },
+    // ^ Reset Password Reducers
+    [resetPassword.pending]: (state) => {
+      state.loading = true;
+    },
+    [resetPassword.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.isLoggedIn = true;
+      state.user = payload.user;
+      state.token = payload.token;
+      toast.success('Your password have been updated successfully');
+    },
+    [resetPassword.rejected]: (state, { payload }) => {
+      state.loading = false;
+      toast.error(payload);
+    },
+    // ^ Confirm Mail Reducers
+    [handleFavourities.pending]: (state) => {
+      state.loading = true;
+    },
+    [handleFavourities.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      toast.success('Success', {
+        hideProgressBar: true,
+        autoClose: 5,
+      });
+      console.log('payload', payload);
+      const responseKey = [Object.keys(payload)[0]];
+      state.user[responseKey] = payload[responseKey];
+    },
+    [handleFavourities.rejected]: (state, { payload }) => {
+      state.loading = false;
+      toast.error(payload);
+    },
+    // ^ Confirm Mail Reducers
+    [confirmMail.pending]: (state) => {
+      state.loading = true;
+    },
+    [confirmMail.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      toast.success(payload);
+    },
+    [confirmMail.rejected]: (state, { payload }) => {
+      state.loading = false;
+      toast.error(payload);
     },
   },
 });

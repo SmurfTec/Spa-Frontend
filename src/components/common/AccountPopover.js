@@ -33,10 +33,8 @@ const styles = makeStyles((theme) => ({
 export default function AccountPopover() {
   const classes = styles();
   const { user } = useSelector((st) => st.auth);
-
-  const anchorRef = useRef(null);
-
   const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
   // const [error, setError] = useState(null);
 
   const dispatch = useDispatch();

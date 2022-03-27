@@ -3,8 +3,8 @@ import { makeReq } from 'utils/makeReq';
 
 //* My Requests
 
-export const myOrders = createAsyncThunk(
-  'orders/myOrders',
+export const getmyOrders = createAsyncThunk(
+  'orders/getmyOrders',
   async (_, { rejectWithValue }) => {
     return makeReq('/orders/me')
       .then((resData) => resData.orders)
@@ -28,6 +28,16 @@ export const updateOrder = createAsyncThunk(
     console.log('UPDATE DATA', data);
     return makeReq(`/orders/${id}`, { body: data }, 'PATCH')
       .then((resData) => resData)
+      .catch((err) => rejectWithValue(err));
+  }
+);
+
+export const addReview = createAsyncThunk(
+  'orders/review',
+  async ({ data, id }, { rejectWithValue }) => {
+    console.log('addReview DATA', data);
+    return makeReq(`/orders/${id}/review`, { body: data }, 'POST')
+      .then((resData) => resData.order)
       .catch((err) => rejectWithValue(err));
   }
 );

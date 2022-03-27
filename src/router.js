@@ -3,13 +3,22 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import Loading from 'components/common/Loading';
-import UserInfo from 'components/UserInfo';
-import OrderHistory from 'components/UserInfo/OrderHistory';
-import Orders from 'components/UserInfo/Orders';
+// import UserInfo from 'components/UserInfo';
+// import OrderHistory from 'components/UserInfo/OrderHistory';
+// import ResetPassword from 'components/common/Form/ResetPassword';
 
-const CommonLayout = lazy(() =>
-  import('components/layouts/CommonLayout')
+const UserInfo = lazy(() => import('components/UserInfo'));
+const Orders = lazy(() => import('components/UserInfo/Orders'));
+const OrderHistory = lazy(() => import('components/UserInfo/OrderHistory'));
+const ForgotPassword = lazy(() =>
+  import('components/common/Form/ForgotPassword')
 );
+const ConfirmMail = lazy(() => import('components/common/Form/ConfirmMail'));
+const ResetPassword = lazy(() =>
+  import('components/common/Form/ResetPassword')
+);
+const CommonLayout = lazy(() => import('components/layouts/CommonLayout'));
+
 const HomePage = lazy(() => import('components/Home'));
 const VendorProdServ = lazy(() =>
   import('components/ProductsServices/VendorProdServ')
@@ -19,15 +28,11 @@ const AllProductsServices = lazy(() =>
 );
 const Login = lazy(() => import('components/common/Form/Login'));
 const SingleProdServ = lazy(() => import('components/DetailsView'));
-const ProductView = lazy(() =>
-  import('components/DetailsView/ProductDetails')
-);
+const ProductView = lazy(() => import('components/DetailsView/ProductDetails'));
 const Join = lazy(() => import('components/common/Form/Join'));
 const Cart = lazy(() => import('components/Checkout'));
 const Profile = lazy(() => import('components/UserInfo/Profile'));
-const OrderDetails = lazy(() =>
-  import('components/UserInfo/OrderDetails')
-);
+const OrderDetails = lazy(() => import('components/UserInfo/OrderDetails'));
 const Wishlist = lazy(() => import('components/UserInfo/Wishlist'));
 // const Reviews = lazy(() => import('components/UserInfo/Reviews'));
 
@@ -178,6 +183,30 @@ const Router = () => {
             element={
               <Suspense fallback={<Loading />}>
                 <Login />
+              </Suspense>
+            }
+          />
+          <Route
+            path='forgotPassword'
+            element={
+              <Suspense fallback={<Loading />}>
+                <ForgotPassword />
+              </Suspense>
+            }
+          />
+          <Route
+            path='resetPassword/:token'
+            element={
+              <Suspense fallback={<Loading />}>
+                <ResetPassword />
+              </Suspense>
+            }
+          />
+          <Route
+            path='confirmMail/:token'
+            element={
+              <Suspense fallback={<Loading />}>
+                <ConfirmMail />
               </Suspense>
             }
           />

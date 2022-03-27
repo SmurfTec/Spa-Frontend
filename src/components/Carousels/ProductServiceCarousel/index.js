@@ -58,7 +58,7 @@ const ProdServCarousel = (props) => {
       ) : dataa.length > 0 ? (
         dataa.map((el, index) => (
           <div key={el._id} className={classes.carouselItem}>
-            <Card {...el} showVendor={props.showVendor} />
+            <Card item={el} showVendor={props.showVendor} />
           </div>
         ))
       ) : (

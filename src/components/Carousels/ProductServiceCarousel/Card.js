@@ -1,5 +1,6 @@
-import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useMemo } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Card,
   CardContent,
@@ -21,35 +22,86 @@ import styles from './CardProp';
 import useStyles from 'styles/commonStyles';
 
 import prodImg from 'assets/prod3.jpg';
+import { addToCart } from 'store/slices/cart';
+import { handleFavourities } from 'store/slices/Auth/extraReducers';
 
-const ProductCard = (props) => {
+const ProductCard = ({ item }) => {
+  const { user } = useSelector((st) => st.auth);
+  const dispatch = useDispatch();
   const classes = styles();
   const classes_g = useStyles();
+
   const {
     isService,
-    isPromo,
     name,
-    description,
-    images,
     rating,
-    isFavourite,
     id,
     price,
-    dummyId,
     numReviews,
     info,
     sale,
     showVendor,
     discount,
-  } = props;
+    vendor,
+  } = item;
 
   const navigate = useNavigate();
+  const location = useLocation();
   const { type } = useParams();
 
   const handleClick = () => {
     if (isService) navigate(`/services/${id}`);
     else navigate(`/products/${id}`);
     // navigate(`/products&services/${type}/${dummyId}`);
+  };
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    const cartItem = {
+      id,
+      price: price - discount,
+      name,
+      quantity: 1,
+    };
+
+    console.log('cartItem', cartItem);
+    // dispatch(addToCart(cartItem));
+  };
+
+  const isFavourite = useMemo(() => {
+    if (!user || !item) return false;
+    let condition = false;
+    if (isService) {
+      condition = Boolean(
+        user.serviceFavourites?.find((el) => el === item._id)
+      );
+    } else {
+      condition = Boolean(
+        user.productFavourites?.find((el) => el === item._id)
+      );
+    }
+
+    return condition;
+  }, [user, item]);
+
+  const handleFavourite = () => {
+    if (!user) navigate(`/login?redirect=${location.pathname}`);
+    if (isFavourite)
+      dispatch(
+        handleFavourities({
+          itemId: item._id,
+          resource: isService ? 'services' : 'products',
+          action: 'removeFromFavourites',
+        })
+      );
+    else
+      dispatch(
+        handleFavourities({
+          itemId: item._id,
+          resource: isService ? 'services' : 'products',
+          action: 'addToFavourites',
+        })
+      );
   };
 
   return (
@@ -84,7 +136,7 @@ const ProductCard = (props) => {
                   variant='subtitle2'
                   className={classes_g.fontWeight600}
                 >
-                  - ${Math.floor(price - props.discount)}
+                  - ${price - discount}
                 </Typography>
               </div>
             ) : (
@@ -125,23 +177,19 @@ const ProductCard = (props) => {
           )}
           {showVendor && (
             <Typography variant='caption'>
-              {isService ? 'Service from ' : 'Product from '}{' '}
-              {props?.vendor?.fullName}
+              {isService ? 'Service from ' : 'Product from '} {vendor?.fullName}
             </Typography>
           )}
         </Box>
 
-        <Box
-          component='span'
-          sx={{ textAlign: 'center', marginBlock: 5 }}
-        >
+        <Box component='span' sx={{ textAlign: 'center', marginBlock: 5 }}>
           {!isService ? (
             <Button
               variant='contained'
               color='secondary'
               endIcon={<ShoppingCartIcon />}
               size='small'
-              style={{ padding: '3px 6px' }}
+              onClick={handleAddToCart}
             >
               ADD TO CART
             </Button>
@@ -156,12 +204,8 @@ const ProductCard = (props) => {
             </Button>
           )}
         </Box>
-        <IconButton className={classes.favourite}>
-          {isFavourite ? (
-            <Favorite style={{ color: '#67000e' }} />
-          ) : (
-            <UnFavorite style={{ color: '#111' }} />
-          )}
+        <IconButton className={classes.favourite} onClick={handleFavourite}>
+          {isFavourite ? <Favorite /> : <UnFavorite />}
         </IconButton>
       </CardContent>
     </Card>

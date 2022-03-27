@@ -55,8 +55,48 @@ export const signUp = createAsyncThunk(
   }
 );
 
+export const resetPassword = createAsyncThunk(
+  'resetPassword',
+  async (values, { rejectWithValue }) =>
+    makeReq(
+      `/auth/resetPassword/${values.token}`,
+      {
+        body: {
+          ...values.pass,
+        },
+      },
+      'PATCH'
+    )
+      .then((resData) => resData)
+      .catch((err) => rejectWithValue(err.message))
+);
+
+export const forgotPassword = createAsyncThunk(
+  'forgotPassword',
+  async (values, { rejectWithValue }) =>
+    makeReq(
+      `/auth/forgotPassword/${values.token}`,
+      {
+        body: {
+          ...values.email,
+        },
+      },
+      'PATCH'
+    )
+      .then((resData) => resData)
+      .catch((err) => rejectWithValue(err.message))
+);
+
+export const confirmMail = createAsyncThunk(
+  'confirmMail',
+  async (token, { rejectWithValue }) =>
+    makeReq(`/auth/confirmMail/${token}`)
+      .then((resData) => resData.message)
+      .catch((err) => rejectWithValue(err.message))
+);
+
 export const updateMe = createAsyncThunk(
-  'users/me',
+  'auth/updateMe',
   async (userInfo, { rejectWithValue }) => {
     return makeReq(
       '/users/me',
@@ -68,6 +108,37 @@ export const updateMe = createAsyncThunk(
       'PATCH'
     )
       .then((resData) => resData.user)
+      .catch((err) => rejectWithValue(err));
+  }
+);
+
+export const updatePassword = createAsyncThunk(
+  'auth/updatePassword',
+  async (values, { rejectWithValue }) => {
+    return makeReq(
+      `/auth/update-password`,
+      {
+        body: {
+          ...values,
+        },
+      },
+      'PATCH'
+    )
+      .then((resData) => resData.user)
+      .catch((err) => rejectWithValue(err));
+  }
+);
+
+export const handleFavourities = createAsyncThunk(
+  'auth/handleFavourities',
+  async ({ resource, action, itemId }, { rejectWithValue }) => {
+    const resResource =
+      resource === 'products' ? 'productFavourites' : 'serviceFavourites';
+
+    return makeReq(`/${resource}/${itemId}/${action}`, {}, 'PATCH')
+      .then((resData) => ({
+        [resResource]: resData[resResource],
+      }))
       .catch((err) => rejectWithValue(err));
   }
 );

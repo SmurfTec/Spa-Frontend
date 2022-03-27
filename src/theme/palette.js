@@ -1,5 +1,3 @@
-import { alpha } from '@material-ui/core/styles';
-
 const INFO = {
   lighter: '#D0F2FF',
   light: '#74CAFF',

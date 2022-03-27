@@ -1,9 +1,5 @@
 import React, { memo, useEffect, useState, useMemo } from 'react';
-import {
-  useNavigate,
-  useParams,
-  useLocation,
-} from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import { Box, Button, Typography } from '@material-ui/core';
 import { Pagination, Skeleton } from '@material-ui/lab';
@@ -36,9 +32,7 @@ const ProdServContent = memo(
     }, [location.search]);
 
     useEffect(() => {
-      if (
-        !['all', 'products', 'services', 'flashSales'].includes(type)
-      ) {
+      if (!['all', 'products', 'services', 'flashSales'].includes(type)) {
         return navigate(`/${link}/all`);
       }
 
@@ -184,20 +178,7 @@ const ProdServContent = memo(
                   .fill()
                   .map((_, idx) => (
                     <div key={idx} className={classes_g.gridElement}>
-                      <Box
-                        borderRadius={10}
-                        overflow='hidden'
-                        height='100%'
-                        minHeight={200}
-                        minWidth={50}
-                      >
-                        <Skeleton
-                          animation='wave'
-                          variant='rect'
-                          width='100%'
-                          height='100%'
-                        />
-                      </Box>
+                      <Box borderRadius={10} overflow='hidden' height='100%' />
                     </div>
                   ))}
               </div>
@@ -216,11 +197,8 @@ const ProdServContent = memo(
                     (page - 1) * rowsPerPage + rowsPerPage
                   )
                   .map((el) => (
-                    <div
-                      key={el._id}
-                      className={classes_g.gridElement}
-                    >
-                      <Card {...el} isPromo={false} />
+                    <div key={el._id} className={classes_g.gridElement}>
+                      <Card item={el} isPromo={false} />
                     </div>
                   ))}
               </div>
