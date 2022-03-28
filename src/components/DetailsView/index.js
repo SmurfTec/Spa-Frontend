@@ -37,7 +37,7 @@ import { responsive2 } from 'components/Carousels/Default/settings';
 
 import { useManyInputs, useToggleInput } from 'hooks';
 
-import { products, services, productsB, dropDownNumbers, reviews } from 'data';
+import { dropDownNumbers, reviews } from 'data';
 import { getMuiDateFormat } from 'utils/constants';
 
 import prod1 from 'assets/prod1.jpg';
@@ -58,6 +58,7 @@ import useFetch from 'hooks/useFetch';
 import { API_BASE_URL } from 'utils/makeReq';
 import { createOrder } from 'store/slices/orders/extraReducers';
 import { toast } from 'react-toastify';
+import { allServices } from 'store/slices/getAll/extraReducers';
 
 function TabPanel(props) {
   const { children, value, index, classes, ...other } = props;
@@ -102,6 +103,8 @@ const SingleProdServ = ({ type }) => {
     guests: 1,
   };
 
+  const { services, loading: fetching } = useSelector((st) => st.getAll);
+
   const [state, handleTxtChange, , changeInput, , setState] =
     useManyInputs(initialState);
   const [tabValue, setTabValue] = React.useState(1);
@@ -115,6 +118,7 @@ const SingleProdServ = ({ type }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [relatedProduct, setRelatedProduct] = useState([]);
 
   let {
     error,
@@ -141,6 +145,18 @@ const SingleProdServ = ({ type }) => {
       setSelectedSlots((st) => st.slice(0, state.guests - 1));
     }
   }, [state.guests]);
+
+  //* set Related Proucts
+  useEffect(() => {
+    if (!value) return;
+
+    if (!services) return dispatch(allServices());
+    setRelatedProduct(
+      services?.filter((el) => {
+        return el?.category?.name === value?.category?.name;
+      })
+    );
+  }, [value]);
 
   useEffect(() => {
     if (type === 'product') {
@@ -734,8 +750,8 @@ const SingleProdServ = ({ type }) => {
         )}
       </div>
       <TabPanel className={classes.TabPanel} value={tabValue} index={0}>
-        {reviews && reviews.length > 0 ? (
-          reviews.map((el) => <Review {...el} key={el.user._id} />)
+        {value.reviews && value.reviews.length > 0 ? (
+          value.reviews.map((el) => <Review {...el} key={el.user._id} />)
         ) : (
           <Typography variant='body1' align='center'>
             No Reviews
@@ -743,40 +759,24 @@ const SingleProdServ = ({ type }) => {
         )}
       </TabPanel>
       <TabPanel className={classes.TabPanel} value={tabValue} index={1}>
-        <Box>
-          <Box my={3}>
-            <Typography variant='h4' fullWidth align='center'>
-              Related {type === 'product' ? ' Products' : 'Services'}
-            </Typography>
-          </Box>
-          {type === 'product' ? (
-            products && products.length > 0 ? (
-              <CarouselLayout respSettings={responsive2}>
-                {products.map((el) => (
-                  <div key={el._id} className={classes_g.carouselItem}>
-                    <ProdServCard item={el} isPromo={false} />
-                  </div>
-                ))}
-              </CarouselLayout>
-            ) : (
-              <Typography variant='body1' align='center'>
-                'No Results'
-              </Typography>
-            )
-          ) : services && services.length > 0 ? (
-            <CarouselLayout respSettings={responsive2}>
-              {services.map((el) => (
-                <div key={el._id} className={classes_g.carouselItem}>
-                  <ProdServCard item={el} isPromo={false} />
-                </div>
-              ))}
-            </CarouselLayout>
-          ) : (
-            <Typography variant='body1' align='center'>
-              'No Results'
-            </Typography>
-          )}
+        <Box my={3}>
+          <Typography variant='h4' fullWidth align='center'>
+            Related {type === 'product' ? ' Products' : 'Services'}
+          </Typography>
         </Box>
+        {relatedProduct && relatedProduct.length > 0 ? (
+          <CarouselLayout respSettings={responsive2}>
+            {relatedProduct.map((el) => (
+              <div key={el._id} className={classes_g.carouselItem}>
+                <ProdServCard item={el} isPromo={false} />
+              </div>
+            ))}
+          </CarouselLayout>
+        ) : (
+          <Typography variant='body1' align='center'>
+            'No Results'
+          </Typography>
+        )}
       </TabPanel>
 
       {/* </div> */}
