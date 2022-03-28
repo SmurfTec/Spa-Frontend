@@ -1,5 +1,5 @@
 import { Box, makeStyles, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import spa1 from 'assets/med.jpg';
 import { bannerContent } from 'data';
 import useStyles from 'styles/commonStyles';
@@ -9,7 +9,10 @@ const styles = makeStyles((theme) => ({
   root: {
     height: 500,
     // marginBottom: 40,
-    backgroundImage: `url(${spa1})`,
+    backgroundImage: (props) => {
+      console.log('props', props);
+      return `url(${props.image})`;
+    },
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     position: 'relative',
@@ -38,9 +41,16 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-const Banner = () => {
-  const classes = styles();
-  const classes_g = useStyles();
+const Banner = ({ banners }) => {
+  let bannerImg = banners?.find((el) => el.name === 'Homepage Carousel') || '';
+
+  const classes = styles({
+    image: bannerImg?.images[0]?.url || '',
+  });
+
+  const classes_g = useStyles({
+    image: bannerImg?.images[0]?.url || '',
+  });
 
   return (
     <section className={classes.root}>
@@ -51,9 +61,7 @@ const Banner = () => {
             bannerContent.map((el, index) => (
               <div key={el._id} className={classes.carouselItem}>
                 <Typography variant='h4'>{el.title}</Typography>
-                <Typography variant='subtitle1'>
-                  {el.description}
-                </Typography>
+                <Typography variant='subtitle1'>{el.description}</Typography>
               </div>
             ))}
         </SimpleCarousel>

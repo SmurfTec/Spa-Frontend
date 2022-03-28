@@ -5,6 +5,7 @@ import productSlice from './slices/products';
 import getAllSlice from './slices/getAll';
 import cartSlice from './slices/cart';
 import getMyOrders from './slices/orders';
+import bannersSlice from './slices/banners';
 
 const store = configureStore({
   reducer: combineReducers({
@@ -14,6 +15,7 @@ const store = configureStore({
     getAll: getAllSlice.reducer,
     cart: cartSlice.reducer,
     orders: getMyOrders.reducer,
+    banners: bannersSlice.reducer,
   }),
 });
 
