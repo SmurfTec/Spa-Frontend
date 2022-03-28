@@ -410,11 +410,8 @@ const ProductDetails = (props) => {
               {relatedProduct && relatedProduct.length > 0 ? (
                 <CarouselLayout respSettings={responsive2}>
                   {relatedProduct.map((el) => (
-                    <div
-                      key={el._id}
-                      className={classes_g.carouselItem}
-                    >
-                      <ProdServCard {...el} isPromo={false} />
+                    <div key={el._id} className={classes_g.carouselItem}>
+                      <ProdServCard item={el} isPromo={false} />
                     </div>
                   ))}
                 </CarouselLayout>
