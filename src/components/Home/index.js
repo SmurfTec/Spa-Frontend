@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,35 +19,56 @@ import styles from 'styles/HomeStyles';
 import spa1 from 'assets/med.jpg';
 import spa2 from 'assets/spa2.jpg';
 import Blog from 'components/Blog';
+import Loading from 'components/common/Loading';
+import { getBanners } from 'store/slices/banners/extraReducers';
+import { BatteryUnknownRounded } from '@material-ui/icons';
 
 const Home = () => {
   const classes = styles();
   const classes_g = globalStyles();
+  const { banners } = useSelector((st) => st.banners);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { sales, topSelling } = useSelector((st) => st.products);
 
+  const [partnersImages, setPartnersImages] = useState([]);
+  const [newsletter1, setNewsletter1] = useState([]);
+  const [newsletter2, setNewsletter2] = useState([]);
+  const [productsImages, setProductsImages] = useState([]);
+  const [salesImages, setSalesImages] = useState([]);
+
   const patnerSearch = () => {};
+
+  useEffect(() => {
+    console.log('banners', banners);
+    if (!banners) return dispatch(getBanners());
+
+    let p1 = banners.find((el) => el.name === 'Partners Carousel');
+    let p2 = banners.find((el) => el.name === 'Sales Carousel');
+    let p3 = banners.find((el) => el.name === 'Products Carousel');
+    let p4 = banners.find((el) => el.name === 'Newsletter1');
+    let p5 = banners.find((el) => el.name === 'Newsletter2');
+
+    setPartnersImages(p1.images);
+    setNewsletter1(p4.images);
+    setNewsletter2(p5.images);
+    setProductsImages(p3.images);
+    setSalesImages(p2.images);
+  }, [banners]);
+
+  if (!banners) return <Loading noTitle />;
 
   return (
     <>
       {/* // ^ Banner */}
-      <Banner />
+      <Banner banners={banners} />
 
       {/* // ^ Partners section*/}
       <section id='ourPartners' className={classes_g.backWrapper}>
         <Box className='overlay' position='absolute' />
-        <Box
-          py={5}
-          zIndex={2}
-          width='100%'
-          className={classes_g.sectionFlex}
-        >
+        <Box py={5} zIndex={2} width='100%' className={classes_g.sectionFlex}>
           <div className={classes_g.sectHorAlignment}>
-            <Search
-              placeholder='Where to ?'
-              submitForm={patnerSearch}
-            />
+            <Search placeholder='Where to ?' submitForm={patnerSearch} />
           </div>
           <div className={classes_g.sectHorAlignment}>
             <Typography variant='h2' align='center'>
@@ -74,15 +95,13 @@ const Home = () => {
             className={classes_g.Carousel}
           >
             <div>
-              <img src={spa2} alt='' />
+              <img src={partnersImages[0]?.url} alt='' />
               <div className={classes_g.overlay} />
               <Box className='legend'>
                 <div className={classes_g.contentContainer}>
                   <div>
                     <Typography variant='h5'>ABOUT</Typography>
-                    <Typography variant='body2'>
-                      {loremlong}
-                    </Typography>
+                    <Typography variant='body2'>{loremlong}</Typography>
                   </div>
 
                   <Box mt={2}>
@@ -92,15 +111,13 @@ const Home = () => {
               </Box>
             </div>
             <div>
-              <img src={spa1} alt='' />
+              <img src={partnersImages[1]?.url} alt='' />
               <div className={classes_g.overlay} />
               <Box className='legend'>
                 <div className={classes_g.contentContainer}>
                   <div>
                     <Typography variant='h5'>ABOUT</Typography>
-                    <Typography variant='body2'>
-                      {loremlong}
-                    </Typography>
+                    <Typography variant='body2'>{loremlong}</Typography>
                   </div>
 
                   <Box mt={2}>
@@ -125,12 +142,7 @@ const Home = () => {
       {/* // ^ Flash Sales Section */}
       <section id='flashSales' className={classes_g.backWrapper}>
         <Box className='overlay' position='absolute' />
-        <Box
-          py={5}
-          zIndex={2}
-          width='100%'
-          className={classes_g.sectionFlex}
-        >
+        <Box py={5} zIndex={2} width='100%' className={classes_g.sectionFlex}>
           <div className={classes_g.sectHorAlignment}>
             <Typography variant='h2' align='center'>
               Flash Sales
@@ -155,15 +167,13 @@ const Home = () => {
             className={classes_g.Carousel}
           >
             <div>
-              <img src={spa2} alt='' />
+              <img src={salesImages[0]?.url} alt='' />
               <div className={classes_g.overlay} />
               <Box className='legend'>
                 <div className={classes_g.contentContainer}>
                   <div>
                     <Typography variant='h5'>ABOUT</Typography>
-                    <Typography variant='body2'>
-                      {loremlong}
-                    </Typography>
+                    <Typography variant='body2'>{loremlong}</Typography>
                   </div>
 
                   <Box mt={2}>
@@ -173,15 +183,13 @@ const Home = () => {
               </Box>
             </div>
             <div>
-              <img src={spa1} alt='' />
+              <img src={salesImages[1]?.url} alt='' />
               <div className={classes_g.overlay} />
               <Box className='legend'>
                 <div className={classes_g.contentContainer}>
                   <div>
                     <Typography variant='h5'>ABOUT</Typography>
-                    <Typography variant='body2'>
-                      {loremlong}
-                    </Typography>
+                    <Typography variant='body2'>{loremlong}</Typography>
                   </div>
 
                   <Box mt={2}>
@@ -200,32 +208,22 @@ const Home = () => {
           </Box>
           <Box
             mt={2}
-            className={clsx(
-              classes_g.sectionLink,
-              classes_g.linkUnderline
-            )}
+            className={clsx(classes_g.sectionLink, classes_g.linkUnderline)}
           >
-            <NavLink to='/products&services/flashSales'>
-              See More
-            </NavLink>
+            <NavLink to='/products&services/flashSales'>See More</NavLink>
           </Box>
         </Box>
       </section>
 
       {/* // ^ Flash Sales Banner Section */}
       <section>
-        <div
-          className={clsx(
-            classes_g.secBackImage,
-            classes.homePromoBg
-          )}
-        >
+        <div className={clsx(classes_g.secBackImage, classes.homePromoBg)}>
           <Grid container className={classes.offerWrapper}>
             <Grid item xs={12} sm={3}>
               <Box
                 className={classes.divbackImg}
                 sx={{
-                  backgroundImage: `url(https://images.unsplash.com/photo-1453834190665-46ff0a1fbd5a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80)`,
+                  backgroundImage: `url(${newsletter1?.[0]?.url})`,
                 }}
               >
                 <Box
@@ -248,7 +246,7 @@ const Home = () => {
               <Box
                 className={classes.divbackImg}
                 sx={{
-                  backgroundImage: `url(https://images.unsplash.com/photo-1631730486572-226d1f595b68?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=475&q=80)`,
+                  backgroundImage: `url(${newsletter2?.[2]?.url})`,
                 }}
               >
                 <Box
@@ -281,15 +279,13 @@ const Home = () => {
               className={classes_g.Carousel}
             >
               <div className='carouselMini'>
-                <img src={spa2} alt='' />
+                <img src={productsImages?.[0]?.url} alt='' />
                 <div className={classes_g.overlay} />
                 <Box className='legend'>
                   <div className={classes_g.contentContainer}>
                     <div>
                       <Typography variant='h5'>ABOUT</Typography>
-                      <Typography variant='body2'>
-                        {loremlong}
-                      </Typography>
+                      <Typography variant='body2'>{loremlong}</Typography>
                     </div>
 
                     <Box mt={2}>
@@ -301,15 +297,13 @@ const Home = () => {
                 </Box>
               </div>
               <div className='carouselMini'>
-                <img src={spa1} alt='' />
+                <img src={productsImages?.[1]?.url} alt='' />
                 <div className={classes_g.overlay} />
                 <Box className='legend'>
                   <div className={classes_g.contentContainer}>
                     <div>
                       <Typography variant='h5'>ABOUT</Typography>
-                      <Typography variant='body2'>
-                        {loremlong}
-                      </Typography>
+                      <Typography variant='body2'>{loremlong}</Typography>
                     </div>
 
                     <Box mt={2}>
@@ -328,17 +322,9 @@ const Home = () => {
       {/* // ^ Products Banner Section */}
       <section id='ourProducts' className={classes_g.backWrapper}>
         <Box className='overlay' position='absolute' />
-        <Box
-          py={5}
-          zIndex={2}
-          width='100%'
-          className={classes_g.sectionFlex}
-        >
+        <Box py={5} zIndex={2} width='100%' className={classes_g.sectionFlex}>
           <div className={classes_g.sectHorAlignment}>
-            <Search
-              placeholder='Product name'
-              submitForm={patnerSearch}
-            />
+            <Search placeholder='Product name' submitForm={patnerSearch} />
           </div>
 
           <div className={classes_g.sectHorAlignment}>
@@ -355,23 +341,15 @@ const Home = () => {
           </div>
 
           <Box className={classes_g.carouselDefaults}>
-            <ProductServiceCarousel
-              data={topSelling}
-              showVendor={true}
-            />
+            <ProductServiceCarousel data={topSelling} showVendor={true} />
           </Box>
 
           <Box
             mt={2}
-            className={clsx(
-              classes_g.sectionLink,
-              classes_g.linkUnderline
-            )}
+            className={clsx(classes_g.sectionLink, classes_g.linkUnderline)}
             // className={`${classes_g.sectionLink} ${classes.linkUnderline}`}
           >
-            <NavLink to='/products&services/products'>
-              See More
-            </NavLink>
+            <NavLink to='/products&services/products'>See More</NavLink>
           </Box>
         </Box>
       </section>
@@ -401,10 +379,7 @@ const Home = () => {
 
           <Box
             mt={3}
-            className={clsx(
-              classes_g.sectionLink,
-              classes_g.linkUnderline
-            )}
+            className={clsx(classes_g.sectionLink, classes_g.linkUnderline)}
           >
             <NavLink to='/blog'>See More</NavLink>
           </Box>
