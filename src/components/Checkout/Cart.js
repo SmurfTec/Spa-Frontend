@@ -97,7 +97,7 @@ const CartStep = ({
         );
       } else {
         setTimeout(() => {
-          navigate(`orderDetails/${value.payload._id}`);
+          navigate(`/paymentDetails/${value.payload._id}`);
         }, 500);
         console.log('Success');
       }
