@@ -39,7 +39,11 @@ const PaymentDetails = () => {
         {order?.status !== 'completed' ? 'Payment' : 'Order Details'}
       </Typography>
       <Box display='flex' alignItems='center' gridGap={15}>
-        {order?.status !== 'completed' ? <Payment /> : <Details />}
+        {order?.status !== 'completed' ? (
+          <Payment order={order} />
+        ) : (
+          <Details order={order} />
+        )}
       </Box>
     </>
   );

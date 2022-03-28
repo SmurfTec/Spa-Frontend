@@ -66,7 +66,11 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.user = payload.user;
       state.token = payload.token;
-      window.localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, payload.token);
+      window.localStorage.setItem(
+        LOCALSTORAGE_TOKEN_KEY,
+        payload.token
+      );
+      toast.sucess('Login successfully');
     },
     [login.rejected]: (state, { payload }) => {
       state.loading = false;

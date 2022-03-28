@@ -26,7 +26,9 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-const Details = () => {
+const Details = ({ order }) => {
+  console.log('order', order);
+
   const orderNumber = '1AJH3H78';
   const orderArrives = '27/9 - 29/10';
   const classes_g = useStyles();

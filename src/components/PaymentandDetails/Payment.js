@@ -42,7 +42,7 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-const Payment = () => {
+const Payment = ({ order }) => {
   const classes_g = globalStyles();
   const classes = styles();
   const [state, setState] = useState(0);
@@ -50,6 +50,8 @@ const Payment = () => {
   let shippingAddress = 'asds';
   let totalItems = 5;
   let cartTotal = 1000;
+
+  console.log('order', order);
 
   const handlePayment = () => {
     console.log('PAYMENT');
@@ -359,8 +361,7 @@ const Payment = () => {
                 gridGap={5}
               >
                 <Typography variant='caption'>
-                  {totalItems} {totalItems > 1 ? 'items' : 'item'}{' '}
-                  with shipping fee
+                  {order?.products?.length} items with shipping fee
                 </Typography>
 
                 <Box
@@ -375,7 +376,7 @@ const Payment = () => {
                     className={classes_g.fontWeight600}
                     style={{ fontSize: '1.1rem' }}
                   >
-                    ${cartTotal}
+                    ${order.total}
                   </Typography>
                 </Box>
               </Box>
