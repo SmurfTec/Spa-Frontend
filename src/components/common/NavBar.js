@@ -165,7 +165,9 @@ const Navbar = (props) => {
                 color='secondary'
                 size='small'
                 className={classes.navBtn}
-                onClick={() => navigate('/login')}
+                onClick={() =>
+                  navigate('/products&services/products')
+                }
               >
                 BOOK NOW
               </Button>
@@ -302,7 +304,7 @@ const Navbar = (props) => {
               variant='contained'
               color='secondary'
               fullWidth
-              onClick={toggleSideBar}
+              onClick={() => navigate('/products&services/products')}
             >
               BOOK NOW
             </Button>

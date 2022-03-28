@@ -55,6 +55,7 @@ const Payment = ({ order }) => {
 
   const handlePayment = () => {
     console.log('PAYMENT');
+    
   };
   return (
     <>

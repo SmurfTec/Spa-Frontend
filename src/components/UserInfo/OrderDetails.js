@@ -22,12 +22,17 @@ import styles from './styles';
 import prodImg from 'assets/prod1.jpg';
 import { getOrder } from 'store/slices/orders';
 import { useDispatch, useSelector } from 'react-redux';
-import { addReview, getmyOrders } from 'store/slices/orders/extraReducers';
+import {
+  addReview,
+  getmyOrders,
+} from 'store/slices/orders/extraReducers';
+import { useNavigate } from 'react-router-dom';
 
 const OrderDetails = () => {
   const classes_g = globalStyles();
   const classes = styles();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { orderid } = useParams();
   const [open, setOpen] = React.useState(false);
@@ -45,7 +50,6 @@ const OrderDetails = () => {
       dispatch(getmyOrders());
     }
   }, [loading]);
-
 
   const toggleReviewOpen = () => {
     setOpen((st) => !st);
@@ -80,6 +84,7 @@ const OrderDetails = () => {
   const handlePay = (id) => {
     console.log('HANDLE PAY');
     // navigate to payment
+    navigate(`/paymentDetails/${orderid}`);
   };
 
   return (
@@ -121,7 +126,11 @@ const OrderDetails = () => {
               >
                 Order ID :
               </Typography>
-              <Typography variant='body2' color='textPrimary' component='span'>
+              <Typography
+                variant='body2'
+                color='textPrimary'
+                component='span'
+              >
                 {orderid.split('-')[0]}
               </Typography>
             </Box>
@@ -165,7 +174,10 @@ const OrderDetails = () => {
                     gridGap={10}
                     flex='2 2 190px'
                   >
-                    <Avatar variant='square' className={classes.orderItemImage}>
+                    <Avatar
+                      variant='square'
+                      className={classes.orderItemImage}
+                    >
                       <img
                         src={prodImg}
                         width='100%'
@@ -173,11 +185,17 @@ const OrderDetails = () => {
                         alt={el.product.name}
                       />
                     </Avatar>
-                    <Typography variant='subtitle2' style={{ fontWeight: 500 }}>
+                    <Typography
+                      variant='subtitle2'
+                      style={{ fontWeight: 500 }}
+                    >
                       {el.product.name}
                     </Typography>
                   </Box>
-                  <Box className={classes.orderItems} flex='1 1 200px'>
+                  <Box
+                    className={classes.orderItems}
+                    flex='1 1 200px'
+                  >
                     <Typography variant='body2'>
                       {el.product.description}
                     </Typography>
@@ -199,7 +217,9 @@ const OrderDetails = () => {
                       >
                         Add Review{' '}
                         {loading && (
-                          <CircularProgress style={{ marginRight: 10 }} />
+                          <CircularProgress
+                            style={{ marginRight: 10 }}
+                          />
                         )}
                       </Button>
                     </Box>
@@ -219,7 +239,10 @@ const OrderDetails = () => {
                   gridGap={10}
                   flex='2 2 190px'
                 >
-                  <Avatar variant='square' className={classes.orderItemImage}>
+                  <Avatar
+                    variant='square'
+                    className={classes.orderItemImage}
+                  >
                     <img
                       src={prodImg}
                       width='100%'
@@ -239,25 +262,31 @@ const OrderDetails = () => {
                     {order?.service?.service.description}
                   </Typography>
                 </Box>
-                {order.status === 'completed' && !order.service.review && (
-                  <Box className={classes.orderItems} flex='1 1 100px'>
-                    <Button
-                      variant='outlined'
-                      color='secondary'
-                      size='small'
-                      style={{ fontWeight: 400 }}
-                      onClick={handleAddReview}
-                      disabled={loading}
-                      data-id={order.service._id}
-                      data-type='service'
+                {order.status === 'completed' &&
+                  !order.service.review && (
+                    <Box
+                      className={classes.orderItems}
+                      flex='1 1 100px'
                     >
-                      Add Review{' '}
-                      {loading && (
-                        <CircularProgress style={{ marginRight: 10 }} />
-                      )}
-                    </Button>
-                  </Box>
-                )}
+                      <Button
+                        variant='outlined'
+                        color='secondary'
+                        size='small'
+                        style={{ fontWeight: 400 }}
+                        onClick={handleAddReview}
+                        disabled={loading}
+                        data-id={order.service._id}
+                        data-type='service'
+                      >
+                        Add Review{' '}
+                        {loading && (
+                          <CircularProgress
+                            style={{ marginRight: 10 }}
+                          />
+                        )}
+                      </Button>
+                    </Box>
+                  )}
               </Box>
             )}
           </Box>
@@ -309,7 +338,11 @@ const OrderDetails = () => {
           </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={toggleReviewOpen} color='primary' variant='outlined'>
+          <Button
+            onClick={toggleReviewOpen}
+            color='primary'
+            variant='outlined'
+          >
             Cancel
           </Button>
           <Button

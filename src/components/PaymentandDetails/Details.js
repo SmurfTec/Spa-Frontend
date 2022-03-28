@@ -28,17 +28,8 @@ const styles = makeStyles((theme) => ({
 
 const Details = ({ order }) => {
   console.log('order', order);
-
-  const orderNumber = '1AJH3H78';
-  const orderArrives = '27/9 - 29/10';
   const classes_g = useStyles();
   const classes = styles();
-  const productQuantity = 2;
-
-  let shippingAddress = 'asds';
-  let totalItems = 5;
-  let cartTotal = 1000;
-  let cartItems = [1, 2, 3];
 
   return (
     <>
@@ -51,11 +42,10 @@ const Details = ({ order }) => {
                 color='primary'
                 className={classes_g.fontWeight600}
               >
-                Your Orders ({totalItems}{' '}
-                {totalItems > 1 ? ` items` : ` item`})
+                Your Orders ({order?.products?.length} items)
               </Typography>
               <Typography variant='subtitle1' color='textSecondary'>
-                Order Number : {orderNumber}
+                Order Number : {order?._id}
               </Typography>
             </Box>
             <Box
@@ -69,57 +59,65 @@ const Details = ({ order }) => {
                 variant='subtitle1'
                 style={{ color: '#fff' }}
               >
-                Order Arrives : {orderArrives}
+                Order : {new Date(order.createdAt).toDateString()}
               </Typography>
             </Box>
             <Divider />
             <Box sx={{ overflowY: 'auto', maxHeight: 270 }}>
-              {/* {cartItems.map((el, index) => (
-                <>
-                  <Box
-                    mt={index !== 0 ? 2 : 0}
-                    mb={index < cartItems.length - 1 ? 2 : 0}
-                    key={el._id}
-                    display='flex'
-                    gridGap={15}
-                    alignItems='center'
-                  >
-                    <Box>
-                      <Avatar
-                        className={classes.avatar}
-                        variant='square'
-                      >
-                        <img
-                          src={image}
-                          alt={el.title}
-                          width='100%'
-                          height='100%'
-                        />
-                      </Avatar>
-                    </Box>
+              {order &&
+                order.products.length > 0 &&
+                order?.products.map((el, index) => (
+                  <>
                     <Box
+                      mt={index !== 0 ? 2 : 0}
+                      mb={index < order?.products - 1 ? 2 : 0}
+                      key={el._id}
                       display='flex'
-                      gridGap={5}
-                      flexDirection='column'
+                      gridGap={15}
+                      alignItems='center'
                     >
-                      <Typography variant='body2' color='textPrimary'>
-                        {el.title}
-                      </Typography>
-                      <Typography variant='body2' color='textPrimary'>
-                        Quantity :{` ${productQuantity}`}
-                      </Typography>
-                      <Typography
-                        variant='h5'
-                        color='primary'
-                        className={classes_g.lightText}
+                      <Box>
+                        <Avatar
+                          className={classes.avatar}
+                          variant='square'
+                        >
+                          <img
+                            src={image}
+                            alt={el.name}
+                            width='100%'
+                            height='100%'
+                          />
+                        </Avatar>
+                      </Box>
+                      <Box
+                        display='flex'
+                        gridGap={5}
+                        flexDirection='column'
                       >
-                        ${el.price}
-                      </Typography>
+                        <Typography
+                          variant='body2'
+                          color='textPrimary'
+                        >
+                          {el.product.name}
+                        </Typography>
+                        <Typography
+                          variant='body2'
+                          color='textPrimary'
+                        >
+                          Quantity :{el.quantity}
+                        </Typography>
+                        <Typography
+                          variant='h5'
+                          color='primary'
+                          className={classes_g.lightText}
+                        >
+                          ${Math.floor(el.product.price)}
+                        </Typography>
+                      </Box>
                     </Box>
-                  </Box>
-                  {index < cartItems.length - 1 && <Divider />}
-                </>
-              ))} */}
+                    <Divider />
+                  </>
+                ))}
             </Box>
           </Box>
         </Grid>
@@ -146,8 +144,7 @@ const Details = ({ order }) => {
                 gridGap={5}
               >
                 <Typography variant='caption'>
-                  {totalItems} {totalItems > 1 ? 'items' : 'item'}{' '}
-                  with shipping fee
+                  {order?.products?.length} with shipping fee
                 </Typography>
 
                 <Box
@@ -162,7 +159,7 @@ const Details = ({ order }) => {
                     className={classes_g.fontWeight600}
                     style={{ fontSize: '1.1rem' }}
                   >
-                    ${cartTotal}
+                    ${Math.floor(order?.total)}
                   </Typography>
                 </Box>
               </Box>
@@ -202,19 +199,18 @@ const Details = ({ order }) => {
                   flexDirection='column'
                   gridGap={3}
                 >
-                  {/* <Typography variant='body2' component='span'>
-                    Street : {shippingAddress.fullAddress.street}
+                  <Typography variant='body2' component='span'>
+                    Street : {order.shippingAddress.street}
                   </Typography>
                   <Typography variant='body2' component='span'>
-                    City : {shippingAddress.fullAddress.city}
+                    City : {order.shippingAddress.city}
                   </Typography>
                   <Typography variant='body2' component='span'>
-                    Country : {shippingAddress.fullAddress.country}
+                    Country : {order.shippingAddress.country}
                   </Typography>
                   <Typography variant='body2' component='span'>
-                    Postal Code :{' '}
-                    {shippingAddress.fullAddress.postalCode}
-                  </Typography> */}
+                    Postal Code : {order.shippingAddress.postalCode}
+                  </Typography>
                 </Box>
               </Box>
               <Divider />
@@ -229,7 +225,7 @@ const Details = ({ order }) => {
                 </Typography>
                 <Box px={2}>
                   <Typography variant='body2' component='span'>
-                    {shippingAddress.phone}
+                    {order.phoneNumber}
                   </Typography>
                 </Box>
               </Box>
@@ -245,7 +241,7 @@ const Details = ({ order }) => {
                 </Typography>
                 <Box px={2}>
                   <Typography variant='body2' component='span'>
-                    {shippingAddress.email}
+                    {order.email}
                   </Typography>
                 </Box>
               </Box>

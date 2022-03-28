@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Payment from './Payment';
 import Details from './Details';
-import { Box, Typography } from '@material-ui/core';
+import { Box, Grid, Typography } from '@material-ui/core';
 import useStyles from 'styles/commonStyles';
 import { getOrder } from 'store/slices/orders';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getmyOrders } from 'store/slices/orders/extraReducers';
+import { Skeleton } from '@material-ui/lab';
 
 const PaymentDetails = () => {
   const [check, setCheck] = useState(true);
@@ -28,6 +29,37 @@ const PaymentDetails = () => {
 
   console.log('ORDER...', order);
   console.log('loading...', loading);
+
+  if (loading || !order) {
+    return Array(1)
+      .fill()
+      .map((_, idx) => (
+        <Grid container spacing={5}>
+          <Grid item xs={12} sm={6}>
+            <Skeleton
+              style={{
+                marginBlock: '2rem',
+              }}
+              variant='rectangular'
+              animation='wave'
+              height={400}
+              key={idx}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Skeleton
+              style={{
+                marginBlock: '2rem',
+              }}
+              variant='rectangular'
+              animation='wave'
+              height={400}
+              key={idx}
+            />
+          </Grid>
+        </Grid>
+      ));
+  }
 
   return (
     <>
