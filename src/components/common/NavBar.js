@@ -151,7 +151,7 @@ const Navbar = (props) => {
                 </Link>
               </Typography>
               <Typography variant='subtitle2' noWrap>
-                <Link to='/contact-us'>Contact Us</Link>
+                <Link to='/contact'>Contact Us</Link>
               </Typography>
             </Box>
             <Box
@@ -277,11 +277,7 @@ const Navbar = (props) => {
               <Typography variant='subtitle1'>Blog</Typography>
             </ListItem>
           </Link>
-          <Link
-            to='/contactus'
-            className={classes_g.linkHover}
-            onClick={toggleSideBar}
-          >
+          <Link to='/contact' className={classes_g.linkHover}>
             <ListItem button>
               <Typography variant='subtitle1'>Contact Us</Typography>
             </ListItem>

@@ -48,6 +48,7 @@ const Wishlist = lazy(() => import('components/UserInfo/Wishlist'));
 const PaymentDetails = lazy(() =>
   import('components/PaymentandDetails/PaymentDetails')
 );
+const Contact = lazy(() => import('components/ContactUs'));
 
 const Router = () => {
   const { authenticating } = useSelector((st) => st.auth);
@@ -71,6 +72,14 @@ const Router = () => {
             element={
               <Suspense fallback={<Loading />}>
                 <HomePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path='/contact'
+            element={
+              <Suspense fallback={<Loading />}>
+                <Contact />
               </Suspense>
             }
           />
