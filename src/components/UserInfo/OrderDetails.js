@@ -43,8 +43,11 @@ const OrderDetails = () => {
   }));
 
   useEffect(() => {
-    if (loading) dispatch(getmyOrders());
+    if (loading || !order) {
+      dispatch(getmyOrders());
+    }
   }, [loading]);
+
 
   const toggleReviewOpen = () => {
     setOpen((st) => !st);
@@ -74,8 +77,6 @@ const OrderDetails = () => {
     // navigate to payment
   };
 
-  console.log('order', order);
-
   return (
     <>
       <Box
@@ -89,7 +90,7 @@ const OrderDetails = () => {
         <Typography variant='h5' className={classes_g.fontWeight600}>
           Order Details
         </Typography>
-        {order.status !== 'completed' && (
+        {order?.status !== 'completed' && (
           <Button
             variant='contained'
             color='secondary'
@@ -136,11 +137,11 @@ const OrderDetails = () => {
                 color='textPrimary'
                 component='span'
               >
-                {getMuiDateFormat(order.createdAt)}
+                {getMuiDateFormat(order?.createdAt)}
               </Typography>
             </Box>
 
-            <Chip color='warning'>{order.status}</Chip>
+            <Chip color='warning'>{order?.status}</Chip>
           </Box>
           <Box
             mt={2}
@@ -149,7 +150,7 @@ const OrderDetails = () => {
             borderRadius={8}
             px={1}
           >
-            {!order.serviceDate && order.products?.length > 0 ? (
+            {!order?.serviceDate && order?.products?.length > 0 ? (
               order.products.map((el) => (
                 <Box
                   display='flex'
@@ -189,7 +190,7 @@ const OrderDetails = () => {
                       {el.product.description}
                     </Typography>
                   </Box>
-                  {order.status === 'completed' && (
+                  {order?.status === 'completed' && (
                     <Box
                       className={classes.orderItems}
                       flex='1 1 100px'
@@ -234,19 +235,19 @@ const OrderDetails = () => {
                       src={prodImg}
                       width='100%'
                       height='100%'
-                      alt={order.service?.name}
+                      alt={order?.service?.name}
                     />
                   </Avatar>
                   <Typography
                     variant='subtitle2'
                     style={{ fontWeight: 500 }}
                   >
-                    {order.service?.service.name}
+                    {order?.service?.service.name}
                   </Typography>
                 </Box>
                 <Box className={classes.orderItems} flex='1 1 200px'>
                   <Typography variant='body2'>
-                    {order.service?.service.description}
+                    {order?.service?.service.description}
                   </Typography>
                 </Box>
                 <Box className={classes.orderItems} flex='1 1 100px'>

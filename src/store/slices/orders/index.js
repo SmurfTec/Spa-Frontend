@@ -40,7 +40,7 @@ const myOrdersSlice = createSlice({
       state.fetching = true;
     },
     [getmyOrders.fulfilled]: (state, { payload }) => {
-      // console.log('PAYLOAD', payload);
+      console.log('PAYLOAD', payload);
       state.fetching = false;
       myOrdersAdapter.addMany(state, payload);
     },

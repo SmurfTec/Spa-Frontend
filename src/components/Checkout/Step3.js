@@ -30,7 +30,6 @@ const styles = makeStyles((theme) => ({
       gap: 5,
     },
   },
-
   greenAvatar: {
     backgroundColor: theme.palette.success.dark,
   },
@@ -54,7 +53,7 @@ const PaymentStep = ({
   const [state, setState] = useState(0);
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} style={{ border: '1px solid red' }}>
       <Grid item xs={12} sm={7} className={classes.formGrid}>
         <Box
           display='flex'
@@ -107,10 +106,15 @@ const PaymentStep = ({
                   <Avatar className={classes.greenAvatar}>
                     <AssignmentTurnedInIcon />
                   </Avatar>
-                  <Typography variant='subtitle1'>We accept</Typography>
+                  <Typography variant='subtitle1'>
+                    We accept
+                  </Typography>
                 </Box>
                 <Box display='flex' gridGap={15}>
-                  <Avatar variant='square' className={classes_g.avatar}>
+                  <Avatar
+                    variant='square'
+                    className={classes_g.avatar}
+                  >
                     <img
                       src={express}
                       alt='American Express'
@@ -118,7 +122,10 @@ const PaymentStep = ({
                       height='100%'
                     />
                   </Avatar>
-                  <Avatar variant='square' className={classes_g.avatar}>
+                  <Avatar
+                    variant='square'
+                    className={classes_g.avatar}
+                  >
                     <img
                       src={masterCard}
                       alt='Master Card'
@@ -126,14 +133,24 @@ const PaymentStep = ({
                       height='100%'
                     />
                   </Avatar>
-                  <Avatar variant='square' className={classes_g.avatar}>
-                    <img src={visa} alt='Visa' width='100%' height='100%' />
+                  <Avatar
+                    variant='square'
+                    className={classes_g.avatar}
+                  >
+                    <img
+                      src={visa}
+                      alt='Visa'
+                      width='100%'
+                      height='100%'
+                    />
                   </Avatar>
                 </Box>
               </Box>
 
               <Box width='100%'>
-                <Typography variant='subtitle1'>*Name on Card</Typography>
+                <Typography variant='subtitle1'>
+                  *Name on Card
+                </Typography>
                 <TextField
                   margin='dense'
                   value=''
@@ -145,7 +162,9 @@ const PaymentStep = ({
                 />
               </Box>
               <Box width='100%'>
-                <Typography variant='subtitle1'>*Card Number</Typography>
+                <Typography variant='subtitle1'>
+                  *Card Number
+                </Typography>
                 <TextField
                   margin='dense'
                   value=''
@@ -159,7 +178,9 @@ const PaymentStep = ({
               <Box width='100%'>
                 <Box display='flex' alignItems='center' gridGap={15}>
                   <Box flex={1}>
-                    <Typography variant='subtitle1'>*Expire Date</Typography>
+                    <Typography variant='subtitle1'>
+                      *Expire Date
+                    </Typography>
                     <TextField
                       margin='dense'
                       value=''
@@ -172,7 +193,9 @@ const PaymentStep = ({
                   </Box>
                   <Box flex={1}>
                     <Box>
-                      <Typography variant='subtitle1'>*CVV</Typography>
+                      <Typography variant='subtitle1'>
+                        *CVV
+                      </Typography>
                       <TextField
                         margin='dense'
                         value=''
@@ -200,7 +223,9 @@ const PaymentStep = ({
                   // onChange={(e) => handleToggleChange(e)}
                   style={{ boxShadow: 'none', padding: 0 }}
                 />
-                <Typography variant='body1'>Remember my details</Typography>
+                <Typography variant='body1'>
+                  Remember my details
+                </Typography>
               </Box>
             </>
           ) : (
@@ -234,7 +259,12 @@ const PaymentStep = ({
                   >
                     Address
                   </Typography>
-                  <Box display='flex' px={2} flexDirection='column' gridGap={3}>
+                  <Box
+                    display='flex'
+                    px={2}
+                    flexDirection='column'
+                    gridGap={3}
+                  >
                     <Typography variant='body2' component='span'>
                       Street : {shippingAddress.fullAddress.street}
                     </Typography>
@@ -245,7 +275,8 @@ const PaymentStep = ({
                       Country : {shippingAddress.fullAddress.country}
                     </Typography>
                     <Typography variant='body2' component='span'>
-                      Postal Code : {shippingAddress.fullAddress.postalCode}
+                      Postal Code :{' '}
+                      {shippingAddress.fullAddress.postalCode}
                     </Typography>
                   </Box>
                 </Box>
@@ -312,11 +343,15 @@ const PaymentStep = ({
               gridGap={5}
             >
               <Typography variant='caption'>
-                {totalItems} {totalItems > 1 ? 'items' : 'item'} with shipping
-                fee
+                {totalItems} {totalItems > 1 ? 'items' : 'item'} with
+                shipping fee
               </Typography>
 
-              <Box display='flex' justifyContent='space-between' gridGap={5}>
+              <Box
+                display='flex'
+                justifyContent='space-between'
+                gridGap={5}
+              >
                 <Typography variant='h5'>Total Amount</Typography>
                 <Typography
                   variant='subtitle1'

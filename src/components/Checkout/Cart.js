@@ -32,6 +32,8 @@ import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
 import { removeFromCart } from 'store/slices/cart';
 import { createOrder } from 'store/slices/orders/extraReducers';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const shippingFields = [
   { label: 'Address', name: 'address', icon: <LocationOnIcon /> },
@@ -60,6 +62,7 @@ const CartStep = ({
   const classes_g = globalStyles();
   const classes = styles();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [isEditing, toggle] = useToggleInput(false);
   const [editField, setEditField] = useState(-1);
@@ -84,9 +87,23 @@ const CartStep = ({
 
   const handleProceedToPay = () => {
     // console.log('Proceed to pay', cart);
-    dispatch(createOrder(cart));
-    validateStep();
+    dispatch(createOrder(cart)).then((value) => {
+      console.log('Value', value);
+      if (value.error) {
+        toast.error(
+          value.payload.message
+            ? value.payload.message
+            : 'Something went wrong'
+        );
+      } else {
+        setTimeout(() => {
+          navigate(`orderDetails/${value.payload._id}`);
+        }, 500);
+        console.log('Success');
+      }
+    });
   };
+
   return (
     <>
       {/* // ^ Cart Items  */}

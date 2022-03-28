@@ -38,10 +38,13 @@ const Orders = () => {
   }));
 
   useEffect(() => {
-    if (loading) {
+    if (loading || !orders) {
       dispatch(getmyOrders());
     }
   }, [dispatch]);
+
+  console.log('orders', orders);
+  console.log('loading', loading);
 
   useEffect(() => {
     setFilteredOrders(

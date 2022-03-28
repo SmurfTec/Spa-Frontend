@@ -189,7 +189,7 @@ const Checkout = () => {
       )}
     >
       <Box display='flex' alignItems='center' gridGap={15}>
-        {activeStep > 0 && activeStep < 3 && (
+        {activeStep > 0 && activeStep <= 3 && (
           <>
             <IconButton
               onClick={handleBack}
