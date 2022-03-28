@@ -104,11 +104,11 @@ const myOrdersSlice = createSlice({
       state.loading = true;
     },
     [addReview.fulfilled]: (state, { payload }) => {
-      // console.log('PAYLOAD', payload);
+      console.log('PAYLOAD', payload);
       state.loading = false;
       state.isOpen = true;
       myOrdersAdapter.updateOne(state, {
-        id: payload.post._id,
+        id: payload._id,
         changes: { ...payload },
       });
       toast.success('Success');
