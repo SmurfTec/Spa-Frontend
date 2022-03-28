@@ -348,226 +348,44 @@ const SingleProdServ = ({ type }) => {
           </Grid>
         </Grid>
       )}
-      <div
-        className={
-          type === 'product' ? classes.prodViewWrapper : classes.servViewWrapper
-        }
-      >
-        {/* //^ Product View  */}
-        {type === 'product' ? (
-          <>
-            <div>
+
+      <div className={classes.prodViewWrapper}>
+        <div>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={12}>
+              <Card sx={{ boxShadow: 'none', borderRadius: 1 }}>
+                <CardMedia
+                  className={classes.cardMedia}
+                  image={value.images[0]?.url}
+                  data-image={value.images[0]?.url}
+                  onClick={handleImageClick}
+                />
+              </Card>
+            </Grid>
+            <Grid item xs={12} sm={12}>
               <Grid container spacing={2}>
-                <Grid item xs={8} sm={12}>
-                  <Card sx={{ boxShadow: 'none', borderRadius: 1 }}>
-                    <CardMedia
-                      className={classes.cardMedia}
-                      image={prod2}
-                      data-image={value?.image}
-                      onClick={handleImageClick}
-                    />
-                  </Card>
-                  {/* <Box
-                  display='flex'
-                  justify-content='center'
-                  sx={{
-                    webkitBoxPack: 'center',
-                  }}
-                >
-                  <span className={classes.prodImgWrapper}>
-                    <img
-                      src={prod4}
-                      alt={state?.prodServ?.title}
-                      height='100%'
-                      width='100%'
-                    />
-                  </span>
-                </Box> */}
-                </Grid>
-                <Grid item xs={8} sm={12}>
-                  <Grid container spacing={2}>
-                    {[...Array(3)].map((_, index) => (
-                      <Grid item xs={4} sm={4} key={index}>
-                        <Card
-                          sx={{
-                            boxShadow: 'none',
-                            borderRadius: 1,
-                          }}
-                        >
-                          <CardMedia
-                            className={classes.cardMediaSm}
-                            image={`${prod2}`}
-                            data-image={value.image}
-                            onClick={handleImageClick}
-                          />
-                        </Card>
-                      </Grid>
-                    ))}
+                {value.images.slice(1).map((img) => (
+                  <Grid item xs={4} sm={4} key={img}>
+                    <Card
+                      sx={{
+                        boxShadow: 'none',
+                        borderRadius: 1,
+                      }}
+                    >
+                      <CardMedia
+                        className={classes.cardMediaSm}
+                        image={img.url}
+                        data-image={img.url}
+                        onClick={handleImageClick}
+                      />
+                    </Card>
                   </Grid>
-                </Grid>
+                ))}
               </Grid>
-            </div>
-            <div>
-              {value ? (
-                value === 404 ? (
-                  <Navigate to='/' />
-                ) : (
-                  <>
-                    <Box width='100%' display='flex' flexDirection='column'>
-                      <Box
-                        display='flex'
-                        flexDirection='column'
-                        gridGap='0.5em'
-                      >
-                        <Box display='flex' alignItems='center' gridGap='2em'>
-                          <Typography
-                            variant='h5'
-                            component='span'
-                            className={classes_g.lightText}
-                          >
-                            {value.name}
-                          </Typography>
-                          <Typography
-                            variant='subtitle1'
-                            component='span'
-                            color='textSecondary'
-                            className={classes_g.lightText}
-                          >
-                            (100ml)
-                          </Typography>
-                        </Box>
-                        <Box display='flex' gridGap={10} alignItems='center'>
-                          <Rating value={4} readOnly size='small' />
-                          <Typography
-                            variant='subtitle1'
-                            className={classes_g.lightText}
-                          >
-                            {state.prodServ.rating}
-                          </Typography>
-                        </Box>
-                        <Typography variant='h5' sx={{ mt: 1 }}>
-                          {state.prodServ.price}
-                        </Typography>
-                      </Box>
-
-                      <Typography variant='body2' sx={{ mt: 1 }}>
-                        {faker.lorem.sentences(2)}
-                      </Typography>
-                      <Box
-                        my={2}
-                        display='flex'
-                        gridGap='1em'
-                        justifyContent='space-between'
-                        alignItems='center'
-                      >
-                        <div className={classes.quantBtnWrapper}>
-                          <IconButton
-                            color='primary'
-                            disabled={state.quantity <= 1}
-                            onClick={decreaseNoOfItems}
-                          >
-                            <RemoveRounded />
-                          </IconButton>
-                          <Typography
-                            variant='subtitle1'
-                            style={{ fontWeight: 600 }}
-                            sx={{ userSelect: 'none' }}
-                          >
-                            {state.quantity}
-                          </Typography>
-                          <IconButton
-                            color='primary'
-                            onClick={increaseNoOfItems}
-                            disabled={state.quantity >= 10}
-                          >
-                            <Addrounded />
-                          </IconButton>
-                        </div>
-                        <Box sx={{ flexShrink: 0 }}>
-                          <Typography
-                            variant='subtitle1'
-                            component='span'
-                            className={classes_g.lightText}
-                            sx={{ userSelect: 'none' }}
-                          >
-                            Status :
-                          </Typography>{' '}
-                          <Typography
-                            variant='subtitle1'
-                            component='span'
-                            className={clsx(
-                              classes_g.lightText,
-                              classes.statusLabel
-                            )}
-                            sx={{ userSelect: 'none' }}
-                          >
-                            {status}
-                          </Typography>
-                        </Box>
-                      </Box>
-                      <Box>
-                        <Button
-                          variant='contained'
-                          color='secondary'
-                          sx={{ mt: 3 }}
-                          onClick={handleAddToCart}
-                          endIcon={<ShoppingCartIcon />}
-                        >
-                          ADD TO CART
-                        </Button>
-                      </Box>
-                    </Box>
-                    <Box mt={2}>
-                      <Tabs
-                        value={tabValue}
-                        onChange={handleTabChange}
-                        indicatorColor='primary'
-                        className={classes_g.tabs}
-                      >
-                        <Tab label='Review' {...a11yProps(0)} />
-                        <Tab {...a11yProps(1)} label='Related Products' />
-                      </Tabs>
-                    </Box>
-                  </>
-                )
-              ) : (
-                <div>
-                  <Typography variant='h3'>
-                    <Skeleton variant='text' />
-                  </Typography>
-                  <Typography variant='h4' color='textSecondary' sx={{ mt: 1 }}>
-                    <Skeleton variant='text' />
-                  </Typography>
-                  <Typography variant='h5' sx={{ mt: 1 }}>
-                    <Skeleton variant='text' />
-                  </Typography>
-                  <Typography variant='body1' sx={{ mt: 3 }}>
-                    <Skeleton variant='text' />
-                  </Typography>
-
-                  <Box
-                    sx={{
-                      mt: 5,
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: 2,
-                      width: '100%',
-                    }}
-                  >
-                    <Skeleton variant='rect' />
-                  </Box>
-
-                  <Skeleton variant='text' />
-                </div>
-              )}
-            </div>
-          </>
-        ) : (
-          //^ Service View
-          <>
-            <div>
-              <div className={classes.serviceImg}>
-                <div
+            </Grid>
+          </Grid>
+        </div>
+        {/* <div
                   style={{
                     display: 'inline-block',
                     maxWidth: '100%',
@@ -624,131 +442,128 @@ const SingleProdServ = ({ type }) => {
                       objectFit: 'contain',
                     }}
                   />
-                </div>
-              </div>
-            </div>
-            <div>
-              <Box display='flex' flexDirection='column' gridGap='0.5em'>
-                <Typography variant='h4' className={classes_g.lightText}>
-                  {value.name}
-                </Typography>
+                </div> */}{' '}
+        <div>
+          <Box width='100%' display='flex' flexDirection='column'>
+            <Typography variant='h4' className={classes_g.lightText}>
+              {value.name}
+            </Typography>
 
-                <Box display='flex' gridGap={10} alignItems='center'>
-                  <Rating value={4} readOnly />
-                  <Typography variant='h5' className={classes_g.lightText}>
-                    {value.rating}
-                  </Typography>
-                </Box>
-
-                <Typography variant='body1' color='textPrimary'>
-                  {value.price}
-                </Typography>
-
-                <Typography variant='h4' sx={{ mt: 1, fontWeight: 500 }}>
-                  {value.info}
-                </Typography>
-              </Box>
-
-              <Typography variant='body1' sx={{ mt: 1 }}>
-                {value.description}
+            <Box display='flex' gridGap={10} alignItems='center'>
+              <Rating value={4} readOnly />
+              <Typography variant='h5' className={classes_g.lightText}>
+                {value.rating}
               </Typography>
+            </Box>
 
-              <Box
-                display='flex'
-                flexWrap='wrap'
-                gridGap={15}
-                className={classes.servOptions}
+            <Typography variant='body1' color='textPrimary'>
+              {value.price}
+            </Typography>
+
+            <Typography variant='h4' sx={{ mt: 1, fontWeight: 500 }}>
+              {value.info}
+            </Typography>
+          </Box>
+
+          <Typography variant='body1' sx={{ mt: 1 }}>
+            {value.description}
+          </Typography>
+
+          <Box
+            display='flex'
+            flexWrap='wrap'
+            gridGap={15}
+            className={classes.servOptions}
+          >
+            <TextField
+              name='checkIn'
+              label='Check In'
+              variant='outlined'
+              type='date'
+              format='mm/dd/yyyy'
+              value={state.checkIn}
+              onChange={handleTxtChange}
+              // className={classes.textField}
+              // fullWidth
+
+              ops={{
+                shrink: true,
+              }}
+            />
+            <FormControl variant='outlined'>
+              <InputLabel htmlFor='outlined-age-native-simple'>
+                Guest
+              </InputLabel>
+              <Select
+                value={state.guests}
+                onChange={handleGuests}
+                variant='outlined'
+                label='Guests'
+                fullWidth
               >
-                <TextField
-                  name='checkIn'
-                  label='Check In'
-                  variant='outlined'
-                  type='date'
-                  format='mm/dd/yyyy'
-                  value={state.checkIn}
-                  onChange={handleTxtChange}
-                  // className={classes.textField}
-                  // fullWidth
+                {dropDownNumbers.map((el) => (
+                  <MenuItem value={el} key={el}>
+                    {el}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
 
-                  ops={{
-                    shrink: true,
+          <Box display='flex' flexWrap='wrap' gridGap='15px'>
+            {value.slots[slotDay]?.slots.length > 0 ? (
+              value.slots[slotDay].slots.map((el) => (
+                <Typography
+                  onClick={() => {
+                    if (isSlotDisabled(el) === false) selectElement(el);
                   }}
-                />
-                <FormControl variant='outlined'>
-                  <InputLabel htmlFor='outlined-age-native-simple'>
-                    Guest
-                  </InputLabel>
-                  <Select
-                    value={state.guests}
-                    onChange={handleGuests}
-                    variant='outlined'
-                    label='Guests'
-                    fullWidth
-                  >
-                    {dropDownNumbers.map((el) => (
-                      <MenuItem value={el} key={el}>
-                        {el}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-
-              <Box display='flex' flexWrap='wrap' gridGap='15px'>
-                {value.slots[slotDay]?.slots.length > 0 ? (
-                  value.slots[slotDay].slots.map((el) => (
-                    <Typography
-                      onClick={() => {
-                        if (isSlotDisabled(el) === false) selectElement(el);
-                      }}
-                      className={`${classes.slotBtn} ${
-                        !!selectedSlots.find((st) => st._id === el._id) &&
-                        'selected'
-                      } ${isSlotDisabled(el) === true && 'disabled'}`}
-                    >
-                      {el.from} - {el.to}
-                    </Typography>
-                  ))
-                ) : (
-                  <Typography variant='body2'>No Slot for this day.</Typography>
-                )}
-              </Box>
-
-              <Box>
-                <Button
-                  color='primary'
-                  sx={{ mt: 3 }}
-                  onClick={handleBook}
-                  endIcon={<BookIcon />}
-                  disabled={!selectedSlots.length}
+                  className={`${classes.slotBtn} ${
+                    !!selectedSlots.find((st) => st._id === el._id) &&
+                    'selected'
+                  } ${isSlotDisabled(el) === true && 'disabled'}`}
                 >
-                  Book Now
-                </Button>
-              </Box>
+                  {el.from} - {el.to}
+                </Typography>
+              ))
+            ) : (
+              <Typography variant='body2'>No Slot for this day.</Typography>
+            )}
+          </Box>
 
-              <Box mt={2}>
-                <Tabs
-                  value={tabValue}
-                  onChange={handleTabChange}
-                  indicatorColor='primary'
-                  className={classes.tabs}
-                >
-                  <Tab label='Review' {...a11yProps(0)} />
-                  <Tab
-                    {...a11yProps(1)}
-                    // className={
-                    //   tabValue === 1
-                    //     ? classes.ActiveTab
-                    //     : classes.InActiveTab
-                    // }
-                    label='Related Services'
-                  />
-                </Tabs>
-              </Box>
-            </div>
-          </>
-        )}
+          <Box>
+            <Button
+              color='primary'
+              sx={{ mt: 3 }}
+              onClick={handleBook}
+              endIcon={<BookIcon />}
+              disabled={!selectedSlots.length}
+            >
+              Book Now
+            </Button>
+          </Box>
+
+          <Box mt={2}>
+            <Tabs
+              value={tabValue}
+              onChange={handleTabChange}
+              indicatorColor='primary'
+              className={classes.tabs}
+            >
+              <Tab label='Review' {...a11yProps(0)} />
+              <Tab
+                {...a11yProps(1)}
+                // className={
+                //   tabValue === 1
+                //     ? classes.ActiveTab
+                //     : classes.InActiveTab
+                // }
+                label='Related Services'
+              />
+            </Tabs>
+          </Box>
+        </div>
       </div>
+
       <TabPanel className={classes.TabPanel} value={tabValue} index={0}>
         {value.reviews && value.reviews.length > 0 ? (
           value.reviews.map((el) => <Review {...el} key={el.user._id} />)
