@@ -163,6 +163,22 @@ const styles = makeStyles((theme) => ({
     border: `1px solid #eee`,
     padding: '2em',
   },
+
+  slotBtn: {
+    border: '1px solid #ccc',
+    padding: 5,
+    cursor: 'pointer',
+    borderRadius: 5,
+    '&.disabled': {
+      cursor: 'not-allowed',
+    },
+    '&.selected': {
+      background: 'lightblue !important',
+    },
+    '&:hover': {
+      background: 'whitesmoke',
+    },
+  },
 }));
 
 export default styles;

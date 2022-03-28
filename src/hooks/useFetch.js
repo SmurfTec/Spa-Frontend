@@ -11,6 +11,8 @@ export default function useFetch(url, options = {}, dependencies = [], key) {
         return res.json().then((json) => {
           // * json is { status : 'success' , user : { id :sadas , name "" , ...}}
           // * if key is user, we have to return json.user
+
+          console.log('key', key);
           if (key) {
             return Promise.resolve(json[key]);
           } else return Promise.resolve(json);
@@ -19,4 +21,3 @@ export default function useFetch(url, options = {}, dependencies = [], key) {
     });
   }, dependencies);
 }
-
