@@ -31,9 +31,6 @@ const Checkout = () => {
   const [activeStep, setActiveStep] = useState(-1);
   const steps = getSteps();
   const dispatch = useDispatch();
-
-  // const type = 'product';
-  // const steps = getSteps();
   const { products } = useSelector((st) => st.cart);
 
   const initialState = {
@@ -43,7 +40,7 @@ const Checkout = () => {
       street: '...',
       city: '...',
       country: '...',
-      postalCode: 123,
+      postalCode: '...',
     },
     email: 'abc@gmail.com',
     phoneNumber: 9231232133,
@@ -124,6 +121,8 @@ const Checkout = () => {
   const validateStep3 = () => {
     handleNext();
   };
+
+  console.log('cartState', cartState);
 
   const getStepContent = useMemo(() => {
     switch (activeStep) {

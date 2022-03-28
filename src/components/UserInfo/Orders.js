@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   Avatar,
   Box,
+  Button,
   Grid,
   Table,
   TableBody,
@@ -43,13 +44,15 @@ const Orders = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    setFilteredOrders(orders.filter((order) => order.status !== 'completed'));
+    setFilteredOrders(
+      orders.filter((order) => order.status !== 'completed')
+    );
   }, [orders]);
 
-  // const showOrderDetails = (e) => {
-  //   const { orderid } = e.currentTarget.dataset;
-  //   navigate(`/customer/orders/${orderid}`);
-  // };
+  const showOrderDetails = (e) => {
+    const { orderid } = e.currentTarget.dataset;
+    navigate(`/customer/orders/${orderid}`);
+  };
 
   return (
     <Box style={{ minHeight: 745 }}>
@@ -98,18 +101,23 @@ const Orders = () => {
                       hover
                       key={order._id}
                       className={classes.tableBodyRow}
-                      // onClick={showOrderDetails}
-                      // data-orderid={order._id}
+                      onClick={showOrderDetails}
+                      data-orderid={order._id}
                     >
                       <TableCell>
-                        <Typography variant='subtitle2'>{order._id}</Typography>
+                        <Typography variant='subtitle2'>
+                          {order._id}
+                        </Typography>
                       </TableCell>
                       <TableCell>
                         <Typography variant='subtitle2'>
                           {order.serviceDate ? 'Service' : 'Product'}
                         </Typography>
                       </TableCell>
-                      <TableCell align='center' className={classes.chipCell}>
+                      <TableCell
+                        align='center'
+                        className={classes.chipCell}
+                      >
                         {/* <Chip size='small' label={order.status} color='primary' /> */}
                         <Chip color='warning'>{order.status}</Chip>
                       </TableCell>
@@ -120,7 +128,9 @@ const Orders = () => {
                         </Typography>
                       </TableCell>
                       <TableCell align='right'>
-                        <Typography variant='body2'>${order.total}</Typography>
+                        <Typography variant='body2'>
+                          ${Math.floor(order.total)}
+                        </Typography>
                       </TableCell>
                     </TableRow>
                   );

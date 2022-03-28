@@ -16,9 +16,9 @@ export const createOrder = createAsyncThunk(
   'order/create',
   async (request, { rejectWithValue }) => {
     console.log('REQUEST', request);
-    // return makeReq('/orders', { body: request }, 'POST')
-    //   .then((resData) => resData.order)
-    //   .catch((err) => rejectWithValue(err));
+    return makeReq('/orders', { body: request }, 'POST')
+      .then((resData) => resData.order)
+      .catch((err) => rejectWithValue(err));
   }
 );
 

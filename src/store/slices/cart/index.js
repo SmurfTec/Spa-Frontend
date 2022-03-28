@@ -14,8 +14,6 @@ if (Cart?.products?.length > 0) {
   };
 }
 
-console.log('initialState', initialState);
-
 const myCartSlice = createSlice({
   name: 'cart',
   initialState,

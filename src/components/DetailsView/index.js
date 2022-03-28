@@ -107,30 +107,14 @@ const SingleProdServ = (props) => {
 
   const [state, handleTxtChange, , changeInput, , setState] =
     useManyInputs(initialState);
+  const [tabValue, setTabValue] = React.useState(1);
 
   // const [isOpen, toggleOpen] = useToggleInput(false); // done
-  const [tabValue, setTabValue] = React.useState(1);
   // const [checkIn, setCheckIn] = React.useState(getMuiDateFormat());
-
   // const { addItemToCart, userOrders } = useContext(StoreContext);
 
   const { id, type } = useParams();
 
-  // let {
-  //   value: auction,
-  //   loading,
-  //   error,
-  //   setValue: setAuction,
-  // } = useFetch(
-  //   `${API_BASE_URL}/products/${id}`,
-  //   {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   },
-  //   [id],
-  //   'product'
-  // );
   let {
     error,
     loading,
@@ -147,7 +131,7 @@ const SingleProdServ = (props) => {
     'product'
   );
 
-  console.log('value', error, loading, value);
+  console.log('value', value);
 
   useEffect(() => {
     if (type === 'product') {

@@ -7,7 +7,13 @@ import DoneIcon from '@material-ui/icons/Done';
 import CloseIcon from '@material-ui/icons/Close';
 import { useManyInputs } from 'hooks';
 
-const EditField = ({ classes, name, value, editedValue, toggleEditForm }) => {
+const EditField = ({
+  classes,
+  name,
+  value,
+  editedValue,
+  toggleEditForm,
+}) => {
   const initialAddress = {
     street: '',
     city: '',
@@ -15,7 +21,8 @@ const EditField = ({ classes, name, value, editedValue, toggleEditForm }) => {
     postalCode: 12,
   };
   const [fieldValue, handleChange, reset] = useTextInput(value);
-  const [inputState, handleTxtChange, , , , ,] = useManyInputs(initialAddress);
+  const [inputState, handleTxtChange, , , , ,] =
+    useManyInputs(initialAddress);
 
   return (
     <form
@@ -49,6 +56,7 @@ const EditField = ({ classes, name, value, editedValue, toggleEditForm }) => {
                 placeholder='Street'
                 variant='outlined'
                 margin='dense'
+                required
                 fullWidth
                 autoFocus
               />
@@ -59,6 +67,7 @@ const EditField = ({ classes, name, value, editedValue, toggleEditForm }) => {
                 value={inputState.city}
                 onChange={handleTxtChange}
                 placeholder='City'
+                required
                 fullWidth
                 variant='outlined'
               />
@@ -69,6 +78,7 @@ const EditField = ({ classes, name, value, editedValue, toggleEditForm }) => {
                 value={inputState.country}
                 onChange={handleTxtChange}
                 placeholder='Country'
+                required
                 fullWidth
                 variant='outlined'
               />
@@ -77,8 +87,9 @@ const EditField = ({ classes, name, value, editedValue, toggleEditForm }) => {
                 name='postalCode'
                 value={inputState.postalCode}
                 onChange={handleTxtChange}
-                type='number'
+                type='string'
                 placeholder='Postal Code'
+                required
                 fullWidth
                 variant='outlined'
               />
@@ -92,6 +103,7 @@ const EditField = ({ classes, name, value, editedValue, toggleEditForm }) => {
             type={name === 'email' ? 'email' : 'number'}
             fullWidth
             autoFocus
+            required
             variant='outlined'
             placeholder={name}
           />

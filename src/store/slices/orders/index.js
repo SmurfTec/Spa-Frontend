@@ -40,7 +40,7 @@ const myOrdersSlice = createSlice({
       state.fetching = true;
     },
     [getmyOrders.fulfilled]: (state, { payload }) => {
-      console.log('PAYLOAD', payload);
+      // console.log('PAYLOAD', payload);
       state.fetching = false;
       myOrdersAdapter.addMany(state, payload);
     },
@@ -56,6 +56,9 @@ const myOrdersSlice = createSlice({
       console.log('payload', payload);
       state.loading = false;
       myOrdersAdapter.addOne(state, payload);
+      //* remove items from localStorage
+      localStorage.removeItem('spaCart');
+      toast.success('Order Created');
     },
     [createOrder.rejected]: (state) => {
       state.addingNew = false;
@@ -68,37 +71,16 @@ const myOrdersSlice = createSlice({
     },
     [updateOrder.fulfilled]: (state, { payload }) => {
       // console.log('PAYLOAD', payload);
-      toast.success('Success');
       state.loading = false;
       state.isOpen = true;
       myOrdersAdapter.updateOne(state, {
         id: payload.post._id,
         changes: { ...payload.post },
       });
-
-      //
-    },
-    [updateOrder.rejected]: (state) => {
-      state.loading = false;
-    },
-
-    //* AddReview
-    [addReview.pending]: (state) => {
-      state.loading = true;
-    },
-    [addReview.fulfilled]: (state, { payload }) => {
-      console.log('PAYLOAD', payload);
       toast.success('Success');
-      state.loading = false;
-      state.isOpen = true;
-      myOrdersAdapter.updateOne(state, {
-        id: payload.post._id,
-        changes: { ...payload },
-      });
-
-      //
     },
-    [addReview.rejected]: (state) => {
+
+    [updateOrder.rejected]: (state) => {
       state.loading = false;
     },
 
@@ -114,6 +96,24 @@ const myOrdersSlice = createSlice({
       toast.success('Order Deleted successfully');
     },
     [deleteOrder.rejected]: (state) => {
+      state.loading = false;
+    },
+
+    //* AddReview
+    [addReview.pending]: (state) => {
+      state.loading = true;
+    },
+    [addReview.fulfilled]: (state, { payload }) => {
+      // console.log('PAYLOAD', payload);
+      state.loading = false;
+      state.isOpen = true;
+      myOrdersAdapter.updateOne(state, {
+        id: payload.post._id,
+        changes: { ...payload },
+      });
+      toast.success('Success');
+    },
+    [addReview.rejected]: (state) => {
       state.loading = false;
     },
   },

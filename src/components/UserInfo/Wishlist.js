@@ -53,7 +53,9 @@ const Wishlist = () => {
     setTabValue(newValue);
   };
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
+
+  console.log('user', user);
 
   return (
     <Box style={{ minHeight: 745 }}>
@@ -83,9 +85,9 @@ const Wishlist = () => {
               classes_g.gridContainerFill
             )}
           >
-            {user.productFavourites.map((el) => (
+            {user?.productFavourites.map((el) => (
               <div key={el._id} className={classes_g.gridElement}>
-                <Card item={el} isPromo={false} />
+                <Card item={el} isPromo={false} wishlist={true} />
               </div>
             ))}
           </div>
@@ -105,9 +107,9 @@ const Wishlist = () => {
               classes_g.gridContainerFill
             )}
           >
-            {user.serviceFavourites.map((el) => (
+            {user?.serviceFavourites.map((el) => (
               <div key={el._id} className={classes_g.gridElement}>
-                <Card item={el} isPromo={false} />
+                <Card item={el} isPromo={false} wishlist={true} />
               </div>
             ))}
           </div>

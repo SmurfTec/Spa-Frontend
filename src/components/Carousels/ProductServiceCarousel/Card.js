@@ -29,7 +29,7 @@ import prodImg from 'assets/prod3.jpg';
 import { addToCart } from 'store/slices/cart';
 import { handleFavourities } from 'store/slices/Auth/extraReducers';
 
-const ProductCard = ({ item }) => {
+const ProductCard = ({ item, wishlist }) => {
   const { user } = useSelector((st) => st.auth);
   const dispatch = useDispatch();
   const classes = styles();
@@ -49,6 +49,8 @@ const ProductCard = ({ item }) => {
     vendor,
   } = item;
 
+  console.log('wishlist', wishlist);
+
   const navigate = useNavigate();
   const location = useLocation();
   const { type } = useParams();
@@ -67,7 +69,6 @@ const ProductCard = ({ item }) => {
       name,
       quantity: 1,
     };
-
     console.log('cartItem', cartItem);
     // dispatch(addToCart(cartItem));
   };
@@ -212,16 +213,18 @@ const ProductCard = ({ item }) => {
             </Button>
           )}
         </Box>
-        <IconButton
-          className={classes.favourite}
-          onClick={handleFavourite}
-        >
-          {isFavourite ? (
-            <Favorite style={{ color: '#67000e' }} />
-          ) : (
-            <UnFavorite style={{ color: '#111' }} />
-          )}
-        </IconButton>
+        {!wishlist && (
+          <IconButton
+            className={classes.favourite}
+            onClick={handleFavourite}
+          >
+            {isFavourite ? (
+              <Favorite style={{ color: '#67000e' }} />
+            ) : (
+              <UnFavorite style={{ color: '#111' }} />
+            )}
+          </IconButton>
+        )}
       </CardContent>
     </Card>
   );

@@ -31,6 +31,7 @@ import DoneIcon from '@material-ui/icons/Done';
 import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
 import { removeFromCart } from 'store/slices/cart';
+import { createOrder } from 'store/slices/orders/extraReducers';
 
 const shippingFields = [
   { label: 'Address', name: 'address', icon: <LocationOnIcon /> },
@@ -70,8 +71,6 @@ const CartStep = ({
     toggle();
   };
 
-  console.log('CART', cart);
-
   const handleQuantity = (e) => {
     console.log('E', e.target.value);
     setQuantityState(e.target.value);
@@ -84,14 +83,14 @@ const CartStep = ({
   };
 
   const handleProceedToPay = () => {
-    // create Order
-
+    // console.log('Proceed to pay', cart);
+    dispatch(createOrder(cart));
     validateStep();
   };
   return (
     <>
       {/* // ^ Cart Items  */}
-      {cart.products && cart.products.length > 0 && (
+      {cart.products && cart.products.length > 0 ? (
         <TableContainer>
           <Table className={classes.tableWrapper}>
             <TableHead className={classes.tableHeader}>
@@ -147,6 +146,29 @@ const CartStep = ({
                   </TableCell>
                 </TableRow>
               ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <TableContainer>
+          <Table className={classes.tableWrapper}>
+            <TableHead className={classes.tableHeader}>
+              <TableRow>
+                <TableCell />
+                <TableCell>Product</TableCell>
+                <TableCell>Price</TableCell>
+                <TableCell align='center'>Quantity</TableCell>
+                <TableCell align='center'>Subtotal</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell>No product Yet!</TableCell>
+                <TableCell>0</TableCell>
+                <TableCell align='center'>0</TableCell>
+                <TableCell align='center'>0</TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
@@ -345,6 +367,7 @@ const CartStep = ({
                       variant='contained'
                       endIcon={<DoneIcon />}
                       onClick={validateStep}
+                      disabled={cart.products.length === 0}
                     >
                       Proceed To Checkout
                     </Button>
@@ -360,28 +383,3 @@ const CartStep = ({
 };
 
 export default CartStep;
-
-// {
-//   /* //^ Promo Code */
-// }
-// {
-//   /* <Box display='flex' alignItems='center' gridGap='1em'>
-
-//         <FormControl
-//           variant='outlined'
-//           size='small'
-//           className={classes.customtextField}
-//         >
-//           <OutlinedInput
-//             name='promoCode'
-//             value={cart.promoCode}
-//             onChange={handleTxtChange}
-//             labelWidth={0}
-//             placeholder='Enter Promotion Code'
-//           />
-//         </FormControl>
-//         <Button color='primary' style={{ minWidth: 100 }}>
-//           Apply
-//         </Button>
-//       </Box> */
-// }
