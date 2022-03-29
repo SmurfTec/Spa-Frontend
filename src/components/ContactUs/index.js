@@ -1,10 +1,4 @@
-import {
-  Box,
-  Button,
-  Grid,
-  TextField,
-  Typography,
-} from '@material-ui/core';
+import { Box, Button, Grid, TextField, Typography } from '@material-ui/core';
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import useManyInputs from 'hooks/useManyInputs';
@@ -110,7 +104,7 @@ const ContactUs = () => {
                       fullWidth
                       variant='outlined'
                       required
-                      placeholder='The thing your mom calls you'
+                      placeholder='Your Name'
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
