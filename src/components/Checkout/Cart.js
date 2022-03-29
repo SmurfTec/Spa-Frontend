@@ -131,7 +131,7 @@ const CartStep = ({
                     </IconButton>
                   </TableCell>
                   <TableCell>{el.product.name}</TableCell>
-                  <TableCell>${el.product.price}</TableCell>
+                  <TableCell>${el.product.discountPrice}</TableCell>
                   {/* <TableCell align='center'>
                     {review ? (
                       2
@@ -159,7 +159,7 @@ const CartStep = ({
                   </TableCell> */}
                   <TableCell align='center'>{el.quantity}</TableCell>
                   <TableCell align='center'>
-                    ${el.product.price * el.quantity}
+                    ${el.product.discountPrice * el.quantity}
                   </TableCell>
                 </TableRow>
               ))}
@@ -203,10 +203,7 @@ const CartStep = ({
                   justifyContent='space-between'
                   gridGap={15}
                 >
-                  <Typography
-                    variant='h5'
-                    className={classes_g.fontWeight600}
-                  >
+                  <Typography variant='h5' className={classes_g.fontWeight600}>
                     Cart Total
                   </Typography>
                   {review && (
@@ -230,9 +227,7 @@ const CartStep = ({
                       gridGap={15}
                       className={classes.listDivider}
                     >
-                      <Box className={classes.iconColor}>
-                        {el.icon}
-                      </Box>
+                      <Box className={classes.iconColor}>{el.icon}</Box>
                       <div className={classes.dispFlex}>
                         {isEditing && editField === index ? (
                           <>
@@ -357,10 +352,7 @@ const CartStep = ({
                     className={classes.listDivider}
                   >
                     <Typography variant='h5'>Subtotal</Typography>
-                    <Typography
-                      variant='h5'
-                      className={classes_g.lightText}
-                    >
+                    <Typography variant='h5' className={classes_g.lightText}>
                       ${cart.subtotal}
                     </Typography>
                   </Box>
@@ -374,9 +366,7 @@ const CartStep = ({
                     className={classes_g.customGreyBack}
                   >
                     <Typography variant='h5'>Total</Typography>
-                    <Typography variant='h5'>
-                      ${cart.total}
-                    </Typography>
+                    <Typography variant='h5'>${cart.total}</Typography>
                   </Box>
                   <Box>
                     <Button

@@ -55,10 +55,7 @@ const Details = ({ order }) => {
               bgcolor='primary.main'
               borderRadius={5}
             >
-              <Typography
-                variant='subtitle1'
-                style={{ color: '#fff' }}
-              >
+              <Typography variant='subtitle1' style={{ color: '#fff' }}>
                 Order : {new Date(order.createdAt).toDateString()}
               </Typography>
             </Box>
@@ -77,10 +74,7 @@ const Details = ({ order }) => {
                       alignItems='center'
                     >
                       <Box>
-                        <Avatar
-                          className={classes.avatar}
-                          variant='square'
-                        >
+                        <Avatar className={classes.avatar} variant='square'>
                           <img
                             src={image}
                             alt={el.name}
@@ -89,21 +83,11 @@ const Details = ({ order }) => {
                           />
                         </Avatar>
                       </Box>
-                      <Box
-                        display='flex'
-                        gridGap={5}
-                        flexDirection='column'
-                      >
-                        <Typography
-                          variant='body2'
-                          color='textPrimary'
-                        >
+                      <Box display='flex' gridGap={5} flexDirection='column'>
+                        <Typography variant='body2' color='textPrimary'>
                           {el.product.name}
                         </Typography>
-                        <Typography
-                          variant='body2'
-                          color='textPrimary'
-                        >
+                        <Typography variant='body2' color='textPrimary'>
                           Quantity :{el.quantity}
                         </Typography>
                         <Typography
@@ -111,7 +95,7 @@ const Details = ({ order }) => {
                           color='primary'
                           className={classes_g.lightText}
                         >
-                          ${Math.floor(el.product.price)}
+                          ${Math.floor(el.product.discountPrice)}
                         </Typography>
                       </Box>
                     </Box>
@@ -147,11 +131,7 @@ const Details = ({ order }) => {
                   {order?.products?.length} with shipping fee
                 </Typography>
 
-                <Box
-                  display='flex'
-                  justifyContent='space-between'
-                  gridGap={5}
-                >
+                <Box display='flex' justifyContent='space-between' gridGap={5}>
                   <Typography variant='h5'>Total Amount</Typography>
                   <Typography
                     variant='subtitle1'
@@ -180,12 +160,7 @@ const Details = ({ order }) => {
               >
                 Details
               </Typography>
-              <Box
-                display='flex'
-                flexDirection='column'
-                mb={1}
-                mt={1}
-              >
+              <Box display='flex' flexDirection='column' mb={1} mt={1}>
                 <Typography
                   variant='subtitle1'
                   component='span'
@@ -193,12 +168,7 @@ const Details = ({ order }) => {
                 >
                   Address
                 </Typography>
-                <Box
-                  display='flex'
-                  px={2}
-                  flexDirection='column'
-                  gridGap={3}
-                >
+                <Box display='flex' px={2} flexDirection='column' gridGap={3}>
                   <Typography variant='body2' component='span'>
                     Street : {order.shippingAddress.street}
                   </Typography>

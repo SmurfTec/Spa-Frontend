@@ -1,9 +1,5 @@
 import React, { useMemo } from 'react';
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-} from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   Card,
@@ -42,6 +38,7 @@ const ProductCard = ({ item, wishlist }) => {
     id,
     price,
     numReviews,
+    discountPrice,
     info,
     sale,
     showVendor,
@@ -65,7 +62,7 @@ const ProductCard = ({ item, wishlist }) => {
     e.preventDefault();
     const cartItem = {
       id,
-      price: price - discount,
+      price: discountPrice,
       name,
       quantity: 1,
     };
@@ -182,16 +179,12 @@ const ProductCard = ({ item, wishlist }) => {
           )}
           {showVendor && (
             <Typography variant='caption'>
-              {isService ? 'Service from ' : 'Product from '}{' '}
-              {vendor?.fullName}
+              {isService ? 'Service from ' : 'Product from '} {vendor?.fullName}
             </Typography>
           )}
         </Box>
 
-        <Box
-          component='span'
-          sx={{ textAlign: 'center', marginBlock: 5 }}
-        >
+        <Box component='span' sx={{ textAlign: 'center', marginBlock: 5 }}>
           {!isService ? (
             <Button
               variant='contained'
@@ -214,10 +207,7 @@ const ProductCard = ({ item, wishlist }) => {
           )}
         </Box>
         {!wishlist && (
-          <IconButton
-            className={classes.favourite}
-            onClick={handleFavourite}
-          >
+          <IconButton className={classes.favourite} onClick={handleFavourite}>
             {isFavourite ? (
               <Favorite style={{ color: '#67000e' }} />
             ) : (

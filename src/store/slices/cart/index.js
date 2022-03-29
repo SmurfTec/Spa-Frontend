@@ -34,8 +34,7 @@ const myCartSlice = createSlice({
               ? {
                   product,
                   quantity: el.quantity + quantity,
-                  subTotal:
-                    el.product.price * (el.quantity + quantity),
+                  subTotal: el.product.discountPrice * (el.quantity + quantity),
                 }
               : el
           );
@@ -49,7 +48,7 @@ const myCartSlice = createSlice({
             {
               product,
               quantity,
-              subTotal: product.price * quantity,
+              subTotal: product.discountPrice * quantity,
             },
           ];
           Cart = state;
@@ -63,9 +62,7 @@ const myCartSlice = createSlice({
       reducer: (state, action) => {
         const id = action.payload;
         let Cart;
-        state.products = state.products.filter(
-          (el) => el.product._id !== id
-        );
+        state.products = state.products.filter((el) => el.product._id !== id);
         Cart = state;
         localStorage.setItem('spaCart', JSON.stringify(Cart));
         toast.success(' Item removed from Cart successfully');

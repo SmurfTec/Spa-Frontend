@@ -57,14 +57,12 @@ const VendorProductsServices = () => {
         <div>
           <Box display='flex' gridColumnGap={5} alignItems='center'>
             <StarIcon />
-            <Typography variant='h5'>4.6 (580)</Typography>
+            <Typography variant='h5'>
+              {vendor.rating}({vendor.ratingsQuantity || 0})
+            </Typography>
           </Box>
           {/* // ? Should it be NavLink or button */}
-          <Typography
-            variant='subtitle2'
-            color='primary'
-            align='center'
-          >
+          <Typography variant='subtitle2' color='primary' align='center'>
             view Reviews
           </Typography>
         </div>

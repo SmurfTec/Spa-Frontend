@@ -187,10 +187,10 @@ const SingleProdServ = ({ type }) => {
         service: {
           service: value._id,
           guests: state.guests,
-          subTotal: value.price * state.guests,
+          subTotal: value.discountPrice * state.guests,
           slot: selectedSlots,
         },
-        total: value.price * state.guests,
+        total: value.discountPrice * state.guests,
         serviceDate: new Date(state.checkIn),
       })
     ).then((res) => {
@@ -457,7 +457,7 @@ const SingleProdServ = ({ type }) => {
             </Box>
 
             <Typography variant='body1' color='textPrimary'>
-              {value.price}
+              {value.discountPrice}
             </Typography>
 
             <Typography variant='h4' sx={{ mt: 1, fontWeight: 500 }}>

@@ -100,7 +100,7 @@ const OrderDetails = ({
                         color='primary'
                         className={classes_g.lightText}
                       >
-                        ${el.price}
+                        ${el.discountPrice}
                       </Typography>
                     </Box>
                   </Box>

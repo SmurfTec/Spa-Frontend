@@ -72,13 +72,13 @@ const CheckOutStep = ({
                     </IconButton>
                   </TableCell>
                   <TableCell>{el.title}</TableCell>
-                  <TableCell>{el.price}</TableCell>
+                  <TableCell>{el.discountPrice}</TableCell>
                   <TableCell align='center'>
                     {getMuiDateFormat(el.date)}
                   </TableCell>
                   <TableCell align='center'>2</TableCell>
                   <TableCell align='center'>
-                    {el.price * state.guests}
+                    {el.discountPrice * state.guests}
                   </TableCell>
                 </TableRow>
               ))}
@@ -108,10 +108,10 @@ const CheckOutStep = ({
                     </IconButton>
                   </TableCell>
                   <TableCell>{el.title}</TableCell>
-                  <TableCell>{el.price}</TableCell>
+                  <TableCell>{el.discountPrice}</TableCell>
                   <TableCell align='center'>1</TableCell>
                   <TableCell align='center'>
-                    {el.price * state.quantity}
+                    {el.discountPrice * state.quantity * 1}
                   </TableCell>
                 </TableRow>
               ))}
@@ -126,10 +126,7 @@ const CheckOutStep = ({
           <Grid item xs={12} sm={6}>
             <div className={classes.cartTotalInfo}>
               <div className={classes_g.customGreyBack}>
-                <Typography
-                  variant='h4'
-                  className={classes_g.fontWeight600}
-                >
+                <Typography variant='h4' className={classes_g.fontWeight600}>
                   Cart Total
                 </Typography>
               </div>
@@ -141,10 +138,7 @@ const CheckOutStep = ({
                 alignItems='center'
               >
                 <Typography variant='h5'>Address</Typography>
-                <Typography
-                  variant='h5'
-                  className={classes_g.lightText}
-                >
+                <Typography variant='h5' className={classes_g.lightText}>
                   {/* ${cart.subtotal} */}
                   $100
                 </Typography>
