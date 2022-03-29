@@ -385,65 +385,8 @@ const SingleProdServ = ({ type }) => {
             </Grid>
           </Grid>
         </div>
-        {/* <div
-                  style={{
-                    display: 'inline-block',
-                    maxWidth: '100%',
-                    overflow: 'hidden',
-                    position: 'relative',
-                    boxSizing: 'border-box',
-                    margin: 0,
-                  }}
-                >
-                  <div
-                    style={{
-                      boxSizing: 'border-box',
-                      display: 'block',
-                      maxWidth: '100%',
-                    }}
-                  >
-                    <img
-                      style={{
-                        maxWidth: '100%',
-                        display: 'block',
-                        margin: 0,
-                        border: 'none',
-                        padding: 0,
-                      }}
-                      alt=''
-                      aria-hidden='true'
-                      role='presentation'
-                      src={value.images?.[0]?.url}
-                    />
-                  </div>
-                  <img
-                    alt={state.prodServ.title}
-                    srcSet={`${value.images?.[1]?.url}`}
-                    src={`${value.images?.[1]?.url}`}
-                    decoding='async'
-                    // class='LazyImage-tufn0p-0 eIalbs'
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      bottom: 0,
-                      right: 0,
-                      boxSizing: 'border-box',
-                      padding: 0,
-                      border: 'none',
-                      margin: 'auto',
-                      display: 'block',
-                      width: 0,
-                      height: 0,
-                      minWidth: '100%',
-                      maxWidth: '100%',
-                      minHeight: '100%',
-                      maxHeight: '100%',
-                      objectFit: 'contain',
-                    }}
-                  />
-                </div> */}{' '}
-        <div>
+
+        <div style={{ gap: 15 }}>
           <Box width='100%' display='flex' flexDirection='column'>
             <Typography variant='h4' className={classes_g.lightText}>
               {value.name}
