@@ -67,7 +67,6 @@ const authSlice = createSlice({
       state.user = payload.user;
       state.token = payload.token;
       window.localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, payload.token);
-      toast.sucsess('Login successfully');
     },
     [login.rejected]: (state, { payload }) => {
       state.loading = false;

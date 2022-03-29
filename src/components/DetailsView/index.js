@@ -510,7 +510,14 @@ const SingleProdServ = ({ type }) => {
             </FormControl>
           </Box>
 
-          <Box display='flex' flexWrap='wrap' gridGap='15px'>
+          <Box
+            display='flex'
+            flexWrap='wrap'
+            gridGap='15px'
+            style={{
+              justifyContent: 'flex-start !important',
+            }}
+          >
             {value.slots[slotDay]?.slots.length > 0 ? (
               value.slots[slotDay].slots.map((el) => (
                 <Typography

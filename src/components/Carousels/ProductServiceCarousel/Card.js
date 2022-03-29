@@ -25,7 +25,7 @@ import prodImg from 'assets/prod3.jpg';
 import { addToCart } from 'store/slices/cart';
 import { handleFavourities } from 'store/slices/Auth/extraReducers';
 
-const ProductCard = ({ item, wishlist }) => {
+const ProductCard = ({ item, wishlist = true }) => {
   const { user } = useSelector((st) => st.auth);
   const dispatch = useDispatch();
   const classes = styles();
@@ -75,11 +75,11 @@ const ProductCard = ({ item, wishlist }) => {
     let condition = false;
     if (isService) {
       condition = Boolean(
-        user.serviceFavourites?.find((el) => el === item._id)
+        user.serviceFavourites?.find((el) => el._id === item._id)
       );
     } else {
       condition = Boolean(
-        user.productFavourites?.find((el) => el === item._id)
+        user.productFavourites?.find((el) => el._id === item._id)
       );
     }
 
@@ -206,15 +206,13 @@ const ProductCard = ({ item, wishlist }) => {
             </Button>
           )}
         </Box>
-        {!wishlist && (
-          <IconButton className={classes.favourite} onClick={handleFavourite}>
-            {isFavourite ? (
-              <Favorite style={{ color: '#67000e' }} />
-            ) : (
-              <UnFavorite style={{ color: '#111' }} />
-            )}
-          </IconButton>
-        )}
+        <IconButton className={classes.favourite} onClick={handleFavourite}>
+          {isFavourite ? (
+            <Favorite style={{ color: '#67000e' }} />
+          ) : (
+            <UnFavorite style={{ color: '#111' }} />
+          )}
+        </IconButton>
       </CardContent>
     </Card>
   );
