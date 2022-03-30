@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
-} from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { IconButton, Typography, Box } from '@material-ui/core';
 import { useManyInputs } from 'hooks';
 
@@ -20,6 +15,7 @@ import clsx from 'clsx';
 import { getTotal } from 'utils/constants';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart } from 'store/slices/cart';
+import { toast } from 'react-toastify';
 
 function getSteps() {
   return ['Cart', 'Cart', 'Payment Method', 'OrderDetails'];
@@ -119,6 +115,7 @@ const Checkout = () => {
   };
 
   const validateStep3 = () => {
+    toast.success('Order Paid Successfully');
     handleNext();
   };
 
@@ -182,20 +179,11 @@ const Checkout = () => {
   }, [activeStep, cartState, removeFromCart, handleEditedField]);
 
   return (
-    <div
-      className={clsx(
-        classes_g.componentSectionGap,
-        classes.stepIcon
-      )}
-    >
+    <div className={clsx(classes_g.componentSectionGap, classes.stepIcon)}>
       <Box display='flex' alignItems='center' gridGap={15}>
         {activeStep > 0 && activeStep <= 3 && (
           <>
-            <IconButton
-              onClick={handleBack}
-              color='primary'
-              size='small'
-            >
+            <IconButton onClick={handleBack} color='primary' size='small'>
               <NavigateBeforeIcon />
             </IconButton>
           </>

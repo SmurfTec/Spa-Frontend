@@ -119,23 +119,6 @@ const ProductDetails = (props) => {
         classes.root
       )}
     >
-      {/* {state.prodServ && isOpen && (
-        <Lightbox
-          mainSrc={[photoIndex]}
-          // mainSrc={images[0]}
-          nextSrc={images[(photoIndex + 1) % images.length]}
-          prevSrc={images[(photoIndex + images.length - 1) % images.length]}
-          onCloseRequest={toggleOpen}
-          onMovePrevRequest={() =>
-            setphotoIndex((st) => (st + images.length - 1) % images.length)
-          }
-          onMoveNextRequest={() =>
-            setphotoIndex((st) => (st + 1) % images.length)
-          }
-        />
-      )} */}
-      {/* <div> */}
-
       {loading ? (
         // ^ Skeleton
         <>
@@ -296,7 +279,7 @@ const ProductDetails = (props) => {
                     </Typography>
                   </Box>
                   <Box display='flex' gridGap={10} alignItems='center'>
-                    <Rating value={4} readOnly size='small' />
+                    <Rating value={product.rating} readOnly size='small' />
                     <Typography
                       variant='subtitle1'
                       className={classes_g.lightText}

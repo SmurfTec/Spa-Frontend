@@ -21,6 +21,8 @@ import express from 'assets/americanexpress.svg';
 import masterCard from 'assets/mastercard.svg';
 import visa from 'assets/visa.svg';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const styles = makeStyles((theme) => ({
   tabButtons: {
@@ -46,7 +48,8 @@ const Payment = ({ order }) => {
   const classes_g = globalStyles();
   const classes = styles();
   const [state, setState] = useState(0);
-
+  const { orderid } = useParams();
+  const navigate = useNavigate();
   let shippingAddress = 'asds';
   let totalItems = 5;
   let cartTotal = 1000;
@@ -55,15 +58,12 @@ const Payment = ({ order }) => {
 
   const handlePayment = () => {
     console.log('PAYMENT');
-    
+    toast.success('Order Paid Successfully');
+    navigate(`/customer/orders/${orderid}`);
   };
   return (
     <>
-      <Grid
-        container
-        spacing={2}
-        style={{ margin: '0rem 1rem 0rem' }}
-      >
+      <Grid container spacing={2} style={{ margin: '0rem 1rem 0rem' }}>
         <Grid item xs={12} sm={7} className={classes.formGrid}>
           <Box
             display='flex'
@@ -112,23 +112,14 @@ const Payment = ({ order }) => {
                   px={2}
                   py={1}
                 >
-                  <Box
-                    display='flex'
-                    alignItems='center'
-                    gridGap={15}
-                  >
+                  <Box display='flex' alignItems='center' gridGap={15}>
                     <Avatar className={classes.greenAvatar}>
                       <AssignmentTurnedInIcon />
                     </Avatar>
-                    <Typography variant='subtitle1'>
-                      We accept
-                    </Typography>
+                    <Typography variant='subtitle1'>We accept</Typography>
                   </Box>
                   <Box display='flex' gridGap={15}>
-                    <Avatar
-                      variant='square'
-                      className={classes_g.avatar}
-                    >
+                    <Avatar variant='square' className={classes_g.avatar}>
                       <img
                         src={express}
                         alt='American Express'
@@ -136,10 +127,7 @@ const Payment = ({ order }) => {
                         height='100%'
                       />
                     </Avatar>
-                    <Avatar
-                      variant='square'
-                      className={classes_g.avatar}
-                    >
+                    <Avatar variant='square' className={classes_g.avatar}>
                       <img
                         src={masterCard}
                         alt='Master Card'
@@ -147,24 +135,14 @@ const Payment = ({ order }) => {
                         height='100%'
                       />
                     </Avatar>
-                    <Avatar
-                      variant='square'
-                      className={classes_g.avatar}
-                    >
-                      <img
-                        src={visa}
-                        alt='Visa'
-                        width='100%'
-                        height='100%'
-                      />
+                    <Avatar variant='square' className={classes_g.avatar}>
+                      <img src={visa} alt='Visa' width='100%' height='100%' />
                     </Avatar>
                   </Box>
                 </Box>
 
                 <Box width='100%'>
-                  <Typography variant='subtitle1'>
-                    *Name on Card
-                  </Typography>
+                  <Typography variant='subtitle1'>*Name on Card</Typography>
                   <TextField
                     margin='dense'
                     value=''
@@ -176,9 +154,7 @@ const Payment = ({ order }) => {
                   />
                 </Box>
                 <Box width='100%'>
-                  <Typography variant='subtitle1'>
-                    *Card Number
-                  </Typography>
+                  <Typography variant='subtitle1'>*Card Number</Typography>
                   <TextField
                     margin='dense'
                     value=''
@@ -190,15 +166,9 @@ const Payment = ({ order }) => {
                   />
                 </Box>
                 <Box width='100%'>
-                  <Box
-                    display='flex'
-                    alignItems='center'
-                    gridGap={15}
-                  >
+                  <Box display='flex' alignItems='center' gridGap={15}>
                     <Box flex={1}>
-                      <Typography variant='subtitle1'>
-                        *Expire Date
-                      </Typography>
+                      <Typography variant='subtitle1'>*Expire Date</Typography>
                       <TextField
                         margin='dense'
                         value=''
@@ -211,9 +181,7 @@ const Payment = ({ order }) => {
                     </Box>
                     <Box flex={1}>
                       <Box>
-                        <Typography variant='subtitle1'>
-                          *CVV
-                        </Typography>
+                        <Typography variant='subtitle1'>*CVV</Typography>
                         <TextField
                           margin='dense'
                           value=''
@@ -241,9 +209,7 @@ const Payment = ({ order }) => {
                     // onChange={(e) => handleToggleChange(e)}
                     style={{ boxShadow: 'none', padding: 0 }}
                   />
-                  <Typography variant='body1'>
-                    Remember my details
-                  </Typography>
+                  <Typography variant='body1'>Remember my details</Typography>
                 </Box>
               </>
             ) : (
@@ -290,12 +256,10 @@ const Payment = ({ order }) => {
                         City : {shippingAddress.fullAddress.city}
                       </Typography>
                       <Typography variant='body2' component='span'>
-                        Country :{' '}
-                        {shippingAddress.fullAddress.country}
+                        Country : {shippingAddress.fullAddress.country}
                       </Typography>
                       <Typography variant='body2' component='span'>
-                        Postal Code :{' '}
-                        {shippingAddress.fullAddress.postalCode}
+                        Postal Code : {shippingAddress.fullAddress.postalCode}
                       </Typography>
                     </Box>
                   </Box>
@@ -365,11 +329,7 @@ const Payment = ({ order }) => {
                   {order?.products?.length} items with shipping fee
                 </Typography>
 
-                <Box
-                  display='flex'
-                  justifyContent='space-between'
-                  gridGap={5}
-                >
+                <Box display='flex' justifyContent='space-between' gridGap={5}>
                   <Typography variant='h5'>Total Amount</Typography>
                   <Typography
                     variant='subtitle1'

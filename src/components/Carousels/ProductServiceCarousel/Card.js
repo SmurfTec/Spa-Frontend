@@ -58,6 +58,10 @@ const ProductCard = ({ item, wishlist = true }) => {
     // navigate(`/products&services/${type}/${dummyId}`);
   };
 
+  const handleBook = () => {
+    navigate(`/services/${id}`);
+  };
+
   const handleAddToCart = (e) => {
     e.preventDefault();
     const cartItem = {
@@ -67,7 +71,7 @@ const ProductCard = ({ item, wishlist = true }) => {
       quantity: 1,
     };
     console.log('cartItem', cartItem);
-    // dispatch(addToCart(cartItem));
+    dispatch(addToCart({ product: item, quantity: 1 }));
   };
 
   const isFavourite = useMemo(() => {
@@ -200,6 +204,7 @@ const ProductCard = ({ item, wishlist = true }) => {
               color='primary'
               endIcon={<SendIcon />}
               size='small'
+              onClick={handleBook}
               style={{ width: 130, padding: '3px 6px' }}
             >
               BOOK

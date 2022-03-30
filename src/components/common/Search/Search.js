@@ -46,10 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomizedInputBase({
-  placeholder,
-  submitForm,
-}) {
+export default function CustomizedInputBase({ placeholder, submitForm }) {
   const classes = useStyles();
   const [search, handleChange] = useTextInput('');
   const [hover, handleHover] = useToggleInput(false);
@@ -62,7 +59,7 @@ export default function CustomizedInputBase({
 
     // * if search is empty , navigate to '/' from '/search='blabla'
     if (!search) navigate(location.pathname);
-    else navigate(`?search=${search}`);
+    else submitForm(search);
     // * navigate to '/' from '/search='blabla'
   };
 

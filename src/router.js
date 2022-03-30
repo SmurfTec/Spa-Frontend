@@ -9,21 +9,15 @@ import Loading from 'components/common/Loading';
 
 const UserInfo = lazy(() => import('components/UserInfo'));
 const Orders = lazy(() => import('components/UserInfo/Orders'));
-const OrderHistory = lazy(() =>
-  import('components/UserInfo/OrderHistory')
-);
+const OrderHistory = lazy(() => import('components/UserInfo/OrderHistory'));
 const ForgotPassword = lazy(() =>
   import('components/common/Form/ForgotPassword')
 );
-const ConfirmMail = lazy(() =>
-  import('components/common/Form/ConfirmMail')
-);
+const ConfirmMail = lazy(() => import('components/common/Form/ConfirmMail'));
 const ResetPassword = lazy(() =>
   import('components/common/Form/ResetPassword')
 );
-const CommonLayout = lazy(() =>
-  import('components/layouts/CommonLayout')
-);
+const CommonLayout = lazy(() => import('components/layouts/CommonLayout'));
 
 const HomePage = lazy(() => import('components/Home'));
 const VendorProdServ = lazy(() =>
@@ -34,15 +28,12 @@ const AllProductsServices = lazy(() =>
 );
 const Login = lazy(() => import('components/common/Form/Login'));
 const SingleProdServ = lazy(() => import('components/DetailsView'));
-const ProductView = lazy(() =>
-  import('components/DetailsView/ProductDetails')
-);
+const ProductView = lazy(() => import('components/DetailsView/ProductDetails'));
 const Join = lazy(() => import('components/common/Form/Join'));
 const Cart = lazy(() => import('components/Checkout'));
 const Profile = lazy(() => import('components/UserInfo/Profile'));
-const OrderDetails = lazy(() =>
-  import('components/UserInfo/OrderDetails')
-);
+const OrderDetails = lazy(() => import('components/UserInfo/OrderDetails'));
+const OrderDetails2 = lazy(() => import('components/Checkout/OrderDetails'));
 const Wishlist = lazy(() => import('components/UserInfo/Wishlist'));
 // const Reviews = lazy(() => import('components/UserInfo/Reviews'));
 const PaymentDetails = lazy(() =>
@@ -170,7 +161,8 @@ const Router = () => {
               path='orders/:orderid'
               element={
                 <Suspense fallback={<Loading />}>
-                  <OrderDetails />
+                  {/* <OrderDetails /> */}
+                  <OrderDetails2 />
                 </Suspense>
               }
             />

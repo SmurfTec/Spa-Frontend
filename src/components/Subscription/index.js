@@ -11,6 +11,8 @@ import SendIcon from '@material-ui/icons/Send';
 import globalStyles from 'styles/commonStyles';
 import clsx from 'clsx';
 import patternImg from 'assets/bg1.svg';
+import { makeReq, handleCatch } from 'utils/makeReq';
+import { toast } from 'react-toastify';
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -70,7 +72,25 @@ const Subscription = () => {
   const classes_g = globalStyles();
   const [state, handleChange, ,] = useTextInput('');
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const resData = await makeReq(
+        '/users/subscribe',
+        {
+          body: {
+            email: state,
+          },
+        },
+        'POST'
+      );
+
+      toast.success('subscribe successfully!');
+    } catch (err) {
+      handleCatch(err);
+    } finally {
+    }
+  };
   return (
     <div className={classes.root}>
       <Box className='overlay' position='absolute' />
@@ -100,7 +120,7 @@ const Subscription = () => {
             onChange={handleChange}
             style={{ flex: 2, background: '#fff' }}
           />
-          <Button color='secondary' endIcon={<SendIcon />}>
+          <Button type='submit' color='secondary' endIcon={<SendIcon />}>
             Subscribe
           </Button>
         </div>

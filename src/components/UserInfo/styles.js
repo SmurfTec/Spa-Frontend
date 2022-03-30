@@ -17,7 +17,7 @@ const styles = makeStyles((theme) => ({
     },
     '& > div:last-child': {
       flex: 1,
-      maxWidth: 700,
+      // maxWidth: 700,
     },
 
     [theme.breakpoints.up('lg')]: {

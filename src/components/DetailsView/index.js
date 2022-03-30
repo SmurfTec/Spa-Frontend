@@ -457,6 +457,7 @@ const SingleProdServ = ({ type }) => {
             display='flex'
             flexWrap='wrap'
             gridGap='15px'
+            justifyContent='flex-start'
             style={{
               justifyContent: 'flex-start !important',
             }}

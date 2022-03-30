@@ -20,12 +20,10 @@ const ProdServCarousel = (props) => {
 
   useEffect(() => {
     if (!data) return;
-    if (parsedQuery.search) {
+    if (parsedQuery.products) {
       setData(
         data.filter((d) =>
-          d.name
-            .toLowerCase()
-            .includes(parsedQuery.search.toLowerCase())
+          d.name.toLowerCase().includes(parsedQuery.products.toLowerCase())
         )
       );
     } else {

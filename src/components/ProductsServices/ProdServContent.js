@@ -24,7 +24,7 @@ const ProdServContent = memo(
     const [data, setData] = useState([]);
     // * Pagination Stuff
     const [page, setPage] = React.useState(1);
-    const [rowsPerPage] = React.useState(8);
+    const [rowsPerPage] = React.useState(12);
 
     // * Filter by search
     const parsedQuery = useMemo(() => {

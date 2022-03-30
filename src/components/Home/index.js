@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import React, { useEffect, useMemo, useState } from 'react';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Button, Grid, Typography } from '@material-ui/core';
@@ -22,22 +22,54 @@ import Blog from 'components/Blog';
 import Loading from 'components/common/Loading';
 import { getBanners } from 'store/slices/banners/extraReducers';
 import { BatteryUnknownRounded } from '@material-ui/icons';
+import queryString from 'query-string';
 
 const Home = () => {
   const classes = styles();
   const classes_g = globalStyles();
   const { banners } = useSelector((st) => st.banners);
-
+  const location = useLocation();
   const dispatch = useDispatch();
   const { sales, topSelling } = useSelector((st) => st.products);
 
+  const navigate = useNavigate();
+  const [filteredTopSelling, setFilteredTopSelling] = useState([]);
   const [partnersImages, setPartnersImages] = useState([]);
   const [newsletter1, setNewsletter1] = useState([]);
   const [newsletter2, setNewsletter2] = useState([]);
   const [productsImages, setProductsImages] = useState([]);
   const [salesImages, setSalesImages] = useState([]);
 
-  const patnerSearch = () => {};
+  const parsedQuery = useMemo(() => {
+    return queryString.parse(location.products);
+  }, [location.products]);
+
+  useEffect(() => {
+    if (!topSelling) return;
+    if (parsedQuery.products) {
+      setFilteredTopSelling(
+        topSelling.filter((el) =>
+          el.className
+            .toLowerCase()
+            .includes(parsedQuery.products.toLowerCase())
+        )
+      );
+    } else {
+      setFilteredTopSelling(topSelling);
+    }
+  }, [topSelling, parsedQuery]);
+
+  const patnerSearch = (value) => {
+    navigate(`?search=${value}`);
+  };
+
+  const productsSearch = (value) => {
+    navigate(`?products=${value}`);
+  };
+
+  useEffect(() => {
+    return () => {};
+  }, []);
 
   useEffect(() => {
     console.log('banners', banners);
@@ -324,7 +356,7 @@ const Home = () => {
         <Box className='overlay' position='absolute' />
         <Box py={5} zIndex={2} width='100%' className={classes_g.sectionFlex}>
           <div className={classes_g.sectHorAlignment}>
-            <Search placeholder='Product name' submitForm={patnerSearch} />
+            <Search placeholder='Product name' submitForm={productsSearch} />
           </div>
 
           <div className={classes_g.sectHorAlignment}>
