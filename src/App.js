@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { getMe } from 'store/slices/Auth/extraReducers';
 import { fetchVendors } from 'store/slices/vendors';
 import { topProducts, flashSales } from 'store/slices/products';
+import './App.css';
 
 const App = () => {
   const dispatch = useDispatch();

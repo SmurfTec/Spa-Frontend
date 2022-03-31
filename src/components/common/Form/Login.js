@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
+import { GoogleLogin } from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
 
 import {
   Box,
@@ -13,7 +15,7 @@ import {
   InputAdornment,
 } from '@material-ui/core';
 
-import { login } from 'store/slices/Auth/extraReducers';
+import { login, socialLogin } from 'store/slices/Auth/extraReducers';
 
 import FaceIcon from '@material-ui/icons/Face';
 import LockIcon from '@material-ui/icons/Lock';
@@ -26,6 +28,10 @@ import useStyles from 'styles/commonStyles';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import FormTextField from './FormTextField';
+import GoogleButton from './GoogleButton';
+import FacebookButton from './FacebookButton';
+import axios from 'axios';
+import { API_BASE_URL, handleCatch } from 'utils/makeReq';
 
 const Login = () => {
   const classes = styles();
@@ -61,6 +67,49 @@ const Login = () => {
   useEffect(() => {
     if (isLoggedIn) navigate('/');
   }, [isLoggedIn, navigate]);
+
+  const responseFacebook = async (response) => {
+    console.log(response);
+
+    if (response.error) return;
+
+    const { name, email, picture } = response;
+
+    console.log(`email`, email);
+
+    try {
+      const res = await axios.post(`${API_BASE_URL}/auth/socialLogin`, {
+        name,
+        email,
+        socialType: 'facebook',
+      });
+
+      dispatch(
+        socialLogin({
+          fullName: name,
+          email,
+          socialType: 'facebook',
+        })
+      );
+    } catch (err) {
+      handleCatch(err);
+    }
+  };
+
+  const responseGoogle = async (response) => {
+    console.log(response);
+    if (response.error) return;
+    const { name, email, imageUrl } = response.profileObj;
+    console.log(`email`, email);
+    dispatch(
+      socialLogin({
+        fullName: name,
+        email,
+        socialType: 'google',
+        photo: imageUrl,
+      })
+    );
+  };
 
   // const handleFormikChange = (e) => {
   //   handleChange(e);
@@ -130,14 +179,11 @@ const Login = () => {
           className={classes.faceBookBtn}
         >
           Facebook
+          <FacebookButton responseFacebook={responseFacebook} />
         </Button>
-        <Button
-          className={classes.googleBtn}
-          variant='contained'
-          color='default'
-        >
-          Google
-        </Button>
+
+        <GoogleButton classes={classes} responseGoogle={responseGoogle} />
+
         <Box
           mt={1}
           display='flex'

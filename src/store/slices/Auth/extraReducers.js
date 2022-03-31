@@ -142,3 +142,19 @@ export const handleFavourities = createAsyncThunk(
       .catch((err) => rejectWithValue(err));
   }
 );
+
+export const socialLogin = createAsyncThunk(
+  'auth/socailLogin',
+  async ({ fullName, email, socialType, photo }, { rejectWithValue }) => {
+    return makeReq(
+      '/auth/sociallogin',
+      { body: { fullName, email, socialType, photo } },
+      'POST'
+    )
+      .then((resData) => ({
+        token: resData.token,
+        user: resData.user,
+      }))
+      .catch((err) => rejectWithValue(err));
+  }
+);

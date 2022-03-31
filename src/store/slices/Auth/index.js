@@ -12,6 +12,7 @@ import {
   confirmMail,
   updatePassword,
   handleFavourities,
+  socialLogin,
 } from './extraReducers';
 
 const initialState = {
@@ -71,6 +72,26 @@ const authSlice = createSlice({
     [login.rejected]: (state, { payload }) => {
       state.loading = false;
       toast.error(payload.message);
+    },
+
+    [socialLogin.pending]: (state) => {
+      state.loading = true;
+    },
+    [socialLogin.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.isLoggedIn = true;
+      state.user = payload.user;
+      state.token = payload.token;
+      window.localStorage.setItem(LOCALSTORAGE_TOKEN_KEY, payload.token);
+    },
+    [socialLogin.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.isLoggedIn = false;
+      state.error =
+        payload?.message ||
+        payload.response?.data?.message ||
+        `Something Went Wrong`;
+      toast.error(`Error: ${state.error}`);
     },
 
     // ^ Signup Reducers

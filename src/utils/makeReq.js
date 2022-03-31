@@ -2,12 +2,12 @@ import { LOCALSTORAGE_TOKEN_KEY } from './constants';
 import { toast } from 'react-toastify';
 
 // * Development URLs
-// const API_BASE_URL = `http://localhost:5000/api`;
-// const API_BASE_ORIGIN = `http://localhost:5000`;
+const API_BASE_URL = `http://localhost:5000/api`;
+const API_BASE_ORIGIN = `http://localhost:5000`;
 
 // * Production URLs
-const API_BASE_URL = `https://spa-api-1.herokuapp.com/api`;
-const API_BASE_ORIGIN = `https://spa-api-1.herokuapp.com/`;
+// const API_BASE_URL = `https://spa-api-1.herokuapp.com/api`;
+// const API_BASE_ORIGIN = `https://spa-api-1.herokuapp.com/`;
 
 const handleCatch = (err) => {
   let errMsg = 'Something Went Wrong';
