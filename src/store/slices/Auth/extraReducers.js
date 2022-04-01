@@ -75,13 +75,13 @@ export const forgotPassword = createAsyncThunk(
   'forgotPassword',
   async (values, { rejectWithValue }) =>
     makeReq(
-      `/auth/forgotPassword/${values.token}`,
+      `/auth/forgotPassword`,
       {
         body: {
-          ...values.email,
+          email: values.email,
         },
       },
-      'PATCH'
+      'POST'
     )
       .then((resData) => resData)
       .catch((err) => rejectWithValue(err.message))

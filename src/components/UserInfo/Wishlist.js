@@ -78,7 +78,7 @@ const Wishlist = () => {
 
       {/* //^ Products Panel */}
       <TabPanel value={tabValue} index={0}>
-        {user.productFavourites.length > 0 ? (
+        {user.productFavourites?.length > 0 ? (
           <div
             className={clsx(
               classes_g.gridContainer,
@@ -100,7 +100,7 @@ const Wishlist = () => {
 
       {/* //^ Services Panel */}
       <TabPanel value={tabValue} index={1}>
-        {user.serviceFavourites.length > 0 ? (
+        {user.serviceFavourites?.length > 0 ? (
           <div
             className={clsx(
               classes_g.gridContainer,

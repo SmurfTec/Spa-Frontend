@@ -39,10 +39,7 @@ const myCartSlice = createSlice({
               : el
           );
           Cart = state;
-          toast.success(' Item added to Cart successfully');
         } else {
-          console.log('HERE 2');
-          console.log('state products', state.products);
           state.products = [
             ...state.products,
             {
@@ -52,7 +49,6 @@ const myCartSlice = createSlice({
             },
           ];
           Cart = state;
-          toast.success(' Item added to Cart successfully');
         }
         // set to localStorage
         localStorage.setItem('spaCart', JSON.stringify(Cart));

@@ -1,15 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
-import {
-  Box,
-  Typography,
-  Checkbox,
-  Button,
-  CircularProgress,
-  TextField,
-  InputAdornment,
-} from '@material-ui/core';
+import { Box, Typography, Button, CircularProgress } from '@material-ui/core';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 
@@ -42,6 +34,7 @@ const ForgotPassword = () => {
     validateOnBlur: false,
     validateOnChange: true,
     onSubmit: (values) => {
+      console.log('values', values);
       dispatch(forgotPassword(values));
     },
   });
@@ -51,9 +44,16 @@ const ForgotPassword = () => {
   }, [isLoggedIn, navigate]);
 
   return (
-    <Box className={clsx(classes_g.backWrapper)} justifyContent='center'>
+    <Box
+      style={{ height: '100vh' }}
+      className={clsx(classes_g.backWrapper)}
+      justifyContent='center'
+    >
       <Box className='overlay' position='absolute' />
-      <div className={clsx(classes.root, classes.loginWrapper)}>
+      <div
+        style={{ maxHeight: 350 }}
+        className={clsx(classes.root, classes.loginWrapper)}
+      >
         <Box>
           <Typography variant='h3' color='primary' gutterBottom={true}>
             Forgot Password

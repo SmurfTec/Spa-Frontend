@@ -34,15 +34,13 @@ const OrderHistory = () => {
   }));
 
   useEffect(() => {
-    if (loading) {
+    if (loading || !orders) {
       dispatch(getmyOrders());
     }
   }, [dispatch]);
 
   useEffect(() => {
-    setFilteredOrders(
-      orders.filter((order) => order.status === 'completed')
-    );
+    setFilteredOrders(orders.filter((order) => order.status === 'completed'));
   }, [orders]);
 
   const showOrderDetails = (e) => {
@@ -95,19 +93,14 @@ const OrderHistory = () => {
                       data-orderid={order._id}
                     >
                       <TableCell>
-                        <Typography variant='subtitle2'>
-                          {order._id}
-                        </Typography>
+                        <Typography variant='subtitle2'>{order._id}</Typography>
                       </TableCell>
                       <TableCell>
                         <Typography variant='subtitle2'>
                           {order.serviceDate ? 'Service' : 'Product'}
                         </Typography>
                       </TableCell>
-                      <TableCell
-                        align='center'
-                        className={classes.chipCell}
-                      >
+                      <TableCell align='center' className={classes.chipCell}>
                         <Chip color='warning'>{order.status}</Chip>
                       </TableCell>
 

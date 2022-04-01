@@ -139,7 +139,7 @@ const authSlice = createSlice({
     },
     [forgotPassword.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      toast.success(payload);
+      toast.success(payload.message);
     },
     [forgotPassword.rejected]: (state, { payload }) => {
       state.loading = false;

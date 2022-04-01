@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Divider,
   Grid,
   makeStyles,
@@ -10,7 +11,7 @@ import React, { useState, useEffect } from 'react';
 import useStyles from 'styles/commonStyles';
 import image from 'assets/prod5.jpg';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getOrder } from 'store/slices/orders';
 import { addReview, getmyOrders } from 'store/slices/orders/extraReducers';
 import Loading from 'components/common/Loading';
@@ -32,16 +33,11 @@ const styles = makeStyles((theme) => ({
 }));
 
 const OrderDetails = () => {
-  const orderNumber = '1AJH3H78';
-  const orderArrives = '27/9 - 29/10';
   const classes_g = useStyles();
   const classes = styles();
   const { orderid } = useParams();
   const dispatch = useDispatch();
-  const [open, setOpen] = React.useState(false);
-  const [rating, setRating] = React.useState(0);
-  const [comment, setComment] = useState('');
-  const [reviewId, setReviewId] = useState();
+  const navigate = useNavigate();
 
   const { loading, order } = useSelector((state) => ({
     order: orderid ? getOrder(state, orderid) : undefined,
@@ -66,25 +62,42 @@ const OrderDetails = () => {
                 variant='h5'
                 color='primary'
                 className={classes_g.fontWeight600}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                }}
               >
                 Your Orders ({order.products?.length || 1}{' '}
                 {order.products?.length || 1 > 1 ? ` items` : ` item`})
+                {order.status === 'unpaid' && (
+                  <Button
+                    onClick={() => {
+                      navigate(`/paymentDetails/${order._id}`);
+                    }}
+                    type='contained'
+                    color='primary'
+                  >
+                    Pay
+                  </Button>
+                )}
               </Typography>
               <Typography variant='subtitle1' color='textSecondary'>
-                Order Number : {orderNumber}
+                Order Number : {order._id}
               </Typography>
             </Box>
-            <Box
-              width='100%'
-              px={2}
-              py={2}
-              bgcolor='primary.main'
-              borderRadius={5}
-            >
-              <Typography variant='subtitle1' style={{ color: '#fff' }}>
-                Order Arrives : {orderArrives}
-              </Typography>
-            </Box>
+            {order.status === 'completed' && (
+              <Box
+                width='100%'
+                px={2}
+                py={2}
+                bgcolor='primary.main'
+                borderRadius={5}
+              >
+                <Typography variant='subtitle1' style={{ color: '#fff' }}>
+                  Order Arrives : {order.deliveredAt}
+                </Typography>
+              </Box>
+            )}
             <Divider />
             <Box>
               {order.products ? (
@@ -123,13 +136,22 @@ const OrderDetails = () => {
                           ${el.subTotal}
                         </Typography>
                       </Box>
-                      <Box style={{
-                        alignSelf: 'baseline'
-                      }}>
-                        <Label  color={el.status ==='unpaid' ? 'error' : el.status ==='inProgress' ? 'warning' : 'success'}>
-                      {el.status}
+                      <Box
+                        style={{
+                          alignSelf: 'baseline',
+                        }}
+                      >
+                        <Label
+                          color={
+                            el.status === 'unpaid'
+                              ? 'error'
+                              : el.status === 'inProgress'
+                              ? 'warning'
+                              : 'success'
+                          }
+                        >
+                          {el.status}
                         </Label>
-
                       </Box>
                     </Box>
                     {index < order.products?.length - 1 && <Divider />}
