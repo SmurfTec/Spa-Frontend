@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
 
 import {
   Box,
   Typography,
   Checkbox,
-  Input,
-  IconButton,
   Button,
   CircularProgress,
-  TextField,
-  InputAdornment,
 } from '@material-ui/core';
 
-import { signUp } from 'store/slices/Auth/extraReducers';
-import useManyInputs from 'hooks/useManyInputs';
+import { signUp, socialLogin } from 'store/slices/Auth/extraReducers';
 
 import useStyles from 'styles/commonStyles';
 import styles from 'styles/FormStyles';
@@ -27,10 +21,11 @@ import styles from 'styles/FormStyles';
 import FaceIcon from '@material-ui/icons/Face';
 import LockIcon from '@material-ui/icons/Lock';
 import FacebookIcon from '@material-ui/icons/Facebook';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
 import FormTextField from './FormTextField';
+import GoogleButton from './GoogleButton';
+import FacebookButton from './FacebookButton';
 
 const Join = () => {
   const classes = styles();
@@ -41,6 +36,39 @@ const Join = () => {
   const navigate = useNavigate();
 
   // const [loading, setLoading] = useState(false);
+
+  const responseFacebook = async (response) => {
+    console.log(response);
+
+    if (response.error) return;
+
+    const { name, email, picture } = response;
+
+    console.log(`email`, email);
+
+    dispatch(
+      socialLogin({
+        fullName: name,
+        email,
+        socialType: 'facebook',
+      })
+    );
+  };
+
+  const responseGoogle = async (response) => {
+    console.log(response);
+    if (response.error) return;
+    const { name, email, imageUrl } = response.profileObj;
+    console.log(`email`, email);
+    dispatch(
+      socialLogin({
+        fullName: name,
+        email,
+        socialType: 'google',
+        photo: imageUrl,
+      })
+    );
+  };
 
   useEffect(() => {
     if (isLoggedIn) navigate('/');
@@ -188,19 +216,12 @@ const Join = () => {
               color='default'
               startIcon={<FacebookIcon />}
               className={classes.faceBookBtn}
-              fullWidth
             >
               Facebook
+              <FacebookButton responseFacebook={responseFacebook} />
             </Button>
 
-            <Button
-              className={classes.googleBtn}
-              variant='contained'
-              color='default'
-              fullWidth
-            >
-              Google
-            </Button>
+            <GoogleButton classes={classes} responseGoogle={responseGoogle} />
           </Box>
           <Box
             mt={1}

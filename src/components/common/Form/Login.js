@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
-import { GoogleLogin } from 'react-google-login';
-import FacebookLogin from 'react-facebook-login';
 
 import {
   Box,
@@ -11,8 +9,6 @@ import {
   Checkbox,
   Button,
   CircularProgress,
-  TextField,
-  InputAdornment,
 } from '@material-ui/core';
 
 import { login, socialLogin } from 'store/slices/Auth/extraReducers';
@@ -77,23 +73,13 @@ const Login = () => {
 
     console.log(`email`, email);
 
-    try {
-      const res = await axios.post(`${API_BASE_URL}/auth/socialLogin`, {
-        name,
+    dispatch(
+      socialLogin({
+        fullName: name,
         email,
         socialType: 'facebook',
-      });
-
-      dispatch(
-        socialLogin({
-          fullName: name,
-          email,
-          socialType: 'facebook',
-        })
-      );
-    } catch (err) {
-      handleCatch(err);
-    }
+      })
+    );
   };
 
   const responseGoogle = async (response) => {
