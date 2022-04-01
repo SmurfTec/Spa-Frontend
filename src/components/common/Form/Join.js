@@ -95,7 +95,7 @@ const Join = () => {
   });
 
   return (
-    <div className={classes_g.backWrapper}>
+    <div className={classes_g.backWrapper} style={{ height: '100vh' }}>
       <Box className='overlay' position='absolute' />
       <div className={clsx(classes.root, classes.joinWrapper)}>
         <div>
