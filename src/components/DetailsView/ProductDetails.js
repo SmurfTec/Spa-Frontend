@@ -110,7 +110,9 @@ const ProductDetails = (props) => {
     return <Navigate to='/' />;
   }
 
-  console.log('relatedProduct', relatedProduct);
+  // console.log('relatedProduct', relatedProduct);
+
+  console.log('product', product);
 
   return (
     <div
@@ -162,7 +164,11 @@ const ProductDetails = (props) => {
                 <Typography variant='h3'>
                   <Skeleton animation='wave' variant='text' />
                 </Typography>
-                <Typography variant='h4' color='textSecondary' sx={{ mt: 1 }}>
+                <Typography
+                  variant='h4'
+                  color='textSecondary'
+                  sx={{ mt: 1 }}
+                >
                   <Skeleton animation='wave' variant='text' />
                 </Typography>
                 <Typography variant='h5' sx={{ mt: 1 }}>
@@ -261,8 +267,16 @@ const ProductDetails = (props) => {
             {/* //^ Product Info */}
             <div>
               <Box width='100%' display='flex' flexDirection='column'>
-                <Box display='flex' flexDirection='column' gridGap='0.5em'>
-                  <Box display='flex' alignItems='center' gridGap='2em'>
+                <Box
+                  display='flex'
+                  flexDirection='column'
+                  gridGap='0.5em'
+                >
+                  <Box
+                    display='flex'
+                    alignItems='center'
+                    gridGap='2em'
+                  >
                     <Box
                       style={{
                         display: 'flex',
@@ -280,22 +294,48 @@ const ProductDetails = (props) => {
                         //   style={{ width: 50, height: 50, borderRadius: '50%' }}
                         // />
                       )}
-                      <Typography variant='h4' className={classes_g.lightText}>
-                        {capitalizeFirstLetter(product.name)}
-                      </Typography>
+                      <Box
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          width: '100%',
+                          columnGap: 20,
+                        }}
+                      >
+                        <Typography
+                          variant='h4'
+                          className={classes_g.lightText}
+                        >
+                          {capitalizeFirstLetter(product.name)}
+                        </Typography>
+                        <Typography
+                          variant='subtitle1'
+                          component='span'
+                          color='textSecondary'
+                          className={classes_g.lightText}
+                        >
+                          ({capitalizeFirstLetter(product.info)})
+                        </Typography>
+                        <Typography
+                          variant='caption'
+                          className={classes_g.lightText}
+                        >
+                          {product.vendor.fullName}
+                        </Typography>
+                      </Box>
                     </Box>
-
-                    <Typography
-                      variant='subtitle1'
-                      component='span'
-                      color='textSecondary'
-                      className={classes_g.lightText}
-                    >
-                      ({capitalizeFirstLetter(product.info)})
-                    </Typography>
                   </Box>
-                  <Box display='flex' gridGap={10} alignItems='center'>
-                    <Rating value={product.rating} readOnly size='small' />
+                  <Box
+                    display='flex'
+                    gridGap={10}
+                    alignItems='center'
+                  >
+                    <Rating
+                      value={product.rating}
+                      readOnly
+                      size='small'
+                    />
                     <Typography
                       variant='subtitle1'
                       className={classes_g.lightText}
@@ -304,7 +344,7 @@ const ProductDetails = (props) => {
                     </Typography>
                   </Box>
                   <Typography variant='h5' sx={{ mt: 1 }}>
-                    S${Math.floor(product.discountPrice)}
+                    ${Math.floor(product.discountPrice)}
                   </Typography>
                 </Box>
 
@@ -354,12 +394,16 @@ const ProductDetails = (props) => {
                       variant='subtitle1'
                       component='span'
                       className={clsx(classes_g.lightText, {
-                        [classes.statusSuccess]: product.countInStock > 0,
-                        [classes.statusFail]: product.countInStock <= 0,
+                        [classes.statusSuccess]:
+                          product.countInStock > 0,
+                        [classes.statusFail]:
+                          product.countInStock <= 0,
                       })}
                       sx={{ userSelect: 'none' }}
                     >
-                      {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
+                      {product.countInStock > 0
+                        ? 'In Stock'
+                        : 'Out of Stock'}
                     </Typography>
                   </Box>
                 </Box>
@@ -391,9 +435,15 @@ const ProductDetails = (props) => {
 
           {/* //^ Product Option Panel */}
           {/* //^ Product Reviews */}
-          <TabPanel className={classes.TabPanel} value={tabValue} index={0}>
+          <TabPanel
+            className={classes.TabPanel}
+            value={tabValue}
+            index={0}
+          >
             {product.reviews.length > 0 ? (
-              product.reviews.map((el) => <Review {...el} key={el.user._id} />)
+              product.reviews.map((el) => (
+                <Review {...el} key={el.user._id} />
+              ))
             ) : (
               <Typography variant='body1' align='center'>
                 No Reviews
@@ -401,7 +451,11 @@ const ProductDetails = (props) => {
             )}
           </TabPanel>
           {/* //^ Related Products */}
-          <TabPanel className={classes.TabPanel} value={tabValue} index={1}>
+          <TabPanel
+            className={classes.TabPanel}
+            value={tabValue}
+            index={1}
+          >
             <Box>
               <Box my={3}>
                 <Typography variant='h4' align='center'>
@@ -411,7 +465,10 @@ const ProductDetails = (props) => {
               {relatedProduct && relatedProduct.length > 0 ? (
                 <CarouselLayout respSettings={responsive2}>
                   {relatedProduct.map((el) => (
-                    <div key={el._id} className={classes_g.carouselItem}>
+                    <div
+                      key={el._id}
+                      className={classes_g.carouselItem}
+                    >
                       <ProdServCard item={el} isPromo={false} />
                     </div>
                   ))}
