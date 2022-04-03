@@ -118,13 +118,8 @@ const Home = () => {
           <Carousel
             showArrows={false}
             showThumbs={false}
-            animationHandler='fade'
-            swipeable={false}
-            showStatus={false}
-            interval={4000}
-            autoPlay={true}
-            infiniteLoop={true}
-            className={classes_g.Carousel}
+            showIndicators={false}
+            className={`${classes_g.Carousel} ${classes_g.aboutCarousel}`}
           >
             <div>
               <img src={partnersImages[0]?.url} alt='' />

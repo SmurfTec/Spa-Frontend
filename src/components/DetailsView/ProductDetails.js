@@ -12,6 +12,7 @@ import {
   IconButton,
   Tabs,
   Tab,
+  Avatar,
 } from '@material-ui/core';
 import { Rating, Skeleton } from '@material-ui/lab';
 // import Lightbox from 'react-image-lightbox';
@@ -262,13 +263,28 @@ const ProductDetails = (props) => {
               <Box width='100%' display='flex' flexDirection='column'>
                 <Box display='flex' flexDirection='column' gridGap='0.5em'>
                   <Box display='flex' alignItems='center' gridGap='2em'>
-                    <Typography
-                      variant='h5'
-                      component='span'
-                      className={classes_g.lightText}
+                    <Box
+                      style={{
+                        display: 'flex',
+                        gap: 10,
+                        alignItems: 'center',
+                      }}
                     >
-                      {capitalizeFirstLetter(product.name)}
-                    </Typography>
+                      {product.vendor?.logo?.url && (
+                        <Avatar
+                          variant='circlular'
+                          src={product.vendor?.logo?.url}
+                          alt='logo'
+                        />
+                        // <img
+                        //   style={{ width: 50, height: 50, borderRadius: '50%' }}
+                        // />
+                      )}
+                      <Typography variant='h4' className={classes_g.lightText}>
+                        {capitalizeFirstLetter(product.name)}
+                      </Typography>
+                    </Box>
+
                     <Typography
                       variant='subtitle1'
                       component='span'
@@ -288,7 +304,7 @@ const ProductDetails = (props) => {
                     </Typography>
                   </Box>
                   <Typography variant='h5' sx={{ mt: 1 }}>
-                    ${Math.floor(product.discountPrice)}
+                    S${Math.floor(product.discountPrice)}
                   </Typography>
                 </Box>
 

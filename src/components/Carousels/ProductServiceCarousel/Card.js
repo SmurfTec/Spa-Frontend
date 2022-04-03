@@ -136,13 +136,13 @@ const ProductCard = ({ item, wishlist = true }) => {
                   style={{ textDecoration: 'line-through' }}
                   className={classes_g.fontWeight600}
                 >
-                  ${Math.floor(price)}
+                  SS${Math.floor(price)}
                 </Typography>
                 <Typography
                   variant='subtitle2'
                   className={classes_g.fontWeight600}
                 >
-                  - ${price - discount}
+                  - SS${price - discount}
                 </Typography>
               </div>
             ) : (
@@ -151,7 +151,7 @@ const ProductCard = ({ item, wishlist = true }) => {
                   variant='subtitle1'
                   className={classes_g.fontWeight600}
                 >
-                  ${price}
+                  S${price}
                 </Typography>
                 <Typography variant='caption'>
                   {'  '} ({info})
@@ -177,7 +177,7 @@ const ProductCard = ({ item, wishlist = true }) => {
                 variant='subtitle2'
                 className={classes_g.fontWeight600}
               >
-                From ${price}
+                From S${price}
               </Typography>
             </>
           )}

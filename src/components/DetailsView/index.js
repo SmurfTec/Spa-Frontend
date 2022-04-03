@@ -1,11 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import {
-  Link,
-  Navigate,
-  withRouter,
-  useParams,
-  useNavigate,
-} from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import clsx from 'clsx';
@@ -16,41 +10,31 @@ import {
   Grid,
   Card,
   CardMedia,
-  IconButton,
   Tabs,
   Tab,
-  Avatar,
   TextField,
   Select,
   MenuItem,
   FormControl,
   InputLabel,
+  Avatar,
 } from '@material-ui/core';
 import { Rating, Skeleton } from '@material-ui/lab';
 import PropTypes from 'prop-types';
 // import Lightbox from 'react-image-lightbox';
-import faker from 'faker';
 
 import ProdServCard from 'components/Carousels/ProductServiceCarousel/Card';
 import CarouselLayout from 'components/Carousels/Default/CarouselLayout';
 import { responsive2 } from 'components/Carousels/Default/settings';
 
-import { useManyInputs, useToggleInput } from 'hooks';
+import { useManyInputs } from 'hooks';
 
-import { dropDownNumbers, reviews } from 'data';
+import { dropDownNumbers } from 'data';
 import { getMuiDateFormat } from 'utils/constants';
-
-import prod1 from 'assets/prod1.jpg';
-import prod2 from 'assets/prod2.jpg';
-import prod3 from 'assets/prod3.jpg';
-import prod4 from 'assets/prod4.jpg';
 
 import globalStyles from 'styles/commonStyles';
 import styles from './Styles';
 
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import RemoveRounded from '@material-ui/icons/RemoveRounded';
-import Addrounded from '@material-ui/icons/AddRounded';
 import BookIcon from '@material-ui/icons/Book';
 
 import Review from 'components/common/Review';
@@ -111,10 +95,6 @@ const SingleProdServ = ({ type }) => {
 
   const [selectedSlots, setSelectedSlots] = useState([]);
 
-  // const [isOpen, toggleOpen] = useToggleInput(false); // done
-  // const [checkIn, setCheckIn] = React.useState(getMuiDateFormat());
-  // const { addItemToCart, userOrders } = useContext(StoreContext);
-
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -158,20 +138,6 @@ const SingleProdServ = ({ type }) => {
     );
   }, [value]);
 
-  useEffect(() => {
-    if (type === 'product') {
-      // setState((st) => ({
-      //   ...st,
-      //   prodServ: products?.filter((el) => el.dummyId === parseInt(_id))[0],
-      // }));
-    } else {
-      // setState((st) => ({
-      //   ...st,
-      //   prodServ: services?.filter((el) => el.dummyId === parseInt(_id))[0],
-      // }));
-    }
-  }, [id, type]);
-
   const selectElement = (slot) => {
     if (selectedSlots.find((el) => el._id === slot._id)) {
       setSelectedSlots((st) => st.filter((el) => el._id !== slot._id));
@@ -208,22 +174,6 @@ const SingleProdServ = ({ type }) => {
     });
   };
 
-  const increaseNoOfItems = () => {
-    setState((st) => ({ ...st, quantity: st.quantity + 1 }));
-  };
-  const decreaseNoOfItems = () => {
-    setState((st) => ({ ...st, quantity: st.quantity - 1 }));
-  };
-
-  const handleImageClick = (e) => {
-    const { image } = e.currentTarget.dataset;
-    // toggleOpen();
-  };
-
-  const handleAddToCart = () => {
-    // addItemToCart(product, noOfItem);
-  };
-
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };
@@ -251,7 +201,7 @@ const SingleProdServ = ({ type }) => {
           slotDate.getMonth() === checkIn.getDate() &&
           slotDate.getFullYear() === checkIn.getFullYear() &&
           slotDate.getMonth() === checkIn.getMonth() &&
-          (slotDate.slot.from === slot.from || slotDate.slot.to === slot.to)
+          (slotDate.slot?.from === slot?.from || slotDate.slot?.to === slot?.to)
         ) {
           //
           return true;
@@ -358,7 +308,6 @@ const SingleProdServ = ({ type }) => {
                   className={classes.cardMedia}
                   image={value.images[0]?.url}
                   data-image={value.images[0]?.url}
-                  onClick={handleImageClick}
                 />
               </Card>
             </Grid>
@@ -376,7 +325,6 @@ const SingleProdServ = ({ type }) => {
                         className={classes.cardMediaSm}
                         image={img.url}
                         data-image={img.url}
-                        onClick={handleImageClick}
                       />
                     </Card>
                   </Grid>
@@ -388,9 +336,27 @@ const SingleProdServ = ({ type }) => {
 
         <div style={{ gap: 15 }}>
           <Box width='100%' display='flex' flexDirection='column'>
-            <Typography variant='h4' className={classes_g.lightText}>
-              {value.name}
-            </Typography>
+            <Box
+              style={{
+                display: 'flex',
+                gap: 10,
+                alignItems: 'center',
+              }}
+            >
+              {value.vendor?.logo?.url && (
+                <Avatar
+                  variant='circlular'
+                  src={value.vendor?.logo?.url}
+                  alt='logo'
+                />
+                // <img
+                //   style={{ width: 50, height: 50, borderRadius: '50%' }}
+                // />
+              )}
+              <Typography variant='h4' className={classes_g.lightText}>
+                {value.name}
+              </Typography>
+            </Box>
 
             <Box display='flex' gridGap={10} alignItems='center'>
               <Rating value={4} readOnly />

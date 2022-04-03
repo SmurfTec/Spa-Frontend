@@ -91,9 +91,7 @@ const CartStep = ({
       console.log('Value', value);
       if (value.error) {
         toast.error(
-          value.payload.message
-            ? value.payload.message
-            : 'Something went wrong'
+          value.payload.message ? value.payload.message : 'Something went wrong'
         );
       } else {
         setTimeout(() => {
@@ -131,7 +129,7 @@ const CartStep = ({
                     </IconButton>
                   </TableCell>
                   <TableCell>{el.product.name}</TableCell>
-                  <TableCell>${el.product.discountPrice}</TableCell>
+                  <TableCell>S${el.product.discountPrice}</TableCell>
                   {/* <TableCell align='center'>
                     {review ? (
                       2
@@ -159,7 +157,7 @@ const CartStep = ({
                   </TableCell> */}
                   <TableCell align='center'>{el.quantity}</TableCell>
                   <TableCell align='center'>
-                    ${el.product.discountPrice * el.quantity}
+                    S${el.product.discountPrice * el.quantity}
                   </TableCell>
                 </TableRow>
               ))}

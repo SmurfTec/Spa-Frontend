@@ -38,6 +38,11 @@ const styles = makeStyles((theme) => ({
   fontWeight600: {
     fontWeight: 600,
   },
+  aboutCarousel: {
+    '& .carousel-status': {
+      display: 'none',
+    },
+  },
 
   linkUnderline: {
     '& a': {

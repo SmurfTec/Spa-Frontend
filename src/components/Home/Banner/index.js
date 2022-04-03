@@ -43,27 +43,24 @@ const styles = makeStyles((theme) => ({
 
 const Banner = ({ banners }) => {
   let bannerImg = banners?.find((el) => el.name === 'Homepage Carousel') || '';
+  const banner = banners?.find((el) => el.name === 'Homepage Carousel') || '';
 
   const classes = styles({
     image: bannerImg?.images[0]?.url || '',
   });
 
-  const classes_g = useStyles({
-    image: bannerImg?.images[0]?.url || '',
-  });
+  console.log('banner', banner);
 
   return (
     <section className={classes.root}>
       <div className={classes.content}>
         <SimpleCarousel>
-          {bannerContent &&
-            bannerContent.length > 0 &&
-            bannerContent.map((el, index) => (
-              <div key={el._id} className={classes.carouselItem}>
-                <Typography variant='h4'>{el.title}</Typography>
-                <Typography variant='subtitle1'>{el.description}</Typography>
-              </div>
-            ))}
+          {banner?.images.map((el, index) => (
+            <div key={el._id} className={classes.carouselItem}>
+              <Typography variant='h4'>{el.title}</Typography>
+              <Typography variant='subtitle1'>{el.description}</Typography>
+            </div>
+          ))}
         </SimpleCarousel>
       </div>
     </section>

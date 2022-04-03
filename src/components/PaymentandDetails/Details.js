@@ -95,7 +95,7 @@ const Details = ({ order }) => {
                           color='primary'
                           className={classes_g.lightText}
                         >
-                          ${Math.floor(el.product.discountPrice)}
+                          S${Math.floor(el.product.discountPrice)}
                         </Typography>
                       </Box>
                     </Box>

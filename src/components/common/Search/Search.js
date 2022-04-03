@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 import clsx from 'clsx';
@@ -62,6 +62,11 @@ export default function CustomizedInputBase({ placeholder, submitForm }) {
     else submitForm(search);
     // * navigate to '/' from '/search='blabla'
   };
+
+  useEffect(() => {
+    if (!search) navigate(location.pathname);
+    else submitForm(search);
+  }, [search]);
 
   return (
     <>
