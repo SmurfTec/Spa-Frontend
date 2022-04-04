@@ -29,6 +29,7 @@ const AllProductsServices = lazy(() =>
 const Login = lazy(() => import('components/common/Form/Login'));
 const SingleProdServ = lazy(() => import('components/DetailsView'));
 const ProductView = lazy(() => import('components/DetailsView/ProductDetails'));
+const LazyAbout = lazy(() => import('components/About'));
 const Join = lazy(() => import('components/common/Form/Join'));
 const Cart = lazy(() => import('components/Checkout'));
 const Profile = lazy(() => import('components/UserInfo/Profile'));
@@ -79,6 +80,14 @@ const Router = () => {
             element={
               <Suspense fallback={<Loading />}>
                 <ProductView />
+              </Suspense>
+            }
+          />
+          <Route
+            path='/about-us'
+            element={
+              <Suspense fallback={<Loading />}>
+                <LazyAbout />
               </Suspense>
             }
           />

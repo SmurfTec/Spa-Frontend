@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 
@@ -26,14 +26,14 @@ import * as yup from 'yup';
 import FormTextField from './FormTextField';
 import GoogleButton from './GoogleButton';
 import FacebookButton from './FacebookButton';
-import axios from 'axios';
-import { API_BASE_URL, handleCatch } from 'utils/makeReq';
 
 const Login = () => {
   const classes = styles();
   const classes_g = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const location = useLocation();
 
   const initialValues = {
     email: '',
@@ -59,9 +59,10 @@ const Login = () => {
   });
 
   const { isLoggedIn, loading } = useSelector((st) => st.auth);
+  let redirect = location.search ? location.search.split('=')[1] : '/';
 
   useEffect(() => {
-    if (isLoggedIn) navigate('/');
+    if (isLoggedIn) navigate(redirect || '/');
   }, [isLoggedIn, navigate]);
 
   const responseFacebook = async (response) => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import clsx from 'clsx';
@@ -88,9 +88,8 @@ const SingleProdServ = ({ type }) => {
   };
   const { isLoggedIn } = useSelector((st) => st.auth);
 
-  const { services, loading: fetching } = useSelector(
-    (st) => st.getAll
-  );
+  const { user } = useSelector((st) => st.auth);
+  const { services, loading: fetching } = useSelector((st) => st.getAll);
 
   const [state, handleTxtChange, , changeInput, , setState] =
     useManyInputs(initialState);
@@ -101,6 +100,7 @@ const SingleProdServ = ({ type }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const [relatedProduct, setRelatedProduct] = useState([]);
 
   let {
@@ -143,9 +143,7 @@ const SingleProdServ = ({ type }) => {
 
   const selectElement = (slot) => {
     if (selectedSlots.find((el) => el._id === slot._id)) {
-      setSelectedSlots((st) =>
-        st.filter((el) => el._id !== slot._id)
-      );
+      setSelectedSlots((st) => st.filter((el) => el._id !== slot._id));
     } else {
       if (selectedSlots.length === state.guests) return;
       setSelectedSlots((st) => [...st, slot]);
@@ -153,10 +151,7 @@ const SingleProdServ = ({ type }) => {
   };
 
   const handleBook = () => {
-    if (!isLoggedIn) {
-      toast.info('Login First to book an appointment');
-      return;
-    }
+    if (!user) return navigate(`/login?redirect=${location.pathname}`);
     dispatch(
       createOrder({
         service: {
@@ -172,9 +167,7 @@ const SingleProdServ = ({ type }) => {
       // console.log('Value', res);
       if (res.error) {
         toast.error(
-          res.payload.message
-            ? res.payload.message
-            : 'Something went wrong'
+          res.payload.message ? res.payload.message : 'Something went wrong'
         );
       } else {
         setTimeout(() => {
@@ -212,8 +205,7 @@ const SingleProdServ = ({ type }) => {
           slotDate.getMonth() === checkIn.getDate() &&
           slotDate.getFullYear() === checkIn.getFullYear() &&
           slotDate.getMonth() === checkIn.getMonth() &&
-          (slotDate.slot?.from === slot?.from ||
-            slotDate.slot?.to === slot?.to)
+          (slotDate.slot?.from === slot?.from || slotDate.slot?.to === slot?.to)
         ) {
           //
           return true;
@@ -270,11 +262,7 @@ const SingleProdServ = ({ type }) => {
                             borderRadius: 1,
                           }}
                         >
-                          <Skeleton
-                            variant='rect'
-                            width={'100%'}
-                            height={50}
-                          />
+                          <Skeleton variant='rect' width={'100%'} height={50} />
                         </Card>
                       </Grid>
                     ))}
@@ -287,11 +275,7 @@ const SingleProdServ = ({ type }) => {
               <Typography variant='h3'>
                 <Skeleton variant='text' />
               </Typography>
-              <Typography
-                variant='h4'
-                color='textSecondary'
-                sx={{ mt: 1 }}
-              >
+              <Typography variant='h4' color='textSecondary' sx={{ mt: 1 }}>
                 <Skeleton variant='text' />
               </Typography>
               <Typography variant='h5' sx={{ mt: 1 }}>
@@ -381,16 +365,10 @@ const SingleProdServ = ({ type }) => {
                   width: '100%',
                 }}
               >
-                <Typography
-                  variant='h4'
-                  className={classes_g.lightText}
-                >
+                <Typography variant='h4' className={classes_g.lightText}>
                   {value.name}
                 </Typography>
-                <Typography
-                  variant='caption'
-                  className={classes_g.lightText}
-                >
+                <Typography variant='caption' className={classes_g.lightText}>
                   {value.vendor?.fullName}
                 </Typography>
               </Box>
@@ -398,10 +376,7 @@ const SingleProdServ = ({ type }) => {
 
             <Box display='flex' gridGap={10} alignItems='center'>
               <Rating value={4} readOnly />
-              <Typography
-                variant='h5'
-                className={classes_g.lightText}
-              >
+              <Typography variant='h5' className={classes_g.lightText}>
                 {value.rating}
               </Typography>
             </Box>
@@ -473,8 +448,7 @@ const SingleProdServ = ({ type }) => {
               value.slots[slotDay].slots.map((el) => (
                 <Typography
                   onClick={() => {
-                    if (isSlotDisabled(el) === false)
-                      selectElement(el);
+                    if (isSlotDisabled(el) === false) selectElement(el);
                   }}
                   className={`${classes.slotBtn} ${
                     !!selectedSlots.find((st) => st._id === el._id) &&
@@ -485,9 +459,7 @@ const SingleProdServ = ({ type }) => {
                 </Typography>
               ))
             ) : (
-              <Typography variant='body2'>
-                No Slot for this day.
-              </Typography>
+              <Typography variant='body2'>No Slot for this day.</Typography>
             )}
           </Box>
 
@@ -528,26 +500,16 @@ const SingleProdServ = ({ type }) => {
         </div>
       </div>
 
-      <TabPanel
-        className={classes.TabPanel}
-        value={tabValue}
-        index={0}
-      >
+      <TabPanel className={classes.TabPanel} value={tabValue} index={0}>
         {value.reviews && value.reviews.length > 0 ? (
-          value.reviews.map((el) => (
-            <Review {...el} key={el.user._id} />
-          ))
+          value.reviews.map((el) => <Review {...el} key={el.user._id} />)
         ) : (
           <Typography variant='body1' align='center'>
             No Reviews
           </Typography>
         )}
       </TabPanel>
-      <TabPanel
-        className={classes.TabPanel}
-        value={tabValue}
-        index={1}
-      >
+      <TabPanel className={classes.TabPanel} value={tabValue} index={1}>
         <Box my={3}>
           <Typography variant='h4' fullWidth align='center'>
             Related {type === 'product' ? ' Products' : 'Services'}

@@ -67,6 +67,11 @@ const Home = () => {
     navigate(`?products=${value}`);
   };
 
+  const handleAbout = () => {
+    console.log('here');
+    navigate('/about-us');
+  };
+
   useEffect(() => {
     return () => {};
   }, []);
@@ -127,12 +132,16 @@ const Home = () => {
               <Box className='legend'>
                 <div className={classes_g.contentContainer}>
                   <div>
-                    <Typography variant='h5'>ABOUT</Typography>
+                    <Typography style={{ cursor: 'pointer' }} variant='h5'>
+                      ABOUT
+                    </Typography>
                     <Typography variant='body2'>{loremlong}</Typography>
                   </div>
 
                   <Box mt={2}>
-                    <NavLink to='/'>See More</NavLink>
+                    <NavLink to='/' onClick={handleAbout}>
+                      See More
+                    </NavLink>
                   </Box>
                 </div>
               </Box>
@@ -143,7 +152,9 @@ const Home = () => {
               <Box className='legend'>
                 <div className={classes_g.contentContainer}>
                   <div>
-                    <Typography variant='h5'>ABOUT</Typography>
+                    <Typography style={{ cursor: 'pointer' }} variant='h5'>
+                      ABOUT
+                    </Typography>
                     <Typography variant='body2'>{loremlong}</Typography>
                   </div>
 
@@ -196,34 +207,12 @@ const Home = () => {
             <div>
               <img src={salesImages[0]?.url} alt='' />
               <div className={classes_g.overlay} />
-              <Box className='legend'>
-                <div className={classes_g.contentContainer}>
-                  <div>
-                    <Typography variant='h5'>ABOUT</Typography>
-                    <Typography variant='body2'>{loremlong}</Typography>
-                  </div>
-
-                  <Box mt={2}>
-                    <NavLink to='/'>See More</NavLink>
-                  </Box>
-                </div>
-              </Box>
+              <Box className='legend'></Box>
             </div>
             <div>
               <img src={salesImages[1]?.url} alt='' />
               <div className={classes_g.overlay} />
-              <Box className='legend'>
-                <div className={classes_g.contentContainer}>
-                  <div>
-                    <Typography variant='h5'>ABOUT</Typography>
-                    <Typography variant='body2'>{loremlong}</Typography>
-                  </div>
-
-                  <Box mt={2}>
-                    <NavLink to='/'>See More</NavLink>
-                  </Box>
-                </div>
-              </Box>
+              <Box className='legend'></Box>
             </div>
           </Carousel>
 
@@ -311,7 +300,9 @@ const Home = () => {
                 <Box className='legend'>
                   <div className={classes_g.contentContainer}>
                     <div>
-                      <Typography variant='h5'>ABOUT</Typography>
+                      <Typography style={{ cursor: 'pointer' }} variant='h5'>
+                        ABOUT
+                      </Typography>
                       <Typography variant='body2'>{loremlong}</Typography>
                     </div>
 
@@ -329,7 +320,9 @@ const Home = () => {
                 <Box className='legend'>
                   <div className={classes_g.contentContainer}>
                     <div>
-                      <Typography variant='h5'>ABOUT</Typography>
+                      <Typography style={{ cursor: 'pointer' }} variant='h5'>
+                        ABOUT
+                      </Typography>
                       <Typography variant='body2'>{loremlong}</Typography>
                     </div>
 

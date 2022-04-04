@@ -12,6 +12,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 // * ------------- *//
 
+if (process.env.NODE_ENV === 'production') {
+  console.log = () => {};
+  console.error = () => {};
+  console.warn = () => {};
+}
+
 ReactDOM.render(
   // <React.StrictMode>
   <StoreProvider store={store}>
