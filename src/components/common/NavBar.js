@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Link,
-  useNavigate,
-  useLocation,
-  NavLink,
-} from 'react-router-dom';
+import { Link, useNavigate, useLocation, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 import {
@@ -63,11 +58,7 @@ const Navbar = (props) => {
       <AppBar position='fixed' className={classes.Appbar}>
         <Toolbar>
           <div>
-            <Box
-              display='flex'
-              alignItems='center'
-              sx={{ columnGap: 5 }}
-            >
+            <Box display='flex' alignItems='center' sx={{ columnGap: 5 }}>
               <div className={classes.sectionMobile}>
                 <IconButton
                   aria-label='show more'
@@ -88,10 +79,7 @@ const Navbar = (props) => {
             {isLoggedIn && <AccountPopover />}
             <IconButton aria-label='cart' onClick={handleCart}>
               <Badge badgeContent={`${products?.length || 0}`}>
-                <ShoppingCart
-                  style={{ color: '#fff' }}
-                  fontSize='small'
-                />
+                <ShoppingCart style={{ color: '#fff' }} fontSize='small' />
               </Badge>
             </IconButton>
           </div>
@@ -113,9 +101,7 @@ const Navbar = (props) => {
               <Typography variant='subtitle2' noWrap>
                 <Link
                   to='/#ourPartners'
-                  className={
-                    locHash === '#ourPartners' ? 'active' : undefined
-                  }
+                  className={locHash === '#ourPartners' ? 'active' : undefined}
                 >
                   Our Partners
                 </Link>
@@ -123,9 +109,7 @@ const Navbar = (props) => {
               <Typography variant='subtitle2' noWrap>
                 <Link
                   to='/#flashSales'
-                  className={
-                    locHash === '#flashSales' ? 'active' : undefined
-                  }
+                  className={locHash === '#flashSales' ? 'active' : undefined}
                 >
                   Flash Sales
                 </Link>
@@ -133,9 +117,7 @@ const Navbar = (props) => {
               <Typography variant='subtitle2' noWrap>
                 <Link
                   to='/#ourProducts'
-                  className={
-                    locHash === '#ourProducts' ? 'active' : undefined
-                  }
+                  className={locHash === '#ourProducts' ? 'active' : undefined}
                 >
                   Products
                 </Link>
@@ -143,9 +125,7 @@ const Navbar = (props) => {
               <Typography variant='subtitle2' noWrap>
                 <Link
                   to='/#blog'
-                  className={
-                    locHash === '#blog' ? 'active' : undefined
-                  }
+                  className={locHash === '#blog' ? 'active' : undefined}
                 >
                   Blog
                 </Link>
@@ -165,9 +145,7 @@ const Navbar = (props) => {
                 color='secondary'
                 size='small'
                 className={classes.navBtn}
-                onClick={() =>
-                  navigate('/products&services/products')
-                }
+                onClick={() => navigate('/products&services/products')}
               >
                 BOOK NOW
               </Button>
@@ -177,10 +155,7 @@ const Navbar = (props) => {
                 <Button
                   variant='contained'
                   color='default'
-                  className={clsx(
-                    classes.customNavBtn,
-                    classes.navBtn
-                  )}
+                  className={clsx(classes.customNavBtn, classes.navBtn)}
                   size='small'
                   endIcon={<Face />}
                   onClick={() => navigate('/login')}
@@ -190,10 +165,7 @@ const Navbar = (props) => {
               )}
               <IconButton aria-label='cart' onClick={handleCart}>
                 <Badge badgeContent={`${products?.length || 0}`}>
-                  <ShoppingCart
-                    style={{ color: '#fff' }}
-                    fontSize='small'
-                  />
+                  <ShoppingCart style={{ color: '#fff' }} fontSize='small' />
                 </Badge>
               </IconButton>
             </Box>
@@ -230,11 +202,7 @@ const Navbar = (props) => {
         <Box mt={4} />
 
         <List className={classes.drawerList}>
-          <Link
-            to='/'
-            className={classes_g.linkHover}
-            onClick={toggleSideBar}
-          >
+          <Link to='/' className={classes_g.linkHover} onClick={toggleSideBar}>
             <ListItem button>
               <Typography variant='subtitle1'>Home</Typography>
             </ListItem>
@@ -254,9 +222,7 @@ const Navbar = (props) => {
             onClick={toggleSideBar}
           >
             <ListItem button>
-              <Typography variant='subtitle1'>
-                Our Partners
-              </Typography>
+              <Typography variant='subtitle1'>Our Partners</Typography>
             </ListItem>
           </Link>
           <Link

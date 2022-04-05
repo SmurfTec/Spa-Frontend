@@ -435,6 +435,9 @@ const SingleProdServ = ({ type }) => {
             </FormControl>
           </Box>
 
+          <Typography variant='body2'>
+            On : {new Date(state.checkIn).toDateString()}
+          </Typography>
           <Box
             display='flex'
             flexWrap='wrap'

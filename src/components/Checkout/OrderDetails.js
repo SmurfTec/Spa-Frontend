@@ -189,7 +189,7 @@ const OrderDetails = () => {
                         color='primary'
                         className={classes_g.lightText}
                       >
-                        S${order.service?.service?.discountPrice}
+                        ${order.service?.service?.discountPrice}
                       </Typography>
                     </Box>
                   </Box>

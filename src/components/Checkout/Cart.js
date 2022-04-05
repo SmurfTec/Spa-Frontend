@@ -129,7 +129,7 @@ const CartStep = ({
                     </IconButton>
                   </TableCell>
                   <TableCell>{el.product.name}</TableCell>
-                  <TableCell>S${el.product.discountPrice}</TableCell>
+                  <TableCell>${el.product.discountPrice}</TableCell>
                   {/* <TableCell align='center'>
                     {review ? (
                       2
@@ -157,7 +157,7 @@ const CartStep = ({
                   </TableCell> */}
                   <TableCell align='center'>{el.quantity}</TableCell>
                   <TableCell align='center'>
-                    S${el.product.discountPrice * el.quantity}
+                    ${el.product.discountPrice * el.quantity}
                   </TableCell>
                 </TableRow>
               ))}

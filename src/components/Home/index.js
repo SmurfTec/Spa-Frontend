@@ -139,9 +139,12 @@ const Home = () => {
                   </div>
 
                   <Box mt={2}>
-                    <NavLink to='/' onClick={handleAbout}>
+                    <Typography
+                      style={{ cursor: 'pointer' }}
+                      onClick={handleAbout}
+                    >
                       See More
-                    </NavLink>
+                    </Typography>
                   </Box>
                 </div>
               </Box>
