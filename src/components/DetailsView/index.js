@@ -436,7 +436,7 @@ const SingleProdServ = ({ type }) => {
           </Box>
 
           <Typography variant='body2'>
-            On : {new Date(state.checkIn).toDateString()}
+            {new Date(state.checkIn).toDateString()}
           </Typography>
           <Box
             display='flex'
@@ -476,9 +476,6 @@ const SingleProdServ = ({ type }) => {
             >
               Book Now
             </Button>
-          </Box>
-          <Box>
-            <Typography variant='body2'>Booking :</Typography>
           </Box>
 
           <Box mt={2}>
