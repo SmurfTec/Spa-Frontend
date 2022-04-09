@@ -70,6 +70,7 @@ const styles = makeStyles((theme) => ({
     display: 'flex',
     flexWrap: 'nowrap',
     columnGap: 15,
+    zIndex : 5,
     paddingTop: '0.5em',
     '& .MuiAvatar-colorDefault': {
       backgroundColor: 'transparent',

@@ -44,6 +44,7 @@ const ProductCard = ({ item, wishlist = true }) => {
     showVendor,
     discount,
     vendor,
+    images,
   } = item;
 
   console.log('wishlist', wishlist);
@@ -113,7 +114,7 @@ const ProductCard = ({ item, wishlist = true }) => {
   return (
     <Card className={classes.productCard}>
       <CardActionArea onClick={handleClick}>
-        <CardMedia className={classes.cardMedia} image={prodImg} />
+        <CardMedia className={classes.cardMedia} image={images?.[0]?.url} />
       </CardActionArea>
 
       <CardContent>

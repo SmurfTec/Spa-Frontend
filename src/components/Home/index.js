@@ -265,7 +265,7 @@ const Home = () => {
               <Box
                 className={classes.divbackImg}
                 sx={{
-                  backgroundImage: `url(${newsletter2?.[2]?.url})`,
+                  backgroundImage: `url(${newsletter2?.[0]?.url})`,
                 }}
               >
                 <Box

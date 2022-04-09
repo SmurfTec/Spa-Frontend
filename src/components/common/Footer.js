@@ -1,5 +1,5 @@
 import { Avatar, Box, Divider, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from 'styles/FooterStyles';
 import Logo from './Logo';
 import faker from 'faker';
@@ -13,6 +13,7 @@ import casetrust from 'assets/casetrust.svg';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import YouTubeIcon from '@material-ui/icons/YouTube';
+import { makeReq } from 'utils/makeReq';
 
 const menu = [
   {
@@ -54,6 +55,47 @@ const menu = [
 
 const Footer = () => {
   const classes = styles();
+
+  const [facebook, setFacebook] = useState('');
+  const [instagram, setInstagram] = useState('');
+  const [youtube, setYoutube] = useState('');
+
+  const getAllBanners = async (name) => {
+    console.log('name', name);
+    const resData = await makeReq(`/social/${name}`);
+    console.log('res.data.social.link', resData.social?.link);
+
+    switch (name) {
+      case 'facebook':
+        setFacebook(resData.social?.link);
+        break;
+      case 'instagram':
+        setInstagram(resData.social?.link);
+        break;
+      case 'youtube':
+        setYoutube(resData.social?.link);
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    if (!facebook) {
+      getAllBanners('facebook');
+    }
+  }, [facebook]);
+  useEffect(() => {
+    if (!instagram) {
+      getAllBanners('instagram');
+    }
+  }, [instagram]);
+  useEffect(() => {
+    if (!youtube) {
+      getAllBanners('youtube');
+    }
+  }, [youtube]);
 
   return (
     <>
@@ -154,18 +196,45 @@ const Footer = () => {
                 </Avatar>
               </div>
             </Box>
-            <Box>
+            <Box
+              onClick={() => {
+                console.log('fuck3');
+                window.open(facebook);
+              }}
+            >
               <Typography variant='h5' align='center'>
                 FIND US ON
               </Typography>
               <div className={classes.brandsImg}>
-                <Avatar variant='rounded' size='small'>
-                  <FacebookIcon />
+                <Avatar
+                  variant='rounded'
+                  size='small'
+                  style={{ cursor: 'pointer' }}
+                >
+                  <FacebookIcon
+                    onClick={() => {
+                      console.log('fuck');
+                      window.open(facebook);
+                    }}
+                    style={{ cursor: 'pointer' }}
+                  />
                 </Avatar>
-                <Avatar variant='rounded'>
+                <Avatar
+                  variant='rounded'
+                  onClick={() => {
+                    window.open(instagram);
+                  }}
+                  style={{ cursor: 'pointer' }}
+                >
                   <InstagramIcon />
                 </Avatar>
-                <Avatar variant='rounded'>
+                <Avatar
+                  variant='rounded'
+                  onClick={() => {
+                    window.open(youtube);
+                  }}
+                  style={{ cursor: 'pointer' }}
+                >
                   <YouTubeIcon />
                 </Avatar>
               </div>
