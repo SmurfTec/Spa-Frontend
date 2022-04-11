@@ -10,6 +10,8 @@ import store from './store';
 // * Style Sheets
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
+
 // * ------------- *//
 
 if (process.env.NODE_ENV === 'production') {

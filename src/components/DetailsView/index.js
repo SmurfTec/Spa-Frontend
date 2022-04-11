@@ -21,7 +21,7 @@ import {
 } from '@material-ui/core';
 import { Rating, Skeleton } from '@material-ui/lab';
 import PropTypes from 'prop-types';
-// import Lightbox from 'react-image-lightbox';
+import Lightbox from 'react-image-lightbox';
 
 import ProdServCard from 'components/Carousels/ProductServiceCarousel/Card';
 import CarouselLayout from 'components/Carousels/Default/CarouselLayout';
@@ -80,6 +80,7 @@ const SingleProdServ = ({ type }) => {
   const classes = styles();
   const status = 'In Stock';
 
+  const [currentImg, setCurrentImg] = useState();
   const initialState = {
     prodServ: {},
     quantity: 1,
@@ -102,6 +103,10 @@ const SingleProdServ = ({ type }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [relatedProduct, setRelatedProduct] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
+
+  const [images, setImages] = useState([]);
 
   let {
     error,
@@ -134,11 +139,17 @@ const SingleProdServ = ({ type }) => {
     if (!value) return;
 
     if (!services) return dispatch(allServices());
+    console.log('value.images', value.images);
+    setCurrentImg(value.images[0]);
     setRelatedProduct(
       services?.filter((el) => {
         return el?.category?.name === value?.category?.name;
       })
     );
+
+    setTimeout(() => {
+      console.log('images', images);
+    }, 1000);
   }, [value]);
 
   const selectElement = (slot) => {
@@ -227,21 +238,21 @@ const SingleProdServ = ({ type }) => {
         classes.root
       )}
     >
-      {/* {value && isOpen && (
+      {value && isOpen && (
         <Lightbox
-          mainSrc={ [photoIndex]}
+          mainSrc={[photoIndex]}
           // mainSrc={images[0]}
           nextSrc={images[(photoIndex + 1) % images.length]}
           prevSrc={images[(photoIndex + images.length - 1) % images.length]}
-          onCloseRequest={toggleOpen}
+          onCloseRequest={() => setIsOpen(false)}
           onMovePrevRequest={() =>
-            setphotoIndex((st) => (st + images.length - 1) % images.length)
+            setPhotoIndex((st) => (st + images.length - 1) % images.length)
           }
           onMoveNextRequest={() =>
-            setphotoIndex((st) => (st + 1) % images.length)
+            setPhotoIndex((st) => (st + 1) % images.length)
           }
         />
-      )} */}
+      )}
       {/* <div> */}
 
       {loading && (
@@ -310,29 +321,36 @@ const SingleProdServ = ({ type }) => {
               <Card sx={{ boxShadow: 'none', borderRadius: 1 }}>
                 <CardMedia
                   className={classes.cardMedia}
-                  image={value.images[0]?.url}
-                  data-image={value.images[0]?.url}
+                  image={currentImg?.url}
+                  data-image={currentImg?.url}
+                  style={{ cursor: 'pointer' }}
                 />
               </Card>
             </Grid>
             <Grid item xs={12} sm={12}>
               <Grid container spacing={2}>
-                {value.images.slice(1).map((img) => (
-                  <Grid item xs={4} sm={4} key={img}>
-                    <Card
-                      sx={{
-                        boxShadow: 'none',
-                        borderRadius: 1,
-                      }}
-                    >
-                      <CardMedia
-                        className={classes.cardMediaSm}
-                        image={img.url}
-                        data-image={img.url}
-                      />
-                    </Card>
-                  </Grid>
-                ))}
+                {value.images
+                  .filter((img) => img._id !== currentImg?._id)
+                  .map((img, idx) => (
+                    <Grid item xs={4} sm={4} key={img}>
+                      <Card
+                        sx={{
+                          boxShadow: 'none',
+                          borderRadius: 1,
+                        }}
+                      >
+                        <CardMedia
+                          className={classes.cardMediaSm}
+                          image={img.url}
+                          data-image={img.url}
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => {
+                            setCurrentImg(img);
+                          }}
+                        />
+                      </Card>
+                    </Grid>
+                  ))}
               </Grid>
             </Grid>
           </Grid>

@@ -46,6 +46,11 @@ const ProductDetails = (props) => {
   const [quantity, setQuantity] = useState(1);
   const [relatedProduct, setRelatedProduct] = useState([]);
 
+  const [photoIndex, setPhotoIndex] = useState(0);
+
+  const [images, setImages] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+
   const [tabValue, setTabValue] = React.useState(1);
   const { products: Products, loading: productLoading } = useSelector(
     (st) => st.getAll
@@ -73,8 +78,12 @@ const ProductDetails = (props) => {
 
   useEffect(() => {
     if (!value) return;
+    setImages(value.images.map((el) => el.url));
+    setCurrentImg(value.images[0]);
+
     setProduct(value);
   }, [value]);
+  const [currentImg, setCurrentImg] = useState();
 
   //* set Related Proucts
   useEffect(() => {
@@ -122,6 +131,21 @@ const ProductDetails = (props) => {
         classes.root
       )}
     >
+      {value && isOpen && (
+        <Lightbox
+          mainSrc={[photoIndex]}
+          // mainSrc={images[0]}
+          nextSrc={images[(photoIndex + 1) % images.length]}
+          prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+          onCloseRequest={() => setIsOpen(false)}
+          onMovePrevRequest={() =>
+            setPhotoIndex((st) => (st + images.length - 1) % images.length)
+          }
+          onMoveNextRequest={() =>
+            setPhotoIndex((st) => (st + 1) % images.length)
+          }
+        />
+      )}
       {loading ? (
         // ^ Skeleton
         <>
@@ -164,11 +188,7 @@ const ProductDetails = (props) => {
                 <Typography variant='h3'>
                   <Skeleton animation='wave' variant='text' />
                 </Typography>
-                <Typography
-                  variant='h4'
-                  color='textSecondary'
-                  sx={{ mt: 1 }}
-                >
+                <Typography variant='h4' color='textSecondary' sx={{ mt: 1 }}>
                   <Skeleton animation='wave' variant='text' />
                 </Typography>
                 <Typography variant='h5' sx={{ mt: 1 }}>
@@ -235,31 +255,36 @@ const ProductDetails = (props) => {
                   <Card sx={{ boxShadow: 'none', borderRadius: 1 }}>
                     <CardMedia
                       className={classes.cardMedia}
-                      image={product.images[0]?.url}
-                      data-image={product.images[0]?.url}
-                      onClick={handleImageClick}
+                      image={currentImg?.url}
+                      data-image={currentImg?.url}
+                      style={{ cursor: 'pointer' }}
                     />
                   </Card>
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <Grid container spacing={2}>
-                    {product.images.slice(1).map((img) => (
-                      <Grid item xs={4} sm={4} key={img}>
-                        <Card
-                          sx={{
-                            boxShadow: 'none',
-                            borderRadius: 1,
-                          }}
-                        >
-                          <CardMedia
-                            className={classes.cardMediaSm}
-                            image={img.url}
-                            data-image={img.url}
-                            onClick={handleImageClick}
-                          />
-                        </Card>
-                      </Grid>
-                    ))}
+                    {product.images
+                      .filter((img) => img._id !== currentImg?._id)
+                      .map((img) => (
+                        <Grid item xs={4} sm={4} key={img}>
+                          <Card
+                            sx={{
+                              boxShadow: 'none',
+                              borderRadius: 1,
+                            }}
+                          >
+                            <CardMedia
+                              className={classes.cardMediaSm}
+                              image={img.url}
+                              data-image={img.url}
+                              style={{ cursor: 'pointer' }}
+                              onClick={() => {
+                                setCurrentImg(img);
+                              }}
+                            />
+                          </Card>
+                        </Grid>
+                      ))}
                   </Grid>
                 </Grid>
               </Grid>
@@ -267,16 +292,8 @@ const ProductDetails = (props) => {
             {/* //^ Product Info */}
             <div>
               <Box width='100%' display='flex' flexDirection='column'>
-                <Box
-                  display='flex'
-                  flexDirection='column'
-                  gridGap='0.5em'
-                >
-                  <Box
-                    display='flex'
-                    alignItems='center'
-                    gridGap='2em'
-                  >
+                <Box display='flex' flexDirection='column' gridGap='0.5em'>
+                  <Box display='flex' alignItems='center' gridGap='2em'>
                     <Box
                       style={{
                         display: 'flex',
@@ -326,16 +343,8 @@ const ProductDetails = (props) => {
                       </Box>
                     </Box>
                   </Box>
-                  <Box
-                    display='flex'
-                    gridGap={10}
-                    alignItems='center'
-                  >
-                    <Rating
-                      value={product.rating}
-                      readOnly
-                      size='small'
-                    />
+                  <Box display='flex' gridGap={10} alignItems='center'>
+                    <Rating value={product.rating} readOnly size='small' />
                     <Typography
                       variant='subtitle1'
                       className={classes_g.lightText}
@@ -394,16 +403,12 @@ const ProductDetails = (props) => {
                       variant='subtitle1'
                       component='span'
                       className={clsx(classes_g.lightText, {
-                        [classes.statusSuccess]:
-                          product.countInStock > 0,
-                        [classes.statusFail]:
-                          product.countInStock <= 0,
+                        [classes.statusSuccess]: product.countInStock > 0,
+                        [classes.statusFail]: product.countInStock <= 0,
                       })}
                       sx={{ userSelect: 'none' }}
                     >
-                      {product.countInStock > 0
-                        ? 'In Stock'
-                        : 'Out of Stock'}
+                      {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
                     </Typography>
                   </Box>
                 </Box>
@@ -435,15 +440,9 @@ const ProductDetails = (props) => {
 
           {/* //^ Product Option Panel */}
           {/* //^ Product Reviews */}
-          <TabPanel
-            className={classes.TabPanel}
-            value={tabValue}
-            index={0}
-          >
+          <TabPanel className={classes.TabPanel} value={tabValue} index={0}>
             {product.reviews.length > 0 ? (
-              product.reviews.map((el) => (
-                <Review {...el} key={el.user._id} />
-              ))
+              product.reviews.map((el) => <Review {...el} key={el.user._id} />)
             ) : (
               <Typography variant='body1' align='center'>
                 No Reviews
@@ -451,11 +450,7 @@ const ProductDetails = (props) => {
             )}
           </TabPanel>
           {/* //^ Related Products */}
-          <TabPanel
-            className={classes.TabPanel}
-            value={tabValue}
-            index={1}
-          >
+          <TabPanel className={classes.TabPanel} value={tabValue} index={1}>
             <Box>
               <Box my={3}>
                 <Typography variant='h4' align='center'>
@@ -465,10 +460,7 @@ const ProductDetails = (props) => {
               {relatedProduct && relatedProduct.length > 0 ? (
                 <CarouselLayout respSettings={responsive2}>
                   {relatedProduct.map((el) => (
-                    <div
-                      key={el._id}
-                      className={classes_g.carouselItem}
-                    >
+                    <div key={el._id} className={classes_g.carouselItem}>
                       <ProdServCard item={el} isPromo={false} />
                     </div>
                   ))}

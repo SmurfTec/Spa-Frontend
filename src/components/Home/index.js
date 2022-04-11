@@ -39,6 +39,7 @@ const Home = () => {
   const [newsletter2, setNewsletter2] = useState([]);
   const [productsImages, setProductsImages] = useState([]);
   const [salesImages, setSalesImages] = useState([]);
+  const [offersImages, setOffersImages] = useState([]);
 
   const parsedQuery = useMemo(() => {
     return queryString.parse(location.products);
@@ -85,12 +86,14 @@ const Home = () => {
     let p3 = banners.find((el) => el.name === 'Products Carousel');
     let p4 = banners.find((el) => el.name === 'Newsletter1');
     let p5 = banners.find((el) => el.name === 'Newsletter2');
+    let p6 = banners.find((el) => el.name === 'offers');
 
     setPartnersImages(p1.images);
     setNewsletter1(p4.images);
     setNewsletter2(p5.images);
     setProductsImages(p3.images);
     setSalesImages(p2.images);
+    setOffersImages(p6.images);
   }, [banners]);
 
   if (!banners) return <Loading noTitle />;
@@ -177,7 +180,7 @@ const Home = () => {
 
       {/* // ^ Offers Section */}
       <section>
-        <Offers />
+        <Offers offers={offersImages} />
       </section>
 
       {/* // ^ Flash Sales Section */}

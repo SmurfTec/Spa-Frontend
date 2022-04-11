@@ -6,7 +6,7 @@ import globalStyles from 'styles/commonStyles';
 import spa2 from 'assets/spa2.jpg';
 import Subscription from 'components/Subscription';
 
-const index = () => {
+const Index = (offers = []) => {
   const classes = styles();
   const classes_g = globalStyles();
 
@@ -19,8 +19,8 @@ const index = () => {
         <Grid item xs={12} sm={6}>
           <Box
             className={classes.divbackImg}
-            sx={{
-              backgroundImage: `url(https://images.unsplash.com/photo-1453834190665-46ff0a1fbd5a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80)`,
+            style={{
+              backgroundImage: `url(${offers?.offers[0]?.url})`,
             }}
           >
             <Box
@@ -60,8 +60,8 @@ const index = () => {
         <Grid item xs={12} sm={3}>
           <Box
             className={classes.divbackImg}
-            sx={{
-              backgroundImage: `url(https://images.unsplash.com/photo-1631730486572-226d1f595b68?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=475&q=80)`,
+            style={{
+              backgroundImage: `url(${offers?.offers[1]?.url})`,
             }}
           >
             <Box
@@ -98,8 +98,8 @@ const index = () => {
         <Grid item xs={12} sm={3}>
           <Box
             className={classes.divbackImg}
-            sx={{
-              backgroundImage: `url(${spa2})`,
+            style={{
+              backgroundImage: `url(${offers?.offers[2]?.url})`,
             }}
           >
             <Box
@@ -147,4 +147,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;
