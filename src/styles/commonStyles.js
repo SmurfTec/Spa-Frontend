@@ -280,7 +280,7 @@ const styles = makeStyles((theme) => ({
     },
   },
   secBackImage: {
-    backgroundImage: `url(${bgImg})`,
+    // backgroundImage: `url(${bgImg})`,
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',

@@ -13,6 +13,9 @@ const Index = (offers = []) => {
   return (
     <div
       className={clsx(classes_g.secBackImage, classes.homePromoBg)}
+      style={{
+        backgroundImage: `url(${offers?.offers[3]?.url})`,
+      }}
       // className={`${classes_g.secBackImage} ${classes.homePromoBg}`}
     >
       <Grid container className={classes.offerWrapper}>

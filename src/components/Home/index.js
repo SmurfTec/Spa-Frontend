@@ -239,7 +239,12 @@ const Home = () => {
 
       {/* // ^ Flash Sales Banner Section */}
       <section>
-        <div className={clsx(classes_g.secBackImage, classes.homePromoBg)}>
+        <div
+          className={clsx(classes_g.secBackImage, classes.homePromoBg)}
+          style={{
+            backgroundImage: `url(${newsletter1?.[1]?.url})`,
+          }}
+        >
           <Grid container className={classes.offerWrapper}>
             <Grid item xs={12} sm={3}>
               <Box
