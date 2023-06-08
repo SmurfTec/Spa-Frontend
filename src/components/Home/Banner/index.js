@@ -5,24 +5,24 @@ import { bannerContent } from 'data';
 import useStyles from 'styles/commonStyles';
 import SimpleCarousel from './SimpleCarousel';
 
-const styles = makeStyles((theme) => ({
+const styles = makeStyles(theme => ({
   root: {
     height: 500,
     // marginBottom: 40,
-    backgroundImage: (props) => {
+    backgroundImage: props => {
       console.log('props', props);
       return `url(${props.image})`;
     },
     backgroundPosition: 'center',
     backgroundSize: 'cover',
-    position: 'relative',
+    position: 'relative'
   },
   content: {
     position: 'absolute',
     top: '50%',
     transform: 'translateY(-50%)',
     width: '100%',
-    zIndex: 555,
+    zIndex: 555
   },
   carouselItem: {
     display: 'flex',
@@ -35,18 +35,18 @@ const styles = makeStyles((theme) => ({
     minHeight: 250,
     color: '#fff',
     [theme.breakpoints.down('sm')]: {
-      minHeight: 300,
-    },
+      minHeight: 300
+    }
     /* height: 100%; */
-  },
+  }
 }));
 
 const Banner = ({ banners }) => {
-  let bannerImg = banners?.find((el) => el.name === 'Homepage Carousel') || '';
-  const banner = banners?.find((el) => el.name === 'Homepage Carousel') || '';
+  let bannerImg = banners?.find(el => el.name === 'Homepage Carousel') || '';
+  const banner = banners?.find(el => el.name === 'Homepage Carousel') || '';
 
   const classes = styles({
-    image: bannerImg?.images[0]?.url || '',
+    image: bannerImg?.images?.[0]?.url || ''
   });
 
   console.log('banner', banner);
@@ -55,7 +55,7 @@ const Banner = ({ banners }) => {
     <section className={classes.root}>
       <div className={classes.content}>
         <SimpleCarousel>
-          {banner?.images.map((el, index) => (
+          {banner?.images?.map((el, index) => (
             <div key={el._id} className={classes.carouselItem}>
               <Typography variant='h4'>{el.title}</Typography>
               <Typography variant='subtitle1'>{el.description}</Typography>

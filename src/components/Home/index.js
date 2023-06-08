@@ -27,10 +27,10 @@ import queryString from 'query-string';
 const Home = () => {
   const classes = styles();
   const classes_g = globalStyles();
-  const { banners } = useSelector((st) => st.banners);
+  const { banners } = useSelector(st => st.banners);
   const location = useLocation();
   const dispatch = useDispatch();
-  const { sales, topSelling } = useSelector((st) => st.products);
+  const { sales, topSelling } = useSelector(st => st.products);
 
   const navigate = useNavigate();
   const [filteredTopSelling, setFilteredTopSelling] = useState([]);
@@ -49,7 +49,7 @@ const Home = () => {
     if (!topSelling) return;
     if (parsedQuery.products) {
       setFilteredTopSelling(
-        topSelling.filter((el) =>
+        topSelling.filter(el =>
           el.className
             .toLowerCase()
             .includes(parsedQuery.products.toLowerCase())
@@ -60,11 +60,11 @@ const Home = () => {
     }
   }, [topSelling, parsedQuery]);
 
-  const patnerSearch = (value) => {
+  const patnerSearch = value => {
     navigate(`?search=${value}`);
   };
 
-  const productsSearch = (value) => {
+  const productsSearch = value => {
     navigate(`?products=${value}`);
   };
 
@@ -81,19 +81,19 @@ const Home = () => {
     console.log('banners', banners);
     if (!banners) return dispatch(getBanners());
 
-    let p1 = banners.find((el) => el.name === 'Partners Carousel');
-    let p2 = banners.find((el) => el.name === 'Sales Carousel');
-    let p3 = banners.find((el) => el.name === 'Products Carousel');
-    let p4 = banners.find((el) => el.name === 'Newsletter1');
-    let p5 = banners.find((el) => el.name === 'Newsletter2');
-    let p6 = banners.find((el) => el.name === 'offers');
+    let p1 = banners.find(el => el.name === 'Partners Carousel');
+    let p2 = banners.find(el => el.name === 'Sales Carousel');
+    let p3 = banners.find(el => el.name === 'Products Carousel');
+    let p4 = banners.find(el => el.name === 'Newsletter1');
+    let p5 = banners.find(el => el.name === 'Newsletter2');
+    let p6 = banners.find(el => el.name === 'offers');
 
-    setPartnersImages(p1.images);
-    setNewsletter1(p4.images);
-    setNewsletter2(p5.images);
-    setProductsImages(p3.images);
-    setSalesImages(p2.images);
-    setOffersImages(p6.images);
+    setPartnersImages(p1?.images || []);
+    setNewsletter1(p4?.images || []);
+    setNewsletter2(p5?.images || []);
+    setProductsImages(p3?.images || []);
+    setSalesImages(p2?.images || []);
+    setOffersImages(p6?.images || []);
   }, [banners]);
 
   if (!banners) return <Loading noTitle />;
@@ -242,7 +242,7 @@ const Home = () => {
         <div
           className={clsx(classes_g.secBackImage, classes.homePromoBg)}
           style={{
-            backgroundImage: `url(${newsletter1?.[1]?.url})`,
+            backgroundImage: `url(${newsletter1?.[1]?.url})`
           }}
         >
           <Grid container className={classes.offerWrapper}>
@@ -250,7 +250,7 @@ const Home = () => {
               <Box
                 className={classes.divbackImg}
                 sx={{
-                  backgroundImage: `url(${newsletter1?.[0]?.url})`,
+                  backgroundImage: `url(${newsletter1?.[0]?.url})`
                 }}
               >
                 <Box
@@ -273,7 +273,7 @@ const Home = () => {
               <Box
                 className={classes.divbackImg}
                 sx={{
-                  backgroundImage: `url(${newsletter2?.[0]?.url})`,
+                  backgroundImage: `url(${newsletter2?.[0]?.url})`
                 }}
               >
                 <Box
