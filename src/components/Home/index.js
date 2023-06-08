@@ -130,7 +130,7 @@ const Home = () => {
             className={`${classes_g.Carousel} ${classes_g.aboutCarousel}`}
           >
             <div>
-              <img src={partnersImages[0]?.url} alt='' />
+              <img src={spa1} alt='' />
               <div className={classes_g.overlay} />
               <Box className='legend'>
                 <div className={classes_g.contentContainer}>
@@ -153,7 +153,7 @@ const Home = () => {
               </Box>
             </div>
             <div>
-              <img src={partnersImages[1]?.url} alt='' />
+              <img src={spa2} alt='' />
               <div className={classes_g.overlay} />
               <Box className='legend'>
                 <div className={classes_g.contentContainer}>
@@ -211,12 +211,12 @@ const Home = () => {
             className={classes_g.Carousel}
           >
             <div>
-              <img src={salesImages[0]?.url} alt='' />
+              <img src={spa1} alt='' />
               <div className={classes_g.overlay} />
               <Box className='legend'></Box>
             </div>
             <div>
-              <img src={salesImages[1]?.url} alt='' />
+              <img src={spa1} alt='' />
               <div className={classes_g.overlay} />
               <Box className='legend'></Box>
             </div>
@@ -250,7 +250,7 @@ const Home = () => {
               <Box
                 className={classes.divbackImg}
                 sx={{
-                  backgroundImage: `url(${newsletter1?.[0]?.url})`
+                  backgroundImage: `url(${spa1})`
                 }}
               >
                 <Box
@@ -273,7 +273,7 @@ const Home = () => {
               <Box
                 className={classes.divbackImg}
                 sx={{
-                  backgroundImage: `url(${newsletter2?.[0]?.url})`
+                  backgroundImage: `url(${spa2})`
                 }}
               >
                 <Box
@@ -306,7 +306,7 @@ const Home = () => {
               className={classes_g.Carousel}
             >
               <div className='carouselMini'>
-                <img src={productsImages?.[0]?.url} alt='' />
+                <img src={spa1} alt='' />
                 <div className={classes_g.overlay} />
                 <Box className='legend'>
                   <div className={classes_g.contentContainer}>
@@ -326,7 +326,7 @@ const Home = () => {
                 </Box>
               </div>
               <div className='carouselMini'>
-                <img src={productsImages?.[1]?.url} alt='' />
+                <img src={spa2} alt='' />
                 <div className={classes_g.overlay} />
                 <Box className='legend'>
                   <div className={classes_g.contentContainer}>

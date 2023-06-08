@@ -5,6 +5,7 @@ import styles from 'styles/HomeStyles';
 import globalStyles from 'styles/commonStyles';
 import spa2 from 'assets/spa2.jpg';
 import Subscription from 'components/Subscription';
+import spa1 from 'assets/med.jpg';
 
 const Index = (offers = []) => {
   const classes = styles();
@@ -14,7 +15,7 @@ const Index = (offers = []) => {
     <div
       className={clsx(classes_g.secBackImage, classes.homePromoBg)}
       style={{
-        backgroundImage: `url(${offers?.offers[3]?.url})`,
+        backgroundImage: `url(${spa2})`
       }}
       // className={`${classes_g.secBackImage} ${classes.homePromoBg}`}
     >
@@ -23,7 +24,7 @@ const Index = (offers = []) => {
           <Box
             className={classes.divbackImg}
             style={{
-              backgroundImage: `url(${offers?.offers[0]?.url})`,
+              backgroundImage: `url(${spa1})`
             }}
           >
             <Box
@@ -64,7 +65,7 @@ const Index = (offers = []) => {
           <Box
             className={classes.divbackImg}
             style={{
-              backgroundImage: `url(${offers?.offers[1]?.url})`,
+              backgroundImage: `url(${spa2})`
             }}
           >
             <Box
@@ -102,7 +103,7 @@ const Index = (offers = []) => {
           <Box
             className={classes.divbackImg}
             style={{
-              backgroundImage: `url(${offers?.offers[2]?.url})`,
+              backgroundImage: `url(${spa1})`
             }}
           >
             <Box
